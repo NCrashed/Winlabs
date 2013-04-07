@@ -12,6 +12,7 @@ import core.runtime;
 import std.string;
 import std.utf;
 import std.math;
+import std.stdio;
 
 import resource;
 import expression;
@@ -67,7 +68,10 @@ BOOL dialogProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
                         testTree = parseString(exprString);
                     } catch(ExpressionException e)
                     {
-                         MessageBox(null, ("Failed to parser '"~exprString~"'"~e.msg).toUTF16z, "Error", MB_OK | MB_ICONEXCLAMATION);
+                        MessageBox(null, ("Failed to parser '"~exprString~"'"~e.msg).toUTF16z, "Error", MB_OK | MB_ICONEXCLAMATION);
+                    } catch(Exception e)
+                    {
+                        writeln(e.msg);
                     }
 
                     return result;
@@ -252,7 +256,10 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
                 hdc = BeginPaint(hwnd, &ps);
                 scope(exit) EndPaint(hwnd, &ps);
 
-                DrawGraphic(hdc, testTree, sx, sy, width, height, 0.05f);
+                DrawGraphic(hdc, testTree, 
+                    sx, sy, 
+                    width, height, 
+                    0.02f);
                 return 0;
             }
             break;

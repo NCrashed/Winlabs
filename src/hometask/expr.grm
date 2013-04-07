@@ -3,7 +3,7 @@
 "Author"    = 'NCrashed'
 "Version"   = '0.01'
 "About"     = 'exprestion parser'
-"Case Sensitive" = true
+"Case Sensitive" = false
 
 "Start Symbol" = <AdditionList>
 
@@ -13,12 +13,11 @@ Comment End   = '*/'
 Whitespace = {Whitespace}+
            
 ! -- Terminals -----------------------------------------
-Integer = ('+'|'-')? {Digit}+ ( ('e'|'E') ('+'|'-')? {Digit}+)?
-Rational = ('+'|'-')? {Digit}+ '.' {Digit}* ( ('e'|'E') ('+'|'-')? {Digit}+)?
+Integer = {Digit}+ ( ('e'|'E') ('+'|'-')? {Digit}+)?
+Rational = {Digit}+ '.' {Digit}* ( ('e'|'E') ('+'|'-')? {Digit}+)?
 
-!{String Char} = {Printable} - ["\]
-!Literal = '"' ({String Char} | '\'{Printable})* '"'
-Identifier =  ({Letter} | '_') ({AlphaNumeric} | '_')*
+{IdentChars} = {AlphaNumeric} - [+-/*(),]
+Identifier =  ({Letter} | '_') ({IdentChars} | '_')*
              
 ! -- General rules -------------------------------------
 <Real> ::= Rational | Integer
@@ -26,10 +25,11 @@ Identifier =  ({Letter} | '_') ({AlphaNumeric} | '_')*
 ! -- Exprestion rules ----------------------------------
 <Var>           ::= 'x'   
 <ParamList>     ::= <ParamList> ',' <AdditionList> | <AdditionList>
-<Function>      ::= Identifier '(' <ParamList> ')'                    
+<Function>      ::= Identifier '(' <ParamList> ')'  
 <FuncList>      ::= <Real> | <Var> | <Function> | '(' <AdditionList> ')'         
-                 
-<PowerList>     ::= <PowerList> '^' <FuncList>  | <FuncList>                  
+       
+<NegateExpr>    ::= '-' <FuncList> | <FuncList>
+<PowerList>     ::= <PowerList> '^' <NegateExpr>  | <NegateExpr>                  
                  
 <MultList>      ::= <MultList> '*' <PowerList> 
                  | <MultList> '/' <PowerList> 
