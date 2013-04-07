@@ -1,0 +1,798 @@
+[$name|Token$]
+[$title|class Token$]
+[$frame|HTMLPage.tmpl$]
+[$desc|The main interface for processing parse trees$]
+
+<ul>
+<li>[$typeLink|CommentType| enum CommentType $]</li>
+<li>[$typeLink|TokenToStringMode| enum TokenToStringMode $]</li>
+<li>[$pageLink|#Module| Module-Level Members $]</li>
+<li>
+	[$typeLink|Token| class Token $]
+	<ul>
+	<li>
+		[$typeLink|Token_{languageName}| class Token_{languageName}$][$ident| : Token $]
+		<ul>
+		<li>
+			[$typeLink|Token_{languageName}!{symbol}| [:class Token_{languageName}!{symbol}:]$][$ident| : Token_{languageName} $]
+			<ul>
+			<li>[$typeLink|Token_{languageName}!{rule}| [:class Token_{languageName}!{rule}:]$][$ident| : Token_{languageName}!{symbol} $]</li>
+			</ul>
+		</li>
+		</ul>
+	</li>
+	</ul>
+</li>
+</ul>
+
+<p>
+This is the main interface for processing parse trees.
+</p>
+
+<p>
+See the [$pageLink|APIOver#TokenSymbol| explanation of Tokens vs Symbols $].
+</p>
+
+[$apiSectionType| CommentType | goldie.token | enum CommentType $]
+<div class="api-def">
+	[$apiHead| None $]
+	[$apiHead| Line $]
+	[$apiHead| Block $]
+</div>
+
+[$apiSectionType| TokenToStringMode | goldie.token | enum TokenToStringMode $]
+<div class="api-def">
+	[$apiHead| Compact $]
+	<div class="api-def">
+		Omit all whitespace, error and comment tokens.
+	</div>
+
+	[$apiHead| CompactWithSpaces $]
+	<div class="api-def">
+		Like Compact, but adds a space between each token.
+	</div>
+	
+	[$apiHead| default Smart $]
+	<div class="api-def">
+		Like Compact, but adds a space between two
+		tokens whenever the last character of the first
+		token and the first character of the second token
+		are both either alphanumeric or an underscore.
+	</div>
+
+	[$apiHead| Full $]
+	<div class="api-def">
+	<p>
+		Includes all whitespace, error and comment tokens.
+	</p>
+	<p>
+		Note: Doesn't currently work after the parse phase because
+		whitespace, error and comment tokens are not currently
+		preserved by the parser.
+	</p>
+	</div>
+</div>
+
+[$apiSection| Module | goldie.token | Module-Level Members $]
+<div class="api-def">
+	<a name="traverse" />
+	[$apiHead|[: {ForwardRange_of_Token} traverse(Token start) :]$]
+	[$apiHead|[: {ForwardRange_of_Token} traverse(pred)(Token start) :]$]
+	<div class="api-def">
+	<p>
+		Returns a forward range that performs a
+		[$link|http://en.wikipedia.org/wiki/Tree_traversal#Example|preorder traversal$]
+		of the tree beginning at token [$ident|start$]. Takes an optional predicate as
+		a template parameter which can be used to selectively exclude any subtree.
+	</p>
+	<p>
+		The predicate can be either a [$code|inline|bool delegate(Token t)$]
+		or a string, &agrave; la
+		[$link|http://dlang.org/phobos/std_algorithm.html|std.algorithm$].
+		Either way, it takes in a Token (for example, [$ident|Token t$]) and returns a bool.
+		If the predicate returns false,
+		then the entire subtree starting with [$ident|Token t$] will be skipped.
+	</p>
+	<p>
+		If you wish to filter out individual tokens rather than (or in addition to)
+		entire subtrees, you can simply pass the result of [$ident|traverse$] to
+		[$link|http://dlang.org/phobos/std_algorithm.html#filter|std.algorithm.filter$].
+	</p>
+	<p>
+		The range also has a function [$code|inline|void skip()$] which tells
+		the range to skip the entire subtree of the current [$ident|front$]
+		the next time [$ident|popFront$] is called.
+	</p>
+	<p>
+		Example - Visit all descendants of [$code|inline|token$]:
+	</p>
+[$code|highlight|
+[:foreach(tok; traverse(token))
+	writeln("Found: ", tok.name);:]
+$]
+	<p>
+		Example - Skip all [$code|inline|<Declaration>$] subtrees
+		(these are all equivalent):
+	</p>
+[$code|highlight|
+[:alias Token_foo TokFoo; // For convenience
+
+// Dynamic-style
+foreach(tok; traverse!`a.name != "<Declaration>"`(token))
+	writeln("Found: ", tok.name);
+
+// Dynamic-style
+foreach(tok; traverse!( (Token t) { return t.name != "<Declaration>"; } )(token))
+	writeln("Found: ", tok.name);
+
+// Static-style
+foreach(tok; traverse!( (Token t) { return cast(TokFoo!"<Declaration>")t is null; } )(token))
+	writeln("Found: ", tok.name);
+
+// Static-style, using isAnyType from semitwist.util.reflect
+foreach(tok; traverse!( !isAnyType!(TokFoo!"<Declaration>") )(token))
+	writeln("Found: ", tok.name);:]
+$]
+	<p>
+		Example - Only traverse [$code|inline|<Foo>$] and [$code|inline|<Bar>$] tokens
+		(these are both equivalent):
+	</p>
+[$code|highlight|
+[:alias Token_foo TokFoo; // For convenience
+
+// Dynamic-style
+foreach(tok; traverse!`a.name == "<Foo>" || a.name == "<Bar>"`(token))
+	writeln("Found: ", tok.name);
+
+// Static-style, using isAnyType from semitwist.util.reflect
+foreach(tok; traverse!( isAnyType!(TokFoo!"<Foo>", TokFoo!"<Bar>") )(token))
+	writeln("Found: ", tok.name);:]
+$]
+	<p>
+		Example - Using [$code|inline|skip()$]:
+	</p>
+[$code|highlight|
+[:alias Token_foo TokFoo; // For convenience
+
+// Skip all <Declaration> subtrees
+auto r = traverse(token);
+foreach(tok; r)
+{
+	if(t.name == "<Declaration>") // Dynamic-style
+		r.skip();
+	
+	writeln("Found: ", tok.name);
+}
+
+// Only traverse <Foo> and <Bar> tokens
+auto r = traverse(token);
+foreach(tok; r)
+{
+	if( !isAnyType!(TokFoo!"<Foo>", TokFoo!"<Bar>")(t) ) // Static-style
+		r.skip();
+	
+	writeln("Found: ", tok.name);
+}:]
+$]
+	</div>
+</div>
+
+[$apiSectionType| Token | goldie.token | class Token $]
+<div class="api-def">
+	<p>
+		The [$pageLink|StatVsDyn|dynamic-style$] token interface.
+	</p>
+	<p>
+		If you are using [$pageLink|StatVsDyn|static-style$], then
+		all the static-style token types are derived from this class.
+		Note, however, the static-style versions of [$pageLink|Token#Token_get|get$]
+		and [$pageLink|Token#Token_getRequired|getRequired$]
+		actually live directly in this class.
+	</p>
+
+	[$apiHead|[: this(Symbol symbol, Token[] sub, Language lang, int ruleId) :]$]
+	<div class="api-def">
+		Constructor for nonterminals. Normally, only GoldieLib itself needs to
+		instantiate tokens, unless you want to create/modify a parse tree or
+		[$typeName|Token$] array manually.
+	</div>
+	
+	[$apiHead|[: this(Symbol&nbsp;symbol, Language&nbsp;lang, string&nbsp;content, string&nbsp;file="{unknown}", ptrdiff_t&nbsp;line=0, ptrdiff_t&nbsp;srcIndexStart=0, ptrdiff_t&nbsp;srcIndexEnd=0, CommentType&nbsp;commentMode=CommentType.None, string&nbsp;debugInfo="") :]$]
+	<div class="api-def">
+		Constructor for terminals. Normally, only GoldieLib itself needs to
+		instantiate tokens, unless you want to create/modify a parse tree or
+		[$typeName|Token$] array manually.
+	</div>
+
+	[$apiHead| readonly @property Language lang $]
+	<div class="api-def">
+		The [$typeName|Language$] this [$typeName|Token$] is associated with.
+	</div>
+
+	<a name="Token_subtokens" />
+	[$apiHead|[:
+		@property size_t length
+		size_t opDollar()
+		Token opIndex(size_t index)
+		Token opIndexAssign(Token tok, size_t index)
+		Token[] opSlice()
+		Token[] opSlice(size_t a, size_t b)
+		Token[] opSliceAssign(Token tok)
+		Token[] opSliceAssign(Token tok, size_t a, size_t b)
+		Token[] opSliceAssign(Token[] toks)
+		Token[] opSliceAssign(Token[] toks, size_t a, size_t b)
+		int opApply(int delegate(ref Token) dg)
+		int opApply(int delegate(ref size_t, ref Token) dg)
+		int opApplyReverse(int delegate(ref Token) dg)
+		int opApplyReverse(int delegate(ref size_t, ref Token) dg)
+	:]$]
+	<div class="api-def">
+	<p>
+		Access the child tokens (ie, subtokens) of this token (if this is a nonterminal).
+	</p>
+	<p>
+		Note that [$ident|opDollar$] only works in DMD 2.057 and up.
+	</p>
+	<p>
+		Example:
+	</p>
+[$code|highlight|
+[:Token   firstChild = myToken[0];
+Token   lastChild  = myToken[$-1]; // The '$' requires at least DMD 2.057
+Token[] firstThree = myToken[0..3];
+
+// Assignments are possible, but NOT recommended if you are
+// using static-style, because it can easily mess up the
+// static-style sub, get and getRequired.
+myToken[1] = anotherToken;
+
+// Iterate
+foreach(i, subToken; myToken) {}:]
+$]
+	</div>
+
+	<a name="Token_subX" />
+	[$apiHead|[: Token[] subX :]$]
+	<div class="api-def">
+	<p>
+		Direct access to the child tokens (ie, subtokens) of this token (if this is a nonterminal).
+	</p>
+	<p>
+		This will be removed from a later version of Goldie in favor of the
+		operator overloads above.
+	</p>
+	</div>
+
+	<a name="Token_get" />
+	[$apiHead|[: T get(T)(int index=0) :]$]
+	<div class="api-def">
+	<p>
+		[$pageLink|StatVsDyn|Static-style$] function to retrieve the
+		first subtoken matching the given token type [$ident|T$].
+		
+		The type [$ident|T$] must be a
+		[$typeLink|Token_{languageName}!{symbol}| [:Token_{languageName}!{symbol}:]$]
+		or
+		[$typeLink|Token_{languageName}!{rule}| [:Token_{languageName}!{rule}:]$].
+	</p>
+	<p>
+		If there are multiple subtokens matching the desired type,
+		the [$ident|index$] parameter can be used to select which one is desired.
+		If the desired subtoken isn't found, null is returned.
+	</p>
+	<p>
+		Example:
+	</p>
+[$code|highlight|
+[:// The type of 'token' is: Token_myLang!("<A>", "<Foo>", "#", "<Bar>", "*", "<Foo>", ";")
+// ie, 'token' is a nonterminal matching the rule:
+//    <A> ::= <Foo> '#' <Bar> '*' <Foo> ';'
+
+assert( token.get!( Token_myLang!"<Foo>" )()  is token.sub!0 );
+assert( token.get!( Token_myLang!"<Bar>" )()  is token.sub!2 );
+assert( token.get!( Token_myLang!"<Foo>" )(1) is token.sub!4 );
+assert( token.get!( Token_myLang!"<Foo>" )(2) is null        );  // Doesn't exist!:]
+$]
+	</div>
+
+	[$apiHead|[: Ts[$-1] get(Ts...)() if(Ts.length > 1) :]$]
+	<div class="api-def">
+	<p>
+		[$pageLink|StatVsDyn|Static-style$] pattern matching to find a descendant token.
+		Returns null if the given path doesn't exist.
+		This is like chaining calls to [$code|inline| get!T(0) $] above,
+		but safely checks for null at each step.
+	</p>
+	<p>
+		The types passed in must be
+		[$typeLink|Token_{languageName}!{symbol}| [:Token_{languageName}!{symbol}:]$]
+		or
+		[$typeLink|Token_{languageName}!{rule}| [:Token_{languageName}!{rule}:]$].
+	</p>
+	<p>
+		Example:
+	</p>
+[$code|highlight|
+[:alias Token_myLang Tok; // For convenience
+
+auto x = token.get!( Tok!"<A>", Tok!"<B>", Tok!"<C>" )();             // Never dereferences null
+auto y = token.get!(Tok!"<A>")().get!(Tok!"<B>")().get!(Tok!"<C>")(); // Could dereference null
+assert( x is y );:]
+$]
+	</div>
+
+	[$apiHead|[:
+	Token get(string symbolName, int index=0)
+	Token get(string[] symbolNames)
+	:]$]
+	<div class="api-def">
+	<p>
+		[$pageLink|StatVsDyn|Dynamic-style$] versions of [$ident|get$].
+	</p>
+	<p>
+		The symbol names given must be valid symbol names in this Token's
+		language or an [$ident|Exception$] will be thrown.
+	</p>
+	<p>
+		Example:
+	</p>
+[$code|highlight|
+[:// 'token' is a nonterminal matching the rule:
+//    <A> ::= <Foo> '#' <Bar> '*' <Foo> ';'
+assert( token.matches("<A>", "<Foo>", "#", "<Bar>", "*", "<Foo>", ";") );
+
+assert( token.get("<Foo>")    is token[0] );
+assert( token.get("<Bar>")    is token[2] );
+assert( token.get("<Foo>", 1) is token[4] );
+assert( token.get("<Foo>", 2) is null     );  // Doesn't exist!
+
+Token x = token.get( ["<Bar>", "<B>", "<Q>"] ); // If '<Bar> ::= <B>' and '<B> ::= <Q>'
+assert( token.get([]) is token ); // Empty array results in the original token :]
+$]
+	</div>
+
+	<a name="Token_getRequired" />
+	[$apiHead|[:
+	T getRequired(T)(int index=0)
+	Ts[$-1] getRequired(Ts...)() if(Ts.length > 1)
+	Token getRequired(string symbolName, int index=0)
+	Token getRequired(string[] symbolNames)
+	:]$]
+	<div class="api-def">
+	<p>
+		Just like [$ident|get$], but throws an [$ident|Exception$] if the
+		desired subtoken isn't found.
+	</p>
+	<p>
+		The templated versions of [$ident|getRequired$] are [$pageLink|StatVsDyn|static-style$].
+		The types passed in to these must be
+		[$typeLink|Token_{languageName}!{symbol}| [:Token_{languageName}!{symbol}:]$]
+		or
+		[$typeLink|Token_{languageName}!{rule}| [:Token_{languageName}!{rule}:]$].
+	</p>
+	</div>
+
+	[$apiHead| readonly @property int ruleId $]
+	<div class="api-def">
+		If this Token is a nonterminal, then this is the ID of the
+		[$link| http://goldparser.org/doc/grammars/define-rules.htm | reduction rule $]
+		that was used to create the token. This ID is
+		an index into [$typeName|Language$][$ident|.ruleTable$].
+	</div>
+
+	<a name="Token_type" />
+	[$apiHead| SymbolType type $]
+	<div class="api-def">
+		The [$typeName|SymbolType$] of this [$typeName|Token$].
+		See the explanation of
+		[$pageLink|APIOver#TokenSymbol| Tokens, Symbols, and Symbol Types $]
+		for more information.
+	</div>
+
+	[$apiHead| Symbol symbol $]
+	<div class="api-def">
+		The [$typeName|Symbol$] of this [$typeName|Token$].
+		See the explanation of
+		[$pageLink|APIOver#TokenSymbol| Tokens, Symbols, and Symbol Types $]
+		for more information.
+	</div>
+	
+	[$apiHead| readonly @property string typeName $]
+	<div class="api-def">
+		The name of this [$typeName|Token$]'s [$typeName|SymbolType$].
+	</div>
+	
+	<a name="Token_name" />
+	[$apiHead| readonly @property string name $]
+	<div class="api-def">
+		The name of this [$typeName|Token$]'s [$typeName|Symbol$].
+	</div>
+	
+	[$apiHead| readonly @property string fullName $]
+	<div class="api-def">
+		This is just [$code|inline|typeName ~ "." ~ name$].
+		For instance, [$code|inline|"NonTerminal.<Foo>"$]
+	</div>
+
+	<div class="api-head">
+		<span class="attr" style="color: red; margin-bottom: 0px">REMOVED</span>
+		<span style="text-decoration: line-through;">
+			<span class="attr">readonly @property</span> int <span class="ident">id</span>
+		</span>
+		<br />
+	</div>
+	<div class="api-def">
+		This has been removed. Use [$ident|symbol.id$] instead.
+	</div>
+
+	[$apiHead|
+	readonly @property ptrdiff_t line
+	readonly @property string file
+	$]
+	<div class="api-def">
+	<p>
+		The file and line number of the original source where this
+		[$typeName|Token$] starts.
+		See Goldie's conventions relating to 
+		[$pageLink|APIOver#LineColumn| Line and Column Numbers $].
+	</p>
+	<p>
+		For the line number where this [$typeName|Token$] ends, or
+		the column number where this [$typeName|Token$] starts or ends,
+		use [$ident|srcIndexStart$] or [$ident|srcIndexStart$] together
+		with [$typeName|Lexer$][$ident|.lineIndicies$]
+		and [$typeName|Lexer$][$ident|.lineAtIndex$].
+	</p>
+	</div>
+
+	[$apiHead|
+	readonly @property ptrdiff_t srcIndexStart
+	readonly @property ptrdiff_t srcIndexEnd
+	readonly @property ptrdiff_t srcLength
+	$]
+	<div class="api-def">
+		The locations (zero-indexed) in the original source where this
+		[$typeName|Token$] starts and ends, and the difference between
+		them.
+	</div>
+
+	[$apiHead| readonly @property CommentType commentMode $]
+	<div class="api-def">
+		Indicates whether or not this token exists inside a comment and,
+		if so, what type of comment.
+	</div>
+
+	[$apiHead|
+	readonly @property Token firstLeaf
+	readonly @property Token lastLeaf
+	$]
+	<div class="api-def">
+		The first and last terminals in this [$typeName|Token$].
+		If this [$typeName|Token$] isn't a nonterminal, then these
+		both just return [$code|inline|this$].
+	</div>
+
+	[$apiHead| readonly @property string debugInfo $]
+	<div class="api-def">
+		A place for extra debugging information to be stored.
+	</div>
+
+	<a name="Token_matches" />
+	[$apiHead|[: bool matches(string parentSymbol, string[] subSymbols...) :]$]
+	<div class="api-def">
+	<p>
+		Determine if the [$typeName|Token$] matches (ie, was created from) a particular
+		[$link| http://goldparser.org/doc/grammars/define-rules.htm | reduction rule$].
+	</p>
+	<p>
+		Example:
+	</p>
+[$code|highlight|
+// Did this token come from this reduction rule?
+//   <Add Exp> ::= <Add Exp> '+' <Mult Exp>
+bool checkToken(Token tok)
+{
+	return tok.matches("<Add Exp>", "<Add Exp>", "+", "<Mult Exp>");
+}
+$]
+	</div>
+	
+	[$apiHead| 
+	string toString()
+	string toString(TokenToStringMode mode)
+	string toStringCompact()
+	string toStringCompactWithSpaces()
+	string toStringSmart()
+	string toStringFull()
+	$]
+	<div class="api-def">
+	<p>
+		Converts the [$typeName|Token$] to a string that resembles the
+		original source. See [$typeName|TokenToStringMode$] for descriptions
+		of the different modes of conversion.
+	</p>
+	<p>
+		<em>Note:</em>
+		Depending on the language and the chosen mode of conversion, the
+		result <em>might not be valid code</em> in the original language, or
+		<em>may have subtly changed meaning</em>.
+		Not all modes of conversion are suitable for all
+		purposes or all languages. Depending on the language or purpose,
+		it may be that none of these are appropriate and you'll have to
+		create a string by walking the [$typeName|Token$] tree manually.
+		These functions are merely provided as a convenience.
+	</p>
+	</div>
+
+	
+	[$apiHead| semitwist.treeout.TreeNode toTreeNode() $]
+	<div class="api-def">
+	<p>
+		[$link| https://bitbucket.org/Abscissa/semitwistdtools/src/goldie-v0.9/src/semitwist/treeout.d | TreeNode $]
+		is a type from
+		[$link| https://bitbucket.org/Abscissa/semitwistdtools | SemiTwist D Tools $]
+		that provides an easy way to convert a tree to a text format such as JSON or XML.
+	</p>
+	<p>
+		Example: To convert a Token to JSON:
+	</p>
+[$code|highlight|
+import semitwist.treeout;
+
+string tokenToJSON(Token tok, bool prettyPrint)
+{
+	if(prettyPrint)
+		return tok.toTreeNode().format(formatterPrettyJSON);
+	else
+		return tok.toTreeNode().format(formatterTrimmedJSON);
+}
+$]
+	<p>
+		Note, however, if you wish to use the resulting JSON in
+		[$pageName|JsonViewer$], and get [$pageName|JsonViewer$]'s enhanced
+		source-viewing features, then you'll need to
+		[$pageLink|ParseTreeMode|add a few things$] to
+		the returned [$ident|TreeNode$] before formatting it to a string.
+		See the
+		[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/src/tools/parse | source $]
+		of the [$pageName|Parse$] tool for an example.
+	</p>
+	</div>
+</div>
+
+[$apiSectionType| Token_{languageName} | {user-specified package}.token | class Token_{languageName} $]
+<div class="api-def">
+	<div class="api-head">
+		{languageName} = Name of static-style language
+	</div>
+	<p></p>
+	<p>
+		This is the common base class for all tokens in a given
+		static-style language.
+	</p>
+	[$apiHead|[: static enum string StringOf :]$]
+	<div class="api-def">
+	<p>
+		This is a workaround for DMD Bug [$link| http://d.puremagic.com/issues/show_bug.cgi?id=1748 | #1748$].
+	</p>
+	<p>
+		Evaluates to [$code|inline|Token_{languageName}$]. For example, if
+		the language is named [$ident|foo$], then this evaluates to
+		[$code|inline|Token_foo$]
+	</p>
+	</div>
+</div>
+
+[$apiSectionType| Token_{languageName}!{symbol} | {user-specified package}.token | [:class Token_{languageName}!{symbol} : Token_{languageName}:] $]
+<div class="api-def">
+	<div class="api-head">
+		{languageName} = Name of static-style language
+	</div>
+	<div class="api-head">
+		[:{symbol} = [ SymbolType <span class="param-name">staticSymbolType</span>, ] string <span class="param-name">staticName</span>=null:]
+	</div>
+	<p></p>
+	<p>
+		This type is for tokens representing a specific [$typeName|Symbol$]
+		in a [$pageLink|StatVsDyn|static-style$] language.
+	</p>
+	<p>
+		This is a templated type. Instantiation example:
+	</p>
+[$code|highlight|
+// Assume the language is named "calc"
+
+// For a SymbolType.Terminal symbol named "Ident":
+// These are the SAME type:
+Token_calc!"Ident"
+Token_calc!(SymbolType.Terminal, "Ident")
+
+// For a SymbolType.NonTerminal symbol named "<Add Exp>"
+// These are the SAME type (but different from the above types):
+Token_calc!"<Add Exp>"
+Token_calc!(SymbolType.NonTerminal, "<Add Exp>")
+
+// All the above share common base-types: Token_calc and Token.
+// This only shares a common base-type of Token
+// (since it's from a different language).
+Token_anotherCalc!"Ident"
+$]
+	<p>
+		The two-parameter form is needed if there are
+		[$pageLink|AmbiguousSym| two Symbols with the same name $].
+	</p>
+	<p>
+		Attempting to instantiate a [$typeName|Token_{languageName}!{symbol}$]
+		with a symbol that doesn't exist in the language will result in a
+		compile-time error.
+	</p>
+
+	[$apiHead|[: static enum string StringOf :]$]
+	<div class="api-def">
+	<p>
+		This is a workaround for DMD Bug [$link| http://d.puremagic.com/issues/show_bug.cgi?id=1748 | #1748$].
+	</p>
+	<p>
+		Evaluates to [$code|inline|Token_{languageName}!(SymbolType.{symbolType}, "{symbolName}")$].
+	</p>
+	<p>
+		Example:
+	</p>
+		[$code|highlight|
+[:void showStringOf(Token_foo!"Ident" tok)
+{
+	// Output: Token_foo!(SymbolType.Terminal, "Ident")
+	writeln(typeof(tok).StringOf);
+}
+:]$]
+	</div>
+
+	[$apiHead|[: static enum string staticName :]$]
+	<div class="api-def">
+		Compile-time equivalent to [$ident|Token.name$].
+	</div>
+
+	[$apiHead|[:this(Language&nbsp;lang, string&nbsp;content, string&nbsp;file="{unknown}", ptrdiff_t&nbsp;line=0, ptrdiff_t&nbsp;srcIndexStart=0, ptrdiff_t&nbsp;srcIndexEnd=0, CommentType&nbsp;commentMode=CommentType.None, string&nbsp;debugInfo="") :]$]
+	<div class="api-def">
+		Constructor for terminals.
+		This member doesn't exist if [$ident|{symbol}$] is a nonterminal.
+	</div>
+</div>
+
+[$apiSectionType| Token_{languageName}!{rule} | {user-specified package}.token | [:class Token_{languageName}!{rule} : Token_{languageName}!{symbol}:] $]
+<div class="api-def">
+	<div class="api-head">
+		{languageName} = Name of static-style language
+	</div>
+	<div class="api-head">
+		[:{rule} = string <span class="param-name">staticName</span>, ( int <span class="param-name">staticRuleId</span> | <span class="param-name">subTokenTypes</span>... ):]
+	</div>
+	<p></p>
+	<p>
+		Nonterminals have one [$typeName|Token_{languageName}!{rule}$]
+		for each rule that can create them.
+	</p>
+	<p>
+		This is a templated type.
+		See [$pageLink|StatVsDyn#Types|Static And Dynamic Styles: Types and Inheritance$]
+		for an explanation of how it works.
+	</p>
+	<p>
+		Instantiation example:
+	</p>
+[$code|highlight|
+[:// Assume the language is named "calc"
+
+// These three are all the SAME type, and
+// are for a nonterminal Token created from
+// this reduction rule:
+//   <Add Exp> ::= <Add Exp> '+' <Mult Exp>
+Token_calc!("<Add Exp>", "<Add Exp>", "+", "<Mult Exp>")
+Token_calc!("<Add Exp>", "<Add Exp>", Token_calc!(SymbolType.Terminal, "+"), "<Mult Exp>")
+Token_calc!("<Add Exp>", ruleIdOf_calc!("<Add Exp>", "<Add Exp>", "+", "<Mult Exp>"))
+
+// This is a different type, but shares the common
+// base-class of Token_calc!"<Add Exp>" with the above:
+Token_calc!("<Add Exp>", "<Mult Exp>")
+
+// This is another different type, but the only base-types this
+// one shares with the above are Token_calc and Token (because
+// it has a different reduction symbol, ie the first argument).
+Token_calc!("<Mult Exp>", "<Negate Exp>")
+
+// The only base-type this shares with any of the above is Token,
+// since it's from a different language:
+Token_anotherCalc!("<Add Exp>", "<Mult Exp>")
+
+// Use null to refer to a rule that has no sub-tokens, such as in this:
+//   <OptionalHello> ::= 'Hello'
+//                     |
+Token_foo!("<OptionalHello>", "Hello") // First rule
+Token_foo!("<OptionalHello>", null)    // Second rule
+:]$]
+	<p>
+		See also the documentation on [$pageTitle|AmbiguousSym$].
+	</p>
+	<p>
+		Attempting to instantiate a [$typeName|Token_{languageName}!{rule}$] with a
+		rule that doesn't exist in the language will result in a compile-time
+		error.
+	</p>
+	[$apiHead|[: this(Token[] sub, Language lang) :]$]
+	<div class="api-def">
+		Constructor. Normally, only GoldieLib itself needs to
+		instantiate tokens, unless you want to create/modify a parse tree or
+		[$typeName|Token$] array manually.
+	</div>
+	<a name="Token_sub" />
+	<!-- [$apiHead| readonly @property Token_{languageName}!{symbol} sub(int index) $] -->
+	<div class="api-head">
+		<span class="attr">readonly @property</span>
+		[$typeName| Token_{languageName}!{symbol} $]
+		<span class="ident">sub</span>(int <span class="param-name">index</span>)
+		<br />
+	</div>
+	<div class="api-def">
+	<p>
+		Type-safe [$pageLink|StatVsDyn|static-style$] counterpart to the
+		[$ident|opIndex$] and [$ident|opSlice$] operator overloads.
+	</p>
+	<p>
+		Sample usage: [$code|inline|myToken.sub!2$]
+	</p>
+	<p>
+		Example:
+	</p>
+[$code|highlight|
+[:// Assume the language "calc":
+// <Mult Exp>   ::= <Mult Exp> '*' <Negate Exp>
+//                | <Mult Exp> '/' <Negate Exp>
+//                | <Negate Exp>
+// <Negate Exp> ::= '-' <Value>
+//                | <Value>
+
+void foo(Token_calc!("<Mult Exp>", "<Mult Exp>", "*", "<Negate Exp>") tok)
+{
+	// The first subtoken is known (even at compile-time) to be a <Mult Exp>.
+	// The others are also known. These are actually checked at compile-time:
+	// If you get them mixed up, you'll get a type-mismatch error when compiling.
+	Token_calc!"<Mult Exp>"   multTok     = tok.sub!0;
+	Token_calc!"*"            operatorTok = tok.sub!1;
+	Token_calc!"<Negate Exp>" negateTok   = tok.sub!2;
+
+	// Determine exact rule used for the <Negate Exp> subtoken:
+	// Can't know this at compile-time because it depends on
+	// the actual source that was parsed.
+	if( cast(Token_calc!("<Negate Exp>", "-", "<Value>")) negateTok )
+	{
+		writeln("negateTok came from: <Negate Exp> ::= '-' <Value>");
+	}
+	else if( cast(Token_calc!("<Negate Exp>", "<Value>")) negateTok )
+	{
+		writeln("negateTok came from: <Negate Exp> ::= <Value>");
+	}
+	else
+		writeln("Forgot to handle some other rule!");
+}
+:]$]
+	</div>
+	[$apiHead|[: static enum string StringOf :]$]
+	<div class="api-def">
+	<p>
+		This is a workaround for DMD Bug [$link| http://d.puremagic.com/issues/show_bug.cgi?id=1748 | #1748$].
+	</p>
+	<p>
+		Evaluates to [$code|inline|Token_{languageName}!(SymbolType.NonTerminal, "{symbolName}", ...)$].
+	</p>
+	<p>
+		Example:
+	</p>
+		[$code|highlight|
+[:void showStringOf(Token_calc!("<Negate Exp>", "-", "<Value>") tok)
+{
+	// Output: Token_calc!(SymbolType.NonTerminal, "<Negate Exp>", ...)
+	writeln(typeof(tok).StringOf);
+}
+:]$]
+	</div>
+</div>

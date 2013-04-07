@@ -1,0 +1,32 @@
+! -- Parameters ----------------------------------------
+! Basic Calculator Grammar
+! Supports integer literals, + - * / () and whitespace
+
+"Name"     = 'Calc'
+"Author"   = 'GOLD Parser Builder and Nick Sabalausky'
+"Version"  = '0.01'
+"About"    = 'Basic Calculator Grammar'
+"Case Sensitive" = false
+
+"Start Symbol" = <Add Exp>
+
+! -- Terminals -----------------------------------------
+
+Number = {Digit}+
+Whitespace = {Whitespace}+
+
+! -- Rules ---------------------------------------------
+
+<Add Exp>     ::= <Add Exp> '+' <Mult Exp>
+               |  <Add Exp> '-' <Mult Exp>
+               |  <Mult Exp>
+
+<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp>
+               |  <Mult Exp> '/' <Negate Exp>
+               |  <Negate Exp>
+
+<Negate Exp>  ::= '-' <Value>
+               |  <Value> 
+
+<Value>       ::= 'Number'
+               |  '(' <Add Exp> ')'

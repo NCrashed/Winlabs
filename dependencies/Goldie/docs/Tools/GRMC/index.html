@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: GRMC: Grammar Compiler</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><span class="pagemenu-link">GRMC: Grammar Compiler</span></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../Tools/index.html">Goldie's&nbsp;Tools</a>&nbsp;-> <span class="breadcrumb-link">GRMC:&nbsp;Grammar&nbsp;Compiler</span>
+	</div>
+	<br />
+	<h1>GRMC: Grammar Compiler</h1>
+	
+
+
+<p>
+Compiles a 
+<a class="page-link" href="../../Start/Grammar/index.html">grammar definition file</a>
+to a
+<a class="page-link" href="../../CGT/index.html">CGT file</a> (Compiled Grammar Table).
+This tool can be used instead of GOLD Parser Builder. The resulting .cgt files
+can be used with either Goldie or any other
+<a class="extern-link" href="http://goldparser.org/about/how-it-works.htm">GOLD Engine</a>.
+</p>
+
+<p>
+Note that there are a few
+<a class="page-link" href="../../Tools/OtherTools/index.html#GOLD">GOLD Parser Builder</a>
+features that Goldie Grammar Compiler does not yet support:
+</p>
+<ul>
+<li>The <a class="extern-link" href="http://goldparser.org/5.0/index.htm">new GOLD v5.0 features</a></li>
+<li><a class="extern-link" href="http://goldparser.org/doc/grammars/virtual-terminals.htm">Virtual terminals</a></li>
+<li>User-defined terminals named <span class="ident">EOF</span> or <span class="ident">Error</span></li>
+</ul>
+
+<p>
+Be aware that although some grammars can be compiled in under a second,
+others can take several minutes to be compiled into a CGT. In particular,
+grammars that use large sets of Unicode characters or require many parsing
+states tend to take significantly longer than simpler grammars.
+</p>
+
+<p>
+Note: GRMC cannot be compiled with DMD 2.057 due to DMD Issue
+<a class="extern-link" href="http://d.puremagic.com/issues/show_bug.cgi?id=7375">#7375</a>.
+</p>
+
+<h3>Command-line parameters:</h3>
+<div class="code-plain">Usage:   goldie-grmc [options] [grammar file] [options]
+Example: goldie-grmc grammar.grm
+         goldie-grmc grammar.grm -o=output.cgt
+
+Options:
+  --help, /?            Displays this help screen
+  -o, --out &lt;filename&gt;  Output filename
+  -v, --verbose         Verbose, displays progress and timings for each step
+  --gold                Imitate GOLD's output as closely as possible
+  --dot                 Output lexer's NFA and DFA to Graphviz DOT format</div>
+
+<p>
+The <span class="code-inline">--dot</span> parameter is interesting because it allows you to
+use <a class="extern-link" href="http://www.graphviz.org/">Graphviz</a> (or any other
+<a class="extern-link" href="http://en.wikipedia.org/wiki/DOT_language">DOT</a>-compatible
+visualization software) to create visual graphs
+of the lexer's original NFA and its resulting
+<a class="extern-link" href="http://goldparser.org/articles/dfa.htm">DFA</a>.
+</p>
+
+<p>
+The <span class="code-inline">--gold</span> parameter needs a little clarification:
+</p>
+
+<p>
+The CGTs Goldie generates are always valid GOLD-compatible files that are
+functionally equivalent to the CGTs GOLD Parser Builder would generate.
+But there can still be some inconsequential differences, even though the CGTs
+behave exactly the same.
+</p>
+
+<p>
+In theory, it's possible that another GOLD engine besides GoldieLib might
+mistakenly rely on some subtle detail of GOLD Parser Builder's output.
+Such an engine might accidentally handle Goldie's CGT slightly differently
+even though the CGTs normally would be functionally equivalent.
+</p>
+
+<p>
+If this happens, you can use the <span class="code-inline">--gold</span> parameter:
+Goldie will jump through some extra hoops trying to emulate
+the normally-irrelevant details of GOLD Parser Builder as closely
+as possible. It still might not be exactly the same as GOLD Parser Builder's
+output, but it may at least be close enough. If not, you may be able to
+adjust your CGT file as needed with <a class="page-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a>.
+</p>
+
+<h3 class="list-heading">See Also:</h3>
+<ul>
+<li><a class="page-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="page-link" href="../../CGT/index.html">CGT File Format</a></li>
+<li><a class="extern-link" href="http://goldparser.org/doc/grammars/index.htm">GOLD's documentation for the GRM grammar definition language</a></li>
+<li><a class="extern-link" href="http://goldparser.org/doc/cgt/index.htm">GOLD's documentation for the CGT file format</a></li>
+</ul>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

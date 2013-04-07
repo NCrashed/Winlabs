@@ -1,0 +1,93 @@
+[$name|GRMC$]
+[$title|GRMC: Grammar Compiler$]
+[$frame|HTMLPage.tmpl$]
+<p>
+Compiles a 
+[$pageLink|Grammar| grammar definition file $]
+to a
+[$pageLink|CGT| CGT file $] (Compiled Grammar Table).
+This tool can be used instead of GOLD Parser Builder. The resulting .cgt files
+can be used with either Goldie or any other
+[$link| http://goldparser.org/about/how-it-works.htm |GOLD Engine$].
+</p>
+
+<p>
+Note that there are a few
+[$pageLink|OtherTools#GOLD| GOLD Parser Builder $]
+features that Goldie Grammar Compiler does not yet support:
+</p>
+<ul>
+<li>The [$link| http://goldparser.org/5.0/index.htm | new GOLD v5.0 features $]</li>
+<li>[$link| http://goldparser.org/doc/grammars/virtual-terminals.htm | Virtual terminals $]</li>
+<li>User-defined terminals named [$ident|EOF$] or [$ident|Error$]</li>
+</ul>
+
+<p>
+Be aware that although some grammars can be compiled in under a second,
+others can take several minutes to be compiled into a CGT. In particular,
+grammars that use large sets of Unicode characters or require many parsing
+states tend to take significantly longer than simpler grammars.
+</p>
+
+<p>
+Note: GRMC cannot be compiled with DMD 2.057 due to DMD Issue
+[$link| http://d.puremagic.com/issues/show_bug.cgi?id=7375 | #7375 $].
+</p>
+
+<h3>Command-line parameters:</h3>
+[$code|plain|
+[:Usage:   goldie-grmc [options] [grammar file] [options]
+Example: goldie-grmc grammar.grm
+         goldie-grmc grammar.grm -o=output.cgt
+
+Options:
+  --help, /?            Displays this help screen
+  -o, --out <filename>  Output filename
+  -v, --verbose         Verbose, displays progress and timings for each step
+  --gold                Imitate GOLD's output as closely as possible
+  --dot                 Output lexer's NFA and DFA to Graphviz DOT format:]
+$]
+
+<p>
+The [$code|inline|--dot$] parameter is interesting because it allows you to
+use [$link|http://www.graphviz.org/|Graphviz$] (or any other
+[$link|http://en.wikipedia.org/wiki/DOT_language|DOT$]-compatible
+visualization software) to create visual graphs
+of the lexer's original NFA and its resulting
+[$link|http://goldparser.org/articles/dfa.htm|DFA$].
+</p>
+
+<p>
+The [$code|inline|--gold$] parameter needs a little clarification:
+</p>
+
+<p>
+The CGTs Goldie generates are always valid GOLD-compatible files that are
+functionally equivalent to the CGTs GOLD Parser Builder would generate.
+But there can still be some inconsequential differences, even though the CGTs
+behave exactly the same.
+</p>
+
+<p>
+In theory, it's possible that another GOLD engine besides GoldieLib might
+mistakenly rely on some subtle detail of GOLD Parser Builder's output.
+Such an engine might accidentally handle Goldie's CGT slightly differently
+even though the CGTs normally would be functionally equivalent.
+</p>
+
+<p>
+If this happens, you can use the [$code|inline|--gold$] parameter:
+Goldie will jump through some extra hoops trying to emulate
+the normally-irrelevant details of GOLD Parser Builder as closely
+as possible. It still might not be exactly the same as GOLD Parser Builder's
+output, but it may at least be close enough. If not, you may be able to
+adjust your CGT file as needed with [$pageTitle|AlterCGT$].
+</p>
+
+<h3 class="list-heading">See Also:</h3>
+<ul>
+<li>[$pageTitle| Grammar $]</li>
+<li>[$pageTitle| CGT $]</li>
+<li>[$link| http://goldparser.org/doc/grammars/index.htm | GOLD's documentation for the GRM grammar definition language $]</li>
+<li>[$link| http://goldparser.org/doc/cgt/index.htm | GOLD's documentation for the CGT file format $]</li>
+</ul>

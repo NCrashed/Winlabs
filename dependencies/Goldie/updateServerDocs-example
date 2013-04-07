@@ -1,0 +1,26 @@
+#!/bin/sh
+
+showUsage()
+{
+	echo
+	echo "Usage:   ./updateServerDocs-example {version}"
+	echo "Example: ./updateServerDocs-example 0.5"
+	echo
+}
+
+# Check args
+if [ "$1" = "" ] ; then
+	showUsage
+	exit
+fi
+
+if [ "$1" = "--help" ] ; then
+	showUsage
+	exit
+fi
+
+SERVER="/mnt/my-server-via-sshfs"
+
+sshfs user@domain: "$SERVER"
+./updateServerDocs "$1" "$SERVER/www/goldie"
+fusermount -u "$SERVER"

@@ -1,0 +1,134 @@
+[$name|Symbol$]
+[$title|struct Symbol$]
+[$frame|HTMLPage.tmpl$]
+
+<ul>
+<li>[$typeLink|SymbolType| enum SymbolType $]</li>
+<li>[$typeLink|Symbol| struct Symbol $]</li>
+<li>[$pageLink|#Module| Module-Level Members $]</li>
+</ul>
+
+<p>
+See also the [$pageLink|APIOver#TokenSymbol| explanation of Tokens vs Symbols $].
+</p>
+
+[$apiSectionType| SymbolType | goldie.base | enum SymbolType $]
+<div class="api-def">
+	[$apiHead|[:
+	NonTerminal
+	Terminal
+	Whitespace
+	EOF
+	CommentStart
+	CommentEnd
+	CommentLine
+	Error
+	:]$]
+	<div class="api-def">
+	<p>
+		[$ident|EOF$] and [$ident|Error$] symbols (there is exactly
+		one of each in every language) are automatically created
+		when a grammar is compiled.
+		A [$ident|Whitespace$] symbol is automatically
+		defined if the grammar doesn't already define one.
+	</p>
+	<p>
+		Symbols of the other [$typeName|SymbolType$] values are defined
+		by a grammar.
+	</p>
+	<p>
+		All [$typeName|SymbolType$] values except for [$ident|NonTerminal$]
+		are technically considered to be terminals (and tokens of these
+		symbols are created by the [$typeName|Lexer$] instead of the
+		[$typeName|Parser$]), although the actual [$ident|SymbolType.Terminal$]
+		value is only used for "normal" terminals (ie., ones that don't match
+		any of the other [$typeName|SymbolType$] values).
+	</p>
+	</div>
+</div>
+
+[$apiSectionType| Symbol | goldie.base | struct Symbol $]
+<div class="api-def">
+	[$apiHead| string name $]
+	<div class="api-def">
+	<p>
+		The name of the symbol, as defined in a language's grammar.
+		For nonterminals, this includes the surrounding
+		[$code|inline|<$] and [$code|inline|>$].
+	</p>
+	<p>
+		For example, in a grammar,
+		[$code|inline|<If Statement> ::= 'if'$] would define a
+		nonterminal symbol with a [$ident|name$] of
+		[$code|inline|<If Statement>$].
+	</p>
+	</div>
+	
+	[$apiHead| SymbolType type $]
+	<div class="api-def">
+		The type of symbol.
+	</div>
+	
+	[$apiHead| int id $]
+	<div class="api-def">
+		The ID of the symbol. This is an index into
+		[$typeName|Language$][$ident|.symbolTable$].
+	</div>
+	
+	[$apiHead| string toString() $]
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+[$code|highlight|
+[:auto sym = Symbol("foo", SymbolType.Terminal, 7);
+assert(sym.toString() == `Symbol("foo",SymbolType.Terminal,7)`);
+:]$]
+	</div>
+</div>
+
+[$apiSection| Module | goldie.base | Module-Level Members $]
+<div class="api-def">
+
+	[$apiHead|[: string symbolTypeToString(SymbolType type) :]$]
+	<div class="api-def">
+		Example:
+[$code|highlight|
+[:string str = symbolTypeToString(SymbolType.NonTerminal);
+assert(str == "NonTerminal");
+:]$]
+	</div>
+	
+	[$apiHead|[: string fullSymbolTypeToString(SymbolType type) :]$]
+	<div class="api-def">
+		Example:
+[$code|highlight|
+[:string str = fullSymbolTypeToString(SymbolType.NonTerminal);
+assert(str == "SymbolType.NonTerminal");
+:]$]
+	</div>
+
+	[$apiHead|[: string symbolTypesToString(SymbolType[] types) :]$]
+	<div class="api-def">
+		Example:
+[$code|highlight|
+[:auto symTypes = [SymbolType.Terminal, SymbolType.NonTerminal, SymbolType.Terminal];
+string str = symbolTypesToString(symTypes);
+
+assert(str == "Terminal, NonTerminal, Terminal");
+:]$]
+	</div>
+
+	[$apiHead|[: string[] symbolTypesToStrings(SymbolType[] types) :]$]
+	<div class="api-def">
+		Example:
+[$code|highlight|
+[:auto symTypes = [SymbolType.Terminal, SymbolType.NonTerminal, SymbolType.Terminal];
+auto strings = symbolTypesToStrings(symTypes);
+
+assert(strings.length == 3);
+assert(strings[0] == "Terminal");
+assert(strings[1] == "NonTerminal");
+assert(strings[2] == "Terminal");
+:]$]
+	</div>
+</div>

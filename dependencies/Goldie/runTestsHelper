@@ -1,0 +1,59 @@
+#!/bin/sh
+
+echo
+echo ================== Using: $1 ==================
+echo
+
+which dmd
+dmd | grep Compiler
+
+rm -f SemiTwistDTools/bin/semitwist-*
+rm -f Goldie/bin/goldie-*
+rm -f Goldie/tutorial/section3/commas.cgt
+rm -f Goldie/tutorial/sections5-6/commas.cgt
+rm -rf Goldie/tutorial/sections5-6/commas/
+rm -f Goldie/tutorial/sections5-6/program1
+rm -f Goldie/tutorial/sections5-6/program2
+rm -f Goldie/tutorial/sections5-6/program3
+
+# ./test/SemiTwistDTools/
+cd SemiTwistDTools
+./buildAll all
+bin/semitwist-unittests-debug
+
+# ./test/Goldie/
+cd ../Goldie
+../SemiTwistDTools/bin/semitwist-stbuild-debug all all -x=-I../SemiTwistDTools/src
+bin/goldie-sampleGenericParse-debug lang/valid_sample2.calc lang/calc.cgt
+./makeDocs-debug
+
+# ./test/Goldie/tutorial/section3/
+echo Testing tutorial section3
+cd tutorial/section3
+../../bin/goldie-grmc-debug commas.grm
+../../bin/goldie-staticlang-debug commas.cgt --pack=commas
+
+# ./test/Goldie/tutorial/sections5-6/
+echo Testing tutorial sections5-6
+cd ../sections5-6
+../../bin/goldie-grmc-debug commas.grm
+../../bin/goldie-staticlang-debug commas.cgt --pack=commas
+
+echo ...program1
+rdmd --build-only -I../../../SemiTwistDTools/src -I../../src -ofprogram1 program1.d
+./program1 test.commas
+
+echo ...program2
+rdmd --build-only -I../../../SemiTwistDTools/src -I../../src -ofprogram2 program2.d
+./program2 test.commas
+./program2 test-different-sizes.commas
+./program2 test-out-of-range.commas
+
+echo ...program3
+rdmd --build-only -I../../../SemiTwistDTools/src -I../../src -ofprogram3 program3.d
+./program3 test.commas
+./program3 test-different-sizes.commas
+./program3 test-out-of-range.commas
+
+# ./test/
+cd ../../..

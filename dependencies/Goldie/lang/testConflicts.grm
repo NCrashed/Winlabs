@@ -1,0 +1,82 @@
+"Name"     = 'Test Conflicts'
+"Author"   = 'Nick Sabalausky'
+"Version"  = '1'
+"About"    = 'A test grammar that deliberately contains Shift/Reduce and Reduce/Reduce conflicts'
+
+"Case Sensitive" = True
+
+"Start Symbol" = <All>
+
+!*
+
+This grammar deliberately contains Shift/Reduce and Reduce/Reduce conflicts.
+Note: A {DOT} indicates the "marker" in an item.
+
+There are 2 Shift/Reduce conflicts:
+
+  1. Conflict on lookaheads: EOF 'a'
+     <A> ::= 'a' {DOT}      Lookaheads: EOF 'a'  (Reduce)
+     <A> ::= 'a' {DOT} 'a'  Lookaheads: EOF 'a'  (Shift)
+
+  2. Conflict on lookaheads: EOF 'a2'
+     <A2> ::= 'a2' {DOT}       Lookaheads: EOF 'a2'  (Reduce)
+     <A2> ::= 'a2' {DOT} 'a2'  Lookaheads: EOF 'a2'  (Shift)
+
+There are 3 Reduce/Reduce conflicts:
+
+  1. Conflict on lookaheads: EOF 'b' 'c' 'd'
+     <B> ::= 'c' {DOT}  Lookaheads: EOF 'b' 'c' 'd'  (Reduce)
+     <C> ::= 'c' {DOT}  Lookaheads: EOF 'b' 'c' 'd'  (Reduce)
+
+  2. Conflict on lookaheads: EOF 'b2' 'c2' 'd2'
+     <B2> ::= 'c2' {DOT}  Lookaheads: EOF 'b2' 'c2' 'd2'  (Reduce)
+     <C2> ::= 'c2' {DOT}  Lookaheads: EOF 'b2' 'c2' 'd2'  (Reduce)
+
+  3. Conflict on lookahead: EOF
+     <RR>  ::= {DOT}  Lookaheads: EOF 'b'  'c'  'd'   (Reduce)
+     <RR2> ::= {DOT}  Lookaheads: EOF 'b2' 'c2' 'd2'  (Reduce)
+
+*!
+
+! ------------------------------------------------- Rules
+
+<All> ::= <SR> | <RR> | <SR2> | <RR2>
+
+
+!-- Shift/Reduce 1
+
+<SR> ::= <A> <A>
+
+<A> ::= 'a' | 'a' 'a'
+
+
+!-- Shift/Reduce 2
+
+<SR2> ::= <A2> <A2>
+
+<A2> ::= 'a2' | 'a2' 'a2'
+
+
+!-- Reduce/Reduce 1
+
+<RR> ::= <RR> <B Or C>
+      |
+
+<B Or C> ::= <B> | <C>
+
+<B> ::= 'b' | 'c'
+
+<C> ::= 'c' | 'd'
+
+
+!-- Reduce/Reduce 2
+
+<RR2> ::= <RR2> <B2 Or C2>
+      |
+
+<B2 Or C2> ::= <B2> | <C2>
+
+<B2> ::= 'b2' | 'c2'
+
+<C2> ::= 'c2' | 'd2'
+

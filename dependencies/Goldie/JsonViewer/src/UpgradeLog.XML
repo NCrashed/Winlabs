@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="JsonViewer">
+</Property><Property Name="Solution File" Value="D:\DevProject\JsonViewer-15309\JsonViewer.sln">
+</Property><Property Name="Date" Value="Tuesday, January 13, 2009">
+</Property><Property Name="Time" Value="19:57 PM">
+</Property></Properties><Event ErrorLevel="0" Project="FiddlerJsonViewer" Source="Fiddler\FiddlerJsonViewer.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="FiddlerJsonViewer" Source="Fiddler\FiddlerJsonViewer.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="JsonVisualizer" Source="Visualizer\JsonVisualizer.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="JsonVisualizer" Source="Visualizer\JsonVisualizer.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="JsonView" Source="JsonView\JsonView.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="JsonView" Source="JsonView\JsonView.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="JsonViewer" Source="JsonViewer\JsonViewer.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="JsonViewer" Source="JsonViewer\JsonViewer.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="JsonViewer.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="JsonViewer.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="FiddlerJsonViewer" Source="Fiddler\FiddlerJsonViewer.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="JsonVisualizer" Source="Visualizer\JsonVisualizer.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="JsonView" Source="JsonView\JsonView.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="JsonViewer" Source="JsonViewer\JsonViewer.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

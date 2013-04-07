@@ -1,0 +1,178 @@
+[$name|docs$]
+[$title|Goldie Home (v0.9)$]
+[$frame|HTMLPage.tmpl$]
+<h4 style="margin-top: 0px; font-style: italic;">It parses stuff!</h4>
+
+<p>
+[$ident|Goldie$] is a series of
+[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/LICENSE.txt | open-source $]
+parsing tools, including an optional
+[$link| http://dlang.org/ | D programming language $]
+library called [$ident|GoldieLib$].
+Goldie is compatible with
+[$pageLink|OtherTools#GOLD| GOLD Parser Builder $]
+and can be used either together with it, or as an alternative to it.
+</p>
+
+<h3 style="margin-bottom: 0px;">Some of Goldie's benefits:</h3>
+<p style="margin-bottom: 0px; margin-top: 0px; font-size: 0.9em; font-style: italic;">
+	(most are thanks to Goldie's compatibility with GOLD Parser Builder)
+</p>
+<ul class="info-list">
+<li>
+	<h4>Grammars are fully reusable</h4>
+	<div class="info-list-info">
+	No need to create a new grammar for every purpose and every host language.
+	Many grammars are
+	[$link|http://goldparser.org/grammars/index.htm| already available $].
+	</div>
+</li>
+<li>
+	<h4>Grammar-agnostic engine</h4>
+	<div class="info-list-info">
+	One lexer/parser engine can be used for all grammars.
+	</div>
+</li>
+<li>
+	<h4>Engines for nearly any language or platform</h4>
+	<div class="info-list-info">
+	A cross-platform
+	[$link| http://dlang.org/ | D $]-hosted
+	engine is included via [$pageLink|APIOver| GoldieLib $].
+	Engines for many other platforms are
+	[$pageLink|OtherTools#EngineLinks| also available $].
+	New engines are easy to write.
+	</div>
+</li>
+<li>
+	<h4>Static-Style</h4>
+	<div class="info-list-info">
+	[$pageLink|StatVsDyn| Static-style $] provides compile-time checks and extra type-safety.
+	</div>
+</li>
+<li>
+	<h4>Dynamic-Style</h4>
+	<div class="info-list-info">
+	[$pageLink|StatVsDyn| Dynamic-style $] lets you write programs that support user-created grammars.
+	</div>
+</li>
+<li>
+	<h4>Lexing and parsing</h4>
+	<div class="info-list-info">
+	Lexing and parsing are defined
+	[$pageLink|Grammar| in the same file $]
+	and handled by one unified tool.
+	</div>
+</li>
+<li>
+	<h4>Many tools available</h4>
+	<div class="info-list-info">
+	See the [$pageTitle|Tools$] page.
+	</div>
+</li>
+</ul>
+
+<p>
+Goldie is fully-usable and has been tested on both Windows and Linux
+(it should also work on OSX and any other platform supported by DMD,
+but has not been tested),
+although GoldieLib's API is still subject to change. Goldie is licensed under
+[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/LICENSE.txt |The zlib/libpng License$].
+</p>
+
+<h3 class="list-heading">Helpful Links:</h3>
+<ul>
+<li>[$pageTitle| Start $]</li>
+<li>[$pageTitle| LearnParsing $]</li>
+<li>[$pageTitle| Tutorial $]</li>
+<li>[$link| https://bitbucket.org/Abscissa/goldie/v0.9 | Browse Git Repository $]</li>
+<li>[$pageLink|OtherTools#GOLD                 | GOLD Parser Builder $] - A related tool that Goldie is compatible with.</li>
+<li>[$link| http://www.semitwist.com/goldwiki/ | GOLD Wiki $] - A Wiki for GOLD Parser Builder</li>
+</ul>
+
+<hr />
+
+<p>
+If you use Git master, be sure to read [$pageTitle|GitMaster$].
+</p>
+
+<p>
+The homepage and documentation for the most recent version of Goldie can always be found online at:<br />
+[$urlLink| http://www.semitwist.com/goldie/ $]
+</p>
+
+<p>
+The documentation for this version of Goldie can always be found online at:<br />
+[$urlLink| http://www.semitwist.com/goldie/v0.9/ $]
+</p>
+
+<p>
+Prepackaged Goldie releases include a local offline copy of this documentation at:<br />
+[$code|inline| {main goldie directory}/docs/index.html $]<br />
+To build local documentation manually, see [$pageTitle|GenDocs$].
+</p>
+
+<p>
+Links to documentation for older versions of Goldie are on the [$pageTitle|ChangeLog$] page.
+</p>
+
+[$page|
+	[$file| docs.Start.tmpl $]
+	[$page| [$file| docs.Start.Requires.tmpl     $] $]
+	[$page| [$file| docs.Start.Install.tmpl      $] $]
+	[$page| [$file| docs.Start.LearnParsing.tmpl $] $]
+	[$page| [$file| docs.Start.Overview.tmpl     $] $]
+	[$page| [$file| docs.Start.Tutorial.tmpl     $] $]
+	[$page| [$file| docs.Start.Grammar.tmpl      $] $]
+	[$page|
+		[$file| docs.Start.Contact.tmpl $]
+		[$page| [$file| docs.Start.Contact.MessageBoard.tmpl $] $]
+		[$page| [$file| docs.Start.Contact.Tickets.tmpl      $] $]
+	$]
+$]
+[$page|
+	[$file| docs.Tools.tmpl $]
+	[$page| [$file| docs.Tools.AlterCGT.tmpl   $] $]
+	[$page| [$file| docs.Tools.DumpCGT.tmpl    $] $]
+	[$page| [$file| docs.Tools.GenDocs.tmpl    $]
+		[$page| [$file| docs.Tools.GenDocs.TemplateFormat.tmpl $] $]
+	$]
+	[$page| [$file| docs.Tools.GRMC.tmpl    $] $]
+	[$page| [$file| docs.Tools.JsonViewer.tmpl $]
+		[$page| [$file| docs.Tools.JsonViewer.ParseTreeMode.tmpl $] $]
+	$]
+	[$page| [$file| docs.Tools.Parse.tmpl      $] $]
+	[$page| [$file| docs.Tools.StaticLang.tmpl $] $]
+	[$page| [$file| docs.Tools.OtherTools.tmpl $] $]
+$]
+[$page|
+	[$file| docs.APIOver.tmpl$]
+	[$page| [$file| docs.APIOver.StatVsDyn.tmpl    $] $]
+	[$page| [$file| docs.APIOver.AmbiguousSym.tmpl $] $]
+$]
+[$page|
+	[$file| docs.APIRef.tmpl $]
+	[$page| [$file| docs.APIRef.Base.tmpl      $] $]
+	[$page| [$file| docs.APIRef.Exception.tmpl $] $]
+	[$page| [$file| docs.APIRef.Language.tmpl  $] $]
+	[$page| [$file| docs.APIRef.Lexer.tmpl     $] $]
+	[$page| [$file| docs.APIRef.Parser.tmpl    $] $]
+	[$page| [$file| docs.APIRef.Symbol.tmpl    $] $]
+	[$page| [$file| docs.APIRef.Token.tmpl     $] $]
+	[$page| [$file| docs.APIRef.Ver.tmpl       $] $]
+$]
+[$page|
+	[$file| docs.SampleApps.tmpl $]
+	[$page| [$file| docs.SampleApps.CalculatorStatic.tmpl   $] $]
+	[$page| [$file| docs.SampleApps.CalculatorDynamic.tmpl  $] $]
+	[$page| [$file| docs.SampleApps.SampleGenericParse.tmpl $] $]
+$]
+[$page| [$file| docs.CGT.tmpl       $] $]
+[$page| [$file| docs.FAQ.tmpl       $] $]
+[$page| [$file| docs.ChangeLog.tmpl $] $]
+[$page| [$file| docs.GitMaster.tmpl $] $]
+[$page| [$file| docs.Future.tmpl    $] $]
+[$page| [$file| docs.Dev.tmpl $]
+	[$page| [$file| docs.Dev.DevScripts.tmpl $] $]
+	[$page| [$file| docs.Dev.DevStaticLang.tmpl $] $]
+$]

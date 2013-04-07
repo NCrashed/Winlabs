@@ -1,0 +1,39 @@
+{
+	parseTreeMode: true,
+	source: "Once upon a time...",
+
+	"Story": {
+		srcIndexStart: 0,
+		srcLength: 19,
+		
+		"Sentence": {
+			srcIndexStart: 0,
+			srcLength: 16,
+			
+			"Word 1": {
+				srcIndexStart: 0,
+				srcLength: 4,
+			},
+			
+			"Word 2": {
+				srcIndexStart: 5,
+				srcLength: 4,
+			},
+			
+			"Word 3": {
+				srcIndexStart: 10,
+				srcLength: 1,
+			},
+			
+			"Word 4": {
+				srcIndexStart: 12,
+				srcLength: 4,
+			}
+		},
+		
+		"Punctuation": {
+			srcIndexStart: 16,
+			srcLength: 3,
+		}
+	}
+}

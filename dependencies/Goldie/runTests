@@ -1,0 +1,50 @@
+#!/bin/sh
+
+if [ ! -d "test-cache" ]; then
+
+	echo "Exporting Goldie/SemiTwistDTools masters from version control..."
+	echo "These will be cached. To download them again,"
+	echo "delete the 'test-cache' directory."
+
+	# ./test-cache/
+	mkdir test-cache
+	cd test-cache
+	
+	git clone https://bitbucket.org/Abscissa/semitwistdtools.git SemiTwistDTools
+	git clone https://bitbucket.org/Abscissa/goldie.git Goldie
+
+	# Cleanup Git's droppings:
+	rm SemiTwistDTools/.git -rf
+	rm SemiTwistDTools/.gitignore -f
+	rm Goldie/.git -rf
+	rm Goldie/.gitignore -f
+
+	# ./
+	cd ..
+fi
+
+# ./test/
+rm test -rf
+cp -r test-cache test
+cd test
+
+OLD_PATH=$PATH
+
+PATH=$(pwd):~/.dvm/compilers/dmd-2.055/bin:$OLD_PATH
+../runTestsHelper 'DMD 2.055'
+
+PATH=$(pwd):~/.dvm/compilers/dmd-2.056/bin:$OLD_PATH
+../runTestsHelper 'DMD 2.056'
+
+PATH=$(pwd):~/.dvm/compilers/dmd-2.057/bin:$OLD_PATH
+../runTestsHelper 'DMD 2.057'
+
+PATH=$(pwd):~/.dvm/compilers/dmd-2.058/bin:$OLD_PATH
+../runTestsHelper 'DMD 2.058'
+
+PATH=$(pwd):~/.dvm/compilers/dmd-2.059/bin:$OLD_PATH
+../runTestsHelper 'DMD 2.059'
+
+# ./
+cd ..
+echo Done testing.

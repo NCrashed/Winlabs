@@ -1,0 +1,267 @@
+"Name"     = 'D Lex'
+"Author"   = 'Nick Sabalausky'
+"Version"  = '0.02'
+"About"    = 'Lexing grammar for D2'
+"Case Sensitive" = true
+
+"Start Symbol" = <Module>
+
+! -- Terminals -----------------------------------------
+
+Whitespace = {Whitespace}+
+Comment Line  = '//'
+Comment Start = '/*'
+Comment End   = '*/'
+
+! Nested comments not yet supported by Goldie
+NestedCommentStart = '/+'
+NestedCommentEnd   = '+/'
+
+! Token Strings need to be lexed just like ordinary code,
+! so there's no special terminal for them other than 'q{'
+
+Identifier = ({Letter} | '_') ({AlphaNumeric} | '_')*
+
+{NonZeroDigit} = {Number} - [0]
+{DecimalDigit} = {Number} + [_]
+{BinaryDigit}  = [_01]
+{OctalDigit}   = [_01234567]
+{HexDigit}     = {Number} + [_abcdefABCDEF]
+Decimal     = ( '0' | ({NonZeroDigit} ({Number}|'_')*) ) ([LuU]|'Lu'|'LU'|'uL'|'UL')?
+Binary      = '0' [bB] {BinaryDigit}+                    ([LuU]|'Lu'|'LU'|'uL'|'UL')?
+Octal       = '0'      {OctalDigit}+                     ([LuU]|'Lu'|'LU'|'uL'|'UL')?
+Hexadecimal = '0' [xX] {HexDigit}+                       ([LuU]|'Lu'|'LU'|'uL'|'UL')?
+
+FloatLiteralDec = ( '0' | ({NonZeroDigit} ({Number}|'_')*) ) ([LuU]|'Lu'|'LU'|'uL'|'UL')? ([fF]'i'|'Li'|'i') ( [eE][-+]?({Number}|'_')+ )?
+FloatLiteralBin = '0' [bB] {BinaryDigit}+                    ([LuU]|'Lu'|'LU'|'uL'|'UL')? ([fF]'i'|'Li'|'i') ( [eE][-+]?({Number}|'_')+ )?
+FloatLiteralOct = '0'      {OctalDigit}+                     ([LuU]|'Lu'|'LU'|'uL'|'UL')? ([fF]'i'|'Li'|'i') ( [eE][-+]?({Number}|'_')+ )?
+FloatLiteralHex = '0' [xX] {HexDigit}+                       ([LuU]|'Lu'|'LU'|'uL'|'UL')? ([fF]'i'|'Li'|'i') ( [eE][-+]?({Number}|'_')+ )?
+
+DecimalFloat1 = {DecimalDigit}+ '.' ( {DecimalDigit}+ ( [eE][-+]?{DecimalDigit}+ )? )?
+DecimalFloat2 = '.' ( '0' | ({NonZeroDigit} {DecimalDigit}*) ) ( [eE][-+]?{DecimalDigit}+ )?
+DecimalFloat3 = {Number} {DecimalDigit}* [eE][-+]?{DecimalDigit}+
+
+HexFloat1 = '0' [xX] {HexDigit} '.' {HexDigit}+ [pP][-+]?{HexDigit}+
+HexFloat2 = '0' [xX]            '.' {HexDigit}+ [pP][-+]?{HexDigit}+
+HexFloat3 = '0' [xX]                {HexDigit}+ [pP][-+]?{HexDigit}+
+
+{DoubleQuotedStringChar} = {Printable} - ["]
+DoubleQuotedString = '"' ({DoubleQuotedStringChar} | '\' {Printable})* '"' [cwd]?
+WysiwygString = 'r"' {DoubleQuotedStringChar}* '"' [cwd]?
+
+{AlternateWysiwygStringChar} = {Printable} - [`]
+AlternateWysiwygString = '`' {DoubleQuotedStringChar}* '`' [cwd]?
+
+{HexStringDigit} = {HexDigit} + {Whitespace}
+HexString = 'x"' {HexStringDigit}* '"' [cwd]?
+
+! Not yet supported, the following won't work quite right
+! DelimitedString = 'q"' {DoubleQuotedStringChar}* '"' [cwd]?
+
+{CharacterLiteralChar} = {Printable} - ['']
+CharacterLiteral = '' ({CharacterLiteralChar} | '\' {Printable}) '' [cwd]?
+
+! -- Rules ---------------------------------------------
+
+<Module> ::= <Module> <Item>
+          |  
+
+<Item> ::= Identifier
+        |  Decimal
+        |  Binary
+        |  Octal
+        |  Hexadecimal
+        |  FloatLiteralDec
+        |  FloatLiteralBin
+        |  FloatLiteralOct
+        |  FloatLiteralHex
+        |  DecimalFloat1
+        |  DecimalFloat2
+        |  DecimalFloat3
+        |  HexFloat1
+        |  HexFloat2
+        |  HexFloat3
+        |  DoubleQuotedString
+        |  WysiwygString
+        |  AlternateWysiwygString
+        |  HexString !|  DelimitedString
+        |  CharacterLiteral
+        |  NestedCommentStart
+        |  NestedCommentEnd
+        |  '/'
+        |  '/='
+        |  '.'
+        |  '..'
+        |  '...'
+        |  '&'
+        |  '&='
+        |  '&&'
+        |  '|'
+        |  '|='
+        |  '||'
+        |  '-'
+        |  '-='
+        |  '--'
+        |  '+'
+        |  '+='
+        |  '++'
+        |  '<'
+        |  '<='
+        |  '<<'
+        |  '<<='
+        |  '<>'
+        |  '<>='
+        |  '>'
+        |  '>='
+        |  '>>='
+        |  '>>>='
+        |  '>>'
+        |  '>>>'
+        |  '!'
+        |  '!='
+        |  '!<>'
+        |  '!<>='
+        |  '!<'
+        |  '!<='
+        |  '!>'
+        |  '!>='
+        |  '('
+        |  ')'
+        |  '['
+        |  ']'
+        |  'q{'
+        |  '{'
+        |  '}'
+        |  '?'
+        |  ','
+        |  ';'
+        |  ':'
+        |  '$'
+        |  '='
+        |  '=='
+        |  '*'
+        |  '*='
+        |  '%'
+        |  '%='
+        |  '^'
+        |  '^='
+        |  '~'
+        |  '~='
+        |  'abstract'
+        |  'alias'
+        |  'align'
+        |  'asm'
+        |  'assert'
+        |  'auto'
+        |  'body'
+        |  'bool'
+        |  'break'
+        |  'byte'
+        |  'case'
+        |  'cast'
+        |  'catch'
+        |  'cdouble'
+        |  'cent'
+        |  'cfloat'
+        |  'char'
+        |  'class'
+        |  'const'
+        |  'continue'
+        |  'creal'
+        |  'dchar'
+        |  'debug'
+        |  'default'
+        |  'delegate'
+        |  'delete'
+        |  'deprecated'
+        |  'do'
+        |  'double'
+        |  'else'
+        |  'enum'
+        |  'export'
+        |  'extern'
+        |  'false'
+        |  'final'
+        |  'finally'
+        |  'float'
+        |  'for'
+        |  'foreach'
+        |  'foreach_reverse'
+        |  'function'
+        |  'goto'
+        |  'idouble'
+        |  'if'
+        |  'ifloat'
+        |  'immutable'
+        |  'import'
+        |  'in'
+        |  'inout'
+        |  'int'
+        |  'interface'
+        |  'invariant'
+        |  'ireal'
+        |  'is'
+        |  'lazy'
+        |  'long'
+        |  'macro'
+        |  'mixin'
+        |  'module'
+        |  'new'
+        |  'nothrow'
+        |  'null'
+        |  'out'
+        |  'override'
+        |  'package'
+        |  'pragma'
+        |  'private'
+        |  'protected'
+        |  'public'
+        |  'pure'
+        |  'real'
+        |  'ref'
+        |  'return'
+        |  'scope'
+        |  'shared'
+        |  'short'
+        |  'static'
+        |  'struct'
+        |  'super'
+        |  'switch'
+        |  'synchronized'
+        |  'template'
+        |  'this'
+        |  'throw'
+        |  'true'
+        |  'try'
+        |  'typedef'
+        |  'typeid'
+        |  'typeof'
+        |  'ubyte'
+        |  'ucent'
+        |  'uint'
+        |  'ulong'
+        |  'union'
+        |  'unittest'
+        |  'ushort'
+        |  'version'
+        |  'void'
+        |  'volatile'
+        |  'wchar'
+        |  'while'
+        |  'with'
+        |  '__FILE__'
+        |  '__LINE__'
+        |  '__gshared'
+        |  '__thread'
+        |  '__traits'
+        |  '@safe'
+        |  '@trusted'
+        |  '@system'
+        |  '@property'
+        |  '__DATE__'
+        |  '__EOF__'
+        |  '__TIME__'
+        |  '__TIMESTAMP__'
+        |  '__VENDOR__'
+        |  '__VERSION__'
+        |  '#line'

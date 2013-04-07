@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: GoldieLib Overview</title>
+<link rel="stylesheet" type="text/css" href="../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><span class="pagemenu-link">GoldieLib Overview</span></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <span class="breadcrumb-link">GoldieLib&nbsp;Overview</span>
+	</div>
+	<br />
+	<h1>GoldieLib Overview</h1>
+	
+
+
+<a name="Overview" />
+
+<p>
+<span class="ident">GoldieLib</span> is Goldie's
+<a class="extern-link" href="http://dlang.org/">D</a>
+API. Using GoldieLib, your D programs
+can parse text according to any GOLD-compatible grammar and access
+some of Goldie's other capabilities.
+</p>
+
+<a name="Import" />
+<h2>Importing</h2>
+
+<p>Importing is simple:</p>
+
+<div class="code-highlight">import goldie.all;
+</div>
+
+<p>
+When you compile, make sure to tell the compiler where to find
+Goldie and SemiTwist D Tools:
+</p>
+
+<div class="code-plain">&gt;<span class="code-user">rdmd --build-only -I{path to SemiTwistDTools}/src -I{path to Goldie}/src myMain.d</span></div>
+
+
+<h2>Conventions Used By GoldieLib</h2>
+
+<a name="LineColumn" />
+<h3>Line and Column Numbers</h3>
+<p>
+All line numbers and column numbers are internally stored and treated
+by the API as zero-indexed and displayed to the user as one-indexed.
+</p>
+
+<p>
+When Goldie refers to a "column number", it really means "the number of
+characters (ie, UTF code-points) from the start of the line". 
+This behavior is more reliable and more useful than a true "column number"
+because:
+</p>
+<ul>
+<li>
+	Tab-size is a matter of presentation (For better or worse, depending on one's perspective).
+</li>
+<li>
+	Non-printing characters may exist in a source to be parsed.
+</li>
+<li>
+	The increasingly popular concept of
+	<a class="extern-link" href="http://nickgravgaard.com/elastictabstops/">elastic tabstops</a>
+	makes proportional fonts practical for source code, which renders
+	the traditional concept of "column number" meaningless.
+</li>
+</ul>
+
+<a name="TokenSymbol" />
+<h3>
+	Tokens, Symbols, and Symbol Types:<br />
+	<span style="font-size: 0.9em">The Front-End's Building Blocks</span>
+</h3>
+<p>
+A <a class="page-link" href="../APIRef/Token/index.html">Token</a> can be thought of as an instance of a <a class="page-link" href="../APIRef/Symbol/index.html">Symbol</a>.
+A <a class="page-link" href="../APIRef/Token/index.html">Token</a> is part of the parsed source, and a <a class="page-link" href="../APIRef/Symbol/index.html">Symbol</a>
+is part of the grammar.
+</p>
+<p>
+For example, consider this grammar:
+</p>
+
+<div class="code-plain">Word = {Letter}+
+&lt;Sentence&gt; ::= &lt;Sentence&gt; Word
+</div>
+
+<p>
+And this source:
+</p>
+
+<div class="code-plain">Hello world
+</div>
+<p>
+These are the Tokens and Symbols:
+</p>
+<table class="grid-table">
+<tr><td><span class="ident">Word</span></td><td><a class="page-link" href="../APIRef/Symbol/index.html">Symbol</a></td><td>This Symbol's type is <a class="page-link" href="../APIRef/Symbol/index.html#SymbolType">SymbolType</a><span class="ident">.Terminal</span>.</td></tr>
+<tr><td><span class="ident">&lt;Sentence&gt;</span></td><td><a class="page-link" href="../APIRef/Symbol/index.html">Symbol</a></td><td>This Symbol's type is <a class="page-link" href="../APIRef/Symbol/index.html#SymbolType">SymbolType</a><span class="ident">.NonTerminal</span>.</td></tr>
+<tr><td><span class="ident">Hello</span></td><td><a class="page-link" href="../APIRef/Token/index.html">Token</a></td><td>This Token's Symbol is <span class="ident">Word</span>.</td></tr>
+<tr><td><span class="ident">world</span></td><td><a class="page-link" href="../APIRef/Token/index.html">Token</a></td><td>This Token's Symbol is <span class="ident">Word</span>.</td></tr>
+<tr><td><span class="ident">Hello world</span></td><td><a class="page-link" href="../APIRef/Token/index.html">Token</a></td><td>This Token's Symbol is <span class="ident">&lt;Sentence&gt;</span>.</td></tr>
+</table>
+<p>
+Note that Goldie defines more symbol types
+than just <span class="ident">Terminal</span> and <span class="ident">NonTerminal</span> (see the
+<a class="page-link" href="../APIRef/Symbol/index.html#SymbolType">SymbolType</a> documentation).
+So if you want to check if a Symbol or Token is a <span class="ident">SymbolType.NonTerminal</span>
+do NOT do it by comparing the type with <span class="ident">SymbolType.Terminal</span>. Just because
+something isn't a <span class="ident">SymbolType.Terminal</span> does NOT imply that
+it's a <span class="ident">SymbolType.NonTerminal</span>.
+</p>
+
+<a name="EmptyRule" />
+<h2>Referring to a rule that has no subtokens</h2>
+<p>
+Just use <span class="ident">null</span> for the subtokens.
+</p>
+<p>
+Example:
+</p>
+<p>
+Suppose you have this in your grammar for language "myLang":
+</p>
+<div class="code-plain">&lt;Optional Fred&gt; ::= 'fred'
+                  | </div>
+<p>
+The nonterminal <span class="ident">&lt;Optional Fred&gt;</span> can be created from either the
+text <span class="ident">fred</span> or from nothing at all. To check if a token matches the
+first case, ie. the <span class="ident">fred</span> rule, you use this:
+</p>
+<div class="code-highlight"><span class="code-comment">// static-style:</span> 
+if( auto typedTok = cast(Token_myLang!("&lt;Optional Fred&gt;", "fred"))token )
+{
+    <span class="code-comment">// use typedTok</span>
+}
+
+<span class="code-comment">// dynamic-style:</span> 
+if( token.matches("&lt;Optional Fred&gt;", "fred") )
+{
+    <span class="code-comment">// use token</span>
+}</div>
+<p>
+To check for the empty rule, you just use <span class="ident">null</span>:
+</p>
+<div class="code-highlight"><span class="code-comment">// static-style:</span> 
+if( auto typedTok = cast(Token_myLang!("&lt;Optional Fred&gt;", null))token )
+{
+    <span class="code-comment">// use typedTok</span>
+}
+
+<span class="code-comment">// dynamic-style:</span> 
+if( token.matches("&lt;Optional Fred&gt;", null) )
+{
+    <span class="code-comment">// use token</span>
+}</div>
+
+<h2>Simple Examples</h2>
+<p>
+For simple examples of how to use GoldieLib, see the <a class="page-link" href="../SampleApps/index.html">GoldieLib Sample Apps</a>.
+</p>
+
+<h3 class="list-heading">See Also:</h3>
+<ul>
+<li><a class="page-link" href="../APIRef/index.html">GoldieLib API Reference</a></li>
+</ul>
+	
+	
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

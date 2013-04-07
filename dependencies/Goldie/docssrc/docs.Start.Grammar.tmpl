@@ -1,0 +1,86 @@
+[$name|Grammar$]
+[$title|Grammar Definition Language$]
+[$frame|HTMLPage.tmpl$]
+<p>
+Goldie uses the same
+[$link| http://goldparser.org/doc/grammars/index.htm | GOLD Meta-Language $]
+grammar definition language as
+[$pageLink| OtherTools#GOLD | GOLD Parser Builder $].
+</p>
+
+<p>
+GOLD Parser Builder includes
+a grammar editor that features syntax highlighting, a grammar-generating wizard,
+and importing/exporting with YACC/Bison format.
+Goldie's
+[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/lang/calc.grm | calc.grm $]
+grammar below was created by using GOLD's grammar wizard (and slightly modifying the result).
+</p>
+
+<p>
+Other
+[$link|http://goldparser.org/grammars/index.htm| premade grammars $]
+can be found in
+[$link|http://goldparser.org/download.htm| GOLD's downloads section $].
+</p>
+
+<h2>Sample</h2>
+<p>
+As a simple example of what a grammar looks like, this is the
+[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/lang/calc.grm | calc.grm $]
+grammar included with Goldie and used by the [$pageLink|SampleApps| Sample Apps $]:
+</p>
+[$code|plain|
+[:! -- Parameters ----------------------------------------
+! Basic Calculator Grammar
+! Supports integer literals, + - * / () and whitespace
+
+"Name"     = 'Calc'
+"Author"   = 'GOLD Parser Builder and Nick Sabalausky'
+"Version"  = '0.01'
+"About"    = 'Basic Calculator Grammar'
+"Case Sensitive" = false
+
+"Start Symbol" = <Add Exp>
+
+! -- Terminals -----------------------------------------
+
+Number = {Digit}+
+Whitespace = {Whitespace}+
+
+! -- Rules ---------------------------------------------
+
+<Add Exp>     ::= <Add Exp> '+' <Mult Exp>
+               |  <Add Exp> '-' <Mult Exp>
+               |  <Mult Exp>
+
+<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp>
+               |  <Mult Exp> '/' <Negate Exp>
+               |  <Negate Exp>
+
+<Negate Exp>  ::= '-' <Value>
+               |  <Value> 
+
+<Value>       ::= 'Number'
+               |  '(' <Add Exp> ')':]
+$]
+
+<h2>Current Limitations</h2>
+<p>
+There are a few GOLD features that Goldie doesn't yet support:
+</p>
+
+<ul>
+<li>All of Goldie: The [$link| http://goldparser.org/5.0/index.htm | new GOLD v5.0 features $]</li>
+<li>All of Goldie: [$link| http://goldparser.org/doc/grammars/virtual-terminals.htm | Virtual terminals $]</li>
+<li>Goldie's [$pageLink|GRMC|grmc$]: User-defined terminals named [$ident|EOF$] or [$ident|Error$]</li>
+</ul>
+
+<h3 class="list-heading">See Also:</h3>
+<ul>
+<li>[$link| http://goldparser.org/doc/grammars/index.htm | Official GOLD Meta-Language documentation $]</li>
+<li>[$pageLink| APIOver#TokenSymbol | Tokens, Symbols, and Symbol Types: The Front-End's Building Blocks $]</li>
+<li>[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/lang/calc.grm | Sample calculator grammar $]</li>
+<li>[$link| http://goldparser.org/grammars/index.htm | Premade Grammars $]</li>
+</ul>
+

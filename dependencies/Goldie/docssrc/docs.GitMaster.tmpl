@@ -1,0 +1,68 @@
+[$name|GitMaster$]
+[$title|If You Use Git Master$]
+[$frame|HTMLPage.tmpl$]
+
+<p style="font-style: italic">
+Users of the official Goldie releases can safely ignore these notes.
+If you don't know what "Git master" is, then don't worry about it, these notes
+don't apply to you.
+</p>
+
+<p>
+It's recommended that you use the [$pageLink|Install|official Goldie releases$]
+instead of Git master. However, if you do wish to use master,
+there are a few things you should be aware of:
+</p>
+
+<ul>
+<li>
+<p>
+The documentation, both online and in the master, may be out-of-date for you.
+</p>
+</li>
+
+<li>
+<p>
+The built-in [$pageLink|StatVsDyn|static-style$] languages may need to be
+rebuilt (do this by running the
+[$pageLink|DevScripts#makeBuiltinStaticLangs|makeBuiltinStaticLangs$]
+script).
+</p>
+</li>
+
+<li>
+<p>Master may be frequently broken on anything except Windows, 32-bit,
+and whatever version of DMD I happen to be using (usually the latest official DMD release).
+This is because, to save time, I usually only test against the various platforms and DMD
+versions right before an official Goldie release. But if it's broken
+and that's a problem for you, [$pageLink|Tickets|file a ticket$]
+and I'll try to take care of it.
+</p>
+<p>
+I do participate in the
+[$link|http://lists.puremagic.com/mailman/listinfo/dmd-beta|DMD Beta list$],
+so whenever a new DMD is released, chances are that Goldie's Git master will
+already work with it.
+</p>
+</li>
+
+<li>
+<p>
+<em>** IMPORTANT **</em>: You'll need to use whatever revision of SemiTwist D
+Tools was most recent when your revision of Goldie was committed.
+Just remember: Whenever you pull the latest Goldie master, you should also
+pull the latest SemiTwist D Tools master (and vice versa).
+</p>
+</li>
+
+<li>
+<p>
+Of course, all the usual caveats and potential problems of using bleeding-edge
+development versions of software apply.
+</p>
+</li>
+</ul>
+
+<p>
+If you're ok with all of this, then feel free to use Goldie's Git master.
+</p>

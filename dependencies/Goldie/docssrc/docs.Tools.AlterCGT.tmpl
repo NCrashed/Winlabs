@@ -1,0 +1,24 @@
+[$name|AlterCGT$]
+[$title|AlterCGT$]
+[$frame|HTMLPage.tmpl$]
+
+<p>
+Manipulates the internal structure of a [$pageLink| CGT | CGT file $],
+producing a functionally-equivalent CGT file.
+</p>
+<p>
+This can be useful for adjusting the tables in a CGT to more closely match
+another CGT, without actually changing its behavior. This way, their
+[$pageTitle|DumpCGT$] outputs will be easier to compare, and any behavioral
+differences will be easier to identify.
+</p>
+<p>
+This tool can also be useful if you need to use a CGT with a GOLD engine
+that makes improper assumptions about how certain data in the CGT should be
+laid out.
+</p>
+<p>
+Alter CGT's documentation is built into its help screens:
+</p>
+<div class="code-plain">&gt;[$code|user|goldie-altercgt --help$]
+&gt;[$code|user|goldie-altercgt --help$] <i>[:[command]:]</i></div>

@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: Parse Tree Mode</title>
+<link rel="stylesheet" type="text/css" href="../../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><span class="pagemenu-link">Parse Tree Mode</span></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../../Tools/index.html">Goldie's&nbsp;Tools</a>&nbsp;-> <a class="breadcrumb-link" href="../../../Tools/JsonViewer/index.html">JsonViewer</a>&nbsp;-> <span class="breadcrumb-link">Parse&nbsp;Tree&nbsp;Mode</span>
+	</div>
+	<br />
+	<h1>Parse Tree Mode</h1>
+	
+
+
+<p>
+The version of <a class="page-link" href="../../../Tools/JsonViewer/index.html">JsonViewer</a> included with Goldie has been
+customized to include a special Parse Tree Mode for viewing a text document
+side-by-side with a JSON-based tree that describes the text. In this mode,
+you can click on a tree node to highlight its corresponding text,
+or jump from a location in the text to the corresponding tree node.
+</p>
+<p>
+This page describes the special data JsonViewer looks for to enable and use
+this mode.
+</p>
+
+<h2>Sample</h2>
+<p>
+Goldie includes the sample JSON file
+<a class="extern-link" href="https://bitbucket.org/Abscissa/goldie/src/v0.9/jsonSample.json">jsonSample.json</a>
+that demonstrates how to create a JSON file that JsonViewer's Parse Tree Mode
+can use. Here is the content of the file:
+</p>
+<div class="code-plain">{
+    parseTreeMode: true,
+    source: "Once upon a time...",
+    
+    "Story": {
+        srcIndexStart: 0,
+        srcLength: 19,
+        
+        "Sentence": {
+            srcIndexStart: 0,
+            srcLength: 16,
+            
+            "Word 1": {
+                srcIndexStart: 0,
+                srcLength: 4,
+            },
+            
+            "Word 2": {
+                srcIndexStart: 5,
+                srcLength: 4,
+            },
+            
+            "Word 3": {
+                srcIndexStart: 10,
+                srcLength: 1,
+            },
+            
+            "Word 4": {
+                srcIndexStart: 12,
+                srcLength: 4,
+            }
+        },
+        
+        "Punctuation": {
+            srcIndexStart: 16,
+            srcLength: 3,
+        }
+    }
+}</div>
+<p>
+If you load that file into JsonViewer, it will look like this:
+</p>
+<img src="../../../JsonViewerSample.png" alt="" />
+<p>
+As you can see, this JSON file describes a text file containing
+<span class="code-inline">Once upon a time...</span>.
+It also tells JsonViewer that <span class="code-inline">Once upon a time</span> is a "Story",
+<span class="code-inline">...</span> is "Punctuation",
+and <span class="code-inline">Once</span> though <span class="code-inline">time</span> are
+"Word 1" through "Word 4". (Remember that JSON objects can't have
+multiple members with the same name.)
+</p>
+<p>
+Click a tree node in the left panel to highlight the corresponding section of text.
+Click a location in the text and then click "Jump to Node" to select
+the corresponding node.
+</p>
+
+<h2>Reference</h2>
+<p>
+	All of the following are optional. However, if none of them are used,
+	then Parse Tree Mode won't be particularly useful.
+</p>
+
+<div class="api-head"><span class="attr"></span>  <span class="ident">parseTreeMode</span><br />
+</div>
+<div class="api-def">
+<p>
+	This can go in either the root JSON object (as in the example above),
+	or the first JSON object immediately inside the root
+	("Story" in the example above).
+</p>
+<p>
+	Giving this a value of <span class="code-inline">true</span> instructs JsonViewer to
+	automatically turn on Parse Tree Mode when loading the file.
+</p>
+</div>
+
+<div class="api-head"><span class="attr"></span>  <span class="ident">source</span><br />
+</div>
+<div class="api-def">
+<p>
+	This can go in either the root JSON object (as in the example above),
+	or the first JSON object immediately inside the root
+	("Story" in the example above).
+</p>
+<p>
+	This contains the actual text that the JSON file describes.
+	This text will be shown in the middle panel.
+	Don't forget to properly escape any double-quotes.
+</p>
+</div>
+
+<div class="api-head"><span class="attr"></span>  <span class="ident">file</span><br />
+</div>
+<div class="api-def">
+<p>
+	<span style="font-weight: bold">Not recommended:</span>
+	Use <span class="ident">source</span> instead.
+</p>
+<p>
+	This can go in either the root JSON object,
+	or the first JSON object immediately inside the root
+	("Story" in the example above).
+</p>
+<p>
+	If <span class="ident">source</span> is omitted, then <span class="ident">file</span> can be used to load
+	the source text from a specific file. The value of this should be the
+	filename containing the text that the JSON file describes.
+</p>
+<p>
+	<span style="font-weight: bold">This is NOT recommended</span>, however, 
+	because the two files may become out-of-sync. It is recommended
+	that you use <span class="ident">source</span> instead. (This can be safely included in addition to
+	<span class="ident">source</span> though, because if <span class="ident">source</span> is included,
+	JsonViewer will simply ignore <span class="ident">file</span>.)
+</p>
+</div>
+
+<div class="api-head"><span class="attr"></span>  <span class="ident">srcIndexStart</span><br />
+<span class="attr"></span>  <span class="ident">srcLength</span><br />
+</div>
+<div class="api-def">
+<p>
+	Any JSON object that includes both <span class="ident">srcIndexStart</span> and <span class="ident">srcLength</span>
+	is considered to refer to a specific section of the text. This section
+	of the text starts at <span class="ident">srcIndexStart</span> (zero-indexed) and
+	extends for <span class="ident">srcLength</span> characters.
+</p>
+</div>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

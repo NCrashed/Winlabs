@@ -1,0 +1,55 @@
+[$name|APIRef$]
+[$title|GoldieLib Reference$]
+[$frame|HTMLPage.tmpl$]
+
+<h3>Conventions:</h3>
+
+<table class="grid-table" style="margin-bottom: 10px">
+<tr>
+	<td><div class="api-head"><span class="attr">@property</span></div></td>
+	<td>An [$code|inline|@property$] implemented with both getter and setter functions.</td>
+</tr>
+<tr>
+	<td><div class="api-head"><span class="attr">readonly&nbsp;@property</span></div></td>
+	<td>An [$code|inline|@property$], but without a public setter.</td>
+</tr>
+<tr>
+	<td><div class="api-head">default</div></td>
+	<td>
+		This is used in the documentation of enums to indicate which value is
+		the default for functions that take the enum as an optional parameter.
+	</td>
+</tr>
+<tr>
+	<td><div class="api-head">size_t</div></td>
+	<td>
+		This is an unsigned integer type defined by D to be 32-bits on
+		32-bit targets and 64-bit on 64-bit targets. This is the type of
+		the [$code|inline|.length$] member of arrays.
+	</td>
+</tr>
+<tr>
+	<td><div class="api-head">ptrdiff_t</div></td>
+	<td>
+		This is also defined by D. It's just like [$ident|size_t$], but signed.
+	</td>
+</tr>
+<tr>
+	<td>
+	<div class="api-head">
+		<span class="attr" style="color: red; margin-bottom: 0px">DEPRECATED</span>
+	</div>
+	</td>
+	<td>Has been deprecated with the [$code|inline|deprecated$] attribute.</td>
+</tr>
+<tr>
+	<td>
+	<div class="api-head">
+		<span class="attr" style="color: red; margin-bottom: 0px">REMOVED</span>
+	</div>
+	</td>
+	<td>Existed in a previous version, but has now been removed.</td>
+</tr>
+</table>
+
+[$pageMenu$]

@@ -1,0 +1,42 @@
+[$name|CalculatorStatic$]
+[$title|Calculator Static$]
+[$frame|HTMLPage.tmpl$]
+[$desc|A simple command-line arithmetic calculator utilizing a calculator grammar.
+Demonstrates how to use Goldie's static-style.$]
+
+<p>
+A simple arithmetic calculator utilizing a
+[$link|https://bitbucket.org/Abscissa/goldie/src/v0.9/lang/calc.grm|calculator grammar$].
+Demonstrates how to use Goldie's [$pageLink|StatVsDyn|static-style$].
+</p>
+
+<p>
+[$link|https://bitbucket.org/Abscissa/goldie/src/v0.9/src/samples/calculatorStatic/main.d|Calculator Static Source Code$]
+</p>
+
+<h3>Sample run:</h3>
+<div class="code-plain">&gt;[$code|user|goldie-calculatorStatic$]
+Calculator
+Enter an arithmetic expression ('exit' to exit)
+
+calculator&gt;[$code|user|2+2*20$]
+42.00000
+
+calculator&gt;[$code|user|(1-3) / 2$]
+-1.00000
+
+calculator&gt;[$code|user|10$]
+10.00000
+
+calculator&gt;[$code|user|[:12 {;[ 456 qwf:]$]
+(1:4): Syntax Error: [:'{;[':]
+(1:12): Syntax Error: 'qwf'
+2 Error(s)
+
+calculator&gt;[$code|user|2 + * 7$]
+(1:5): Unexpected *: '*'
+
+calculator&gt;[$code|user|-10 * -20$]
+200.00000
+
+calculator>[$code|user|exit$]</div>

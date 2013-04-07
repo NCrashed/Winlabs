@@ -1,0 +1,497 @@
+[$name|Language$]
+[$title|class Language$]
+[$frame|HTMLPage.tmpl$]
+[$desc|The main interface to GoldieLib$]
+
+<ul>
+<li>
+	[$typeLink|Language| class Language $]
+	<ul>
+	<li>[$typeLink|Language_{languageName}| class Language_{languageName}$][$ident| : Language $]</li>
+	</ul>
+</li>
+<li>[$pageLink|#Module| Module-Level Members $]</li>
+</ul>
+
+<p>
+This is the main interface to GoldieLib.
+</p>
+
+[$apiSectionType| Language | goldie.lang | class Language $]
+<div class="api-def">
+	<p>
+	This class corresponds to a loaded [$pageLink|CGT| CGT file $],
+	ie. a compiled grammar.
+	This is used for [$pageLink|StatVsDyn|dynamic-style$].
+	</p>
+
+	[$apiHead| this() $]
+	<div class="api-def">
+	<p>
+		Creates a new blank [$ident|Language$].
+	</p>
+	<p>
+		This should only be used if you're going to manually create a
+		[$ident|Language$], which is an advanced feature.
+		Normally, you would create a [$ident|Language$] via [$ident|Language.load$],
+		[$pageTitle|StaticLang$] or possibly one of the [$ident|Language.compileGrammar*$]
+		functions.
+	</p>
+	</div>
+	
+	<a name="Language_load" />
+	[$apiHead| static Language load(string cgtFilename) $]
+	[$apiHead| <span class="attr" style="color: red; margin-bottom: 0px">DEPRECATED</span> static Language loadCGT(string filename) $]
+	<div class="api-def">
+	Loads a CGT compiled grammar file.
+	</div>
+	
+	[$apiHead| void save(string cgtFilename) $]
+	<div class="api-def">
+	<p>
+		Saves this [$ident|Language$] to a
+		[$pageLink|CGT|CGT file$].
+	</p>
+	</div>
+		
+	[$apiHead| static bool compileGrammarGoldCompatibility $]
+	<div class="api-def">
+	<p>
+		Used by the [$ident|Language.compileGrammar*$] functions. This is
+		equivalent to the [$code|inline|-gold$] command-line switch in [$pageTitle|GRMC$].
+		Default value is [$ident|false$].
+	</p>
+	</div>
+	
+	[$apiHead| static Language compileGrammar(string grammarDefinition, string filename="") $]
+	<div class="api-def">
+	<p>
+		Compiles a grammar definition into a
+		[$pageLink|StatVsDyn|dynamic-style$] [$ident|Language$].
+		This uses the exact same code as [$pageTitle|GRMC$].
+	</p>
+	<p>
+		The filename from which the grammar definition originated can be
+		provided so any errors during compilation can report the
+		grammar definition's filename.
+	</p>
+	<p>
+		If there's an error in the grammar, instead of an exception being
+		thrown, an error message will be sent to stdout and null will be
+		returned. This will be fixed in a future version of Goldie.
+	</p>
+	<p>
+		Because grammar compiling uses [$pageLink|StatVsDyn|static-style$]
+		internally, the [$ident|compileGrammar$] functions cannot be used
+		on DMD 2.057 due to DMD Issue
+		[$link| http://d.puremagic.com/issues/show_bug.cgi?id=7375 | #7375 $].
+	</p>
+	</div>
+
+	[$apiHead| static Language compileGrammarFile(string filename) $]
+	<div class="api-def">
+	<p>
+		Just like [$ident|compileGrammar$], but loads the grammar definition
+		from a .grm file.
+	</p>
+	</div>
+
+	[$apiHead| static Language compileGrammarDebug(string grammarDefinition, string filename="", bool verbose=false) $]
+	[$apiHead| static Language compileGrammarFileDebug(string filename, bool verbose=false) $]
+	<div class="api-def">
+	Same as [$ident|compileGrammar$] and [$ident|compileGrammarFile$], except it 
+	stores the lexer's NFA and DFA
+	(in
+	[$link| http://graphviz.org/ | Graphviz $]
+	[$link| http://en.wikipedia.org/wiki/DOT_language | DOT $]
+	format)
+	into [$ident|Language.nfaDot$] and [$ident|Language.dfaDot$].
+	Also, a verbose mode can optionally be enabled.
+	</div>
+
+	[$apiHead| string filename $]
+	<div class="api-def">
+		The path and name of the [$pageLink|CGT| CGT file $] this Language was loaded from (if any).
+	</div>
+
+	[$apiHead|
+	string name
+	string ver
+	string author
+	string about
+	bool caseSensitive
+	$]
+	<div class="api-def">
+		Metadata about the language.
+		For more information, see GOLD's documentation for the 
+		[$link|http://goldparser.org/doc/grammars/index.htm| grammar definition language $]
+		and
+		[$link|http://goldparser.org/doc/cgt/index.htm|CGT files$].
+		Note that all of these, including [$ident|caseSensitive$], are <em>informational-only</em>
+		and do not actually affect GoldieLib's behavior.
+	</div>
+
+	[$apiHead|[:
+	Symbol[] symbolTable
+	CharSet[] charSetTable
+	Rule[] ruleTable
+	DFAState[] dfaTable
+	LALRState[] lalrTable
+
+	int startSymbolIndex
+	int initialDFAState
+	int initialLALRState
+
+	int eofSymbolIndex
+	int errorSymbolIndex
+	:]$]
+	<div class="api-def">
+	<p>
+		The actual language-defining information in the CGT file.
+		See GOLD's
+		[$link|http://goldparser.org/doc/cgt/index.htm|CGT documentation$]
+		for more information.
+	</p>
+	<p>
+		These are very low-level to the lexing/parsing process and most people
+		will not need to access these directly.
+		In particular, modifying any of these is an <em>advanced</em> feature
+		that should only be done if you really know what you're doing.
+	</p>
+	</div>
+
+	[$apiHead| @property Symbol eofSymbol $]
+	<div class="api-def">
+		The [$typeName|Symbol$] for end-of-file.
+	</div>
+
+	[$apiHead| @property Symbol errorSymbol $]
+	<div class="api-def">
+		The [$typeName|Symbol$] for a lexing error.
+	</div>
+
+	[$apiHead| string nfaDot $]
+	[$apiHead| string dfaDot $]
+	<div class="api-def">
+	<p>
+		The lexer's NFA and DFA in
+		[$link| http://graphviz.org/ | Graphviz $]
+		[$link| http://en.wikipedia.org/wiki/DOT_language | DOT $]
+		format.
+	</p>
+	<p>
+		These are always empty unless the [$typeName|Language$] was created via
+		[$ident|Language.compileGrammarDebug$] or
+		[$ident|Language.compileGrammarFileDebug$].
+		Languages loaded from a [$pageLink|CGT|CGT file$] or via
+		[$pageTitle|StaticLang$] will never have these filled in.
+	</p>
+	</div>
+
+	[$apiHead| int nfaNumStates $]
+	<div class="api-def">
+	<p>
+		The number of NFA states created when generating the lexer.
+		The number of DFA and LALR states can always be found with
+		[$ident|dfaTable.length$] and [$ident|lalrTable.length$].
+	</p>
+	<p>
+		This is always 0 unless the [$typeName|Language$] was created via
+		[$ident|Language.compileGrammarDebug$] or
+		[$ident|Language.compileGrammarFileDebug$].
+		Languages loaded from a [$pageLink|CGT|CGT file$] or via
+		[$pageTitle|StaticLang$] will never have this filled in.
+	</p>
+	</div>
+	
+	<a name="Language_parseFileX" />
+	[$apiHead| Parser parseFileX(string filename) $]
+	<div class="api-def">
+	<p>
+		Loads a file, lexes and parses it with a new [$typeName|Lexer$]
+		and a new [$typeName|Parser$], and returns the [$typeName|Parser$]
+		which can then be used to obtain the parsing
+		(and lexing) results or can be reused to parse something else.
+	</p>
+	<p>
+		Throws a [$typeName|ParseException$] if the source contains an error.
+	</p>
+	</div>
+
+	<a name="Language_parseCodeX" />
+	[$apiHead| Parser parseCodeX(string source, string filename="") $]
+	<div class="api-def">
+	<p>
+		Creates a new [$typeName|Parser$] and a new [$typeName|Lexer$],
+		uses them to lex and parse "source", and returns the [$typeName|Parser$]
+		which can then be used to obtain the
+		parsing (and lexing) results or can be reused to parse something else.
+	</p>
+	<p>
+		Throws a [$typeName|ParseException$] if the source contains an error.
+	</p>
+	<p>
+		The filename from which the source originated can be provided
+		so the error messages upon any parsing or lexing errors can report the
+		filename.
+	</p>
+	</div>
+
+	[$apiHead|[: Parser parseTokensX(Token[] tokens, string filename="", Lexer lexerUsed=null) :]$]
+	<div class="api-def">
+	<p>
+		Usually just called by the other parse functions.
+	</p>
+	<p>
+		Creates a new [$typeName|Parser$], uses it to parse an already-lexed
+		array of [$typeName|Token$]s, and returns the [$typeName|Parser$] which
+		can then be used to obtain the parsing
+		results or can be reused to parse something else.
+	</p>
+	<p>
+		Throws a [$typeName|ParseException$] if the source contains an error.
+	</p>
+	<p>
+		The filename from which the source originated can be provided
+		so the error messages upon any parsing errors can report the filename.
+	</p>
+	<p>
+		The [$typeName|Lexer$] that was used can be provided so that
+		the [$typeName|Parser$] returned can provide access to the lexing results.
+	</p>
+	</div>
+
+	[$apiHead| Lexer lexFileX(string filename) $]
+	<div class="api-def">
+	<p>
+		Usually just called by the parse functions.
+	</p>
+	<p>
+		Loads a file, lexes it with a new [$typeName|Lexer$], and returns
+		the [$typeName|Lexer$] which can then be used to obtain the lexing
+		results or can be reused to lex something else.
+	</p>
+	<p>
+		Throws a [$typeName|LexException$] if the source contains an error.
+	</p>
+	</div>
+
+	[$apiHead| Lexer lexCodeX(string source, string filename="") $]
+	<div class="api-def">
+	<p>
+		Usually just called by the parse functions.
+	</p>
+	<p>
+		Creates a new [$typeName|Lexer$], uses it to lex "source", and returns
+		the [$typeName|Lexer$] which can then be used to obtain the lexing
+		results or can be reused to lex something else.
+	</p>
+	<p>
+		Throws a [$typeName|LexException$] if the source contains an error.
+	</p>
+	<p>
+		The filename from which the source originated can be provided
+		so the error messages upon any lexing errors can report the filename.
+	</p>
+	</div>
+	
+	[$apiHead|[: string[] uniqueSymbolNames() :]$]
+	<div class="api-def">
+		Returns an array of all valid symbol names. If
+		more than one [$typeName|Symbol$] exists with the same name,
+		the name is only included in the array once.
+	</div>
+
+	[$apiHead|[: Symbol[] symbolsByName(string name) :]$]
+	<div class="api-def">
+	<p>
+		Returns an array of every [$typeName|Symbol$] with the name "name".
+	</p>
+	<p>
+		Note that GOLD, and therefore Goldie, allows multiple symbols with the
+		same name as long as each symbol is of a different [$typeName|SymbolType$].
+	</p>
+	</div>
+		
+	[$apiHead|[: SymbolType[] symbolTypesByName(string name) :]$]
+	<div class="api-def">
+		Just like [$ident|symbolsByName$] except this only returns
+		the [$typeName|SymbolType$] of
+		each symbol, rather than the [$typeName|Symbol$] itself.
+	</div>
+		
+	[$apiHead| string symbolTypesStrByName(string name) $]
+	<div class="api-def">
+		Like [$ident|symbolTypesByName$], but returns a human-readable list in string form.
+	</div>
+	
+
+	[$apiHead| bool isSymbolNameValid(string name) $]
+	<div class="api-def">
+		Returns true if <em>at least</em> one [$typeName|Symbol$] exists with the given name.
+	</div>
+		
+	[$apiHead| bool isSymbolNameAmbiguous(string name) $]
+	<div class="api-def">
+	<p>
+		Returns true if <em>more than</em> one [$typeName|Symbol$] exists with the given name.
+	</p>
+	<p>
+		Note that GOLD allows multiple symbols with the same name as long as each
+		symbol is of a different [$typeName|SymbolType$].
+	</p>
+	</div>
+
+	[$apiHead|[: int ruleIdOf(string parentSymbol, string[] subSymbols...) :]$]
+	<div class="api-def">
+	<p>
+		Returns an index into [$ident|ruleTable$] given the name of the reduction symbol
+		and the names of the symbols being reduced.
+	</p>
+	<p>
+		For example, if your grammar has a rule like this:
+	</p>
+	<div class="code-plain">&lt;Add Exp&gt; ::= &lt;Add Exp&gt; '+' &lt;Mult Exp&gt;</div>
+	<p>
+		Then you can retrieve the corresponding [$typeName|Rule$] like this:
+	</p>
+	<div class="code-plain">[:myLang.ruleTable[ myLang.ruleIdOf("&lt;Add Exp&gt;", "&lt;Add Exp&gt;", "+", "&lt;Mult Exp&gt;") ]:]</div>
+	<p>
+		Throws if such a rule doesn't exist or if any of the given symbol names
+		are ambiguous (ie, if more than one symbol exists with the given name).
+	</p>
+	<p>
+		Note: This is just a quick-n-dirty implementation at the moment. It works,
+		but it might run slow.
+	</p>
+	</div>
+
+	[$apiHead|[: string ruleToString(int ruleId) :]$]
+	<div class="api-def">
+	<p>
+		Returns the given rule in a human-readable string.
+		Note this might not actually be valid code for the
+		[$pageLink|Grammar|grammar description language$].
+	</p>
+	<p>
+		For example, if your grammar has a rule like this:
+	</p>
+	<div class="code-plain">&lt;Add Exp&gt; ::= &lt;Add Exp&gt; '+' &lt;Mult Exp&gt;</div>
+	<p>
+		Then:
+	</p>
+[$code|plain|
+[:auto ruleId = myLang.ruleIdOf("<Add Exp>", "<Add Exp>", "+", "<Mult Exp>")
+assert(myLang.ruleToString(ruleId) == "<Add Exp> ::= <Add Exp> + <Mult Exp>");:]
+$]
+	</div>
+</div>
+
+[$apiSectionType| Language_{languageName} | {user-specified package}.lang | class Language_{languageName} : Language $]
+<div class="api-def">
+	<div class="api-head">
+		{languageName} = Name of static-style language
+	</div>
+	<p>
+	This is the [$pageLink|StatVsDyn|static-style$] counterpart to
+	[$typeName|Language$], generated by the
+	[$pageName|StaticLang$] tool.
+	</p>
+	<p>
+	If the name of a language is [$ident|foo$] (for example), then
+	the name of this class will be [$ident|Language_foo$].
+	</p>
+	<p>
+	All of the [$typeName|Language$] members are available, but alternate
+	versions are added.
+	</p>
+	
+	[$apiHead|[:
+	static enum string staticName
+	static enum string staticVer
+	static enum string staticAuthor
+	static enum string staticAbout
+	static enum bool staticCaseSensitive
+
+	static immutable Symbol[] staticSymbolTable
+	static immutable CharSet[] staticCharSetTable
+	static immutable Rule[] staticRuleTable
+	static immutable DFAState[] staticDFATable
+	static immutable LALRState[] staticLALRTable
+
+	static enum int staticStartSymbolIndex
+	static enum int staticInitialDFAState
+	static enum int staticInitialLALRState
+	static enum int staticEofSymbolIndex
+	static enum int staticErrorSymbolIndex
+
+	static immutable string[] staticUniqueSymbolNameArray
+	static enum Symbol staticEofSymbol
+	static enum Symbol staticErrorSymbol
+
+	static bool staticIsSymbolNameValid(string name)
+	static bool staticIsSymbolNameAmbiguous(string name)
+	:]$]
+	<div class="api-def">
+		Compile-time counterparts to the corresponding [$typeName|Language$]
+		members.
+	</div>
+
+	[$apiHead|[:
+	static enum string packageName
+	static enum string shortPackageName
+	:]$]
+	<div class="api-def">
+		If [$pageTitle|StaticLang$] was passed, for example,
+		[$code|inline|--pack=myApp.langs.myLang$], then
+		[$ident|packageName$] is [$code|inline|"myApp.langs.myLang"$] and
+		[$ident|shortPackageName$] is the name of the language: [$code|inline|"myLang"$].
+	</div>
+
+	[$apiHead|[:
+	static enum string langInstanceName
+	static enum string langClassName
+	static enum string lexerClassName
+	static enum string parserClassName
+	static enum string tokenClassName
+	:]$]
+	<div class="api-def">
+		The names of the various classes [$pageTitle|StaticLang$] created for
+		this language. For example, [$code|inline|"language_myLang"$],
+		[$code|inline|"Language_myLang"$], [$code|inline|"Lexer_myLang"$],
+		[$code|inline|"Parser_myLang"$], and [$code|inline|"Token_myLang"$].
+	</div>
+
+	<a name="Language_parseFile" />
+	<a name="Language_parseCode" />
+	[$apiHead| Parser_{languageName} parseFile(string filename) $]
+	[$apiHead| Parser_{languageName} parseCode(string source, string filename="") $]
+	[$apiHead|[: Parser_{languageName} parseTokens(Token[] tokens, string filename="", Lexer lexerUsed=null) :]$]
+	[$apiHead| Lexer_{languageName} lexFile(string filename) $]
+	[$apiHead| Lexer_{languageName} lexCode(string source, string filename="") $]
+	<div class="api-def">
+	<p>
+	Type-safe [$pageLink|StatVsDyn|static-style$] counterparts to the
+	respective "X"-suffixed lex and parse functions in [$typeName|Language$].
+	</p>
+	</div>
+</div>
+
+[$apiSection| Module | {user-specified package}.lang | Module-Level Members $]
+<div class="api-def">
+	<p></p>
+	
+	[$apiHead|[: Language_{languageName} language_{languageName} :]$]
+	<div class="api-def">
+	<p>
+	A pre-instantiated instance of a [$typeName|Language_{languageName}$], 
+	generated by [$pageName|StaticLang$] and only created
+	for [$pageLink|StatVsDyn|static-style$] languages.
+	</p>
+	<p>
+	For example, if the name of a language is [$ident|foo$], then
+	the declaration of this will be:
+	</p>
+	[$code|highlight|Language_foo language_foo;$]
+	</div>
+</div>

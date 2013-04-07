@@ -1,0 +1,155 @@
+[$name|Overview$]
+[$title|Goldie Overview$]
+[$frame|HTMLPage.tmpl$]
+
+<p>
+The process for using Goldie is just like
+[$link| http://goldparser.org/about/how-it-works.htm | the process for GOLD Parser Builder $]:
+</p>
+
+<a name="Grammar" />
+<h2>1. Write a grammar in the .grm language</h2>
+<div class="api-def">
+<p>
+Here is a simple example of a grammar definition:
+</p>
+[$code|plain|
+[:! This grammar defines a simple language consisting of
+! positive integers separated by a plus sign.
+
+"Start Symbol" = <List>
+
+Number = {Digit}+
+
+<List> ::= <List> '+' Number
+         | Number:]
+$]
+<p>
+One of the nice things about the GOLD/Goldie systems, unlike most other parsing systems,
+is that there's no code embedded in the grammars, so grammars are write-once-and-reuse.
+In other words, if you write a grammar to use in one tool, you can reuse the exact same
+grammar for any other tool - even if the two tools are written in completely
+different languages!
+</p>
+<p>
+More information about the grammar description language used by GOLD and Goldie,
+including links to premade grammars, can be found on this page:
+[$pageTitle|Grammar$]
+</p>
+</div>
+
+<a name="Compile" />
+<h2>2. Compile the grammar to .cgt format</h2>
+<div class="api-def">
+<p>
+Goldie uses the
+[$link|http://goldparser.org/articles/lalr.htm| LALR(1) $]
+and
+[$link|http://goldparser.org/articles/dfa.htm| DFA $]
+algorithms to parse source. Both of these algorithms can be driven completely
+by tables of raw data, so Goldie requires grammars be compiled into
+these tables before they can be used. This provides certain benefits:
+</p>
+<ul>
+<li>
+	The grammar definition itself can be parsed ahead of time, instead of on-the-fly.
+	(Although, this is typical of just about any parsing system.)
+</li>
+<li>
+	Grammars can be checked for errors before they're used.
+	(This is also typical.)
+</li>
+<li>
+	The code to parse a source can be written once and reused for any grammar,
+	even without automatically-generating any code.
+	This is very rare among parsing systems.
+	<!-- Goldie already provides this (and other features) to D2 users via the included
+	[$pageLink|APIOver|GoldieLib$]. -->
+</li>
+</ul>
+<p>
+That last benefit is very powerful as it allows programs to be written that operate
+on user-created grammars without compiling any software or using DLL-based plug-in systems.
+Goldie's [$pageTitle|Parse$] tool and [$pageTitle|SampleGenericParse$] sample make
+use of this ability.
+</p>
+<p>
+Of course, this doesn't prevent automatically generating source code for a
+parser as other tools such as ANTLR do. In fact, GOLD has a full
+template system that does exactly that. Goldie doesn't actually make any use of
+it, but GoldieLib does offer a [$pageLink|StatVsDyn|static-style$]
+which fills a similar role for
+[$link| http://dlang.org/ | D v2.x $] users.
+</p>
+<h3>How to compile a grammar</h3>
+<p>Grammar files can be compiled in a number of ways:</p>
+<ul class="info-list">
+<li>
+	<h4>Goldie's [$pageTitle|GRMC$]</h4>
+	<div class="info-list-info">
+	A cross-platform command-line tool.<br />
+	<br />
+<div class="code-plain" style="padding-left: 5px">&gt;[$code|user|goldie-grmc grammar.grm$]
+Or:
+&gt;[$code|user|goldie-grmc grammar.grm -o=output.cgt$]</div>
+	</div>
+</li>
+<li>
+	<h4>[$pageLink|OtherTools#GOLD|GOLD Parser Builder$]</h4>
+	<div class="info-list-info">
+	A .NET-based tool in GUI and command-line versions.
+	</div>
+</li>
+<li>
+	<h4>GoldieLib's [$typeName|Language$][$ident|.compileGrammar*$] functions</h4>
+	<div class="info-list-info">
+	A [$link| http://dlang.org/ | D v2.x $]
+	API interface.
+	This can be useful for building general language-processing tools.
+	In fact, this is what [$pageTitle|GRMC$] uses.<br />
+	<br />
+[$code|highlight|
+[:string grammar1 = "!* grammar definition here *!";
+Language lang1 = Language.compileGrammar(grammar1);
+
+// Or:
+Language lang2 = Language.compileGrammarFile("grammar2.grm");
+
+// Optionally save:
+lang1.save("grammar1.cgt");
+lang2.save("grammar2.cgt");:]
+$]
+	</div>
+</li>
+</ul>
+</div>
+
+<a name="Engine" />
+<h2>3. Use a GOLD engine to load the compiled grammar and parse a source</h2>
+<div class="api-def">
+<p>
+Any [$pageLink|OtherTools#GOLD|GOLD$]-compatible engine can be used to load the
+compiled grammar and parse a source. Such engines are
+[$pageLink|OtherTools#EngineLinks| available for a wide variety of languages $],
+since they're
+[$link|http://goldparser.org/doc/engine-pseudo/index.htm| fairly easy to make $].
+Goldie includes [$pageLink|APIOver|GoldieLib$] which serves as just such
+an engine for [$link| http://dlang.org/ | D v2.x $].
+</p>
+<p>
+Each engine is used differently, and their features and APIs can vary greatly.
+To start learning how to use the GoldieLib engine, see the following:
+</p>
+<ul>
+<li>[$pageTitle|Tutorial$]</li>
+<li>[$pageTitle|SampleApps$]</li>
+<li>[$pageTitle|StatVsDyn$]</li>
+<li>[$pageTitle|APIOver$]</li>
+<li>[$pageTitle|APIRef$]</li>
+</ul>
+<p>
+Additionally, see the [$pageTitle|Tools$] page for various
+tools that may be helpful when using Goldie.
+</p>
+<em>Next:</em> [$pageTitle|Tutorial$]
+</div>

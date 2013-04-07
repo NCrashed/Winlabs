@@ -1,0 +1,424 @@
+[$name|Base$]
+[$title|Base$]
+[$frame|HTMLPage.tmpl$]
+
+<ul>
+<li>[$typeLink| CharPair     | struct CharPair      $]</li>
+<li>[$typeLink| CharSet      | struct CharSet       $]</li>
+<li>[$pageLink| #Symbol      | struct Symbol        $]</li>
+<li>[$typeLink| Rule         | struct Rule          $]</li>
+<li>[$typeLink| DFAState     | struct DFAState      $]</li>
+<li>[$typeLink| DFAStateEdge | struct DFAStateEdge  $]</li>
+<li>[$typeLink| LALRState    | struct LALRState     $]</li>
+<li>[$typeLink| LALRAction   | struct LALRAction    $]</li>
+<li>[$pageLink| #Module      | Module-Level Members $]</li>
+</ul>
+
+<p>
+These types store the information contained in a
+[$pageLink| CGT | CGT file $].
+For more information on what these actually mean, see GOLD's documentation on
+[$link| http://goldparser.org/articles/dfa.htm | DFA Lexing $],
+[$link| http://goldparser.org/articles/lalr.htm | LALR(1) Parsing $],
+and the
+[$link| http://goldparser.org/doc/cgt/index.htm | CGT file format $].
+</p>
+<p>
+Most users of GoldieLib will only need to deal directly with [$typeName|Symbol$].
+</p>
+
+[$apiSectionType| CharPair | goldie.base | struct CharPair $]
+<div class="api-def">
+	[$apiHead|[:
+		dchar start 
+		dchar end
+	:]$]
+	<div class="api-def">
+		The start and end points of a range of UTF-32 code points.
+		Both [$ident|start$] and [$ident|end$] are inclusive.
+	</div>
+
+	[$apiHead|[: const bool opEquals(ref const CharPair s) :]$]
+	<div class="api-def">
+		Comparison operator.
+	</div>
+	
+	[$apiHead|[: string toString() :]$]
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+[$code|highlight|
+[:auto charPair = CharPair('A', 'Z');
+assert(charPair.toString() == `CharPair('\U00000041','\U0000005A')`);:]
+$]
+	</div>
+</div>
+
+[$apiSectionType| CharSet | goldie.base | struct CharSet $]
+<div class="api-def">
+	[$apiHead|[: CharPair[] pairs :]$]
+	<div class="api-def">
+		This array defines all the UTF-32 code points
+		contained in this character set.
+	</div>
+
+	[$apiHead|[: this(dstring str) :]$]
+	<div class="api-def">
+	<p>
+		Constructor.
+	</p>
+	<p>
+		Automatically converts an unsorted array of UTF-32 code points
+		(with possible duplicates) to the internal, sorted and canonical,
+		[$code|inline|[:CharPair[]:]$] representation.
+	</p>
+	</div>
+	
+	[$apiHead|[: this(CharPair[] pairs) :]$]
+	<div class="api-def">
+	<p>
+		Constructor.
+	</p>
+	<p>
+		This <em>should</em> be sorted and canonical. For instance,
+		a set containing "ABC123" <em>should</em> be laid out exactly
+		like this:
+	</p>
+[$code|highlight|
+[:CharSet([ CharPair('1','3'), CharPair('A','C') ]);:]$]
+	<p>
+		Any other equivalent set <em>might not</em> be properly handled by
+		when comparing with another CharSet. See [$ident|opEquals$] below
+		for specifics.
+	</p>
+	<p>
+		If you're not passing the CharSet into Goldie, and you don't need
+		comparisons to be properly set-based, then this isn't required to be
+		sorted or canonical.
+	</p>
+	</div>
+
+	[$apiHead|[: const bool opEquals(ref const CharSet s) :]$]
+	<div class="api-def">
+	<p>
+		Comparison operator.
+	</p>
+	<p>
+		Only checks that the [$ident|pairs$] arrays are equal.
+		Doesn't check for set equivalence:
+	</p>
+[$code|highlight|
+[:auto a = CharSet([ CharPair('A','D') ]);
+auto b = CharSet([ CharPair('A','B'), CharPair('C','D') ]);
+auto c = CharSet([ CharPair('C','D'), CharPair('A','B') ]);
+auto d = CharSet([ CharPair('A','C'), CharPair('B','D') ]);
+assert(a == b); // Fails!
+assert(a == c); // Fails!
+assert(a == d); // Fails!
+assert(b == c); // Fails!
+assert(b == d); // Fails!
+assert(c == d); // Fails!
+:]$]
+	</div>
+	
+	[$apiHead|[: string toString() :]$]
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+[$code|highlight|
+[:auto charSet = CharSet("123ABC"d);
+assert(
+	charSet.toString() ==
+	`CharSet(CharPair('\U00000031','\U00000033'),CharPair('\U00000041','\U00000043'))`
+);
+:]$]
+	</div>
+
+	[$apiHead|[: dstring toRawChars() :]$]
+	<div class="api-def">
+	<p>
+		Returns an array of all the UTF-32 code points in this set.
+	</p>
+	<p>
+		Not guaranteed to be sorted or to lack duplicates unless the
+		internal [$ident|pairs$] array is sorted and canonical.
+	</p>
+	</div>
+
+	[$apiHead|[: CharSet dup() const :]$]
+	<div class="api-def">
+		Returns a deep (not shallow) duplicate of this CharSet.
+	</div>
+
+	[$apiHead|[: bool matches(dchar ch) :]$]
+	<div class="api-def">
+		Checks whether a UTF-32 code point is included in this set.
+[$code|highlight|
+[:auto charSet = CharSet([ CharPair('1','3'), CharPair('A','C') ]);
+assert(charSet.matches('B'));:]$]
+	</div>
+</div>
+
+[$apiSection| Symbol | goldie.base | struct Symbol $]
+<div class="api-def">
+	See the [$pageTitle|Symbol$] page.
+</div>
+
+[$apiSectionType| Rule | goldie.base | struct Rule $]
+<div class="api-def">
+	[$apiHead|[: int symbolIndex :]$]
+	<div class="api-def">
+	<p>
+		The nonterminal symbol this rule reduces to.
+	</p>
+	<p>
+		This is an index into [$typeName|Language$][$ident|.symbolTable$].
+	</p>
+	</div>
+
+	[$apiHead|[: int[] subSymbolIndicies :]$]
+	<div class="api-def">
+	<p>
+		The symbols that get reduced by this rule.
+	</p>
+	<p>
+		These are indicies into [$typeName|Language$][$ident|.symbolTable$].
+	</p>
+	</div>
+
+	[$apiHead|[: string toString() :]$]
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+[$code|highlight|
+[:auto rule = Rule(10, [2, 3, 4]);
+assert(rule.toString() == `Rule( 10, [2, 3, 4] )`);
+:]$]
+	</div>
+
+	[$apiHead|[: Rule dup() const :]$]
+	<div class="api-def">
+		Returns a deep (not shallow) duplicate of this Rule.
+	</div>
+</div>
+
+[$apiSectionType| DFAState | goldie.base | struct DFAState $]
+<div class="api-def">
+	[$apiHead|[: bool accept :]$]
+	<div class="api-def">
+		Is this an "accept" state?
+	</div>
+
+	[$apiHead|[: int acceptSymbolIndex :]$]
+	<div class="api-def">
+	<p>
+		If this is an accept state, [$ident|acceptSymbolIndex$] refers to
+		the symbol that has been found.
+	</p>
+	<p>
+		This is an index into [$typeName|Language$][$ident|.symbolTable$].
+	</p>
+	</div>
+
+	[$apiHead|[: DFAStateEdge[] edges :]$]
+	<div class="api-def">
+	<p>
+		The DFA edges leading away from this state.
+	</p>
+	<p>
+		For more information,
+		see [$typeName|DFAStateEdge$] and GOLD's documentation on both
+		[$link| http://goldparser.org/articles/dfa.htm | DFA Lexing $]
+		and the
+		[$link| http://goldparser.org/doc/cgt/index.htm | CGT file format $].
+	</p>
+	</div>
+
+	[$apiHead|[: string toString() :]$]
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+[$code|highlight|
+[:auto dfaState = DFAState(true, 5, [ DFAStateEdge(3, 8) ]);
+assert(dfaState.toString() == `DFAState( true, 5, [DFAStateEdge(3,8)] )`);
+:]$]
+	</div>
+
+	[$apiHead|[: DFAState dup() const :]$]
+	<div class="api-def">
+		Returns a deep (not shallow) duplicate of this DFAState.
+	</div>
+</div>
+
+[$apiSectionType| DFAStateEdge | goldie.base | struct DFAStateEdge $]
+<div class="api-def">
+	<p>
+		If the current character being scanned by the [$typeName|Lexer$]
+		is in the character set referred to by [$ident|charSetIndex$],
+		then the [$typeName|Lexer$] moves to the DFA state referred to by
+		[$ident|targetDFAStateIndex$].
+	</p>
+	<p>
+		For more information, see GOLD's documentation on
+		[$link| http://goldparser.org/articles/dfa.htm | DFA Lexing $]
+		and the
+		[$link| http://goldparser.org/doc/cgt/index.htm | CGT file format $].
+	</p>
+	[$apiHead|[: int charSetIndex :]$]
+	<div class="api-def">
+		This is an index into [$typeName|Language$][$ident|.charSetTable$].
+	</div>
+
+	[$apiHead|[: int targetDFAStateIndex :]$]
+	<div class="api-def">
+		This is an index into [$typeName|Language$][$ident|.dfaTable$].
+	</div>
+
+	[$apiHead|[: string toString() :]$]
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+[$code|highlight|
+[:auto dfaEdge = DFAStateEdge(3, 8);
+assert(dfaEdge.toString() == `DFAStateEdge(3,8)`);
+:]$]
+	</div>
+</div>
+
+[$apiSectionType| LALRState | goldie.base | struct LALRState $]
+<div class="api-def">
+	[$apiHead|[: LALRAction[] actions :]$]
+	<div class="api-def">
+	<p>
+		The possible LALR actions associated with this state.
+	</p>
+	<p>
+		For more information, see GOLD's documentation on
+		[$link| http://goldparser.org/articles/lalr.htm | LALR Parsing $]
+		and the
+		[$link| http://goldparser.org/doc/cgt/index.htm | CGT file format $].
+	</p>
+	</div>
+
+	[$apiHead|[: string toString() :]$]
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+[$code|highlight|
+[:auto lalrState = LALRState([ LALRAction(7, LALRAction.Type.Shift, 10) ]);
+assert(lalrState.toString() == `LALRState( [LALRAction(7,LALRAction.Type.Shift,10)] )`);
+:]$]
+	</div>
+
+	[$apiHead|[: LALRState dup() const :]$]
+	<div class="api-def">
+		Returns a deep (not shallow) duplicate of this LALRState.
+	</div>
+</div>
+
+[$apiSectionType| LALRAction | goldie.base | struct LALRAction $]
+<div class="api-def">
+	[$apiHead|[: enum Type :]$]
+	<div class="api-def">
+		The definition of [$ident|LALRAction.Type$] is:
+[$code|highlight|
+[:enum Type
+{
+    Shift  = 1, // target: LALR State Index
+    Reduce = 2, // target: Rule Index
+    Goto   = 3, // target: LALR State Index
+    Accept = 4  // target: unused
+}
+:]$]
+	</div>
+
+	[$apiHead|[: int symbolId :]$]
+	<div class="api-def">
+	<p>
+		The symbol expected in order for the [$typeName|Parser$] to take
+		this branch of the LALR graph.
+	</p>
+	<p>
+		This is an index into [$typeName|Language$][$ident|.symbolTable$].
+	</p>
+	<p>
+		For more information, see the definition of enum [$ident|Type$] above,
+		as well as GOLD's documentation on
+		[$link| http://goldparser.org/articles/lalr.htm | LALR Parsing $]
+		and the
+		[$link| http://goldparser.org/doc/cgt/index.htm | CGT file format $].
+	</p>
+	</div>
+
+	[$apiHead|[: Type type :]$]
+	<div class="api-def">
+	<p>
+		The type of this state.
+	</p>
+	<p>
+		For more information, see the definition of enum [$ident|Type$] above,
+		as well as GOLD's documentation on
+		[$link| http://goldparser.org/articles/lalr.htm | LALR Parsing $]
+		and the
+		[$link| http://goldparser.org/doc/cgt/index.htm | CGT file format $].
+	</p>
+	</div>
+
+	[$apiHead|[: int target :]$]
+	<div class="api-def">
+	<p>
+		Extra information associated with this LALR state.
+		The exact meaning of this depends on the value of [$ident|type$].
+	</p>
+	<p>
+		For more information, see the definition of enum [$ident|Type$] above,
+		as well as GOLD's documentation on
+		[$link| http://goldparser.org/articles/lalr.htm | LALR Parsing $]
+		and the
+		[$link| http://goldparser.org/doc/cgt/index.htm | CGT file format $].
+	</p>
+	</div>
+
+	[$apiHead|[: string toString() :]$]
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+[$code|highlight|
+[:auto lalrAction = LALRAction(7, LALRAction.Type.Shift, 10);
+assert(lalrAction.toString() == `LALRAction(7,LALRAction.Type.Shift,10)`);
+:]$]
+	</div>
+
+	[$apiHead|[: static string typeToString(Type type) :]$]
+	<div class="api-def">
+		Example:
+[$code|highlight|
+[:string str = LALRAction.typeToString(LALRAction.Type.Reduce);
+assert(str == "Reduce");
+:]$]
+	</div>
+
+	[$apiHead|[: static string fullTypeToString(Type type) :]$]
+	<div class="api-def">
+		Example:
+[$code|highlight|
+[:string str = LALRAction.fullTypeToString(LALRAction.Type.Reduce);
+assert(str == "LALRAction.Type.Reduce");
+:]$]
+	</div>
+</div>
+
+[$apiSection| Module | goldie.base | Module-Level Members $]
+<div class="api-def">
+	[$apiHead|[: T[] goldieBaseDup(T)(const(T[]) arr) :]$]
+	<div class="api-def">
+	<p>
+		Duplicates the given array, calling [$code|inline|xxxx.dup()$]
+		on each member.
+	</p>
+	<p>
+		Intended specifically for arrays of the types defined in
+		this [$code|inline|goldie.base$] module.
+	</p>
+	</div>
+</div>

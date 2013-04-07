@@ -1,0 +1,202 @@
+[$name|Exception$]
+[$title|Exception$]
+[$frame|HTMLPage.tmpl$]
+[$desc|Includes functionality for when a parsed source contains errors$]
+
+<ul>
+<li>[$typeLink|LexError| struct LexError $]</li>
+<li>
+	[$typeLink|ParseException| class ParseException $]
+	<ul>
+	<li>
+		[$typeLink|LexException| class LexException$] [$ident| : ParseException $]
+		<ul>
+		<li>[$typeLink|InvalidUtfSequence| class InvalidUtfSequence$] [$ident| : LexException $]</li>
+		</ul>
+	</li>
+	<li>[$typeLink|UnexpectedTokenException| class UnexpectedTokenException$][$ident| : ParseException $]</li>
+	<li>[$typeLink|UnexpectedEofException|   class UnexpectedEofException$]  [$ident| : ParseException $]</li>
+	<li>[$typeLink|InternalException|        class InternalException$]       [$ident| : ParseException $]</li>
+	</ul>
+</li>
+<li>
+	[$typeLink|LanguageLoadException| class LanguageLoadException$][$ident| : std.stdio.StdioException $]
+	<ul>
+	<li>[$typeLink|LanguageNotFoundException| class LanguageNotFoundException$][$ident| : LanguageLoadException $]</li>
+	</ul>
+</li>
+	<li>[$typeLink|IllegalArgumentException| class IllegalArgumentException$]</li>
+</ul>
+
+<p>
+This includes functionality for when a parsed source contains errors.
+</p>
+
+[$apiSectionType| LexError | goldie.exception | struct LexError $]
+<div class="api-def">
+	<p>
+		This isn't actually a thrown exception. It's just used to represent
+		a single lexing error.
+	</p>
+	[$apiHead| string file $]
+	[$apiHead| ptrdiff_t line $]
+	[$apiHead| ptrdiff_t pos $]
+	<div class="api-def">
+		Filename, line number, and "[$pageLink|APIOver#LineColumn|column$] number" of the error.
+		Note Goldie's conventions regarding [$pageLink|APIOver#LineColumn|line and column numbers$].
+	</div>
+
+	[$apiHead| string content $]
+	<div class="api-def">
+		The actual piece of source that failed to lex.
+	</div>
+
+	[$apiHead| readonly @property string printableContent $]
+	<div class="api-def">
+		Like [$ident|content$], but with non-printable characters removed.
+	</div>
+	
+	[$apiHead| string toString() $]
+	<div class="api-def">
+		Ready-to-display string representation in the following format:
+		[$code|plain|{file}({line}:{pos}): Syntax Error: '{printableContent}'$]
+	</div>
+</div>
+
+[$apiSectionType| ParseException | goldie.exception | class ParseException : Exception $]
+<div class="api-def">
+	<p>
+	Thrown upon any lexing or parsing error.
+	</p>
+	[$apiHead| Parser parser $]
+	[$apiHead| Lexer lexer $]
+	<div class="api-def">
+	<p>
+		The lexer and parser used when the error occurred. These can be
+		inspected to obtain more information about the error.
+	</p>
+	<p>
+		Under certain circumstances, either or both of these may be null,
+		so make sure to check for null before using.
+	</p>
+	</div>
+	
+	[$apiHead| string msg $]
+	<div class="api-def">
+		Ready-to-display string representation of the error, including
+		filename (if available) and line and [$pageLink|APIOver#LineColumn|column$] numbers.
+	</div>
+	
+	[$apiHead| this(string msg) $]
+	[$apiHead| this(Parser parser, string msg) $]
+	<div class="api-def">
+		Constructors.
+	</div>
+</div>
+
+[$apiSectionType| LexException | goldie.exception | class LexException : ParseException $]
+<div class="api-def">
+	<p>
+	Thrown upon any lexing error.
+	</p>
+
+	[$apiHead| this(Lexer lexer) $]
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>
+
+[$apiSectionType| InvalidUtfSequence | goldie.exception | class InvalidUtfSequence : LexException $]
+<div class="api-def">
+	<p>
+	Thrown when the lexer comes across a byte sequence that is invalid Unicode.
+	This may occur if the source contains invalid UTF-8, or if a binary file is parsed by accident.
+	</p>
+
+	[$apiHead| this(Lexer lexer) $]
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>
+
+[$apiSectionType| UnexpectedTokenException | goldie.exception | class UnexpectedTokenException : ParseException $]
+<div class="api-def">
+	<p>
+	Thrown when parsing finds a type of token in a place where the grammar
+	doesn't allow it.
+	For example, in a C-like language,
+	the [$code|inline|if$] in: [$code|inline|var1 + if + var2$].
+	</p>
+
+	[$apiHead| this(Parser parser) $]
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>
+
+[$apiSectionType| UnexpectedEofException | goldie.exception | class UnexpectedEofException : ParseException $]
+<div class="api-def">
+	<p>
+	Thrown when parsing reaches the end of the source in a place where the
+	grammar expects more tokens.
+	For example, in a C-like language,
+	a source consisting entirely of: [$code|inline|void main() { $].
+	</p>
+
+	[$apiHead| this(Parser parser=null) $]
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>
+
+[$apiSectionType| InternalException | goldie.exception | class InternalException : ParseException $]
+<div class="api-def">
+	<p>
+	Thrown when an internal error is detected within Goldie.
+	</p>
+	<p>
+	If you get one of these exceptions (the "msg" string will say
+	something along the lines of "Internal Goldie Error:..."),
+	please [$link|http://www.dsource.org/projects/goldie/newticket|file a bug report$].
+	</p>
+</div>
+
+[$apiSectionType| LanguageLoadException | goldie.exception | class LanguageLoadException : std.stdio.StdioException $]
+<div class="api-def">
+	<p>
+	Thrown when a problem occurs loading a CGT language file.
+	</p>
+	<p>
+	[$ident|StdioException$] is part of D's standard library.
+	</p>
+
+	[$apiHead| this(string msg="", string lang="", Exception next=null) $]
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>
+
+[$apiSectionType| LanguageNotFoundException | goldie.exception | class LanguageNotFoundException : LanguageLoadException $]
+<div class="api-def">
+	<p>
+	Thrown when Goldie tries to load a CGT language file,
+	but cannot find the file.
+	</p>
+
+	[$apiHead| this(string lang, Exception next=null) $]
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>
+
+[$apiSectionType| IllegalArgumentException | goldie.exception | class IllegalArgumentException : Exception $]
+<div class="api-def">
+	<p>
+	Thrown when an invalid argument is passed to a Goldie function.
+	</p>
+
+	[$apiHead| this(string msg) $]
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>

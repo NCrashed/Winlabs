@@ -1,0 +1,134 @@
+[$name|DevScripts$]
+[$title|Scripts for Developers$]
+[$frame|HTMLPage.tmpl$]
+
+<ul>
+<li>[$pageLink|#makeBuiltinStaticLangs| makeBuiltinStaticLangs $]</li>
+<li>[$pageLink|#makeDocs|               makeDocs               $]</li>
+<li>[$pageLink|#makePackage|            makePackage            $]</li>
+<li>[$pageLink|#runTests|               runTests               $]</li>
+<li>[$pageLink|#updateServerDocs|       updateServerDocs       $]</li>
+</ul>
+
+<p>
+There are a few tools and scripts included to aid in Goldie's development.
+All of these are available in both Unix shell script and Windows batch file.
+All of these should be run from the main Goldie directory.
+</p>
+
+<a name="makeBuiltinStaticLangs" />
+<h3>makeBuiltinStaticLangs</h3>
+<p>
+Goldie comes with two [$pageLink|StatVsDyn|static-style$] languages already generated and built-in:
+[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/src/samples/calculatorStatic/calc | calc $]
+and
+[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/src/goldie/langs/grm | grm $].
+Run this script to automatically regenerate them if you've modified their
+grammars, [$pageTitle|StaticLang$], or relevant portions of [$pageLink|APIRef|GoldieLib$].
+</p>
+<p>
+Note that this script does not automatically compile the [$code|inline|.grm$] grammar definitions
+into [$pageLink|CGT|CGT$] files. So if you modify their [$code|inline|.grm$] definitions,
+you'll have to recompile
+[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/lang | their CGT files $]
+yourself via either [$pageTitle|GRMC$]
+or [$pageLink|OtherTools#GOLD|GOLD Parser Builder$]
+before running this script.
+</p>
+
+<a name="makeDocs" />
+<h3>makeDocs</h3>
+<p>
+This is explained on the [$pageTitle|GenDocs$] page.
+</p>
+
+<a name="makePackage" />
+<h3>makePackage</h3>
+<p>
+Exports the latest Goldie and SemiTwistDTools masters fresh out of version control,
+builds them, and generates ready-to-distribute [$pageLink|Install#7z|.7z$]
+packages, just like the ones on the
+[$link| http://www.semitwist.com/download/goldie/ | Goldie downloads page $].
+The Unix shell script version also generates a source-only package.
+</p>
+
+<p>
+All work is done in [$code|inline| ./release/ $]. If that directory already exists,
+it will be <em>completely erased</em> first. If it does not exist, it will be created.
+</p>
+
+<a name="runTests" />
+<h3>runTests</h3>
+<p>
+Exports the latest Goldie and SemiTwistDTools masters fresh out of version control
+and into [$code|inline| ./test-cache/ $]. Then with each supported D compiler,
+attempts to build everything and run all unittests (all done inside
+[$code|inline| ./test/ $]).
+</p>
+
+<p>
+This tool requires that you have
+[$pageLink|Requires#dvm|DVM (D Version Manager)$]
+installed, and that you have used DVM to install all versions of DMD
+supported by Goldie (You can check inside the
+[$code|inline|runTests$] script to see which versions these are).
+</p>
+
+<p>
+It's highly recommended to log the output of runTests, because it's unlikely
+to all fit on one command line screen, even with scrolling.
+If you're not sure how to do this, see the article
+[$link| https://www.semitwist.com/articles/article/view/tee-time-logging | 'tee' Time Logging$].
+</p>
+
+<a name="updateServerDocs" />
+<h3>updateServerDocs</h3>
+<p>
+Goldie's documentation is laid out like this:
+</p>
+[$code|plain|[:http://www.semitwist.com/goldie/*             <-- Most recent version
+http://www.semitwist.com/goldie/v{version}/*  <-- Specific version archives:]$]
+
+<p>
+If you're maintaining a copy of Goldie's documentation, you can use this
+tool to automatically merge in a new version. It's split into two components:
+</p>
+
+<ol style="list-style-type: decimal">
+<li>
+The core implementation written in D: [$code|inline|./bin/goldie-updateServerDocs$]
+</li>
+<li>
+An optional user-specific shell script frontend
+(examples are in
+[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/updateServerDocs-example | ./updateServerDocs-example $]
+and
+[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/updateServerDocs-example.bat | ./updateServerDocs-example.bat $]).
+</li>
+</ol>
+
+<p>
+Run either one with no arguments to see usage information.
+</p>
+
+<p>
+To use this, make sure the documentation you want to merge in is at [$code|inline|./release/PublicDocs/docs$]
+(it will already be put there by [$pageLink|#makePackage|makePackage$]).
+Then, run the updateServerDocs tool and give it the version number you're merging in. Examples:
+</p>
+<div class="code-plain">[:$:][$code|user|./updateServerDocs-example 0.6$]
+[:$:][$code|user|goldie-updateServerDocs 0.6 /mnt/my-server-via-sshfs/www/goldie$]
+
+&gt;[$code|user|updateServerDocs-example 0.6$]
+&gt;[$code|user|goldie-updateServerDocs 0.6 C:\Inetpub\wwwroot\goldie$]</div>
+
+<p>
+If you want to merge in more than one version, make sure you merge them in order
+from oldest to newest. Otherwise, the automatic creation of "this page no longer exists"
+pages will get messed up.
+</p>
+
+<p>
+Compile with:
+</p>
+<div class="code-plain">&gt;[$code|user|semitwist-stbuild updateServerDocs$]</div>

@@ -1,0 +1,1828 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: Beginner's Tutorial</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><span class="pagemenu-link">Beginner's Tutorial</span></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../Start/index.html">Getting&nbsp;Started</a>&nbsp;-> <span class="breadcrumb-link">Beginner's&nbsp;Tutorial</span>
+	</div>
+	<br />
+	<h1>Beginner's Tutorial</h1>
+	
+
+
+
+<ol style="list-style-type: decimal;">
+<li><a class="page-link" href="../../Start/Tutorial/index.html#InstallD">Install the D compiler</a></li>
+<li><a class="page-link" href="../../Start/Tutorial/index.html#InstallGoldie">Install Goldie and SemiTwist D Tools</a></li>
+<li>
+	<a class="page-link" href="../../Start/Tutorial/index.html#WriteGrammar">Write a Grammar</a>
+	<ul>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#Terminal">Terminal Symbols</a></li>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#NonTerminal">NonTerminal Symbols</a></li>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#OtherTerminal">The Other Terminal</a></li>
+	</ul>
+</li>
+<li>
+	<a class="page-link" href="../../Start/Tutorial/index.html#CompileAndTestGrammar">Compile and Test the Grammar</a>
+	<ul>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#CompileGrammar">Compiling the Grammar</a></li>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#TestGrammar">Testing the Grammar</a></li>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#WhitespaceComments">Whitespace and Comments</a></li>
+	</ul>
+</li>
+<li><a class="page-link" href="../../Start/Tutorial/index.html#EnhanceGrammar">Enhancing the Grammar</a></li>
+<li>
+	<a class="page-link" href="../../Start/Tutorial/index.html#Program">Making a Real Program</a>
+	<ul>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#ImportLanguage">Importing the Language</a></li>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#ParseInput">Parsing the Input</a></li>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#AST">The Abstract Syntax Tree</a></li>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#NavigateParseTree">Navigating the Parse Tree</a></li>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#SemanticErrors">Semantic Errors</a></li>
+	</ul>
+</li>
+<li><a class="page-link" href="../../Start/Tutorial/index.html#SuggestedExercises">Suggested Exercises</a></li>
+<li>
+	<a class="page-link" href="../../Start/Tutorial/index.html#AdditionalTools">Additional Tools</a>
+	<ul>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#DumpCGT">Dumping the Compiled Grammar Tables</a></li>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#LexerGraph">Lexer Graph</a></li>
+	<li><a class="page-link" href="../../Start/Tutorial/index.html#GOLD">GOLD Parser Builder</a></li>
+	</ul>
+</li>
+</ol>
+
+<p>
+All the code samples in this tutorial can be found in Goldie's
+<span class="code-inline">tutorial</span> subdirectory. To use them, simply
+follow along with this tutorial.
+</p>
+
+<a name="InstallD" />
+<h2>1. Install the D compiler</h2>
+<div class="api-def">
+<p>
+If you don't already have DMD installed, you can do it like this
+(where <i>{NAME-OF-DVM-FILE}</i> is the appropriate file for your OS from
+the <a class="extern-link" href="https://bitbucket.org/doob/dvm/downloads">DVM download page</a>):
+</p>
+
+<h4 style="margin-bottom: 0px;">Windows:</h4>
+<div class="code-plain"><i>[Download <i>{NAME-OF-DVM-FILE}</i> to your current directory]</i>
+&gt;<span class="code-user"><i>{NAME-OF-DVM-FILE}</i> install dvm</span>
+<i>[Close your command prompt and open a new one.]</i>
+&gt;<span class="code-user">dvm install 2.058</span>
+&gt;<span class="code-user">dvm use 2.058 --default</span>
+</div>
+
+<h4 style="margin-bottom: 0px;">Posix:</h4>
+<div class="code-plain">&gt;<span class="code-user">wget -O dvm https://bitbucket.org/doob/dvm/downloads/<i>{NAME-OF-DVM-FILE}</i></span>
+&gt;<span class="code-user">chmod +x dvm</span>
+&gt;<span class="code-user">./dvm install dvm</span>
+<i>[Close your command prompt and open a new one.]</i>
+&gt;<span class="code-user">dvm install 2.058</span>
+&gt;<span class="code-user">dvm use 2.058 --default</span>
+</div>
+
+<p>
+Note that DMD 2.057 won't work for this tutorial due to DMD Issue
+<a class="extern-link" href="http://d.puremagic.com/issues/show_bug.cgi?id=7375">#7375</a>.
+</p>
+
+<p style="font-style: italic;">
+(For more information on this step, see the
+<a class="extern-link" href="https://bitbucket.org/doob/dvm/wiki/Home">DVM installation instructions</a>.)
+</p>
+</div>
+
+
+<a name="InstallGoldie" />
+<h2>2. Install Goldie and SemiTwist D Tools</h2>
+<div class="api-def">
+<p>
+Download and extract the
+<a class="extern-link" href="http://www.semitwist.com/download/goldie/">prepackaged release</a>
+(in <a class="page-link" href="../../Start/Install/index.html#7z">7z</a> format) for your OS. Or grab the "source-only"
+package. (If you'd prefer to download via Git, please see <a class="page-link" href="../../Start/Install/index.html">Download / Install</a>.)
+</p>
+<p>
+Then, just <a class="page-link" href="../../Start/Install/index.html#EnvPATH">update your PATH</a>
+to include the Goldie and SemiTwistDTools <span class="code-inline">bin</span> directories
+(or just symlink the executables to your preferred <span class="code-inline">bin</span>
+directory if you're on a Posix OS), and
+<a class="page-link" href="../../Start/Install/index.html#IncludePath">update DMD's configuration</a>
+to include the Goldie and SemiTwistDTools <span class="code-inline">src</span> directories.
+</p>
+<p>
+If you downloaded the "source-only" package, or downloaded via Git,
+you'll need to compile Goldie and SemiTwist D Tools like this:
+</p>
+<div class="code-plain">&gt;<span class="code-user">cd SemiTwistDTools</span>
+&gt;<span class="code-user">buildAll</span> <i>(or <span class="code-user">./buildAll</span> on Posix)</i>
+&gt;<span class="code-user">cd ../Goldie</span>
+&gt;<span class="code-user">semitwist-stbuild all -x-I../SemiTwistDTools/src</span>
+&gt;<span class="code-user">makeDocs</span> <i>(or <span class="code-user">./makeDocs</span> on Posix)</i></div>
+<p style="font-style: italic;">
+(For more information on this step, see <a class="page-link" href="../../Start/Install/index.html">Download / Install</a>.)
+</p>
+</div>
+
+
+<a name="WriteGrammar" />
+<h2>3. Write a Grammar</h2>
+<div class="api-def">
+<p>
+There are grammars
+<a class="extern-link" href="http://goldparser.org/grammars/index.htm">already available</a>,
+but to help get a feel for Goldie, let's write our own.
+For your first grammar, we'll keep it super-simple and make it a
+comma-separated list of integers. Goldie's grammars are written in the
+<a class="extern-link" href="http://goldparser.org/doc/grammars/index.htm">GOLD Meta-Language</a>,
+so that's what we'll be using.
+</p>
+<p>
+Start by opening your favorite text editor. Or you can use
+<a class="page-link" href="../../Tools/OtherTools/index.html#GOLD">GOLD Parser Builder</a> or
+<a class="extern-link" href="http://goldparser.org/builder/index.htm#Tools">Grammar Edit</a>,
+both of which feature syntax highlighting and other benefits. There's also a 
+<a class="extern-link" href="http://goldparser.org/builder/index.htm#Tools">syntax file for VIM</a>.
+</p>
+<p>
+Create a new file in your editor of choice and name it <span class="code-inline">commas.grm</span>.
+Enter the following into it:
+</p>
+<p class="figure-title">tutorial/section3/commas.grm:</p>
+<div class="code-plain">! This grammar describes a comma-separated list of integers.
+"Name"     = 'Commas Forever'
+"Author"   = 'Joe Coder'
+"Version"  = '0.01'
+"About"    = 'Comma-separated list of integers'
+"Case Sensitive" = true   ! Doesn't really matter since there's no letters
+
+"Start Symbol" = &lt;List&gt;
+
+! -- Terminals -----------------------------------------
+
+Integer = '-'? {Digit}+
+
+! -- Rules ---------------------------------------------
+
+&lt;List&gt; ::= &lt;List&gt; ',' Integer
+        |  Integer</div>
+<p>
+There's two things to notice about this code right from the start:
+</p>
+<ol style="list-style-type: decimal;">
+<li>
+	Comments start with <span class="code-inline">!</span> and extend to the end of the line.
+	The grammar description language also supports multi-line block comments
+	which look like this: <span class="code-inline">!* comment *!</span>
+</li>
+<li>
+	Whitespace and indentation are not significant, but newlines are.
+	However, that said, we could have put the <span class="code-inline"> |  Integer</span>
+	at the end of the previous line and it would have still worked fine.
+</li>
+</ol>
+<p>
+The first line, of course, is just a comment.
+</p>
+<p>
+The next four lines just set some metadata for the grammar: Name, Author,
+Version, and About. You should normally include them, but they don't have
+any real effect.
+</p>
+<p>
+The sixth line tells Goldie that the grammar we're describing is case-sensitive.
+Since our grammar is just numbers and commas, that's irrelevant,
+so just ignore it for now.
+</p>
+<a name="Terminal" />
+<h3>Terminal Symbols</h3>
+<p>
+Skipping the <span class="code-inline">"Start Symbol"</span> for a minute, let's look at the
+line defining our terminal:
+</p>
+<div class="code-plain">Integer = '-'? {Digit}+</div>
+<p>
+A terminal symbol is the most basic part of a grammar. They're defined just
+simply with regular expressions. Our grammar is made up of integers, and we
+can easily describe an integer with a regular expression, so that's what
+we've done here.
+</p>
+<p>
+To analyze that line more closely: First, we're naming our integer symbol
+(sensibly enough) <span class="code-inline">Integer</span>. Next, we're defining an
+<span class="code-inline">Integer</span> symbol to be an optional minus sign followed by one
+or more digits. The <span class="code-inline">?</span> means "optional", the <span class="code-inline">+</span>
+means "one or more", and <span class="code-inline">{Digit}</span> is a built-in character
+set that means "any of the digits from 0 through 9". Instead of using
+<span class="code-inline">{Digit}</span>, we could also have been more explicit and said
+<span class="code-inline">[0123456789]</span> instead.
+</p>
+<a name="NonTerminal" />
+<h3>NonTerminal Symbols</h3>
+<p>
+Now we come to the nonterminal section. A nonterminal is any symbol in our
+grammar that's made of of other terminal and/or nonterminal symbols.
+Here's ours:
+</p>
+<div class="code-plain">&lt;List&gt; ::= &lt;List&gt; ',' Integer
+        |  Integer</div>
+<p>
+In the <a class="extern-link" href="http://goldparser.org/doc/grammars/index.htm">GOLD Meta-Language</a>,
+the names of nonterminals are surrounded by angle brackets,
+such as <span class="code-inline">&lt;List&gt;</span> above. Goldie considers the brackets to be part
+of the symbol's name.
+</p>
+<p>
+What the above code says, is that a <span class="code-inline">&lt;List&gt;</span> symbol can be
+(the correct term is "derives from") either of the following:
+</p>
+<ul>
+<li>
+	<span class="code-inline">Integer</span>: Just a plain old <span class="code-inline">Integer</span> by itself.
+</li>
+<li>
+	<span class="code-inline">&lt;List&gt; ',' Integer</span>: Any existing <span class="code-inline">&lt;List&gt;</span>,
+	followed by a comma, and then an <span class="code-inline">Integer</span>.
+</li>
+</ul>
+<p>
+Actually, the rule as written above is really just syntactic sugar for what
+are <em>really</em> two separate rules:
+</p>
+<div class="code-plain">&lt;List&gt; ::= &lt;List&gt; ',' Integer
+&lt;List&gt; ::= Integer</div>
+<p>
+The combined form is preferred, though.
+</p>
+<p>
+So this grammar accepts an integer as a <span class="code-inline">&lt;List&gt;</span>. But, since an
+<span class="code-inline">Integer</span> can become (or rather, the proper term is "reduces to")
+a <span class="code-inline">&lt;List&gt;</span>, the grammar also accepts
+an integer followed by a comma and then another integer. And since <em>that</em>
+reduces to a <span class="code-inline">&lt;List&gt;</span> too, our grammar also accepts that list
+of two integers followed by <em>another</em> comma and integer, etc..., all
+the way up to any number of comma separated integers you can throw at it.
+</p>
+<p>
+So if you give it a list of numbers, the parser will march right through
+them like this (the parts that get reduced to a new <span class="code-inline">&lt;List&gt;</span>
+at each step have been highlighted):
+</p>
+<div class="code-plain">7,12,42,-920,65535 <span class="code-user">[The "Lexer" turns this into Integers...]</span>
+<span class="code-added">Integer</span>,Integer,Integer,Integer,Integer <span class="code-user">(Integers:</span> 7,12,42,-920,65535<span class="code-user">)</span>
+<span class="code-added">&lt;List&gt;,Integer</span>,Integer,Integer,Integer  <span class="code-user">(List:</span> 7<span class="code-user">) (Integers:</span> 12,42,-920,65535<span class="code-user">)</span>
+<span class="code-added">&lt;List&gt;,Integer</span>,Integer,Integer          <span class="code-user">(List:</span> 7,12<span class="code-user">) (Integers:</span> 42,-920,65535<span class="code-user">)</span>
+<span class="code-added">&lt;List&gt;,Integer</span>,Integer                  <span class="code-user">(List:</span> 7,12,42<span class="code-user">) (Integers:</span> -920,65535<span class="code-user">)</span>
+<span class="code-added">&lt;List&gt;,Integer</span>                          <span class="code-user">(List:</span> 7,12,42,-920<span class="code-user">) (Integers:</span> 65535<span class="code-user">)</span>
+&lt;List&gt;                                  <span class="code-user">(List:</span> 7,12,42,-920,65535<span class="code-user">)</span></div>
+<p>
+By the end, the parser will have built this tree, from bottom to top:
+</p>
+<div class="code-plain">
+                              &lt;List&gt;(7,12,42,-920,65535)
+                                 /\
+                                /  ----------------------
+                               /                \        \
+                        &lt;List&gt;(7,12,42,-920)   ','   Integer(65535)
+                           /\
+                          /  -----------------
+                         /           \        \
+                  &lt;List&gt;(7,12,42)   ','   Integer(-920)
+                     /\
+                    /  --------------
+                   /        \        \
+            &lt;List&gt;(7,12)   ','   Integer(42)
+               /\
+              /  -----------
+             /     \        \
+      &lt;List&gt;(7)   ','   Integer(12)
+         /
+        /
+       /
+  Integer(7)
+
+</div>
+<p>
+Notice that the terminals are always the leaves of the tree.
+(That's why they're called "terminals".)
+</p>
+<p>
+Getting back to the <span class="code-inline">"Start Symbol"</span> we skipped before:
+</p>
+<div class="code-plain">"Start Symbol" = &lt;List&gt;</div>
+<p>
+That's a required part of every grammar. That tells the parser that the
+<em>entire</em> source being parsed must ultimately reduce to that one
+lone nonterminal. If it does, then the source is ok - it parsed successfully.
+If not, then it's not a valid source - the source has an error.
+</p>
+<p>
+Those people experienced with LL parsers may have noticed that this is a
+left-recursive grammar and cringed. Such a grammar is not allowed in LL parsing,
+you'd have to write it using right-recursion: <span class="code-inline">Integer ',' &lt;List&gt;</span>.
+Goldie, however, is an LR parser (more specifically, an LALR(1)). In LR parsing,
+left-recursion is not only allowed, but is more efficient than right-recursion.
+Of course, that doesn't mean LR is necessarily better: We have our own issues
+to deal with, such as shift-reduce and reduce-reduce conflicts.
+</p>
+<a name="OtherTerminal" />
+<h3>The Other Terminal</h3>
+<p>
+As it turns out, <span class="code-inline">Integer</span> isn't the only terminal
+in this grammar. There's also the comma. Since the comma is just a simple
+ordinary string and doesn't require any of the fancy regular expression features
+(such as the "optional" <span class="code-inline">?</span>, the "one or more" <span class="code-inline">+</span>
+or the <span class="code-inline">{Digit}</span>), we were able to define it implicitly
+just by sticking it right in the nonterminal's definition.
+The name of this terminal symbol is just simply <span class="code-inline">,</span>.
+</p>
+<p>
+If we wanted, we could have defined it formally:
+</p>
+<div class="code-plain">Comma = ','
+
+&lt;List&gt; ::= &lt;List&gt; Comma Integer
+        |  Integer</div>
+<p>
+But putting it inline is more convenient and easier to read.
+</p>
+</div>
+
+
+<a name="CompileAndTestGrammar" />
+<h2>4. Compile and Test the Grammar</h2>
+<div class="api-def">
+<p>
+So far, we haven't actually used the grammar. We've just written it and
+discussed how it will work. So let's try it out for real
+(I believe the proper term is "fo realz", but I'm not hip enough).
+</p>
+<a name="CompileGrammar" />
+<h3>Compiling the Grammar</h3>
+<p>
+First we have to compile our grammar. You can do this in
+<a class="page-link" href="../../Tools/OtherTools/index.html#GOLD">GOLD Parser Builder</a>, but Goldie has its own
+tool, <a class="page-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a>, so let's try that. At the command line:
+</p>
+<div class="code-plain">&gt;<span class="code-user">goldie-grmc commas.grm</span></div>
+<p>
+That will compile the grammar and save it to the file <span class="code-inline">commas.cgt</span>.
+The extension "cgt" stands for "Compiled Grammar Table".
+</p>
+<a name="TestGrammar" />
+<h3>Testing the Grammar</h3>
+<p>
+Now that our grammar is compiled, we can test it. Create a new file named
+<span class="code-inline">test.commas</span>. In it, type the number list we used in the
+previous section:
+</p>
+<div class="code-plain">7,12,42,-920,65535</div>
+<p>
+Now save, and then go back to the command line to parse it against your
+freshly compiled grammar:
+</p>
+<div class="code-plain">&gt;<span class="code-user">goldie-parse --lang=commas.cgt test.commas</span>
+Saving Tokens (test.commas.tk.json)...Done!
+Saving Parse Tree (test.commas.pt.json)...Done!</div>
+<p>
+As you can see, there were no errors, and results were saved to the JSON files
+<span class="code-inline">test.commas.tk.json</span> and <span class="code-inline">test.commas.pt.json</span>.
+The first one is the result of the lexing phase, and the second is the final
+parsed result. Let's take a look...
+</p>
+<p>
+Bundled with Goldie is a specially-modified version of a GUI program called
+<a class="page-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>. The original version, and thus this one as well,
+was written in C#, and unfortunately it does have some bugs when run in Linux
+under Mono (A rewrite in D is planned).  But it works fine under .NET on
+Windows, and it does at least work somewhat on Linux/Mono, so let's give it a go.
+</p>
+<p>
+Run the main JsonViewer executable:
+<span class="code-inline">{main Goldie directory}/JsonViewer/JsonView.exe</span>. Open
+the first JSON file with it: <span class="code-inline">test.commas.tk.json</span>. Then expand
+the tree on the left and you should see something like this:
+</p>
+<img src="../../Tutorial-JsonViewer1.png" alt="Lexer Result in JsonViewer" />
+<p>
+That's a lot of info! You can see that Goldie's lexer separated the list
+into a series of integer and comma tokens. Click a token in left panel, and
+it will highlight the token in the original source. Click a position in the
+source, then "Jump To Node", and it will highlight the corresponding token
+on the left. Whenever a token on the left is selected, the far-right-side
+panel will show various information about it.
+</p>
+<p>
+But there's no structure! It's just a series of tokens. And there's no
+<span class="code-inline">&lt;List&gt;</span>. It only has the nonterminals. That's because
+this is only the output of the lexing phase. It's the parser that
+handles the nonterminals.
+</p>
+<p>
+So let's open the other JSON file: <span class="code-inline">test.commas.pt.json</span>. Expand
+the tree on the left again:
+</p>
+<img src="../../Tutorial-JsonViewer2.png" alt="Parser Result in JsonViewer" />
+<p>
+Now that's much more interesting. Although it's laid out differently, notice
+that the tree exactly matches what we predicted in the previous section: The
+same tree, built from the structure defined in the grammar file.
+The root node is a <span class="code-inline">&lt;List&gt;</span>, because that's what our
+<span class="code-inline">"Start Symbol"</span> was set to.
+That root node represents the entire source code, and consists
+of three subtokens: A <span class="code-inline">&lt;List&gt;</span> (representing the entire
+list except for the last element), then a <span class="code-inline">,</span> and finally an
+<span class="code-inline">Integer</span> (which represents the last element). Just like our
+definition of <span class="code-inline">&lt;List&gt; ::= &lt;List&gt; ',' Integer</span>!
+</p>
+<p>
+At this point, I invite you to play around with the <span class="code-inline">test.commas</span>
+file, changing it, reparsing it, and seeing what happens. Make sure to try
+deliberately bad input: put words in, two commas in a row, decimals, etc.
+The parser will properly report the filename, location and what went wrong.
+</p>
+<p>
+If you do something that's valid in the lexing phase (syntactically correct),
+but invalid in the parsing phase (grammatically incorrect), such as two commas
+in a row, the lexer's JSON output (<span class="code-inline">*.tk.json</span>) will look fine,
+but it won't be able to produce a parse tree (<span class="code-inline">*.pt.json</span>).
+</p>
+<p>
+If you have a syntax error, such as including a word instead of an integer,
+then it will still save the lexer results and you'll be able to see the error
+token that was reported to you in the error message.
+</p>
+<a name="WhitespaceComments" />
+<h3>Whitespace and Comments</h3>
+<p>
+While playing around with the sample input, you may have noticed that the
+parser happily accepts any whitespace you throw at it: Spaces, tabs,
+newlines, etc. It even shows up in the lexer's JSON file.
+But we never defined any whitespace in the grammar!
+</p>
+<p>
+The <a class="extern-link" href="http://goldparser.org/doc/grammars/index.htm">GOLD Meta-Language</a>
+automatically defines a default whitespace terminal if you don't. You can
+override it like this:
+</p>
+<div class="code-plain">Whitespace = ({Space} | {HT})+</div>
+<p>
+That defines the whitespace to be one or more characters that can each be
+either space or (horizontal) tab. No newlines, no form-feed, no non-breaking
+space, no vertical tab (yes, there is such a thing!), no anything else.
+</p>
+<p>
+Or, you can effectively disable whitespace by setting it to the rarely-used
+value of 1 (that is, the ASCII/Unicode code #1, not the actual digit '1'):
+</p>
+<div class="code-plain">Whitespace = {&amp;01}+</div>
+<p>
+However you choose to define the whitespace, any whitespace tokens the lexer
+finds are automatically skipped by the parser.
+</p>
+<p>
+The <a class="extern-link" href="http://goldparser.org/doc/grammars/index.htm">GOLD Meta-Language</a>
+also has built-in support for comments, which work much like whitespace.
+For example, to define C/C++-style line comments and block comments:
+</p>
+<div class="code-plain">Comment Line  = '//'
+Comment Start = '/*'
+Comment End   = '*/'</div>
+<p>
+Like whitespace, comments are detected by the lexer and then the parser
+skips them automatically. But unlike whitespace, there are no default comments.
+If you don't define a line comment or a block comment, then you don't get
+any line comments or block comments.
+</p>
+<p>
+<a class="page-link" href="../../Tools/OtherTools/index.html#GOLD">GOLD Parser Builder</a> has rather advanced
+comment support as of version 5, but unfortunately Goldie doesn't support any
+of GOLD's new v5 features just yet. It will, but at the moment, Goldie is
+limited to one type of line comment, and one non-nesting block comment defined
+by a starting token and an ending token.
+</p>
+</div>
+
+
+<a name="EnhanceGrammar" />
+<h2>5. Enhancing the Grammar</h2>
+<div class="api-def">
+<p>
+Before getting into writing some real code, let's make a few small
+enhancements to our grammar.
+</p>
+<a name="Zero" />
+<h3>"Zero" And Case Sensitivity</h3>
+<p>
+First, just for kicks, let's allow the text <span class="code-inline">{zero}</span>
+(including the curly braces) to be a synonym for <span class="code-inline">0</span>.
+It'll still be considered an integer, just
+an alternate way of writing one, so we'll just add it into the
+<span class="code-inline">Integer</span> definition:
+</p>
+<div class="code-plain">Integer = '{zero}' | ( '-'? {Digit}+ )</div>
+<p>
+The <span class="code-inline">|</span> means "or". So this new version of
+<span class="code-inline">Integer</span> can be either <span class="code-inline">{zero}</span> or
+exactly what we had before.
+</p>
+<p>
+Recompile the grammar, and now the you can use <span class="code-inline">{zero}</span> in your
+<span class="code-inline">test.commas</span> file!
+</p>
+<p>
+This is where the <span class="code-inline">"Case Sensitive"</span> starts to make sense.
+Since we set it to true, the grammar will only accept <span class="code-inline">{zero}</span>
+exactly as we typed it in the source. It won't accept <span class="code-inline">{ZERO}</span>,
+<span class="code-inline">{Zero}</span>, <span class="code-inline">{zERo}</span>, etc. If you would like it
+to accept any casing, just change <span class="code-inline">"Case Sensitive"</span> to false.
+(If you omit the <span class="code-inline">"Case Sensitive"</span> line, it defaults to false.)
+</p>
+<a name="Identifiers" />
+<h3>Identifiers</h3>
+<p>
+Let's update the grammar to allow some arbitrary identifiers, just like
+variable names in other languages. Typically, identifiers are defined
+to be a letter or underscore followed by zero or more letters, digits
+or underscores. So let's follow suit:
+</p>
+<div class="code-plain">Ident = ({Letter} | '_') ({AlphaNumeric} | '_')*</div>
+<p>
+The <span class="code-inline">{Letter}</span> means "any upper or lowercase letter".
+The <span class="code-inline">{AlphaNumeric}</span> is the same, but it also includes 0 through 9.
+Finally, the <span class="code-inline">*</span> means "zero or more".
+So this quite literally means "A letter or underscore; followed by zero or more
+letters, digits or underscores".
+</p>
+<p>
+That's getting a little long and harder to read, but we can simplify it by
+defining our own character sets:
+</p>
+<div class="code-plain">{Ident Start} = {Letter} + [_]
+{Ident Char}  = {AlphaNumeric} + [_]
+Ident = {Ident Start} {Ident Char}*</div>
+<p>
+That's surprisingly straightforward. When defining a character set (the names of
+character sets are always surrounded by curly braces), the <span class="code-inline">+</span>
+means "everything in both of these character sets". So <span class="code-inline">{Ident Start}</span>
+is the set off all letters plus the underscore.
+</p>
+<p>
+We can also use <span class="code-inline">-</span> to exclude characters. For example,
+<span class="code-inline">{AlphaNumeric} - {Digit} - [zZ] - 'A'</span> results in all letters
+except for uppercase <span class="code-inline">A</span>, and upper and lowercase <span class="code-inline">Z</span>.
+Of course, if you set <span class="code-inline">"Case Sensitive"</span> to false, then
+it'll simply mean "All letters except for A and Z, regardless of case."
+</p>
+<p>
+But now that we've defined our identifiers, we still have to work them into
+the rest of the grammar. I've highlighted the parts which have changed:
+</p>
+<div class="code-plain">&lt;List&gt; ::= &lt;List&gt; ',' <span class="code-added">&lt;List Element&gt;</span>
+        |  <span class="code-added">&lt;List Element&gt;</span>
+
+<span class="code-added">&lt;List Element&gt; ::= Integer | Ident</span></div>
+<p>
+Now, instead of being a list of <span class="code-inline">Integer</span>, it's a list of
+<span class="code-inline">&lt;List Element&gt;</span>. And a <span class="code-inline">&lt;List Element&gt;</span>
+can be either an <span class="code-inline">Integer</span> or an <span class="code-inline">Ident</span>.
+</p>
+<a name="Surrounded" />
+<h3>We're Surrounded!</h3>
+<p>
+We'll make one last little change: Our grammar should
+support two different forms: Large and Small. Large can accept any integer.
+But since supporting <em>any</em> integer can be computationally demanding,
+we have the option of a Small.
+The Small size means all values must fit into two bytes.
+In other words, only integers from 0 through 65,535 will be allowed.
+</p>
+<p>
+Additionally, let's include the (somewhat contrived) expectation
+that the description of "Large" or "Small" must be repeated at the end of
+the source. For example:
+</p>
+<div class="code-plain">Large 1, mango, -24, 93521356, {zero}, 77 Large</div>
+<div class="code-plain">Small 1, mango, 24, 32000, {zero}, 77 Small</div>
+<p>
+First, we'll create a symbol for these size descriptions:
+</p>
+<div class="code-plain">&lt;Size&gt; ::= 'Large' | 'Small'</div>
+<p>
+Now, we'll create another new symbol to combine it all together:
+</p>
+<div class="code-plain">&lt;Everything&gt; ::= &lt;Size&gt; &lt;List&gt; &lt;Size&gt;</div>
+<p>
+Since this new <span class="code-inline">&lt;Everything&gt;</span> is intended to represent the
+entire source (instead of <span class="code-inline">&lt;List&gt;</span> as before) we have to update
+the <span class="code-inline">"Start Symbol"</span>:
+</p>
+<div class="code-plain">"Start Symbol" = <span class="code-added">&lt;Everything&gt;</span></div>
+<p>
+And while we're at it, we may as well update the grammar's metadata.
+So now, our entire grammar looks like this:
+</p>
+<p class="figure-title">tutorial/sections5-6/commas.grm:</p>
+<div class="code-plain">! This grammar describes a comma-separated list of <span class="code-added">values</span>.
+"Name"     = 'Commas Forever'
+"Author"   = 'Joe Coder'
+"Version"  = '0.0<span class="code-added">2</span>'
+"About"    = 'Comma-separated list of <span class="code-added">values</span>'
+"Case Sensitive" = <span class="code-added">false</span>
+
+"Start Symbol" = <span class="code-added">&lt;Everything&gt;</span>
+
+! -- Terminals -----------------------------------------
+
+Integer = <span class="code-added">'{zero}' | ( </span>'-'? {Digit}+<span class="code-added"> )</span>
+
+<span class="code-added">{Ident Start} = {Letter} + [_]
+{Ident Char}  = {AlphaNumeric} + [_]
+Ident = {Ident Start} {Ident Char}*</span>
+
+! -- Rules ---------------------------------------------
+
+<span class="code-added">&lt;Everything&gt; ::= &lt;Size&gt; &lt;List&gt; &lt;Size&gt;
+
+&lt;Size&gt; ::= 'Large' | 'Small'</span>
+
+&lt;List&gt; ::= &lt;List&gt; ',' <span class="code-added">&lt;List Element&gt;</span>
+        |  <span class="code-added">&lt;List Element&gt;
+
+&lt;List Element&gt; ::= Integer | Ident</span></div>
+<p>
+Whew! That's a lot of changes!
+</p>
+<p>
+You may notice that a couple of
+our new restrictions are not yet enforced: A "Small" list still accepts any
+integer, and the sizes at the beginning and end don't have to match: One could
+be "Large", but the other could still be "Small". Those are not things
+that are easily handled in a grammar. They're more of a semantic matter (rather
+than syntactic), so we'll handle them in our own code later.
+</p>
+<p>
+In any case, compile this new grammar, and try it out!
+</p>
+</div>
+
+<a name="Program" />
+<h2>6. Making a Real Program</h2>
+<div class="api-def">
+<p>
+Alright, now it's time for some real code:
+</p>
+<a name="ImportLanguage" />
+<h3>Importing the Language</h3>
+<p>
+There are two main ways to load your grammar into GoldieLib:
+</p>
+<p>
+One way is to load the compiled grammar file at runtime, just like
+the <a class="page-link" href="../../Tools/Parse/index.html">Parse</a> tool did when we used it earlier.
+We could easily do that,
+but unless you're writing a program like <a class="page-link" href="../../Tools/Parse/index.html">Parse</a> which needs to
+work on <em>any</em> grammar, it's better to take the other approach:
+</p>
+<p>
+Use Goldie's <a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a> tool to convert your compiled grammar
+into a D package. Not only does this help your program startup faster
+and allow you to distribute your program without the compiled grammar file,
+but it also gives you the option of using GoldieLib's
+<a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a> interfaces. The nice thing about
+GoldieLib's static-style interfaces (as opposed to the dynamic-style ones)
+is they provide better compile-time safety. For example,
+if you mistype the name of a symbol (such as <span class="code-inline">Idint</span> instead
+of <span class="code-inline">Ident</span>), the static-style will give you an error at
+compile-time instead of leaving you with a runtime bug.
+</p>
+<p>
+Creating a D package for your grammar is a simple as this:
+</p>
+<div class="code-plain">&gt;<span class="code-user">goldie-staticlang commas.cgt --pack=commas</span></div>
+<p>
+That will create a package named <span class="code-inline">commas</span>.
+In your D code, import it like this:
+</p>
+<div class="code-highlight">import goldie.all; <span class="code-comment">// Import GoldieLib itself</span>
+import commas.all; <span class="code-comment">// Import our commas language</span></div>
+<a name="ParseInput" />
+<h3>Parsing the Input</h3>
+<p>
+Now we're ready to actually start using GoldieLib.
+</p>
+<p>
+The first thing to do is load a file and parse it according to our
+commas grammar:
+</p>
+<p class="figure-title">tutorial/sections5-6/program1.d:</p>
+<div class="code-highlight">import std.stdio;
+import goldie.all; <span class="code-comment">// Import GoldieLib itself</span>
+import commas.all; <span class="code-comment">// Import our commas language</span>
+
+int main(string[] args)
+{
+    try
+    {
+        auto parseTree = language_commas.parseFile(args[1]).parseTree;
+    }
+    catch(ParseException e)
+    {
+        writeln(e.msg);
+        return 1;
+    }
+
+    return 0;
+}</div>
+<p>
+The try/catch block is simply there so upon any parsing (or lexing)
+error you'll get a prettier error message than just an ugly unhandled
+exception.
+</p>
+<p>
+The only particularly interesting line is this one:
+</p>
+<div class="code-highlight">auto parseTree = language_commas.parseFile(args[1]).parseTree;</div>
+<p>
+That one line does it all. Let's break it down:
+</p>
+<p>
+The <span class="code-inline">language_commas</span> is our commas language. It's a
+variable of type
+<a class="page-link" href="../../APIRef/Language/index.html#Language__languageName_">Language_commas</a>
+and, like it's type, is automatically
+defined and instantiated in the <span class="code-inline">commas</span> package that
+<a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a> generated for us.
+</p>
+<p>
+The language has a <span class="code-inline">parseFile</span> function which takes the
+name of a file (we're giving it <span class="code-inline">args[1]</span>), loads
+the file, and parses it according to our grammar. It throws a
+<a class="page-link" href="../../APIRef/Exception/index.html#ParseException">ParseException</a> upon any errors in the file.
+</p>
+<p>
+The <span class="code-inline">parseFile</span> function returns a
+<a class="page-link" href="../../APIRef/Parser/index.html#Parser__languageName_">Parser_commas</a>, ie.,  the parser it
+used to parse the file. Various information can be obtained from the parser,
+but in most cases, the only interesting member is <span class="code-inline">parseTree</span>.
+</p>
+<p>
+This <span class="code-inline">parseTree</span> is, naturally, the resulting parse tree.
+It is, in fact, the very same parse tree generated by the
+<a class="page-link" href="../../Tools/Parse/index.html">Parse</a> tool we used earlier.
+</p>
+<p>
+Finally, we stick the resulting parse tree into a variable named,
+unsurprisingly, <span class="code-inline">parseTree</span>. The type of this variable is
+<a class="page-link" href="../../APIRef/Token/index.html#Token__languageName___symbol_">Token_commas!"&lt;Everything&gt;"</a>.
+That makes sense, because <span class="code-inline">&lt;Everything&gt;</span> is the name of
+our grammar's Start Symbol. So naturally, the root of the parse tree
+would be an <span class="code-inline">&lt;Everything&gt;</span> token.
+</p>
+<div class="code-plain" style="white-space: normal; font-family: verdana,arial,'Bitstream Vera Sans',helvetica,sans-serif;">
+<em>Side note:</em> If we were using
+<a class="page-link" href="../../APIOver/StatVsDyn/index.html">dynamic-style</a> instead of static-style,
+we would have grabbed <span class="code-inline">parseTreeX</span> instead of <span class="code-inline">parseTree</span>.
+Also, the root token (in fact, <em>all</em> tokens in the parse tree) would
+have been type <a class="page-link" href="../../APIRef/Token/index.html">Token</a>. You can try out those changes
+if you would like.<br />
+<br />
+There is a relationship between the token types:
+<a class="page-link" href="../../APIRef/Token/index.html#Token__languageName___symbol_">Token_commas!"&lt;Everything&gt;"</a>
+is a subclass of <a class="page-link" href="../../APIRef/Token/index.html#Token__languageName_">Token_commas</a> which is
+a subclass of <a class="page-link" href="../../APIRef/Token/index.html">Token</a>.
+</div>
+<p>
+Create a commas file to test this program with
+(named, for example, <span class="code-inline">test.commas</span>).
+Then compile and run the program like this
+(If you're using DMD 2.055, add <span class="code-inline">-ofprogram1</span>
+to the command below, <em>before</em> the <span class="code-inline">program1.d</span>):
+</p>
+<div class="code-plain">&gt;<span class="code-user">rdmd --build-only -I{path to SemiTwistDTools}/src -I{path to Goldie}/src program1.d </span>
+&gt;<span class="code-user">program1 test.commas</span></div>
+<p>
+You'll notice that any parsing or lexing errors will result in the exact
+same error messages produced by the <a class="page-link" href="../../Tools/Parse/index.html">Parse</a> tool used earlier.
+</p>
+<a name="AST" />
+<h3>The Abstract Syntax Tree</h3>
+<p>
+It's time to actually do something with the parse tree.
+We'll start by pulling the data from a commas file into this structure:
+</p>
+<div class="code-highlight">enum Size { Large, Small }
+
+struct Element
+{
+    string ident;
+    BigInt integer;
+}
+
+struct Commas
+{
+    Size size;
+    Element[] elements;
+}</div>
+<p>
+That's essentially an Abstract Syntax Tree (AST) for our grammar.
+It matches up to the data contained in a commas file quite nicely:
+</p>
+<p>
+The <span class="ident">Commas</span> struct represents an entire commas data file.
+It contains the size declared in the file (Large or Small) and
+an array of <span class="ident">Element</span>.
+</p>
+<p>
+These <span class="ident">Element</span> structs, in turn, represent each of the individual
+values contained in the commas data file. For the values that are identifiers,
+it has a string <span class="ident">ident</span> to hold the identifier's name.
+For the integer values, the <span class="ident">ident</span> string will be null, and the
+integer value will be stored in the (appropriately-named) <span class="ident">integer</span> variable.
+</p>
+<p>
+Regarding the integers:
+Since the Large-sized files can accept integers of <em>any</em> size,
+an ordinary 32-bit int won't cut it. Even a 64-bit long could fail for very
+large numbers. Since our spec said <em>any</em> size, we need to use a
+<a class="extern-link" href="http://dlang.org/phobos/std_bigint.html">BigInt</a>.
+</p>
+<a name="NavigateParseTree" />
+<h3>Navigating the Parse Tree</h3>
+<p>
+We have our parse tree, thanks to Goldie. And we've defined what we want to
+ultimately end up with. Time to connect those up by writing the core of
+our little program.
+</p>
+<p>
+While writing this, it will help to have a sample parse tree to look at.
+So we'll use our old friends <a class="page-link" href="../../Tools/Parse/index.html">Parse</a> and <a class="page-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>:
+</p>
+<div class="code-plain">&gt;<span class="code-user">goldie-parse --lang=commas.cgt test.commas</span></div>
+<p>
+Then open <span class="code-inline">test.commas.pt.json</span> in <a class="page-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>:
+</p>
+<img src="../../Tutorial-JsonViewer3.png" alt="Sample Parse Tree in JsonViewer" />
+<p>
+You'll also want to keep the grammar definition, <span class="code-inline">commas.grm</span>,
+open for reference.
+</p>
+<p>
+To start, let's create a convenience alias to shorten the token types:
+</p>
+<div class="code-highlight">alias Token_commas Tok;</div>
+<p>
+After parsing, we'll call a function (which we're going to write) to convert
+the parse tree to a <span class="ident">Commas</span> struct:
+</p>
+<div class="code-highlight">auto parseTree = language_commas.parseFile(args[1]).parseTree;
+<div style="width: 100%;" class="code-added">auto commas = toCommas(parseTree);</div></div>
+<p>
+Here's the definition of <span class="ident">toCommas</span>:
+</p>
+<div class="code-highlight">Commas toCommas(Tok!"&lt;Everything&gt;" root)
+{
+    Commas commas;
+
+    <span class="code-comment">// Determine size</span>
+    auto tokSize = root.get!(Tok!"&lt;Size&gt;")();
+    if( cast(Tok!("&lt;Size&gt;", "Large")) tokSize )
+        commas.size = Size.Large;
+    else
+        commas.size = Size.Small;
+    
+    <span class="code-comment">// Get elements</span>
+    auto tokList = root.get!(Tok!"&lt;List&gt;")();
+    commas.elements = toElements(tokList);
+    
+    return commas;
+}</div>
+<p>
+First, this function determines the size that was chosen.
+Looking at the grammar definition (and confirmed by our sample parse tree),
+an <span class="code-inline">&lt;Everything&gt;</span> token has three subtokens:
+<span class="code-inline">&lt;Size&gt;</span>, <span class="code-inline">&lt;List&gt;</span> and then another
+<span class="code-inline">&lt;Size&gt;</span>.
+</p>
+<p>
+We could access each of these subtokens with <span class="code-inline">root.sub!0</span>,
+<span class="code-inline">root.sub!1</span> and <span class="code-inline">root.sub!2</span> respectively
+(or in <a class="page-link" href="../../APIOver/StatVsDyn/index.html">dynamic-style</a>: <span class="code-inline">root[0]</span>,
+<span class="code-inline">root[1]</span> and <span class="code-inline">root[2]</span>).
+But that's not very self-documenting, plus it's brittle if the grammar
+changes. So instead, we're using <a class="page-link" href="../../APIRef/Token/index.html#Token_get">get</a> to ask for
+the first immediate subtoken that's of type <span class="code-inline">Tok!"&lt;Size&gt;"</span>.
+</p>
+<p>
+Since <span class="code-inline">Tok!"&lt;Size&gt;"</span> is a nonterminal, the type
+<span class="code-inline">Tok!"&lt;Size&gt;"</span> is actually an abstract base class. The
+real type of <span class="code-inline">tokSize</span> depends on which of the rules was
+used to create it (ie, which "production rule" it's "derived from"):
+</p>
+<div class="code-plain">&lt;Size&gt; ::= 'Large'
+&lt;Size&gt; ::= 'Small'</div>
+<p>
+To check if the <span class="code-inline">Tok!"&lt;Size&gt;"</span> comes from a
+<span class="code-inline">Large</span>, we simply try to downcast to the type for that rule:
+</p>
+<div class="code-highlight">if( cast(Tok!("&lt;Size&gt;", "Large")) tokSize ) ...</div>
+<p>
+If it isn't a <span class="code-inline">Large</span>, then the downcast fails, resulting in
+null, and the <span class="code-inline">else</span> branch is taken.
+Either way, <span class="code-inline">commas.size</span> is set appropriately.
+</p>
+<p>
+Finally, the function grabs <span class="code-inline">&lt;Everything&gt;</span>'s <span class="code-inline">&lt;List&gt;</span>
+subtoken, and converts it to <span class="code-inline">Element[]</span> using our next
+function:
+</p>
+<div class="code-highlight">Element[] toElements(Tok!"&lt;List&gt;" tokList)
+{
+    Element[] elems;
+
+    <span class="code-comment">// Traverse each token in tokList</span>
+    <span class="code-comment">// (using preorder tree traversal: first the parent, then the children)</span>
+    foreach(Token token; traverse(tokList))
+    {
+        <span class="code-comment">// If the token is an Ident or Integer,</span>
+        <span class="code-comment">// convert it to Element and append it to the array.</span>
+        if(auto tokElem = cast(Tok!"Ident") token)
+            elems ~= toElement(tokElem);
+        else if(auto tokElem = cast(Tok!"Integer") token)
+            elems ~= toElement(tokElem);
+    }
+
+    return elems;
+}</div>
+<p>
+This function uses GoldieLib's
+<a class="page-link" href="../../APIRef/Token/index.html#traverse">traverse</a> to search the parse tree from
+<span class="code-inline">tokList</span> downward. This is a standard "preorder" traversal:
+At each node in the tree, it visits the node itself first, then each of
+its entire child trees from left to right.
+Every time a <span class="code-inline">Tok!"Ident"</span> or <span class="code-inline">Tok!"Integer"</span>
+is found, our function converts it to an <span class="code-inline">Element</span> then appends
+it to an array.
+</p>
+<p>
+One word of caution: You should be very careful about using
+<a class="page-link" href="../../APIRef/Token/index.html#traverse">traverse</a>. Since it visits <em>every</em>
+subnode in the tree until you break out, careless use of it can cause
+big slowdowns in your program. If there are large sections of the parse tree
+you're not interested in, it may be much faster to use
+<a class="page-link" href="../../APIRef/Token/index.html#Token_get">get</a> and <a class="page-link" href="../../APIRef/Token/index.html#Token_sub">sub</a>
+instead. Or you can use the <span class="code-inline">skip()</span> and predicate features
+of <a class="page-link" href="../../APIRef/Token/index.html#traverse">traverse</a> to prune entire sections out of
+your traversal. In our particular case, most of the
+<span class="code-inline">Tok!"&lt;List&gt;"</span> parse tree is relevant, so we should be ok.
+</p>
+<p>
+There's one nifty little D trick in this function I'd like to point out:
+</p>
+<div class="code-highlight">if(auto tokElem = cast(Tok!"Ident") token)</div>
+<p>
+What the heck? A variable declaration inside an if's conditional?
+</p>
+<p>
+Yup. D intentionally allows this. If the downcast fails (resulting in null),
+then <span class="code-inline">tokElem</span> is initialized to null, and you have
+<span class="code-inline">if(null)</span>. That's false, so it takes the <span class="code-inline">else</span>,
+and <span class="code-inline">tokElem</span> is left completely undeclared.
+On the other hand, if the downcast succeeds, the conditional is true
+and <span class="code-inline">tokElem</span> can be used inside the if's "true" path.
+</p>
+<p>
+On a related note, if you're wondering why the body code is identical
+for both if's:
+</p>
+<div class="code-highlight">elems ~= toElement(tokElem);</div>
+<p>
+That's because <span class="code-inline">toElement</span> is overloaded on <span class="code-inline">tokElem</span>'s
+type, and <span class="code-inline">tokElem</span> is declared as a different type in each case:
+<span class="code-inline">Tok!"Ident"</span> in the first, and <span class="code-inline">Tok!"Integer"</span>
+in the second.
+</p>
+<p>
+We're down to the two final functions:
+</p>
+<div class="code-highlight">Element toElement(Tok!"Ident" tokElem)
+{
+    return Element( tokElem.toString() );
+}
+
+Element toElement(Tok!"Integer" tokElem)
+{
+    auto str = tokElem.toString();
+
+    <span class="code-comment">// Integer "{zero}"?</span>
+    if(str == "{zero}")
+        return Element(null, BigInt("0"));
+    
+    <span class="code-comment">// Normal integer</span>
+    return Element(null, BigInt(str));
+}</div>
+<p>
+These convert an <span class="code-inline">Ident</span> or <span class="code-inline">Integer</span> to
+an Element.
+</p>
+<p>
+The first is straightforward: It just creates an <span class="code-inline">Element</span>
+and sets the <span class="code-inline">ident</span> member to whatever string was written in
+the original source file.
+</p>
+<p>
+The second overload is slightly more complex, but not terribly so:
+As with the first overload, it takes the original string text from the
+source file. But instead of stuffing it straight into an <span class="code-inline">Element</span>,
+it checks for that alternative form of zero. Either way, a new
+<a class="extern-link" href="http://dlang.org/phobos/std_bigint.html">BigInt</a>
+is initialized with the appropriate string and set as the <span class="code-inline">integer</span>
+member of a new <span class="code-inline">Element</span>. The <span class="code-inline">ident</span> member
+is initialized to null since it's not applicable.
+</p>
+<p>
+Finally, we need some output so we know things actually went right:
+</p>
+<div class="code-highlight">auto parseTree = language_commas.parseFile(args[1]).parseTree;
+auto commas = toCommas(parseTree);
+<div style="width: 100%;" class="code-added">writeln(commas);</div></div>
+<p>
+That requires a toString for <span class="ident">Commas</span>:
+</p>
+<div class="code-highlight">string toString()
+{
+    string str = to!string(size);
+    foreach(elem; elements)
+    {
+        str ~= "\n";
+        str ~= elem.toString();
+    }
+    return str;
+}</div>
+<p>
+And one for <span class="ident">Element</span>:
+</p>
+<div class="code-highlight">string toString()
+{
+    if(ident)
+        return "Ident:   "~ident;
+    else
+    {
+        string str;
+        integer.toString((const(char)[] s) { str ~= s; }, "");
+        return "Integer: "~str;
+    }
+}</div>
+<p>
+That should about do it. Here's our program so far:
+</p>
+<p class="figure-title">tutorial/sections5-6/program2.d:</p>
+<div class="code-highlight"><div style="width: 100%;" class="code-added">import std.bigint;
+</div><div style="width: 100%;" class="code-added">import std.conv;
+</div>import std.stdio;
+
+import goldie.all; <span class="code-comment">// Import GoldieLib itself</span>
+import commas.all; <span class="code-comment">// Import our commas language</span>
+
+enum Size { Large, Small }
+
+struct Element
+{
+    string ident;
+    BigInt integer;
+
+<div style="width: 100%;" class="code-added">    string toString()
+</div><div style="width: 100%;" class="code-added">    {
+</div><div style="width: 100%;" class="code-added">        if(ident)
+</div><div style="width: 100%;" class="code-added">            return "Ident:   "~ident;
+</div><div style="width: 100%;" class="code-added">        else
+</div><div style="width: 100%;" class="code-added">        {
+</div><div style="width: 100%;" class="code-added">            string str;
+</div><div style="width: 100%;" class="code-added">            integer.toString((const(char)[] s) { str ~= s; }, "");
+</div><div style="width: 100%;" class="code-added">            return "Integer: "~str;
+</div><div style="width: 100%;" class="code-added">        }
+</div><div style="width: 100%;" class="code-added">    }
+</div>}
+
+struct Commas
+{
+    Size size;
+    Element[] elements;
+
+<div style="width: 100%;" class="code-added">    string toString()
+</div><div style="width: 100%;" class="code-added">    {
+</div><div style="width: 100%;" class="code-added">        string str = to!string(size);
+</div><div style="width: 100%;" class="code-added">        foreach(elem; elements)
+</div><div style="width: 100%;" class="code-added">        {
+</div><div style="width: 100%;" class="code-added">            str ~= "\n";
+</div><div style="width: 100%;" class="code-added">            str ~= elem.toString();
+</div><div style="width: 100%;" class="code-added">        }
+</div><div style="width: 100%;" class="code-added">        return str;
+</div><div style="width: 100%;" class="code-added">    }
+</div>}
+
+<div style="width: 100%;" class="code-added">alias Token_commas Tok;
+</div>
+int main(string[] args)
+{
+    try
+    {
+        auto parseTree = language_commas.parseFile(args[1]).parseTree;
+<div style="width: 100%;" class="code-added">        auto commas = toCommas(parseTree);
+</div><div style="width: 100%;" class="code-added">        writeln(commas);
+</div>    }
+    catch(ParseException e)
+    {
+        writeln(e.msg);
+        return 1;
+    }
+
+    return 0;
+}
+
+<div style="width: 100%;" class="code-added">Commas toCommas(Tok!"&lt;Everything&gt;" root)
+</div><div style="width: 100%;" class="code-added">{
+</div><div style="width: 100%;" class="code-added">    Commas commas;
+</div><div style="width: 100%;" class="code-added">
+</div><div style="width: 100%;" class="code-added">    <span class="code-comment">// Determine size</span>
+</div><div style="width: 100%;" class="code-added">    auto tokSize = root.get!(Tok!"&lt;Size&gt;")();
+</div><div style="width: 100%;" class="code-added">    if( cast(Tok!("&lt;Size&gt;", "Large")) tokSize )
+</div><div style="width: 100%;" class="code-added">        commas.size = Size.Large;
+</div><div style="width: 100%;" class="code-added">    else
+</div><div style="width: 100%;" class="code-added">        commas.size = Size.Small;
+</div><div style="width: 100%;" class="code-added">    
+</div><div style="width: 100%;" class="code-added">    <span class="code-comment">// Get elements</span>
+</div><div style="width: 100%;" class="code-added">    auto tokList = root.get!(Tok!"&lt;List&gt;")();
+</div><div style="width: 100%;" class="code-added">    commas.elements = toElements(tokList);
+</div><div style="width: 100%;" class="code-added">    
+</div><div style="width: 100%;" class="code-added">    return commas;
+</div><div style="width: 100%;" class="code-added">}
+</div><div style="width: 100%;" class="code-added">
+</div><div style="width: 100%;" class="code-added">Element[] toElements(Tok!"&lt;List&gt;" tokList)
+</div><div style="width: 100%;" class="code-added">{
+</div><div style="width: 100%;" class="code-added">    Element[] elems;
+</div><div style="width: 100%;" class="code-added">
+</div><div style="width: 100%;" class="code-added">    <span class="code-comment">// Traverse each token in tokList</span>
+</div><div style="width: 100%;" class="code-added">    <span class="code-comment">// (using preorder tree traversal: first the parent, then the children)</span>
+</div><div style="width: 100%;" class="code-added">    foreach(Token token; traverse(tokList))
+</div><div style="width: 100%;" class="code-added">    {
+</div><div style="width: 100%;" class="code-added">        <span class="code-comment">// If the token is an Ident or Integer,</span>
+</div><div style="width: 100%;" class="code-added">        <span class="code-comment">// convert it to Element and append it to the array.</span>
+</div><div style="width: 100%;" class="code-added">        if(auto tokElem = cast(Tok!"Ident") token)
+</div><div style="width: 100%;" class="code-added">            elems ~= toElement(tokElem);
+</div><div style="width: 100%;" class="code-added">        else if(auto tokElem = cast(Tok!"Integer") token)
+</div><div style="width: 100%;" class="code-added">            elems ~= toElement(tokElem);
+</div><div style="width: 100%;" class="code-added">    }
+</div><div style="width: 100%;" class="code-added">
+</div><div style="width: 100%;" class="code-added">    return elems;
+</div><div style="width: 100%;" class="code-added">}
+</div><div style="width: 100%;" class="code-added">
+</div><div style="width: 100%;" class="code-added">Element toElement(Tok!"Ident" tokElem)
+</div><div style="width: 100%;" class="code-added">{
+</div><div style="width: 100%;" class="code-added">    return Element( tokElem.toString() );
+</div><div style="width: 100%;" class="code-added">}
+</div><div style="width: 100%;" class="code-added">
+</div><div style="width: 100%;" class="code-added">Element toElement(Tok!"Integer" tokElem)
+</div><div style="width: 100%;" class="code-added">{
+</div><div style="width: 100%;" class="code-added">    auto str = tokElem.toString();
+</div><div style="width: 100%;" class="code-added">
+</div><div style="width: 100%;" class="code-added">    <span class="code-comment">// Integer "{zero}"?</span>
+</div><div style="width: 100%;" class="code-added">    if(str == "{zero}")
+</div><div style="width: 100%;" class="code-added">        return Element(null, BigInt("0"));
+</div><div style="width: 100%;" class="code-added">    
+</div><div style="width: 100%;" class="code-added">    <span class="code-comment">// Normal integer</span>
+</div><div style="width: 100%;" class="code-added">    return Element(null, BigInt(str));
+</div><div style="width: 100%;" class="code-added">}</div></div>
+<p>
+Compile and run it with a sample commas file, and you'll see something like:
+</p>
+<div class="code-plain">&gt;<span class="code-user">rdmd --build-only -I{path to SemiTwistDTools}/src -I{path to Goldie}/src program2.d</span>
+&gt;<span class="code-user">program2 test.commas</span>
+Large
+Integer: 1
+Ident:   mango
+Integer: -24
+Integer: 93521356
+Integer: 0
+Integer: 77</div>
+<a name="SemanticErrors" />
+<h3>Semantic Errors</h3>
+<p>
+Remember the two restrictions our grammar didn't enforce? To recap:
+The sizes given at the start and end must match, and "Small" mode
+doesn't accept integers outside the range of 0 - 65,535 (ie, two bytes).
+</p>
+<p>
+Well, our program <em>still</em> isn't enforcing those. It happily processes
+them and spits out bogus data. Try it and see:
+</p>
+<p class="figure-title">tutorial/sections5-6/test-different-sizes.commas:</p>
+<div class="code-highlight">Large 1, mango, -24, 93521356, {zero}, 77 Small</div>
+<p class="figure-title">tutorial/sections5-6/test-out-of-range.commas:</p>
+<div class="code-highlight">Small 1, mango, -24, 93521356, {zero}, 77 Small</div>
+<div class="code-plain">&gt;<span class="code-user">program2 test-different-sizes.commas</span>
+Large
+Integer: 1
+Ident:   mango
+Integer: -24
+Integer: 93521356
+Integer: 0
+Integer: 77
+&gt;<span class="code-user">program2 test-out-of-range.commas</span>
+Small
+Integer: 1
+Ident:   mango
+Integer: -24
+Integer: 93521356
+Integer: 0
+Integer: 77</div>
+<p>
+Time to rectify that.
+Matching the sizes is easiest, so let's get that out of the way first.
+In the <span class="code-inline">toCommas</span> function, we'll adjust the size-handling
+portion like this:
+</p>
+<div class="code-highlight">Commas toCommas(Tok!"&lt;Everything&gt;" root)
+{
+    Commas commas;
+
+    <span class="code-comment"><span class="code-added">// Ensure sizes are consistent</span></span>
+    auto tokSize  = root.get!(Tok!"&lt;Size&gt;")(<span class="code-added">0</span>);
+    <span class="code-added">auto tokSize2 = root.get!(Tok!"&lt;Size&gt;")(1);</span>
+    <span class="code-added">if(tokSize[0].symbol != tokSize2[0].symbol)</span>
+        <span class="code-added">throw new ParseException("Sizes must match!");</span>
+
+    <span class="code-comment">// Determine size</span>
+    if( cast(Tok!("&lt;Size&gt;", "Large")) tokSize )
+    ...
+}</div>
+<p>
+We need to get both of <span class="code-inline">root</span>'s two <span class="code-inline">&lt;Size&gt;</span>
+subtokens, not just the first. So we use the optional parameter of
+<a class="page-link" href="../../APIRef/Token/index.html#Token_get">get</a> to ask for the first and second
+<span class="code-inline">&lt;Size&gt;</span> tokens.
+Then, it's just a simple matter of ensuring the single subtoken of 
+each <span class="code-inline">&lt;Size&gt;</span> are of the same symbol: Either
+<span class="code-inline">Ident</span> or <span class="code-inline">Integer</span>.
+</p>
+<p>
+Now for enforcing Small. First of all, there's no need to use a
+<a class="extern-link" href="http://dlang.org/phobos/std_bigint.html">BigInt</a>
+when the number will fit into a two byte ushort. <span class="ident">Element</span>
+should support optional ushort, so we'll add two members:
+</p>
+<div class="code-highlight">bool   isSmall;
+ushort smallInteger;</div>
+<p>
+And adjust the <span class="code-inline">toString</span> accordingly:
+</p>
+<div class="code-highlight">string toString()
+{
+    if(ident)
+        return "Ident:   "~ident;
+    else
+    {
+<div style="width: 100%;" class="code-added">        if(isSmall)
+</div><div style="width: 100%;" class="code-added">            return "ushort:  "~to!string(smallInteger);
+</div><div style="width: 100%;" class="code-added">        else
+</div><div style="width: 100%;" class="code-added">        {
+</div>            string str;
+            integer.toString((const(char)[] s) { str ~= s; }, "");
+            return "Integer: "~str;
+<div style="width: 100%;" class="code-added">        }
+</div>    }
+}</div>
+<p>
+We should give ourselves an easy way to create an
+<span class="ident">Element</span> that uses <span class="code-inline">smallInteger</span>:
+</p>
+<div class="code-highlight">static Element createSmall(ushort smallInteger)
+{
+    Element elem;
+    elem.isSmall = true;
+    elem.smallInteger = smallInteger;
+    return elem;
+}</div>
+<p>
+Now to actually create a such an <span class="ident">Element</span> when possible:
+</p>
+<div class="code-highlight">Element toElement(Tok!"Integer" tokElem)
+{
+    auto str = tokElem.toString();
+
+    <span class="code-comment">// Integer "{zero}"?</span>
+    if(str == "{zero}")
+        return <span class="code-added">Element.createSmall(0)</span>;
+	
+    <span class="code-comment">// Normal integer</span>
+    <span class="code-added">auto bigInt = BigInt(str);</span>
+    <span class="code-added">if(bigInt &gt;= ushort.min &amp;&amp; bigInt &lt;= ushort.max)</span>
+    <span class="code-added">    return Element.createSmall( to!ushort(str) );</span>
+    <span class="code-added">else</span>
+        return Element(null, <span class="code-added">bigInt</span>);
+}</div>
+<p>
+That's everything needed to use a ushort instead of
+<a class="extern-link" href="http://dlang.org/phobos/std_bigint.html">BigInt</a>
+when possible. All that's left is to require it when Small is used:
+</p>
+<div class="code-highlight">Commas toCommas(Tok!"&lt;Everything&gt;" root)
+{
+    ...
+
+    <span class="code-comment">// Get elements</span>
+    auto tokList = root.get!(Tok!"&lt;List&gt;")();
+    commas.elements = toElements(tokList);
+    
+<div style="width: 100%;" class="code-added">    <span class="code-comment">// Enforce size restriction for Small</span>
+</div><div style="width: 100%;" class="code-added">    if(commas.size == Size.Small)
+</div><div style="width: 100%;" class="code-added">    foreach(elem; commas.elements)
+</div><div style="width: 100%;" class="code-added">    {
+</div><div style="width: 100%;" class="code-added">        if(elem.ident is null &amp;&amp; !elem.isSmall)
+</div><div style="width: 100%;" class="code-added">            throw new ParseException("Out of range for Small: "~elem.toString());
+</div><div style="width: 100%;" class="code-added">    }
+</div>    
+    return commas;
+}</div>
+<p>
+And there we have it: A full program for our grammar, and both semantic
+restrictions are enforced.
+Here's the final source for our program:
+</p>
+<p class="figure-title">tutorial/sections5-6/program3.d:</p>
+<div class="code-highlight">import std.bigint;
+import std.conv;
+import std.stdio;
+
+import goldie.all; <span class="code-comment">// Import GoldieLib itself</span>
+import commas.all; <span class="code-comment">// Import our commas language</span>
+
+enum Size { Large, Small }
+
+struct Element
+{
+    string ident;
+    BigInt integer;
+<div style="width: 100%;" class="code-added">    bool   isSmall;
+</div><div style="width: 100%;" class="code-added">    ushort smallInteger;
+</div><div style="width: 100%;" class="code-added">    
+</div><div style="width: 100%;" class="code-added">    static Element createSmall(ushort smallInteger)
+</div><div style="width: 100%;" class="code-added">    {
+</div><div style="width: 100%;" class="code-added">        Element elem;
+</div><div style="width: 100%;" class="code-added">        elem.isSmall = true;
+</div><div style="width: 100%;" class="code-added">        elem.smallInteger = smallInteger;
+</div><div style="width: 100%;" class="code-added">        return elem;
+</div><div style="width: 100%;" class="code-added">    }
+</div>    
+    string toString()
+    {
+        if(ident)
+            return "Ident:   "~ident;
+        else
+        {
+<div style="width: 100%;" class="code-added">            if(isSmall)
+</div><div style="width: 100%;" class="code-added">                return "ushort:  "~to!string(smallInteger);
+</div><div style="width: 100%;" class="code-added">            else
+</div><div style="width: 100%;" class="code-added">            {
+</div>                string str;
+                integer.toString((const(char)[] s) { str ~= s; }, "");
+                return "Integer: "~str;
+<div style="width: 100%;" class="code-added">            }
+</div>        }
+    }
+}
+
+struct Commas
+{
+    Size size;
+    Element[] elements;
+
+    string toString()
+    {
+        string str = to!string(size);
+        foreach(elem; elements)
+        {
+            str ~= "\n";
+            str ~= elem.toString();
+        }
+        return str;
+    }
+}
+
+alias Token_commas Tok;
+
+int main(string[] args)
+{
+    try
+    {
+        auto parseTree = language_commas.parseFile(args[1]).parseTree;
+        auto commas = toCommas(parseTree);
+        writeln(commas);
+    }
+    catch(ParseException e)
+    {
+        writeln(e.msg);
+        return 1;
+    }
+
+    return 0;
+}
+
+Commas toCommas(Tok!"&lt;Everything&gt;" root)
+{
+    Commas commas;
+
+<div style="width: 100%;" class="code-added">    <span class="code-comment">// Ensure sizes are consistent</span>
+</div><div style="width: 100%;" class="code-added">    auto tokSize  = root.get!(Tok!"&lt;Size&gt;")(0);
+</div><div style="width: 100%;" class="code-added">    auto tokSize2 = root.get!(Tok!"&lt;Size&gt;")(1);
+</div><div style="width: 100%;" class="code-added">    if(tokSize[0].symbol != tokSize2[0].symbol)
+</div><div style="width: 100%;" class="code-added">        throw new ParseException("Sizes must match!");
+</div>
+    <span class="code-comment">// Determine size</span>
+    if( cast(Tok!("&lt;Size&gt;", "Large")) tokSize )
+        commas.size = Size.Large;
+    else
+        commas.size = Size.Small;
+    
+    <span class="code-comment">// Get elements</span>
+    auto tokList = root.get!(Tok!"&lt;List&gt;")();
+    commas.elements = toElements(tokList);
+    
+<div style="width: 100%;" class="code-added">    <span class="code-comment">// Enforce size restriction for Small</span>
+</div><div style="width: 100%;" class="code-added">    if(commas.size == Size.Small)
+</div><div style="width: 100%;" class="code-added">    foreach(elem; commas.elements)
+</div><div style="width: 100%;" class="code-added">    {
+</div><div style="width: 100%;" class="code-added">        if(elem.ident is null &amp;&amp; !elem.isSmall)
+</div><div style="width: 100%;" class="code-added">            throw new ParseException("Out of range for Small: "~elem.toString());
+</div><div style="width: 100%;" class="code-added">    }
+</div>    
+    return commas;
+}
+
+Element[] toElements(Tok!"&lt;List&gt;" tokList)
+{
+    Element[] elems;
+
+    <span class="code-comment">// Traverse each token in tokList</span>
+    <span class="code-comment">// (using preorder tree traversal: first the parent, then the children)</span>
+    foreach(Token token; traverse(tokList))
+    {
+        <span class="code-comment">// If the token is an Ident or Integer,</span>
+        <span class="code-comment">// convert it to Element and append it to the array.</span>
+        if(auto tokElem = cast(Tok!"Ident") token)
+            elems ~= toElement(tokElem);
+        else if(auto tokElem = cast(Tok!"Integer") token)
+            elems ~= toElement(tokElem);
+    }
+
+    return elems;
+}
+
+Element toElement(Tok!"Ident" tokElem)
+{
+    return Element( tokElem.toString() );
+}
+
+Element toElement(Tok!"Integer" tokElem)
+{
+    auto str = tokElem.toString();
+
+    <span class="code-comment">// Integer "{zero}"?</span>
+    if(str == "{zero}")
+<div style="width: 100%;" class="code-added">        return Element.createSmall(0);
+</div>    
+    <span class="code-comment">// Normal integer</span>
+<div style="width: 100%;" class="code-added">    auto bigInt = BigInt(str);
+</div><div style="width: 100%;" class="code-added">    if(bigInt &gt;= ushort.min &amp;&amp; bigInt &lt;= ushort.max)
+</div><div style="width: 100%;" class="code-added">        return Element.createSmall( to!ushort(str) );
+</div><div style="width: 100%;" class="code-added">    else
+</div><div style="width: 100%;" class="code-added">        return Element(null, bigInt);
+</div>}</div>
+<p>
+To compile and use, just like before:
+</p>
+<div class="code-plain">&gt;<span class="code-user">rdmd --build-only -I{path to SemiTwistDTools}/src -I{path to Goldie}/src program3.d</span>
+&gt;<span class="code-user">program3 test.commas</span>
+Large
+Integer: 1
+Ident:   mango
+Integer: -24
+Integer: 93521356
+Integer: 0
+Integer: 77
+&gt;<span class="code-user">program3 test-different-sizes.commas</span>
+Sizes must match!
+&gt;<span class="code-user">program3 test-out-of-range.commas</span>
+Out of range for Small: Integer: -24</div>
+<p>
+This section has only touched on some of the features of GoldieLib's API.
+For example, there are many other members of a token we didn't cover; see the
+API Reference for <a class="page-link" href="../../APIRef/Token/index.html">Token</a> for a full list and descriptions.
+And browse through the rest of GoldieLib's <a class="page-link" href="../../APIOver/index.html">Overview</a>
+and <a class="page-link" href="../../APIRef/index.html">Reference</a> for much more information.
+Also, read through the sources for the <a class="page-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a>.
+</p>
+</div>
+
+<a name="SuggestedExercises" />
+<h2>7. Suggested Exercises</h2>
+<div class="api-def">
+<p>
+Here are some exercise ideas for practicing Goldie yourself:
+</p>
+<ul>
+<li>
+	<p>
+	Add a new size "Medium" for 32-byte signed integers (ie, D's <span class="code-inline">int</span>).
+	</p>
+</li>
+<li>
+	<p>
+	Make an alternate program for the commas grammar that
+	finds the longest/shortest identifier, and the largest/smallest
+	integer <em>without</em> creating an AST. Or create a sorted list
+	of identifiers without creating an AST.
+	</p>
+</li>
+<li>
+	<p>
+	Modify the commas program to not use any form of
+	<a class="page-link" href="../../APIRef/Token/index.html#Token_get">get</a> or <a class="page-link" href="../../APIRef/Token/index.html#traverse">traverse</a>
+	at all. Just use <a class="page-link" href="../../APIRef/Token/index.html#Token_sub">sub</a>. Remember, you
+	must downcast a token to its rule form (such as
+	<span class="code-inline">Tok!("&lt;Size&gt;", "Large")</span> or
+	<span class="code-inline">Tok!("&lt;List&gt;", "&lt;List&gt;", ",", "&lt;List Element&gt;")</span>)
+	before you can use <a class="page-link" href="../../APIRef/Token/index.html#Token_sub">sub</a> on it.
+	(This is because which subtokens are available depends on
+	the rule used to create the token.)
+	</p>
+</li>
+<li>
+	<p>
+	Convert a commas file to XML or JSON.
+	</p>
+</li>
+<li>
+	<p>
+	Add an additional "definitions" section to the beginning of
+	the commas file that allows you to set values for each of the
+	identifiers.
+	</p>
+	<p>
+	For example:
+	</p>
+<div class="code-plain">banana = 0;
+mango = 70;
+peach = 17;
+Large
+1, mango, peach, 
+-24, banana, 77
+Large</div>
+	<p>
+	When you output an identifier, also show its associated value, if available.
+	</p>
+	<p>
+	As a next step, require that all identifiers used must have an integer
+	value defined.
+	</p>
+</li>
+<li>
+	<p>
+	Create a simple programming language like this:
+	</p>
+<div class="code-plain">output "Pick a number 1-10";
+:start;
+input num;
+if num == 5 then goto done;
+if num &gt; 5 then goto tooBig;
+    output "Too small";
+    goto start;
+:tooBig;
+    output "Too big";
+    goto start;
+:done;
+output "Yep!";</div>
+	<p>
+	Look at the included <span class="code-inline">lang/dlex.grm</span> file to see how to
+	create a string literal.
+	</p>
+	<p>
+	Write an interpreter to run the code. Or write a translator program
+	to convert the code to D. Later, add support for arithmetic expressions.
+	</p>
+</li>
+</ul>
+</div>
+
+<a name="AdditionalTools" />
+<h2>8. Additional Tools</h2>
+<div class="api-def">
+<p>
+We've covered most of the basics, but there are a few more tools we haven't
+discussed which could be helpful.
+</p>
+<a name="DumpCGT" />
+<h3>Dumping the Compiled Grammar Tables</h3>
+<p>
+First of all, there's <a class="page-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a>. This is just what it sounds:
+it takes the data in a compiled grammar file and dumps it to a human-readable
+form:
+</p>
+<div class="code-plain">&gt;<span class="code-user">goldie-dumpcgt commas.cgt</span></div>
+<p>
+That saves the data in our compiled grammar file to a readable text file named
+<span class="code-inline">commas.cgt.txt</span>.
+Open it up and you'll see our original metadata, and all the internal tables
+that drive the lexer and parser. You can also get the same information
+by loading the compiled grammar file into
+<a class="page-link" href="../../Tools/OtherTools/index.html#GOLD">GOLD Parser Builder</a>.
+</p>
+<p>
+Some information that's not relevant to the lexer or parser is lost when
+compiling the grammar, so you can actually get a larger, better set of
+information by loading the original grammar into GOLD Parser Builder.
+</p>
+<a name="LexerGraph" />
+<h3>Lexer Graph</h3>
+<p>
+Goldie's lexer uses a
+<a class="extern-link" href="http://www.goldparser.org/articles/dfa.htm">finite state machine</a>
+to convert source code into terminal tokens.
+<a class="page-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a> has a feature which allows you to use
+<a class="extern-link" href="http://www.graphviz.org/">Graphviz</a> to visualize how your
+grammar is lexed. This can be helpful for debugging a grammar
+or for just understanding how lexing works.
+</p>
+<p>
+First, you'll need to install <a class="extern-link" href="http://www.graphviz.org/">Graphviz</a>. Then,
+use the <span class="code-inline">--dot</span> switch when compiling your grammar to save the
+lexer's finite state machine to the Graphviz
+<a class="extern-link" href="http://en.wikipedia.org/wiki/DOT_language">DOT</a> format:
+</p>
+<div class="code-plain">&gt;<span class="code-user">goldie-grmc commas.grm --dot</span></div>
+<p>
+That will create two files in addition to the usual compiled grammar file:
+<span class="code-inline">commas.cgt.nfa.dot</span> and <span class="code-inline">commas.cgt.dfa.dot</span>.
+These files each contain a graph of the grammar's finite state machine.
+It's the same graph, but in NFA and DFA forms, respectively.
+The NFA more closely matches the definition in your grammar file.
+The DFA is the graph Goldie actually uses and is created from the NFA.
+</p>
+<p>
+The Graphviz interface is admittedly a bit...weird. But it's not difficult
+to learn. To view a DOT file:
+</p>
+<ol style="list-style-type: decimal;">
+<li>Run Graphviz's "dotty" program. It will start to a blank white window.</li>
+<li>Right-click inside the window, and choose "load graph" from the popup menu.</li>
+<li>Select the DOT file to load.</li>
+</ol>
+<p>
+Here's what the graphs look like for <span class="code-inline">commas.grm</span> (click to enlarge):
+</p>
+<p class="figure-title">NFA:</p>
+<a href="../../Tutorial-Graphviz-NFA.png">
+<img src="../../Tutorial-Graphviz-NFA-Sm.png" alt="NFA for commas.grm in Graphviz" />
+</a>
+<p class="figure-title">DFA:</p>
+<a href="../../Tutorial-Graphviz-DFA.png">
+<img src="../../Tutorial-Graphviz-DFA-Sm.png" alt="DFA for commas.grm in Graphviz" />
+</a>
+<p>
+The graphs are a series of states with transitions between them. Each state
+is numbered, starting with "S_0" - the state where the lexer always begins.
+States that accept a terminal are double-octagons instead of circles.
+The solid black arrows between the states are transitions. They are
+labeled with the characters which, when read from the input, cause the state
+machine to take that transition. The NFA also has dotted red arrows which
+indicate transitions that don't require any input to be read (the existence
+of these empty transitions is what makes it an NFA). Every time the lexer
+accepts a terminal, it starts back at "S_0" again.
+</p>
+<a name="GOLD" />
+<h3>GOLD Parser Builder</h3>
+<p>
+<a class="page-link" href="../../Tools/OtherTools/index.html#GOLD">GOLD Parser Builder</a>
+is the program Goldie is based around. It can be used as an alternative
+to <a class="page-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a> or as an editor for grammar files. It also has
+extensive features for inspecting, analyzing and testing grammars.
+</p>
+<p>
+Using GOLD Parser Builder is very straightforward. However, you can find
+a great overview of the UI on its 
+<a class="extern-link" href="http://goldparser.org/builder/screenshots.htm">screenshots page</a>.
+There's also a
+<a class="extern-link" href="http://goldparser.org/builder/index.htm">commandline version</a>.
+</p>
+<p>
+Keep in mind, Goldie does not yet support GOLD's new v5 features, such as
+the .egt file format.
+</p>
+</div>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

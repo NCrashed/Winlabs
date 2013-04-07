@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: Ambiguous Symbols</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><span class="pagemenu-link">Ambiguous Symbols</span></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../APIOver/index.html">GoldieLib&nbsp;Overview</a>&nbsp;-> <span class="breadcrumb-link">Ambiguous&nbsp;Symbols</span>
+	</div>
+	<br />
+	<h1>Ambiguous Symbols</h1>
+	
+
+
+
+<p>
+<a class="page-link" href="../../Tools/OtherTools/index.html#GOLD">GOLD</a>, and therefore Goldie, 
+allows grammars to
+have different symbols that share the same name as long as their
+<a class="page-link" href="../../APIRef/Symbol/index.html#SymbolType">SymbolType</a> is different. For instance, in this grammar:
+</p>
+<div class="code-plain">Foo = {Letter}+
+&lt;Foo&gt; ::= Foo</div>
+<p>
+According to GOLD, that is a perfectly legal grammar with two symbols named <span class="ident">Foo</span>:
+The first one is a <a class="page-link" href="../../APIRef/Symbol/index.html#SymbolType">SymbolType</a><span class="ident">.Terminal</span>,
+and the second is a <a class="page-link" href="../../APIRef/Symbol/index.html#SymbolType">SymbolType</a><span class="ident">.NonTerminal</span>.
+This can cause problems because if you tried to refer to a symbol named <span class="ident">Foo</span>,
+there are two possible symbols you might mean. Symbol <span class="ident">Foo</span> is ambiguous.
+</p>
+<p>
+Because of this, Goldie considers the angle brackets on nonterminal
+to be part of the symbol's name. So in the example above,
+the terminal symbol is named <span class="ident">Foo</span>, but the nonterminal is named
+<span class="ident">&lt;Foo&gt;</span>. In Goldie, a nonterminal's name <em>always</em> includes
+the surrounding angle brackets.
+</p>
+<p>
+That usually solves the problem, but there are still cases where it doesn't help, such as these three:
+</p>
+<div class="code-plain">&lt;Foo&gt; ::= '&lt;Foo&gt;'
+&lt;A&gt; ::= 'EOL'
+&lt;B&gt; ::= 'Error'</div>
+<p>
+The above is perfectly legal grammar according to GOLD, but there are three
+ambiguities:
+</p>
+<ol>
+<li>
+	There is a nonterminal named <span class="ident">&lt;Foo&gt;</span> <em>and</em>
+	a terminal named <span class="ident">&lt;Foo&gt;</span>. Remember, string literals on
+	the right-side of a rule are terminals, and their name is whatever the
+	content of the string is.
+</li>
+<li>
+	Every GOLD grammar implicitly has a symbol of type
+	<a class="page-link" href="../../APIRef/Symbol/index.html#SymbolType">SymbolType</a><span class="ident">.EOL</span>
+	named <span class="ident">EOL</span>. The <span class="ident">EOL</span> terminal above is ambiguous
+	with that implicit symbol.
+</li>
+<li>
+	Every GOLD grammar implicitly has a symbol of type
+	<a class="page-link" href="../../APIRef/Symbol/index.html#SymbolType">SymbolType</a><span class="ident">.Error</span>
+	named <span class="ident">Error</span>. The <span class="ident">Error</span> terminal above is ambiguous
+	with that implicit symbol.
+</li>
+</ol>
+<p>
+To solve these problems: If you're checking tokens by looking at their symbol name
+(ie, <a class="page-link" href="../../APIRef/Token/index.html#Token_name">Token.name</a>), then you'll need to remember to
+check that the symbol type (ie, <a class="page-link" href="../../APIRef/Token/index.html#Token_type">Token.type</a>) is also
+what you expect.
+</p>
+<p>
+If you're passing a symbol name into a Goldie function or template, Goldie
+will raise an error if the symbol name is ambiguous. This will be a
+compile-time error for <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a> and it will be a
+run-time Exception for <a class="page-link" href="../../APIOver/StatVsDyn/index.html">dynamic-style</a>. If you get such
+an "ambiguous symbol" error, you will need to disambiguate.
+</p>
+<p>
+For now, there is no built-in way to disambiguate for <a class="page-link" href="../../APIOver/StatVsDyn/index.html">dynamic-style</a>,
+you'll have to do it manually by checking the token's <a class="page-link" href="../../APIRef/Token/index.html#Token_type">type</a>. 
+</p>
+<p>
+For <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a>, suppose you have the following in your code:
+</p>
+<div class="code-highlight"><span class="code-comment">// Ex #1</span>
+Token_mylang!("&lt;Foo&gt;") <span class="code-comment">// Which &lt;Foo&gt;? Terminal or nonterminal?</span>
+
+<span class="code-comment">// Ex #2</span>
+Token_mylang!("&lt;Foo&gt;", "subSymbolOfFoo") <span class="code-comment">// Which &lt;Foo&gt;? Terminal or nonterminal?</span>
+
+<span class="code-comment">// Ex #3</span>
+Token_mylang!("&lt;FooParent&gt;", "&lt;Foo&gt;", ";") <span class="code-comment">// Which &lt;Foo&gt;? Terminal or nonterminal?</span></div>
+<p>
+If <span class="ident">&lt;Foo&gt;</span> is ambiguous, you can disambiguate like this:
+</p>
+<div class="code-highlight"><span class="code-comment">// Ex #1</span>
+Token_mylang!(SymbolType.NonTerminal, "&lt;Foo&gt;");
+<span class="code-comment">// or</span>
+Token_mylang!(SymbolType.Terminal, "&lt;Foo&gt;");
+
+<span class="code-comment">// Ex #2</span>
+<span class="code-comment">// No need to change this. All parameters after the first string are sub-symbols,</span>
+<span class="code-comment">// and *only* a SymbolType.NonTerminal can ever have sub-symbols.</span>
+Token_mylang!("&lt;Foo&gt;", "subSymbolOfFoo")
+
+<span class="code-comment">// Ex #3</span>
+Token_mylang!("&lt;FooParent&gt;", Token_mylang!(SymbolType.NonTerminal, "&lt;Foo&gt;"), ";")
+<span class="code-comment">// or</span>
+Token_mylang!("&lt;FooParent&gt;", Token_mylang!(SymbolType.Terminal, "&lt;Foo&gt;"), ";")</div>
+<p>
+Note that you can always use the disambiguated forms even on symbols that
+are not ambiguous.
+</p>
+<p>
+Also, note that using a disambiguated form always refers to the *exact same type*, not merely a separate-but-equivalent type:
+</p>
+<div class="code-highlight"><span class="code-comment">// Grammar:</span>
+<span class="code-comment">//   "Start Symbol" = &lt;Plus&gt;</span>
+<span class="code-comment">//   &lt;Plus&gt; ::= '+'</span>
+
+<span class="code-comment">// Terminal token</span>
+static assert(
+    is( Token_mylang!"+" == Token_mylang!(SymbolType.Terminal, "+") )
+);
+
+<span class="code-comment">// NonTerminal token</span>
+static assert(
+    is( Token_mylang!"&lt;Plus&gt;" == Token_mylang!(SymbolType.NonTerminal, "&lt;Plus&gt;") )
+);
+
+<span class="code-comment">// Rule token</span>
+static assert(
+    is(
+        Token_mylang!("&lt;Plus&gt;", "+") ==
+        Token_mylang!("&lt;Plus&gt;", Token_mylang!(SymbolType.Terminal, "+"))
+    )
+);
+
+<span class="code-comment">// Or even:</span>
+static assert(
+    is(
+        Token_mylang!("&lt;Plus&gt;", "+") ==
+        Token_mylang!("&lt;Plus&gt;", Token_mylang!"+"))
+    )
+);</div>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

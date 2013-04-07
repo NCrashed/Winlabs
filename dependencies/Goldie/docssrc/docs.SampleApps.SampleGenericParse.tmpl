@@ -1,0 +1,64 @@
+[$name|SampleGenericParse$]
+[$title|Sample Generic Parse$]
+[$frame|HTMLPage.tmpl$]
+[$desc|Parse any source file according to any grammar (in CGT form) and view basic information.$]
+
+<p>
+Parses any source file according to any compiled grammar and displays basic
+information about both the language and the parsed source.
+</p>
+
+<p>
+Try using the included
+[$link|https://bitbucket.org/Abscissa/goldie/src/v0.9/lang/calc.cgt|lang/calc.cgt$]
+language on the included *.calc files.
+Or use your own grammar and source.
+</p>
+
+<p>
+[$link|https://bitbucket.org/Abscissa/goldie/src/v0.9/src/samples/sampleGenericParse/main.d|Sample Generic Parse Source Code$]
+</p>
+
+<h3>Sample run:</h3>
+
+<div class="code-plain">&gt;[$code|user|cat lang/valid_sample2.calc$]
+4*4*3
+ /4
+- ( 10 + 0 )
+* -100
+&gt;[$code|user|goldie-sampleGenericParse lang/valid_sample2.calc lang/calc.cgt$]
+Grammar Info:
+File:    lang/calc.cgt
+Name:    Calc
+Version: 0.01
+Author:  Nick Sabalausky
+About:   Basic Calculator Grammar
+
+Root of parse tree:
+  type: NonTerminal
+  name: &lt;Add Exp&gt;
+
+First terminal in parse tree:
+  type: Terminal
+  name: Number
+  content: '4'
+  line: 1
+
+Last terminal in parse tree:
+  type: Terminal
+  name: Number
+  content: '100'
+  line: 4
+
+Root of parse tree has 3 child node(s):
+  Node index 0 is a NonTerminal '&lt;Add Exp&gt;' with 1 child node(s)
+    and content '4*4*3/4'
+    and raw content:
+4*4*3
+ /4
+  Node index 1 is a Terminal '-'
+  Node index 2 is a NonTerminal '&lt;Mult Exp&gt;' with 3 child node(s)
+    and content '(10+0)*-100'
+    and raw content:
+( 10 + 0 )
+* -100</div>

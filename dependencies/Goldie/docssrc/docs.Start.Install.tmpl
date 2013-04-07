@@ -1,0 +1,149 @@
+[$name|Install$]
+[$title|Download / Install$]
+[$frame|HTMLPage.tmpl$]
+<p>
+Assuming you [$pageLink|Requires| already have DMD installed $]:
+</p>
+
+<ol style="list-style-type: decimal;">
+<li>
+	<a name="Download" />
+	<p style="font-weight: bold">Download Goldie and SemiTwist D Tools.</p>
+	<p>
+	There are two ways to download these:
+	</p>
+	<ul>
+	<li>
+	<a name="PrepackagedDownloads" />
+	<em>
+	Prepackaged Downloads at
+	[$link| http://www.semitwist.com/download/goldie/ | Goldie downloads page $]
+	</em>
+	<p>
+	These prepackaged releases include Goldie, SemiTwist D Tools and prebuilt
+	local Goldie documentation.
+	They're available with prebuilt binaries for
+	specific OSes. While prebuilt binaries are not currently available for
+	all OSes, compiling from source is easy, and
+	[$link|http://www.dsource.org/projects/goldie/newticket| submissions $]
+	of prebuilt binaries are welcome.
+	</p>
+	<div class="code-plain" style="white-space: normal; font-family: verdana,arial,'Bitstream Vera Sans',helvetica,sans-serif;">
+	<a name="7z" />
+	<h4 style="margin-top: 0px">Why 7z?</h4>
+	The prepackaged releases are in [$ident|.7z$] format because it provides much
+	higher compression than [$ident|.zip$] or [$ident|.tar.bz2$]. For Goldie,
+	a [$ident|.7z$] is less than half the size a [$ident|.zip$] or [$ident|.tar.bz2$] would be.
+	Besides, these days, no programmer should be without a [$ident|.7z$] tool.<br />
+	<br />
+	If you're on Windows, you can use
+	[$link| http://www.7-zip.org/ | 7-Zip $] or [$link| http://www.rarlab.com/ | WinRAR $].
+	If you're on a Unix-like system, you can use [$link| http://p7zip.sourceforge.net/ | P7ZIP $].
+	On Debian or Ubuntu, you can install P7ZIP with the command:<br />
+	<br />
+	<div class="code-plain">&gt;[$code|user| sudo apt-get install p7zip-full $]</div>
+	<br />
+	When P7ZIP is installed, it may already be integrated with your file
+	manager's default compression tool.
+	</div>
+	</li>
+
+	<li>
+	<a name="VersionControl" />
+	<em>Git</em>
+	<p>
+	Goldie and SemiTwist D Tools can both be obtained via Git. Just clone
+	both repositories, and checkout the tags [$code|inline|goldie-v0.9$]
+	and [$code|inline|v0.9$] for SemiTwistDTools and Goldie respectively.
+	To do that on the command line:
+	</p>
+<div class="code-plain">&gt;[$code|user| git clone https://bitbucket.org/Abscissa/semitwistdtools.git SemiTwistDTools $]
+&gt;[$code|user| git clone https://bitbucket.org/Abscissa/goldie.git Goldie $]
+&gt;[$code|user| cd SemiTwistDTools $]
+&gt;[$code|user| git checkout goldie-v0.9 $]
+&gt;[$code|user| cd ../Goldie $]
+&gt;[$code|user| git checkout v0.9 $]
+</div>
+	<p>
+	You'll need to build the binaries yourself (see below).
+	Prebuilt local Goldie documentation is not included either,
+	but you can easily build it (after you finish installing Goldie)
+	with the instructions on the [$pageTitle|GenDocs$] page.
+	</p>
+	</li>
+	</ul>
+</li>
+
+<li>
+	<a name="Build" />
+	<p>
+	<span style="font-weight: bold">Build SemiTwist D Tools.</span>
+	<br />[:<span style="font-style: italic">
+	[You can skip this step if you obtained a release with prebuilt binaries for your OS.]
+	</span>:]
+	</p>
+	<p>
+	From the main SemiTwist D Tools directory:
+	</p>
+	<div class="code-plain">&gt;[$code|user| buildAll $]</div>
+</li>
+
+<li>
+	<a name="EnvPATH" />
+	<p>
+	<span style="font-weight: bold">
+	Add the executable directories for Goldie and SemiTwist D Tools to your
+	PATH environment variable.
+	</span>
+	<br />[:<span style="font-style: italic">
+	[This is technically optional, but highly recommended.]
+	</span>:]
+	</p>
+	<p>
+	These directories are:
+	</p>
+[$code|plain| {main Goldie directory}/bin/ 
+{main SemiTwistDTools directory}/bin/ $]
+	<p>
+	See step #2 above for how to access the environment variables on WinXP.
+	</p>
+	<p>
+	Having these on your PATH shouldn't cause any name collisions because all
+	the executables for Goldie and SemiTwist D Tools are prefixed with
+	[$code|inline|[:goldie-:]$] and [$code|inline|[:semitwist-:]$] respectively.
+	</p>
+	<p>
+	On WinXP, environment variables can be accessed by: Right-Click on
+	"My Computer", "Properties", "Advanced" tab, "Environment Variables" button.
+	You'll need to start a new command prompt for it to take effect. You might
+	also need to log out and back in again.
+	</p>
+	<p>
+	If you're on a Posix OS, and don't want to modify PATH,
+	you can just symlink the executables to your preferred
+	[$code|inline|bin$] directory. But make sure you symlink them,
+	don't just copy them.
+	</p>
+</li>
+
+<li>
+	<p>
+	<span style="font-weight: bold">Build Goldie's tools and sample apps.</span>
+	<br />[:<span style="font-style: italic">
+	[You can skip this step if you obtained a release with prebuilt binaries for your OS.]
+	</span>:]
+	</p>
+	<p>
+	(See [$pageLink|Install#RDMD|the note above regarding RDMD$].)
+	</p>
+	<p>
+	From Goldie's root directory:
+	</p>
+	<div class="code-plain">&gt;[$code|user| semitwist-stbuild all -x-I../SemiTwistDTools/src $]</div>
+	<p>
+	To see how to build the debug versions of Goldie's tools and sample apps,
+	or only build one tool, or perform a cleaning:
+	</p>
+	<div class="code-plain">&gt;[$code|user| semitwist-stbuild --help $]</div>
+</li>
+</ol>

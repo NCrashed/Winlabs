@@ -1,0 +1,36 @@
+! -- Parameters ----------------------------------------
+! For goldie gendocs
+
+"Name"     = 'tmpl'
+"Author"   = 'Nick Sabalausky'
+"Version"  = '0.02'
+"About"    = 'For Goldie GenDocs'
+
+"Start Symbol" = <TagContent>
+
+! -- Sets ----------------------------------------------
+
+{QuoteCharMinusColon}       = {ANSI Printable} + {Whitespace} - [:]
+{QuoteCharMinusLeftBracket} = {ANSI Printable} + {Whitespace} - [']']
+{LitCharMinusWS} = {ANSI Printable} - ['['']'$|] - {Space} - {NBSP}
+{LitChar}        = {LitCharMinusWS} + {Whitespace}
+
+! -- Terminals -----------------------------------------
+
+Literal = {LitChar}+
+Quote = '[:' ( {QuoteCharMinusColon} | ':' {QuoteCharMinusLeftBracket} )* ':]'
+Whitespace = {&01}+  ! Effectively disable whitespace-stripping
+
+! -- Rules ---------------------------------------------
+
+<Tag> ::= '[$' <TagContentList> '$]'
+
+<TagContentList> ::= <TagContent>
+                  |  <TagContentList> '|' <TagContent>
+
+<TagContent> ::= <Section>
+              |  <TagContent> <Section>
+
+<Section> ::= <Tag>
+           |  Quote
+           |  Literal

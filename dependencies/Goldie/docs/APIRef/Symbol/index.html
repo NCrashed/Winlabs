@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: struct Symbol</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Parser/index.html">class Parser</a></li>
+<li><span class="pagemenu-link">struct Symbol</span></li>
+<li><a class="pagemenu-link" href="../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../APIRef/index.html">GoldieLib&nbsp;Reference</a>&nbsp;-> <span class="breadcrumb-link">struct&nbsp;Symbol</span>
+	</div>
+	<br />
+	<h1>struct Symbol</h1>
+	
+
+
+
+<ul>
+<li><a class="page-link" href="#SymbolType">enum SymbolType</a></li>
+<li><a class="page-link" href="#Symbol">struct Symbol</a></li>
+<li><a class="page-link" href="../../APIRef/Symbol/index.html#Module">Module-Level Members</a></li>
+</ul>
+
+<p>
+See also the <a class="page-link" href="../../APIOver/index.html#TokenSymbol">explanation of Tokens vs Symbols</a>.
+</p>
+
+<p class="module-decl">module goldie.base</p><div class="api-section"><a name="SymbolType" />enum SymbolType</div>
+<div class="api-def">
+	<div class="api-head"><span class="attr"></span>  <span class="ident">NonTerminal</span><br />
+<span class="attr"></span>  <span class="ident">Terminal</span><br />
+<span class="attr"></span>  <span class="ident">Whitespace</span><br />
+<span class="attr"></span>  <span class="ident">EOF</span><br />
+<span class="attr"></span>  <span class="ident">CommentStart</span><br />
+<span class="attr"></span>  <span class="ident">CommentEnd</span><br />
+<span class="attr"></span>  <span class="ident">CommentLine</span><br />
+<span class="attr"></span>  <span class="ident">Error</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		<span class="ident">EOF</span> and <span class="ident">Error</span> symbols (there is exactly
+		one of each in every language) are automatically created
+		when a grammar is compiled.
+		A <span class="ident">Whitespace</span> symbol is automatically
+		defined if the grammar doesn't already define one.
+	</p>
+	<p>
+		Symbols of the other <a class="page-link" href="#SymbolType">SymbolType</a> values are defined
+		by a grammar.
+	</p>
+	<p>
+		All <a class="page-link" href="#SymbolType">SymbolType</a> values except for <span class="ident">NonTerminal</span>
+		are technically considered to be terminals (and tokens of these
+		symbols are created by the <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> instead of the
+		<a class="page-link" href="../../APIRef/Parser/index.html">Parser</a>), although the actual <span class="ident">SymbolType.Terminal</span>
+		value is only used for "normal" terminals (ie., ones that don't match
+		any of the other <a class="page-link" href="#SymbolType">SymbolType</a> values).
+	</p>
+	</div>
+</div>
+
+<p class="module-decl">module goldie.base</p><div class="api-section"><a name="Symbol" />struct Symbol</div>
+<div class="api-def">
+	<div class="api-head"><span class="attr"></span> string <span class="ident">name</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		The name of the symbol, as defined in a language's grammar.
+		For nonterminals, this includes the surrounding
+		<span class="code-inline">&lt;</span> and <span class="code-inline">&gt;</span>.
+	</p>
+	<p>
+		For example, in a grammar,
+		<span class="code-inline">&lt;If Statement&gt; ::= 'if'</span> would define a
+		nonterminal symbol with a <span class="ident">name</span> of
+		<span class="code-inline">&lt;If Statement&gt;</span>.
+	</p>
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="#SymbolType">SymbolType</a> <span class="ident">type</span><br />
+</div>
+	<div class="api-def">
+		The type of symbol.
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> int <span class="ident">id</span><br />
+</div>
+	<div class="api-def">
+		The ID of the symbol. This is an index into
+		<a class="page-link" href="../../APIRef/Language/index.html">Language</a><span class="ident">.symbolTable</span>.
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> string <span class="ident">toString</span>()<br />
+</div>
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+<div class="code-highlight">auto sym = Symbol("foo", SymbolType.Terminal, 7);
+assert(sym.toString() == `Symbol("foo",SymbolType.Terminal,7)`);
+</div>
+	</div>
+</div>
+
+<p class="module-decl">module goldie.base</p><div class="api-section"><a name="Module" />Module-Level Members</div>
+<div class="api-def">
+
+	<div class="api-head"><span class="attr"></span> string <span class="ident">symbolTypeToString</span>(<a class="page-link" href="#SymbolType">SymbolType</a> <span class="param-name">type</span>)<br />
+</div>
+	<div class="api-def">
+		Example:
+<div class="code-highlight">string str = symbolTypeToString(SymbolType.NonTerminal);
+assert(str == "NonTerminal");
+</div>
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> string <span class="ident">fullSymbolTypeToString</span>(<a class="page-link" href="#SymbolType">SymbolType</a> <span class="param-name">type</span>)<br />
+</div>
+	<div class="api-def">
+		Example:
+<div class="code-highlight">string str = fullSymbolTypeToString(SymbolType.NonTerminal);
+assert(str == "SymbolType.NonTerminal");
+</div>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> string <span class="ident">symbolTypesToString</span>(<a class="page-link" href="#SymbolType">SymbolType</a>[] <span class="param-name">types</span>)<br />
+</div>
+	<div class="api-def">
+		Example:
+<div class="code-highlight">auto symTypes = [SymbolType.Terminal, SymbolType.NonTerminal, SymbolType.Terminal];
+string str = symbolTypesToString(symTypes);
+
+assert(str == "Terminal, NonTerminal, Terminal");
+</div>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> string[] <span class="ident">symbolTypesToStrings</span>(<a class="page-link" href="#SymbolType">SymbolType</a>[] <span class="param-name">types</span>)<br />
+</div>
+	<div class="api-def">
+		Example:
+<div class="code-highlight">auto symTypes = [SymbolType.Terminal, SymbolType.NonTerminal, SymbolType.Terminal];
+auto strings = symbolTypesToStrings(symTypes);
+
+assert(strings.length == 3);
+assert(strings[0] == "Terminal");
+assert(strings[1] == "NonTerminal");
+assert(strings[2] == "Terminal");
+</div>
+	</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

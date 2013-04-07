@@ -1,0 +1,72 @@
+[$name|GenDocs$]
+[$title|GenDocs$]
+[$frame|HTMLPage.tmpl$]
+
+<div class="code-plain" style="white-space: normal; font-family: verdana,arial,'Bitstream Vera Sans',helvetica,sans-serif;">
+<em>NOTE:</em> GenDocs might become deprecated in a future version of Goldie
+in favor of [$link|http://dlang.org/ddoc.html|Ddoc$].
+</div>
+
+<p>
+Generates Goldie's documentation. Also serves as an example of Goldie in action.
+</p>
+
+<p>
+[$pageName|GenDocs$] is a tool created to generate HTML documentation
+from template files.
+It was created specifically for Goldie, but is
+general enough that it should be usable for many other projects
+(although some of its features are oriented towards D-based projects).
+</p>
+<p>
+[$pageName|GenDocs$] does not parse source as other doc-generating tools do
+(such as Ddoc or NaturalDocs). So [$pageName|GenDocs$] is primarily
+suited for projects where extra flexibility is desired, and for projects 
+with source that's too complicated for typical
+source-parsing generators to handle
+(for instance, if special preprocessing is done on the source).
+</p>
+<p>
+A helper script is provided to make it easy to use [$pageName|GenDocs$] to
+generate Goldie's documentation. From the main Goldie directory:
+</p>
+<div class="code-plain">&gt;[$code|user| makeDocs $]</div>
+<p>
+That will generate Goldie's documentation and place it in
+[$code|inline|{goldie root}/docs$]. To view the generated documentation,
+open [$code|inline|{goldie root}/docs/index.html$] in your web browser.
+</p>
+<p>
+If you want to serve the documentation from a web server, it is recommended
+that you use the [$code|inline|--trimlink$] command-line parameter:
+</p>
+<div class="code-plain">&gt;[$code|user| makeDocs --trimlink $]</div>
+<p>
+That will remove the [$code|inline|index.html$] from all internal links in the documentation
+(ie, links will be like [$code|inline|PageName/$] instead of [$code|inline|PageName/index.html$]).
+</p>
+<p>
+If your server isn't configured to use [$code|inline|index.html$] as the default file for a
+directory, you can use a different filename with the [$code|inline|--of=$]
+parameter:
+</p>
+<div class="code-plain">&gt;[$code|user| makeDocs --trimlink --of=Default.htm $]</div>
+
+<h3>Command-line parameters:</h3>
+[$code|plain|
+[:Usage:   goldie-gendocs [options] main-template-file [options]
+Example: goldie-gendocs docssrc/docs.tmpl
+
+--help, /?             Displays this help screen
+-d, --od <dir>         Output directory (default: ".")
+-i, --of <index-name>  Filename of output pages (default: "index.html")
+--trimlink             Trim filename from internal links
+-q, --quiet            Quiet mode
+
+--ast           Save abstract syntax trees to JSON (for use in JsonViewer)
+--astd <dir>    JSON AST output directory (implies --ast) (default: curr dir):]
+$]
+<p>
+See [$pageTitle|TemplateFormat$] for a detailed explanation of the
+[$pageName|GenDocs$] template syntax.
+</p>

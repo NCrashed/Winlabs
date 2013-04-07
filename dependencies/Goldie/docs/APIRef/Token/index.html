@@ -1,0 +1,910 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: class Token</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><span class="pagemenu-link">class Token</span></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../APIRef/index.html">GoldieLib&nbsp;Reference</a>&nbsp;-> <span class="breadcrumb-link">class&nbsp;Token</span>
+	</div>
+	<br />
+	<h1>class Token</h1>
+	
+
+
+
+
+<ul>
+<li><a class="page-link" href="#CommentType">enum CommentType</a></li>
+<li><a class="page-link" href="#TokenToStringMode">enum TokenToStringMode</a></li>
+<li><a class="page-link" href="../../APIRef/Token/index.html#Module">Module-Level Members</a></li>
+<li>
+	<a class="page-link" href="#Token">class Token</a>
+	<ul>
+	<li>
+		<a class="page-link" href="#Token__languageName_">class Token_<span class="metaparam">{languageName}</span></a><span class="ident">: Token</span>
+		<ul>
+		<li>
+			<a class="page-link" href="#Token__languageName___symbol_">class Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{symbol}</span></a><span class="ident">: Token_<span class="metaparam">{languageName}</span></span>
+			<ul>
+			<li><a class="page-link" href="#Token__languageName___rule_">class Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{rule}</span></a><span class="ident">: Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{symbol}</span></span></li>
+			</ul>
+		</li>
+		</ul>
+	</li>
+	</ul>
+</li>
+</ul>
+
+<p>
+This is the main interface for processing parse trees.
+</p>
+
+<p>
+See the <a class="page-link" href="../../APIOver/index.html#TokenSymbol">explanation of Tokens vs Symbols</a>.
+</p>
+
+<p class="module-decl">module goldie.token</p><div class="api-section"><a name="CommentType" />enum CommentType</div>
+<div class="api-def">
+	<div class="api-head"><span class="attr"></span>  <span class="ident">None</span><br />
+</div>
+	<div class="api-head"><span class="attr"></span>  <span class="ident">Line</span><br />
+</div>
+	<div class="api-head"><span class="attr"></span>  <span class="ident">Block</span><br />
+</div>
+</div>
+
+<p class="module-decl">module goldie.token</p><div class="api-section"><a name="TokenToStringMode" />enum TokenToStringMode</div>
+<div class="api-def">
+	<div class="api-head"><span class="attr"></span>  <span class="ident">Compact</span><br />
+</div>
+	<div class="api-def">
+		Omit all whitespace, error and comment tokens.
+	</div>
+
+	<div class="api-head"><span class="attr"></span>  <span class="ident">CompactWithSpaces</span><br />
+</div>
+	<div class="api-def">
+		Like Compact, but adds a space between each token.
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> default <span class="ident">Smart</span><br />
+</div>
+	<div class="api-def">
+		Like Compact, but adds a space between two
+		tokens whenever the last character of the first
+		token and the first character of the second token
+		are both either alphanumeric or an underscore.
+	</div>
+
+	<div class="api-head"><span class="attr"></span>  <span class="ident">Full</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		Includes all whitespace, error and comment tokens.
+	</p>
+	<p>
+		Note: Doesn't currently work after the parse phase because
+		whitespace, error and comment tokens are not currently
+		preserved by the parser.
+	</p>
+	</div>
+</div>
+
+<p class="module-decl">module goldie.token</p><div class="api-section"><a name="Module" />Module-Level Members</div>
+<div class="api-def">
+	<a name="traverse" />
+	<div class="api-head"><span class="attr"></span> {ForwardRange_of_Token} <span class="ident">traverse</span>(<a class="page-link" href="#Token">Token</a> <span class="param-name">start</span>)<br />
+</div>
+	<div class="api-head"><span class="attr"></span> {ForwardRange_of_Token} <span class="ident">traverse</span>(pred)(<a class="page-link" href="#Token">Token</a> <span class="param-name">start</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Returns a forward range that performs a
+		<a class="extern-link" href="http://en.wikipedia.org/wiki/Tree_traversal#Example">preorder traversal</a>
+		of the tree beginning at token <span class="ident">start</span>. Takes an optional predicate as
+		a template parameter which can be used to selectively exclude any subtree.
+	</p>
+	<p>
+		The predicate can be either a <span class="code-inline">bool delegate(Token t)</span>
+		or a string, &agrave; la
+		<a class="extern-link" href="http://dlang.org/phobos/std_algorithm.html">std.algorithm</a>.
+		Either way, it takes in a Token (for example, <span class="ident">Token t</span>) and returns a bool.
+		If the predicate returns false,
+		then the entire subtree starting with <span class="ident">Token t</span> will be skipped.
+	</p>
+	<p>
+		If you wish to filter out individual tokens rather than (or in addition to)
+		entire subtrees, you can simply pass the result of <span class="ident">traverse</span> to
+		<a class="extern-link" href="http://dlang.org/phobos/std_algorithm.html#filter">std.algorithm.filter</a>.
+	</p>
+	<p>
+		The range also has a function <span class="code-inline">void skip()</span> which tells
+		the range to skip the entire subtree of the current <span class="ident">front</span>
+		the next time <span class="ident">popFront</span> is called.
+	</p>
+	<p>
+		Example - Visit all descendants of <span class="code-inline">token</span>:
+	</p>
+<div class="code-highlight">foreach(tok; traverse(token))
+    writeln("Found: ", tok.name);</div>
+	<p>
+		Example - Skip all <span class="code-inline">&lt;Declaration&gt;</span> subtrees
+		(these are all equivalent):
+	</p>
+<div class="code-highlight">alias Token_foo TokFoo; <span class="code-comment">// For convenience</span>
+
+<span class="code-comment">// Dynamic-style</span>
+foreach(tok; traverse!`a.name != "&lt;Declaration&gt;"`(token))
+    writeln("Found: ", tok.name);
+
+<span class="code-comment">// Dynamic-style</span>
+foreach(tok; traverse!( (Token t) { return t.name != "&lt;Declaration&gt;"; } )(token))
+    writeln("Found: ", tok.name);
+
+<span class="code-comment">// Static-style</span>
+foreach(tok; traverse!( (Token t) { return cast(TokFoo!"&lt;Declaration&gt;")t is null; } )(token))
+    writeln("Found: ", tok.name);
+
+<span class="code-comment">// Static-style, using isAnyType from semitwist.util.reflect</span>
+foreach(tok; traverse!( !isAnyType!(TokFoo!"&lt;Declaration&gt;") )(token))
+    writeln("Found: ", tok.name);</div>
+	<p>
+		Example - Only traverse <span class="code-inline">&lt;Foo&gt;</span> and <span class="code-inline">&lt;Bar&gt;</span> tokens
+		(these are both equivalent):
+	</p>
+<div class="code-highlight">alias Token_foo TokFoo; <span class="code-comment">// For convenience</span>
+
+<span class="code-comment">// Dynamic-style</span>
+foreach(tok; traverse!`a.name == "&lt;Foo&gt;" || a.name == "&lt;Bar&gt;"`(token))
+    writeln("Found: ", tok.name);
+
+<span class="code-comment">// Static-style, using isAnyType from semitwist.util.reflect</span>
+foreach(tok; traverse!( isAnyType!(TokFoo!"&lt;Foo&gt;", TokFoo!"&lt;Bar&gt;") )(token))
+    writeln("Found: ", tok.name);</div>
+	<p>
+		Example - Using <span class="code-inline">skip()</span>:
+	</p>
+<div class="code-highlight">alias Token_foo TokFoo; <span class="code-comment">// For convenience</span>
+
+<span class="code-comment">// Skip all &lt;Declaration&gt; subtrees</span>
+auto r = traverse(token);
+foreach(tok; r)
+{
+    if(t.name == "&lt;Declaration&gt;") <span class="code-comment">// Dynamic-style</span>
+        r.skip();
+    
+    writeln("Found: ", tok.name);
+}
+
+<span class="code-comment">// Only traverse &lt;Foo&gt; and &lt;Bar&gt; tokens</span>
+auto r = traverse(token);
+foreach(tok; r)
+{
+    if( !isAnyType!(TokFoo!"&lt;Foo&gt;", TokFoo!"&lt;Bar&gt;")(t) ) <span class="code-comment">// Static-style</span>
+        r.skip();
+    
+    writeln("Found: ", tok.name);
+}</div>
+	</div>
+</div>
+
+<p class="module-decl">module goldie.token</p><div class="api-section"><a name="Token" />class Token</div>
+<div class="api-def">
+	<p>
+		The <a class="page-link" href="../../APIOver/StatVsDyn/index.html">dynamic-style</a> token interface.
+	</p>
+	<p>
+		If you are using <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a>, then
+		all the static-style token types are derived from this class.
+		Note, however, the static-style versions of <a class="page-link" href="../../APIRef/Token/index.html#Token_get">get</a>
+		and <a class="page-link" href="../../APIRef/Token/index.html#Token_getRequired">getRequired</a>
+		actually live directly in this class.
+	</p>
+
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(<a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> <span class="param-name">symbol</span>, <a class="page-link" href="#Token">Token</a>[] <span class="param-name">sub</span>, <a class="page-link" href="../../APIRef/Language/index.html">Language</a> <span class="param-name">lang</span>, int <span class="param-name">ruleId</span>)<br />
+</div>
+	<div class="api-def">
+		Constructor for nonterminals. Normally, only GoldieLib itself needs to
+		instantiate tokens, unless you want to create/modify a parse tree or
+		<a class="page-link" href="#Token">Token</a> array manually.
+	</div>
+	
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(<a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a>&nbsp;<span class="param-name">symbol</span>, <a class="page-link" href="../../APIRef/Language/index.html">Language</a>&nbsp;<span class="param-name">lang</span>, string&nbsp;<span class="param-name">content</span>, string&nbsp;<span class="param-name">file</span>="{unknown}", ptrdiff_t&nbsp;<span class="param-name">line</span>=0, ptrdiff_t&nbsp;<span class="param-name">srcIndexStart</span>=0, ptrdiff_t&nbsp;<span class="param-name">srcIndexEnd</span>=0, <a class="page-link" href="#CommentType">CommentType</a>&nbsp;<span class="param-name">commentMode</span>=<a class="page-link" href="#CommentType">CommentType</a>.None, string&nbsp;<span class="param-name">debugInfo</span>="")<br />
+</div>
+	<div class="api-def">
+		Constructor for terminals. Normally, only GoldieLib itself needs to
+		instantiate tokens, unless you want to create/modify a parse tree or
+		<a class="page-link" href="#Token">Token</a> array manually.
+	</div>
+
+	<div class="api-head"><span class="attr">readonly @property</span> <a class="page-link" href="../../APIRef/Language/index.html">Language</a> <span class="ident">lang</span><br />
+</div>
+	<div class="api-def">
+		The <a class="page-link" href="../../APIRef/Language/index.html">Language</a> this <a class="page-link" href="#Token">Token</a> is associated with.
+	</div>
+
+	<a name="Token_subtokens" />
+	<div class="api-head"><span class="attr">@property</span> size_t <span class="ident">length</span><br />
+<span class="attr"></span> size_t <span class="ident">opDollar</span>()<br />
+<span class="attr"></span> <a class="page-link" href="#Token">Token</a> <span class="ident">opIndex</span>(size_t <span class="param-name">index</span>)<br />
+<span class="attr"></span> <a class="page-link" href="#Token">Token</a> <span class="ident">opIndexAssign</span>(<a class="page-link" href="#Token">Token</a> <span class="param-name">tok</span>, size_t <span class="param-name">index</span>)<br />
+<span class="attr"></span> <a class="page-link" href="#Token">Token</a>[] <span class="ident">opSlice</span>()<br />
+<span class="attr"></span> <a class="page-link" href="#Token">Token</a>[] <span class="ident">opSlice</span>(size_t <span class="param-name">a</span>, size_t <span class="param-name">b</span>)<br />
+<span class="attr"></span> <a class="page-link" href="#Token">Token</a>[] <span class="ident">opSliceAssign</span>(<a class="page-link" href="#Token">Token</a> <span class="param-name">tok</span>)<br />
+<span class="attr"></span> <a class="page-link" href="#Token">Token</a>[] <span class="ident">opSliceAssign</span>(<a class="page-link" href="#Token">Token</a> <span class="param-name">tok</span>, size_t <span class="param-name">a</span>, size_t <span class="param-name">b</span>)<br />
+<span class="attr"></span> <a class="page-link" href="#Token">Token</a>[] <span class="ident">opSliceAssign</span>(<a class="page-link" href="#Token">Token</a>[] <span class="param-name">toks</span>)<br />
+<span class="attr"></span> <a class="page-link" href="#Token">Token</a>[] <span class="ident">opSliceAssign</span>(<a class="page-link" href="#Token">Token</a>[] <span class="param-name">toks</span>, size_t <span class="param-name">a</span>, size_t <span class="param-name">b</span>)<br />
+<span class="attr"></span> int <span class="ident">opApply</span>(int delegate(ref <span class="param-name">Token</span>) dg)<br />
+<span class="attr"></span> int <span class="ident">opApply</span>(int delegate(ref <span class="param-name">size_t</span>, ref <span class="param-name">Token</span>) dg)<br />
+<span class="attr"></span> int <span class="ident">opApplyReverse</span>(int delegate(ref <span class="param-name">Token</span>) dg)<br />
+<span class="attr"></span> int <span class="ident">opApplyReverse</span>(int delegate(ref <span class="param-name">size_t</span>, ref <span class="param-name">Token</span>) dg)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Access the child tokens (ie, subtokens) of this token (if this is a nonterminal).
+	</p>
+	<p>
+		Note that <span class="ident">opDollar</span> only works in DMD 2.057 and up.
+	</p>
+	<p>
+		Example:
+	</p>
+<div class="code-highlight">Token   firstChild = myToken[0];
+Token   lastChild  = myToken[$-1]; <span class="code-comment">// The '$' requires at least DMD 2.057</span>
+Token[] firstThree = myToken[0..3];
+
+<span class="code-comment">// Assignments are possible, but NOT recommended if you are</span>
+<span class="code-comment">// using static-style, because it can easily mess up the</span>
+<span class="code-comment">// static-style sub, get and getRequired.</span>
+myToken[1] = anotherToken;
+
+<span class="code-comment">// Iterate</span>
+foreach(i, subToken; myToken) {}</div>
+	</div>
+
+	<a name="Token_subX" />
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="#Token">Token</a>[] <span class="ident">subX</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		Direct access to the child tokens (ie, subtokens) of this token (if this is a nonterminal).
+	</p>
+	<p>
+		This will be removed from a later version of Goldie in favor of the
+		operator overloads above.
+	</p>
+	</div>
+
+	<a name="Token_get" />
+	<div class="api-head"><span class="attr"></span> T <span class="ident">get</span>(T)(int <span class="param-name">index</span>=0)<br />
+</div>
+	<div class="api-def">
+	<p>
+		<a class="page-link" href="../../APIOver/StatVsDyn/index.html">Static-style</a> function to retrieve the
+		first subtoken matching the given token type <span class="ident">T</span>.
+		
+		The type <span class="ident">T</span> must be a
+		<a class="page-link" href="#Token__languageName___symbol_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{symbol}</span></a>
+		or
+		<a class="page-link" href="#Token__languageName___rule_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{rule}</span></a>.
+	</p>
+	<p>
+		If there are multiple subtokens matching the desired type,
+		the <span class="ident">index</span> parameter can be used to select which one is desired.
+		If the desired subtoken isn't found, null is returned.
+	</p>
+	<p>
+		Example:
+	</p>
+<div class="code-highlight"><span class="code-comment">// The type of 'token' is: Token_myLang!("&lt;A&gt;", "&lt;Foo&gt;", "#", "&lt;Bar&gt;", "*", "&lt;Foo&gt;", ";")</span>
+<span class="code-comment">// ie, 'token' is a nonterminal matching the rule:</span>
+<span class="code-comment">//    &lt;A&gt; ::= &lt;Foo&gt; '#' &lt;Bar&gt; '*' &lt;Foo&gt; ';'</span>
+
+assert( token.get!( Token_myLang!"&lt;Foo&gt;" )()  is token.sub!0 );
+assert( token.get!( Token_myLang!"&lt;Bar&gt;" )()  is token.sub!2 );
+assert( token.get!( Token_myLang!"&lt;Foo&gt;" )(1) is token.sub!4 );
+assert( token.get!( Token_myLang!"&lt;Foo&gt;" )(2) is null        );  <span class="code-comment">// Doesn't exist!</span></div>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> Ts[$-1] <span class="ident">get</span>(Ts...)() if(Ts.length > <span class="param-name">1</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		<a class="page-link" href="../../APIOver/StatVsDyn/index.html">Static-style</a> pattern matching to find a descendant token.
+		Returns null if the given path doesn't exist.
+		This is like chaining calls to <span class="code-inline">get!T(0)</span> above,
+		but safely checks for null at each step.
+	</p>
+	<p>
+		The types passed in must be
+		<a class="page-link" href="#Token__languageName___symbol_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{symbol}</span></a>
+		or
+		<a class="page-link" href="#Token__languageName___rule_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{rule}</span></a>.
+	</p>
+	<p>
+		Example:
+	</p>
+<div class="code-highlight">alias Token_myLang Tok; <span class="code-comment">// For convenience</span>
+
+auto x = token.get!( Tok!"&lt;A&gt;", Tok!"&lt;B&gt;", Tok!"&lt;C&gt;" )();             <span class="code-comment">// Never dereferences null</span>
+auto y = token.get!(Tok!"&lt;A&gt;")().get!(Tok!"&lt;B&gt;")().get!(Tok!"&lt;C&gt;")(); <span class="code-comment">// Could dereference null</span>
+assert( x is y );</div>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="#Token">Token</a> <span class="ident">get</span>(string <span class="param-name">symbolName</span>, int <span class="param-name">index</span>=0)<br />
+<span class="attr"></span> <a class="page-link" href="#Token">Token</a> <span class="ident">get</span>(string[] <span class="param-name">symbolNames</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		<a class="page-link" href="../../APIOver/StatVsDyn/index.html">Dynamic-style</a> versions of <span class="ident">get</span>.
+	</p>
+	<p>
+		The symbol names given must be valid symbol names in this Token's
+		language or an <span class="ident">Exception</span> will be thrown.
+	</p>
+	<p>
+		Example:
+	</p>
+<div class="code-highlight"><span class="code-comment">// 'token' is a nonterminal matching the rule:</span>
+<span class="code-comment">//    &lt;A&gt; ::= &lt;Foo&gt; '#' &lt;Bar&gt; '*' &lt;Foo&gt; ';'</span>
+assert( token.matches("&lt;A&gt;", "&lt;Foo&gt;", "#", "&lt;Bar&gt;", "*", "&lt;Foo&gt;", ";") );
+
+assert( token.get("&lt;Foo&gt;")    is token[0] );
+assert( token.get("&lt;Bar&gt;")    is token[2] );
+assert( token.get("&lt;Foo&gt;", 1) is token[4] );
+assert( token.get("&lt;Foo&gt;", 2) is null     );  <span class="code-comment">// Doesn't exist!</span>
+
+Token x = token.get( ["&lt;Bar&gt;", "&lt;B&gt;", "&lt;Q&gt;"] ); <span class="code-comment">// If '&lt;Bar&gt; ::= &lt;B&gt;' and '&lt;B&gt; ::= &lt;Q&gt;'</span>
+assert( token.get([]) is token ); <span class="code-comment">// Empty array results in the original token</span> </div>
+	</div>
+
+	<a name="Token_getRequired" />
+	<div class="api-head"><span class="attr"></span> T <span class="ident">getRequired</span>(T)(int <span class="param-name">index</span>=0)<br />
+<span class="attr"></span> Ts[$-1] <span class="ident">getRequired</span>(Ts...)() if(Ts.length > <span class="param-name">1</span>)<br />
+<span class="attr"></span> <a class="page-link" href="#Token">Token</a> <span class="ident">getRequired</span>(string <span class="param-name">symbolName</span>, int <span class="param-name">index</span>=0)<br />
+<span class="attr"></span> <a class="page-link" href="#Token">Token</a> <span class="ident">getRequired</span>(string[] <span class="param-name">symbolNames</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Just like <span class="ident">get</span>, but throws an <span class="ident">Exception</span> if the
+		desired subtoken isn't found.
+	</p>
+	<p>
+		The templated versions of <span class="ident">getRequired</span> are <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a>.
+		The types passed in to these must be
+		<a class="page-link" href="#Token__languageName___symbol_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{symbol}</span></a>
+		or
+		<a class="page-link" href="#Token__languageName___rule_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{rule}</span></a>.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr">readonly @property</span> int <span class="ident">ruleId</span><br />
+</div>
+	<div class="api-def">
+		If this Token is a nonterminal, then this is the ID of the
+		<a class="extern-link" href="http://goldparser.org/doc/grammars/define-rules.htm">reduction rule</a>
+		that was used to create the token. This ID is
+		an index into <a class="page-link" href="../../APIRef/Language/index.html">Language</a><span class="ident">.ruleTable</span>.
+	</div>
+
+	<a name="Token_type" />
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Symbol/index.html#SymbolType">SymbolType</a> <span class="ident">type</span><br />
+</div>
+	<div class="api-def">
+		The <a class="page-link" href="../../APIRef/Symbol/index.html#SymbolType">SymbolType</a> of this <a class="page-link" href="#Token">Token</a>.
+		See the explanation of
+		<a class="page-link" href="../../APIOver/index.html#TokenSymbol">Tokens, Symbols, and Symbol Types</a>
+		for more information.
+	</div>
+
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> <span class="ident">symbol</span><br />
+</div>
+	<div class="api-def">
+		The <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> of this <a class="page-link" href="#Token">Token</a>.
+		See the explanation of
+		<a class="page-link" href="../../APIOver/index.html#TokenSymbol">Tokens, Symbols, and Symbol Types</a>
+		for more information.
+	</div>
+	
+	<div class="api-head"><span class="attr">readonly @property</span> string <span class="ident">typeName</span><br />
+</div>
+	<div class="api-def">
+		The name of this <a class="page-link" href="#Token">Token</a>'s <a class="page-link" href="../../APIRef/Symbol/index.html#SymbolType">SymbolType</a>.
+	</div>
+	
+	<a name="Token_name" />
+	<div class="api-head"><span class="attr">readonly @property</span> string <span class="ident">name</span><br />
+</div>
+	<div class="api-def">
+		The name of this <a class="page-link" href="#Token">Token</a>'s <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a>.
+	</div>
+	
+	<div class="api-head"><span class="attr">readonly @property</span> string <span class="ident">fullName</span><br />
+</div>
+	<div class="api-def">
+		This is just <span class="code-inline">typeName ~ "." ~ name</span>.
+		For instance, <span class="code-inline">"NonTerminal.&lt;Foo&gt;"</span>
+	</div>
+
+	<div class="api-head">
+		<span class="attr" style="color: red; margin-bottom: 0px">REMOVED</span>
+		<span style="text-decoration: line-through;">
+			<span class="attr">readonly @property</span> int <span class="ident">id</span>
+		</span>
+		<br />
+	</div>
+	<div class="api-def">
+		This has been removed. Use <span class="ident">symbol.id</span> instead.
+	</div>
+
+	<div class="api-head"><span class="attr">readonly @property</span> ptrdiff_t <span class="ident">line</span><br />
+<span class="attr">readonly @property</span> string <span class="ident">file</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		The file and line number of the original source where this
+		<a class="page-link" href="#Token">Token</a> starts.
+		See Goldie's conventions relating to 
+		<a class="page-link" href="../../APIOver/index.html#LineColumn">Line and Column Numbers</a>.
+	</p>
+	<p>
+		For the line number where this <a class="page-link" href="#Token">Token</a> ends, or
+		the column number where this <a class="page-link" href="#Token">Token</a> starts or ends,
+		use <span class="ident">srcIndexStart</span> or <span class="ident">srcIndexStart</span> together
+		with <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a><span class="ident">.lineIndicies</span>
+		and <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a><span class="ident">.lineAtIndex</span>.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr">readonly @property</span> ptrdiff_t <span class="ident">srcIndexStart</span><br />
+<span class="attr">readonly @property</span> ptrdiff_t <span class="ident">srcIndexEnd</span><br />
+<span class="attr">readonly @property</span> ptrdiff_t <span class="ident">srcLength</span><br />
+</div>
+	<div class="api-def">
+		The locations (zero-indexed) in the original source where this
+		<a class="page-link" href="#Token">Token</a> starts and ends, and the difference between
+		them.
+	</div>
+
+	<div class="api-head"><span class="attr">readonly @property</span> <a class="page-link" href="#CommentType">CommentType</a> <span class="ident">commentMode</span><br />
+</div>
+	<div class="api-def">
+		Indicates whether or not this token exists inside a comment and,
+		if so, what type of comment.
+	</div>
+
+	<div class="api-head"><span class="attr">readonly @property</span> <a class="page-link" href="#Token">Token</a> <span class="ident">firstLeaf</span><br />
+<span class="attr">readonly @property</span> <a class="page-link" href="#Token">Token</a> <span class="ident">lastLeaf</span><br />
+</div>
+	<div class="api-def">
+		The first and last terminals in this <a class="page-link" href="#Token">Token</a>.
+		If this <a class="page-link" href="#Token">Token</a> isn't a nonterminal, then these
+		both just return <span class="code-inline">this</span>.
+	</div>
+
+	<div class="api-head"><span class="attr">readonly @property</span> string <span class="ident">debugInfo</span><br />
+</div>
+	<div class="api-def">
+		A place for extra debugging information to be stored.
+	</div>
+
+	<a name="Token_matches" />
+	<div class="api-head"><span class="attr"></span> bool <span class="ident">matches</span>(string <span class="param-name">parentSymbol</span>, string[] <span class="param-name">subSymbols</span>...)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Determine if the <a class="page-link" href="#Token">Token</a> matches (ie, was created from) a particular
+		<a class="extern-link" href="http://goldparser.org/doc/grammars/define-rules.htm">reduction rule</a>.
+	</p>
+	<p>
+		Example:
+	</p>
+<div class="code-highlight"><span class="code-comment">// Did this token come from this reduction rule?</span>
+<span class="code-comment">//   &lt;Add Exp&gt; ::= &lt;Add Exp&gt; '+' &lt;Mult Exp&gt;</span>
+bool checkToken(Token tok)
+{
+    return tok.matches("&lt;Add Exp&gt;", "&lt;Add Exp&gt;", "+", "&lt;Mult Exp&gt;");
+}</div>
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> string <span class="ident">toString</span>()<br />
+<span class="attr"></span> string <span class="ident">toString</span>(<a class="page-link" href="#TokenToStringMode">TokenToStringMode</a> <span class="param-name">mode</span>)<br />
+<span class="attr"></span> string <span class="ident">toStringCompact</span>()<br />
+<span class="attr"></span> string <span class="ident">toStringCompactWithSpaces</span>()<br />
+<span class="attr"></span> string <span class="ident">toStringSmart</span>()<br />
+<span class="attr"></span> string <span class="ident">toStringFull</span>()<br />
+</div>
+	<div class="api-def">
+	<p>
+		Converts the <a class="page-link" href="#Token">Token</a> to a string that resembles the
+		original source. See <a class="page-link" href="#TokenToStringMode">TokenToStringMode</a> for descriptions
+		of the different modes of conversion.
+	</p>
+	<p>
+		<em>Note:</em>
+		Depending on the language and the chosen mode of conversion, the
+		result <em>might not be valid code</em> in the original language, or
+		<em>may have subtly changed meaning</em>.
+		Not all modes of conversion are suitable for all
+		purposes or all languages. Depending on the language or purpose,
+		it may be that none of these are appropriate and you'll have to
+		create a string by walking the <a class="page-link" href="#Token">Token</a> tree manually.
+		These functions are merely provided as a convenience.
+	</p>
+	</div>
+
+	
+	<div class="api-head"><span class="attr"></span> semitwist.treeout.TreeNode <span class="ident">toTreeNode</span>()<br />
+</div>
+	<div class="api-def">
+	<p>
+		<a class="extern-link" href="https://bitbucket.org/Abscissa/semitwistdtools/src/goldie-v0.9/src/semitwist/treeout.d">TreeNode</a>
+		is a type from
+		<a class="extern-link" href="https://bitbucket.org/Abscissa/semitwistdtools">SemiTwist D Tools</a>
+		that provides an easy way to convert a tree to a text format such as JSON or XML.
+	</p>
+	<p>
+		Example: To convert a Token to JSON:
+	</p>
+<div class="code-highlight">import semitwist.treeout;
+
+string tokenToJSON(Token tok, bool prettyPrint)
+{
+    if(prettyPrint)
+        return tok.toTreeNode().format(formatterPrettyJSON);
+    else
+        return tok.toTreeNode().format(formatterTrimmedJSON);
+}</div>
+	<p>
+		Note, however, if you wish to use the resulting JSON in
+		<a class="page-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>, and get <a class="page-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>'s enhanced
+		source-viewing features, then you'll need to
+		<a class="page-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">add a few things</a> to
+		the returned <span class="ident">TreeNode</span> before formatting it to a string.
+		See the
+		<a class="extern-link" href="https://bitbucket.org/Abscissa/goldie/src/v0.9/src/tools/parse">source</a>
+		of the <a class="page-link" href="../../Tools/Parse/index.html">Parse</a> tool for an example.
+	</p>
+	</div>
+</div>
+
+<p class="module-decl">module {user-specified package}.token</p><div class="api-section"><a name="Token__languageName_" />class Token_<span class="metaparam">{languageName}</span></div>
+<div class="api-def">
+	<div class="api-head">
+		{languageName} = Name of static-style language
+	</div>
+	<p></p>
+	<p>
+		This is the common base class for all tokens in a given
+		static-style language.
+	</p>
+	<div class="api-head"><span class="attr">static enum</span> string <span class="ident">StringOf</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		This is a workaround for DMD Bug <a class="extern-link" href="http://d.puremagic.com/issues/show_bug.cgi?id=1748">#1748</a>.
+	</p>
+	<p>
+		Evaluates to <span class="code-inline">Token_{languageName}</span>. For example, if
+		the language is named <span class="ident">foo</span>, then this evaluates to
+		<span class="code-inline">Token_foo</span>
+	</p>
+	</div>
+</div>
+
+<p class="module-decl">module {user-specified package}.token</p><div class="api-section"><a name="Token__languageName___symbol_" />class Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{symbol}</span> : Token_<span class="metaparam">{languageName}</span></div>
+<div class="api-def">
+	<div class="api-head">
+		{languageName} = Name of static-style language
+	</div>
+	<div class="api-head">
+		{symbol} = [ SymbolType <span class="param-name">staticSymbolType</span>, ] string <span class="param-name">staticName</span>=null
+	</div>
+	<p></p>
+	<p>
+		This type is for tokens representing a specific <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a>
+		in a <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a> language.
+	</p>
+	<p>
+		This is a templated type. Instantiation example:
+	</p>
+<div class="code-highlight"><span class="code-comment">// Assume the language is named "calc"</span>
+
+<span class="code-comment">// For a SymbolType.Terminal symbol named "Ident":</span>
+<span class="code-comment">// These are the SAME type:</span>
+Token_calc!"Ident"
+Token_calc!(SymbolType.Terminal, "Ident")
+
+<span class="code-comment">// For a SymbolType.NonTerminal symbol named "&lt;Add Exp&gt;"</span>
+<span class="code-comment">// These are the SAME type (but different from the above types):</span>
+Token_calc!"&lt;Add Exp&gt;"
+Token_calc!(SymbolType.NonTerminal, "&lt;Add Exp&gt;")
+
+<span class="code-comment">// All the above share common base-types: Token_calc and Token.</span>
+<span class="code-comment">// This only shares a common base-type of Token</span>
+<span class="code-comment">// (since it's from a different language).</span>
+Token_anotherCalc!"Ident"</div>
+	<p>
+		The two-parameter form is needed if there are
+		<a class="page-link" href="../../APIOver/AmbiguousSym/index.html">two Symbols with the same name</a>.
+	</p>
+	<p>
+		Attempting to instantiate a <a class="page-link" href="#Token__languageName___symbol_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{symbol}</span></a>
+		with a symbol that doesn't exist in the language will result in a
+		compile-time error.
+	</p>
+
+	<div class="api-head"><span class="attr">static enum</span> string <span class="ident">StringOf</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		This is a workaround for DMD Bug <a class="extern-link" href="http://d.puremagic.com/issues/show_bug.cgi?id=1748">#1748</a>.
+	</p>
+	<p>
+		Evaluates to <span class="code-inline">Token_{languageName}!(SymbolType.{symbolType}, "{symbolName}")</span>.
+	</p>
+	<p>
+		Example:
+	</p>
+		<div class="code-highlight">void showStringOf(Token_foo!"Ident" tok)
+{
+    <span class="code-comment">// Output: Token_foo!(SymbolType.Terminal, "Ident")</span>
+    writeln(typeof(tok).StringOf);
+}
+</div>
+	</div>
+
+	<div class="api-head"><span class="attr">static enum</span> string <span class="ident">staticName</span><br />
+</div>
+	<div class="api-def">
+		Compile-time equivalent to <span class="ident">Token.name</span>.
+	</div>
+
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(<a class="page-link" href="../../APIRef/Language/index.html">Language</a>&nbsp;<span class="param-name">lang</span>, string&nbsp;<span class="param-name">content</span>, string&nbsp;<span class="param-name">file</span>="{unknown}", ptrdiff_t&nbsp;<span class="param-name">line</span>=0, ptrdiff_t&nbsp;<span class="param-name">srcIndexStart</span>=0, ptrdiff_t&nbsp;<span class="param-name">srcIndexEnd</span>=0, <a class="page-link" href="#CommentType">CommentType</a>&nbsp;<span class="param-name">commentMode</span>=<a class="page-link" href="#CommentType">CommentType</a>.None, string&nbsp;<span class="param-name">debugInfo</span>="")<br />
+</div>
+	<div class="api-def">
+		Constructor for terminals.
+		This member doesn't exist if <span class="ident"><span class="metaparam">{symbol}</span></span> is a nonterminal.
+	</div>
+</div>
+
+<p class="module-decl">module {user-specified package}.token</p><div class="api-section"><a name="Token__languageName___rule_" />class Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{rule}</span> : Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{symbol}</span></div>
+<div class="api-def">
+	<div class="api-head">
+		{languageName} = Name of static-style language
+	</div>
+	<div class="api-head">
+		{rule} = string <span class="param-name">staticName</span>, ( int <span class="param-name">staticRuleId</span> | <span class="param-name">subTokenTypes</span>... )
+	</div>
+	<p></p>
+	<p>
+		Nonterminals have one <a class="page-link" href="#Token__languageName___rule_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{rule}</span></a>
+		for each rule that can create them.
+	</p>
+	<p>
+		This is a templated type.
+		See <a class="page-link" href="../../APIOver/StatVsDyn/index.html#Types">Static And Dynamic Styles: Types and Inheritance</a>
+		for an explanation of how it works.
+	</p>
+	<p>
+		Instantiation example:
+	</p>
+<div class="code-highlight"><span class="code-comment">// Assume the language is named "calc"</span>
+
+<span class="code-comment">// These three are all the SAME type, and</span>
+<span class="code-comment">// are for a nonterminal Token created from</span>
+<span class="code-comment">// this reduction rule:</span>
+<span class="code-comment">//   &lt;Add Exp&gt; ::= &lt;Add Exp&gt; '+' &lt;Mult Exp&gt;</span>
+Token_calc!("&lt;Add Exp&gt;", "&lt;Add Exp&gt;", "+", "&lt;Mult Exp&gt;")
+Token_calc!("&lt;Add Exp&gt;", "&lt;Add Exp&gt;", Token_calc!(SymbolType.Terminal, "+"), "&lt;Mult Exp&gt;")
+Token_calc!("&lt;Add Exp&gt;", ruleIdOf_calc!("&lt;Add Exp&gt;", "&lt;Add Exp&gt;", "+", "&lt;Mult Exp&gt;"))
+
+<span class="code-comment">// This is a different type, but shares the common</span>
+<span class="code-comment">// base-class of Token_calc!"&lt;Add Exp&gt;" with the above:</span>
+Token_calc!("&lt;Add Exp&gt;", "&lt;Mult Exp&gt;")
+
+<span class="code-comment">// This is another different type, but the only base-types this</span>
+<span class="code-comment">// one shares with the above are Token_calc and Token (because</span>
+<span class="code-comment">// it has a different reduction symbol, ie the first argument).</span>
+Token_calc!("&lt;Mult Exp&gt;", "&lt;Negate Exp&gt;")
+
+<span class="code-comment">// The only base-type this shares with any of the above is Token,</span>
+<span class="code-comment">// since it's from a different language:</span>
+Token_anotherCalc!("&lt;Add Exp&gt;", "&lt;Mult Exp&gt;")
+
+<span class="code-comment">// Use null to refer to a rule that has no sub-tokens, such as in this:</span>
+<span class="code-comment">//   &lt;OptionalHello&gt; ::= 'Hello'</span>
+<span class="code-comment">//                     |</span>
+Token_foo!("&lt;OptionalHello&gt;", "Hello") <span class="code-comment">// First rule</span>
+Token_foo!("&lt;OptionalHello&gt;", null)    <span class="code-comment">// Second rule</span>
+</div>
+	<p>
+		See also the documentation on <a class="page-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a>.
+	</p>
+	<p>
+		Attempting to instantiate a <a class="page-link" href="#Token__languageName___rule_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{rule}</span></a> with a
+		rule that doesn't exist in the language will result in a compile-time
+		error.
+	</p>
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(<a class="page-link" href="#Token">Token</a>[] <span class="param-name">sub</span>, <a class="page-link" href="../../APIRef/Language/index.html">Language</a> <span class="param-name">lang</span>)<br />
+</div>
+	<div class="api-def">
+		Constructor. Normally, only GoldieLib itself needs to
+		instantiate tokens, unless you want to create/modify a parse tree or
+		<a class="page-link" href="#Token">Token</a> array manually.
+	</div>
+	<a name="Token_sub" />
+	<!-- <div class="api-head"><span class="attr">readonly @property</span> <a class="page-link" href="#Token__languageName_">Token_<span class="metaparam">{languageName}</span></a>!{symbol} <span class="ident">sub</span>(int <span class="param-name">index</span>)<br />
+</div> -->
+	<div class="api-head">
+		<span class="attr">readonly @property</span>
+		<a class="page-link" href="#Token__languageName___symbol_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{symbol}</span></a>
+		<span class="ident">sub</span>(int <span class="param-name">index</span>)
+		<br />
+	</div>
+	<div class="api-def">
+	<p>
+		Type-safe <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a> counterpart to the
+		<span class="ident">opIndex</span> and <span class="ident">opSlice</span> operator overloads.
+	</p>
+	<p>
+		Sample usage: <span class="code-inline">myToken.sub!2</span>
+	</p>
+	<p>
+		Example:
+	</p>
+<div class="code-highlight"><span class="code-comment">// Assume the language "calc":</span>
+<span class="code-comment">// &lt;Mult Exp&gt;   ::= &lt;Mult Exp&gt; '*' &lt;Negate Exp&gt;</span>
+<span class="code-comment">//                | &lt;Mult Exp&gt; '/' &lt;Negate Exp&gt;</span>
+<span class="code-comment">//                | &lt;Negate Exp&gt;</span>
+<span class="code-comment">// &lt;Negate Exp&gt; ::= '-' &lt;Value&gt;</span>
+<span class="code-comment">//                | &lt;Value&gt;</span>
+
+void foo(Token_calc!("&lt;Mult Exp&gt;", "&lt;Mult Exp&gt;", "*", "&lt;Negate Exp&gt;") tok)
+{
+    <span class="code-comment">// The first subtoken is known (even at compile-time) to be a &lt;Mult Exp&gt;.</span>
+    <span class="code-comment">// The others are also known. These are actually checked at compile-time:</span>
+    <span class="code-comment">// If you get them mixed up, you'll get a type-mismatch error when compiling.</span>
+    Token_calc!"&lt;Mult Exp&gt;"   multTok     = tok.sub!0;
+    Token_calc!"*"            operatorTok = tok.sub!1;
+    Token_calc!"&lt;Negate Exp&gt;" negateTok   = tok.sub!2;
+
+    <span class="code-comment">// Determine exact rule used for the &lt;Negate Exp&gt; subtoken:</span>
+    <span class="code-comment">// Can't know this at compile-time because it depends on</span>
+    <span class="code-comment">// the actual source that was parsed.</span>
+    if( cast(Token_calc!("&lt;Negate Exp&gt;", "-", "&lt;Value&gt;")) negateTok )
+    {
+        writeln("negateTok came from: &lt;Negate Exp&gt; ::= '-' &lt;Value&gt;");
+    }
+    else if( cast(Token_calc!("&lt;Negate Exp&gt;", "&lt;Value&gt;")) negateTok )
+    {
+        writeln("negateTok came from: &lt;Negate Exp&gt; ::= &lt;Value&gt;");
+    }
+    else
+        writeln("Forgot to handle some other rule!");
+}
+</div>
+	</div>
+	<div class="api-head"><span class="attr">static enum</span> string <span class="ident">StringOf</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		This is a workaround for DMD Bug <a class="extern-link" href="http://d.puremagic.com/issues/show_bug.cgi?id=1748">#1748</a>.
+	</p>
+	<p>
+		Evaluates to <span class="code-inline">Token_{languageName}!(SymbolType.NonTerminal, "{symbolName}", ...)</span>.
+	</p>
+	<p>
+		Example:
+	</p>
+		<div class="code-highlight">void showStringOf(Token_calc!("&lt;Negate Exp&gt;", "-", "&lt;Value&gt;") tok)
+{
+    <span class="code-comment">// Output: Token_calc!(SymbolType.NonTerminal, "&lt;Negate Exp&gt;", ...)</span>
+    writeln(typeof(tok).StringOf);
+}
+</div>
+	</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

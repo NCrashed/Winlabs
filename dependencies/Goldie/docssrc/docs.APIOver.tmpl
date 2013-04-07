@@ -1,0 +1,167 @@
+[$name|APIOver$]
+[$title|GoldieLib Overview$]
+[$frame|HTMLPage.tmpl$]
+<a name="Overview" />
+
+<p>
+[$ident|GoldieLib$] is Goldie's
+[$link| http://dlang.org/ | D $]
+API. Using GoldieLib, your D programs
+can parse text according to any GOLD-compatible grammar and access
+some of Goldie's other capabilities.
+</p>
+
+<a name="Import" />
+<h2>Importing</h2>
+
+<p>Importing is simple:</p>
+
+[$code|highlight|
+[:import goldie.all;
+:]$]
+
+<p>
+When you compile, make sure to tell the compiler where to find
+Goldie and SemiTwist D Tools:
+</p>
+
+<div class="code-plain">&gt;[$code|user|
+	rdmd --build-only -I{path to SemiTwistDTools}/src -I{path to Goldie}/src myMain.d
+$]</div>
+
+
+<h2>Conventions Used By GoldieLib</h2>
+
+<a name="LineColumn" />
+<h3>Line and Column Numbers</h3>
+<p>
+All line numbers and column numbers are internally stored and treated
+by the API as zero-indexed and displayed to the user as one-indexed.
+</p>
+
+<p>
+When Goldie refers to a "column number", it really means "the number of
+characters (ie, UTF code-points) from the start of the line". 
+This behavior is more reliable and more useful than a true "column number"
+because:
+</p>
+<ul>
+<li>
+	Tab-size is a matter of presentation (For better or worse, depending on one's perspective).
+</li>
+<li>
+	Non-printing characters may exist in a source to be parsed.
+</li>
+<li>
+	The increasingly popular concept of
+	[$link|http://nickgravgaard.com/elastictabstops/|elastic tabstops$]
+	makes proportional fonts practical for source code, which renders
+	the traditional concept of "column number" meaningless.
+</li>
+</ul>
+
+<a name="TokenSymbol" />
+<h3>
+	Tokens, Symbols, and Symbol Types:<br />
+	<span style="font-size: 0.9em">The Front-End's Building Blocks</span>
+</h3>
+<p>
+A [$typeName|Token$] can be thought of as an instance of a [$typeName|Symbol$].
+A [$typeName|Token$] is part of the parsed source, and a [$typeName|Symbol$]
+is part of the grammar.
+</p>
+<p>
+For example, consider this grammar:
+</p>
+
+[$code|plain|
+[:Word = {Letter}+
+<Sentence> ::= <Sentence> Word
+:]$]
+
+<p>
+And this source:
+</p>
+
+[$code|plain|
+[:Hello world
+:]$]
+<p>
+These are the Tokens and Symbols:
+</p>
+<table class="grid-table">
+<tr><td>[$ident|Word$]</td><td>[$typeName|Symbol$]</td><td>This Symbol's type is [$typeName|SymbolType$][$ident|.Terminal$].</td></tr>
+<tr><td>[$ident|&lt;Sentence&gt;$]</td><td>[$typeName|Symbol$]</td><td>This Symbol's type is [$typeName|SymbolType$][$ident|.NonTerminal$].</td></tr>
+<tr><td>[$ident|Hello$]</td><td>[$typeName|Token$]</td><td>This Token's Symbol is [$ident|Word$].</td></tr>
+<tr><td>[$ident|world$]</td><td>[$typeName|Token$]</td><td>This Token's Symbol is [$ident|Word$].</td></tr>
+<tr><td>[$ident|Hello world$]</td><td>[$typeName|Token$]</td><td>This Token's Symbol is [$ident|&lt;Sentence&gt;$].</td></tr>
+</table>
+<p>
+Note that Goldie defines more symbol types
+than just [$ident|Terminal$] and [$ident|NonTerminal$] (see the
+[$typeName|SymbolType$] documentation).
+So if you want to check if a Symbol or Token is a [$ident|SymbolType.NonTerminal$]
+do NOT do it by comparing the type with [$ident|SymbolType.Terminal$]. Just because
+something isn't a [$ident|SymbolType.Terminal$] does NOT imply that
+it's a [$ident|SymbolType.NonTerminal$].
+</p>
+
+<a name="EmptyRule" />
+<h2>Referring to a rule that has no subtokens</h2>
+<p>
+Just use [$ident|null$] for the subtokens.
+</p>
+<p>
+Example:
+</p>
+<p>
+Suppose you have this in your grammar for language "myLang":
+</p>
+[$code|plain|
+[:<Optional Fred> ::= 'fred'
+                  | :]
+$]
+<p>
+The nonterminal [$ident|&lt;Optional Fred&gt;$] can be created from either the
+text [$ident|fred$] or from nothing at all. To check if a token matches the
+first case, ie. the [$ident|fred$] rule, you use this:
+</p>
+[$code|highlight|
+[:// static-style: 
+if( auto typedTok = cast(Token_myLang!("<Optional Fred>", "fred"))token )
+{
+	// use typedTok
+}
+
+// dynamic-style: 
+if( token.matches("<Optional Fred>", "fred") )
+{
+	// use token
+}:]
+$]
+<p>
+To check for the empty rule, you just use [$ident|null$]:
+</p>
+[$code|highlight|
+[:// static-style: 
+if( auto typedTok = cast(Token_myLang!("<Optional Fred>", null))token )
+{
+	// use typedTok
+}
+
+// dynamic-style: 
+if( token.matches("<Optional Fred>", null) )
+{
+	// use token
+}:]
+$]
+
+<h2>Simple Examples</h2>
+<p>
+For simple examples of how to use GoldieLib, see the [$pageTitle|SampleApps$].
+</p>
+
+<h3 class="list-heading">See Also:</h3>
+<ul>
+<li>[$pageLink|APIRef| GoldieLib API Reference $]</li>
+</ul>

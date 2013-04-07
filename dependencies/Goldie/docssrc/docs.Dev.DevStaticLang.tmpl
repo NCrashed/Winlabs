@@ -1,0 +1,406 @@
+[$name|DevStaticLang$]
+[$title|Library Source and StaticLang$]
+[$frame|HTMLPage.tmpl$]
+
+<h3>
+Q: I've looked at the source for Token, Language, Lexer and Parser,
+and OMG, what the hell is that mess?! (Especially Token! Geez!)
+</h3>
+<p>
+A: Heh :) Put simply, it's a temporary kludge. The [$pageName|StaticLang$] tool
+generates static-style languages directly from Goldie's dynamic-style
+library source. That mess is all the directives used to help instruct
+[$pageName|StaticLang$] in how to do the conversion.
+</p>
+<p>
+To read the dynamic-style source, just ignore all the weird
+[$code|inline|/+...+/$] directives
+and anything inside [$code|inline|version(Goldie_StaticStyle)$]
+(it will NOT be defined when you compile).
+</p>
+<p>
+To read the static-style source, look at [$pageName|StaticLang$]'s output
+and remember that [$code|inline|version(Goldie_StaticStyle)$] WILL be
+defined when compiling.
+</p>
+<p>
+To read the dynamic-style source, and see how [$pageName|StaticLang$] will
+transform it, see the explanation of [$pageName|StaticLang$]'s preprocessing
+below.
+</p>
+<p>
+I do intend to clean that all up.
+</p>
+
+<h3>
+Q: Goldie is already a language processing tool. Why don't you just use
+Goldie and a D grammar to do the conversion? Or use D's fantastic
+metaprogramming abilities?
+</h3>
+<p>
+A: I do intend to do something like that.
+</p>
+
+<h2>
+StaticLang's Preprocessing
+</h2>
+
+<h3>Tag Structure</h3>
+<p>
+StaticLang's preprocessing system is based on some basic tags:
+</p>
+<div class="code-plain">/+LETTER:TAG_NAME+/
+/+LETTER:TAG_NAME+/DUMMY</div>
+<p>
+Where:
+</p>
+<ul>
+<li>
+	[$code|inline|LETTER$] is one of: [$code|inline|P$], [$code|inline|S$], or [$code|inline|E$]
+	<ul>
+		<li>
+			[$code|inline|P$] tags stand for "Place" and are used by themselves.
+			These tags are replaced by some other text.
+		</li>
+		<li>
+			<p>[$code|inline|S$] and [$code|inline|E$] tags stand for "Start" and "End"
+			and are used in pairs surrounding code. Both tags <em>and</em> all the code
+			in between are all replaced.</p>
+			<p>Example:</p>
+<div class="code-plain">/+P:SOME_TAG+/
+/+P:SOME_TAG+/DUMMY
+/+S:SOME_TAG+/some D code here/+E:SOME_TAG+/</div>
+		</li>
+	</ul>
+</li>
+<li>
+	[$code|inline|TAG_NAME$] is the name of the desired tag (see below).
+</li>
+<li>
+	The text [$code|inline|DUMMY$] can optionally be appended whenever needed to make D's parser happy.
+	This is usually only useful for [$code|inline|P$] tags.
+</li>
+</ul>
+<p>
+Note that, aside from the [$code|inline|DUMMY$] text, the tags are seen as
+nested comments by D.
+</p>
+
+<h3>Defined Tags</h3>
+<p style="font-style: italic">
+You'll notice that some of the following are not yet documented.
+Full documentation of StaticLang's preprocessing is delayed because I
+may make use of D's metaprogramming to take over much of the work currently
+done by StaticLang.
+</p>
+<p>
+There are three classes of tags:
+cvars (Constant Vars), svars (Store Vars), and mvars (Modify Vars)
+</p>
+<h4>cvars (Constant Vars):</h4>
+<p>
+These tags are replaced with constant predetermined text that is always
+the same for a given language. (But it may differ from one language to another.)
+</p>
+<p>
+If [$code|inline|S$] and [$code|inline|E$] tags are used, all the code inside
+the start and end tags is replaced.
+</p>
+[$apiHeadPlain| REM $]
+<div class="api-def">
+	<p>
+	Comments. Short for "remark", just like in BASIC and BATCH. These are
+	removed completely by StaticLang, and replaced with absolutely nothing.
+	</p>
+	<p>
+	Generally, it's preferred to use
+	[$code|inline|version(Goldie_DynamicStyle)$] instead of this.
+	</p>
+</div>
+
+[$apiHeadPlain| STATIC $]
+<div class="api-def">
+	Replaced with the text [$code|inline|static$]
+</div>
+
+[$apiHeadPlain| OVERRIDE $]
+<div class="api-def">
+	Replaced with the text [$code|inline|override$]
+</div>
+
+[$apiHeadPlain| VERSION $]
+<div class="api-def">
+	Replaced with Goldie's version number.
+</div>
+
+[$apiHeadPlain| PACKAGE $]
+<div class="api-def">
+	<p>
+		Replaced with the package name of the language.
+	</p>
+	<p>
+		For instance, if StaticLang is run with the command line parameter
+		[$code|inline|-pack:myApp.langs.myLang$], then this tag is
+		replaced with the text [$code|inline|myApp.langs.myLang$].
+	</p>
+</div>
+
+[$apiHeadPlain| SHORT_PACKAGE $]
+<div class="api-def">
+	<p>
+		Replaced with the name of the language, ie., the last part of the package name.
+	</p>
+	<p>
+		For instance, if StaticLang is run with the command line parameter
+		[$code|inline|-pack:myApp.langs.myLang$], then this tag is
+		replaced with the text [$code|inline|myLang$].
+	</p>
+</div>
+
+[$apiHeadPlain| INIT_STATIC_LANG $]
+<div class="api-def">
+	Inserts some basic initialization for each module:
+[$code|plain|
+[:version = Goldie_StaticStyle;
+private enum _packageName = "/+P:PACKAGE+/";
+private enum _shortPackageName = "/+P:SHORT_PACKAGE+/":]
+$]
+</div>
+
+[$apiHeadPlain| LANG_CLASSNAME $]
+<div class="api-def">
+	Replaced with [$code|inline|Language_myLang$]
+	(assuming the language name, ie. [$ident|SHORT_PACKAGE$], is [$code|inline|myLang$])
+</div>
+
+[$apiHeadPlain| LANG_INHERIT $]
+<div class="api-def">
+	Replaced with [$code|inline|public class Language_myLang : Language$]
+</div>
+
+[$apiHeadPlain| LANG_INSTNAME $]
+<div class="api-def">
+	Replaced with [$code|inline|language_myLang$]
+</div>
+
+[$apiHeadPlain| LANG_FILENAME $]
+<div class="api-def">
+	Inserts the name of the [$pageLink|CGT|CGT$] file this static-style
+	language is being created from, without the path.
+	For instance, [$code|inline|myLang.cgt$]
+</div>
+
+[$apiHeadPlain| LEXER_CLASSNAME $]
+<div class="api-def">
+	Replaced with [$code|inline|Lexer_myLang$]
+</div>
+
+[$apiHeadPlain| LEXER_INHERIT $]
+<div class="api-def">
+	Replaced with [$code|inline|public class Lexer_myLang : Lexer$]
+</div>
+
+[$apiHeadPlain| PARSER_CLASSNAME $]
+<div class="api-def">
+	Replaced with [$code|inline|Parser_myLang$]
+</div>
+
+[$apiHeadPlain| PARSER_INHERIT $]
+<div class="api-def">
+	Replaced with [$code|inline|public class Parser_myLang : Parser$]
+</div>
+
+[$apiHeadPlain| TOKEN_CLASSNAME $]
+<div class="api-def">
+	Replaced with [$code|inline|Token_myLang$]
+</div>
+
+[$apiHeadPlain| TOKEN_INHERIT $]
+<div class="api-def">
+	Replaced with
+	[$code|inline|private class _Token_myLang(SymbolType staticSymbolType, string _staticName) : Base_Token_myLang$]
+</div>
+
+[$apiHeadPlain| SUBTOKENTYPE_NAME $]
+<div class="api-def">
+	Replaced with [$code|inline|SubTokenType_myLang$]
+</div>
+
+[$apiHeadPlain| IS_CORRECT_TOKEN_FUNCNAME $]
+<div class="api-def">
+	Replaced with [$code|inline|isCorrectToken_myLang$]
+</div>
+
+[$apiHeadPlain| RULE_ID_OF_FUNCNAME $]
+<div class="api-def">
+	Replaced with [$code|inline|ruleIdOf_myLang$]
+</div>
+
+[$apiHeadPlain| TOKEN_CTOR_TERMFIRST $]
+<div class="api-def">
+	Replaced with [$code|inline|static if(staticSymbolType != SymbolType.NonTerminal) {$]
+</div>
+
+[$apiHeadPlain| TOKEN_CTOR_NONTERMFIRST $]
+<div class="api-def">
+	Replaced with [$code|inline|static if(staticSymbolType == SymbolType.NonTerminal) {$]
+</div>
+
+[$apiHeadPlain| BLOCK_ELSE $]
+<div class="api-def">
+	Replaced with [$code|inline|} else {$]
+</div>
+
+[$apiHeadPlain| TOKEN_CTOR_END $]
+<div class="api-def">
+	Replaced with [$code|inline|}$]
+</div>
+
+[$apiHeadPlain| TOKEN_CLASSNAME_TOPNODE $]
+<div class="api-def">
+	Inserts the name of the nonterminal [$typeName|Token_{languageName}!{symbol}$]
+	that is the root, or "Start Symbol", of the parse tree. Ie, this is the
+	type of [$pageLink|Parser#Parser_parseTree|Parser_{languageName}.parseTree$].
+</div>
+
+[$apiHeadPlain| TOKEN_TEMPLATE_1P $]
+[$apiHeadPlain| TOKEN_TEMPLATE_2P $]
+[$apiHeadPlain| TOKEN_TEMPLATE_RULE $]
+<div class="api-def">
+	Inserts the bodies of various helper templates for referring to
+	the various static-style token types.
+</div>
+
+[$apiHeadPlain| SUBTOKENTYPE_TEMPLATE $]
+<div class="api-def">
+	Inserts the implementation of the [$code|inline|SubTokenType_myLang$]
+	template used by
+	[$pageLink|Token#Token_sub|Token_{languageName}!{rule}.sub(int index)$]
+	to determine the correct static-style token type for each subtoken of a
+	[$pageLink|Token#Token__languageName___rule_|Token_{languageName}!{rule}$].
+</div>
+
+[$apiHeadPlain| SET_STATICID_TERM $]
+<div class="api-def">
+	<span style="font-style: italic">To be documented...</span>
+</div>
+
+[$apiHeadPlain| SET_STATICID_NONTERM $]
+<div class="api-def">
+	<span style="font-style: italic">To be documented...</span>
+</div>
+
+[$apiHeadPlain| RULE_ID_OF $]
+<div class="api-def">
+	<span style="font-style: italic">To be documented...</span>
+</div>
+
+[$apiHeadPlain| LANG_STATICDATA $]
+<div class="api-def">
+	Used to insert all the data from the given [$pageLink|CGT|CGT$] file
+	into the static-style [$typeName|Language_{languageName}$].
+</div>
+
+[$apiHeadPlain| INIT_SYMBOL_LOOKUP $]
+<div class="api-def">
+	Used in the [$typeName|Language_{languageName}$] constructor to insert
+	code that initializes the [$ident|symbolLookup$] table.
+</div>
+
+[$apiHeadPlain| LOOKUP_SYMBOL $]
+<div class="api-def">
+	Used to insert most of the body code for the
+	[$typeName|Language_{languageName}$][$ident|.staticLookupSymbol()$] function.
+</div>
+
+
+<h4>svars (Store Vars):</h4>
+<p>
+	These are fairly complex compared to the cvars and mvars.
+	They involve the use multiple distinct forms:
+</p>
+[$code|plain|
+[:/+S:TAG_NAME:STORE+/ code here /+E:TAG_NAME:STORE+/
+/+P:TAG_NAME+/
+/+S:TAG_NAME:SOME_NAME+/ code here /+E:TAG_NAME:SOME_NAME+/
+/+P:TAG_NAME:SOME_NAME+/:]
+$]
+<p>
+	First, the form [$code|inline|/+S:TAG_NAME:STORE+/ code here /+E:TAG_NAME:STORE+/$]
+	is used to tell StaticLang to "store" the code inside.
+	The code [$code|inline|code here$] is stored, but the whole set of tags
+	are removed and replaced with nothing.
+</p>
+<p>
+	Then, the form [$code|inline|/+P:TAG_NAME+/$] is used. The stored code
+	is inserted into some internally-defined boilerplate code, repeated however
+	many times necessary (determined by the [$ident|TAG_NAME$]
+	and the language), surrounding boilerplate is added, and
+	then the final result is inserted in.
+</p>
+<p>
+	Within the "stored" code, the final two forms can be used to insert certain
+	data that's different for each repetition.
+</p>
+
+
+[$apiHeadPlain| ACCEPT_TERM $]
+[$apiHeadPlain| ACCEPT_TERM:STORE $]
+<div class="api-def">
+<p>
+	Inside the lexer, this stores/inserts the code to accept and create a new
+	terminal token of the appropriate type.
+</p>
+<p>
+	This is repeated (along with boilerplate) for each possible terminal
+	token type, such as
+	[$code|inline|Token_myLang!(SymbolType.Whitespace, "Whitespace")$]
+	or
+	[$code|inline|Token_myLang!(SymbolType.Terminal, "Number")$].
+</p>
+</div>
+[$apiHeadPlain| ACCEPT_TERM:TOKEN_CLASSNAME $]
+<div class="api-def">
+	Inserts the class name for a particular type of terminal token, such as
+	[$code|inline|Token_myLang!(SymbolType.Whitespace, "Whitespace")$]
+	or
+	[$code|inline|Token_myLang!(SymbolType.Terminal, "Number")$].
+</div>
+[$apiHeadPlain| REDUCE $]
+[$apiHeadPlain| REDUCE:STORE $]
+<div class="api-def">
+<p>
+	Inside the parser, this stores/inserts the code to reduce a group of
+	subtokens into a new nonterminal token of the appropriate type.
+</p>
+<p>
+	This is repeated (along with boilerplate) for each possible
+	[$typeName|Token_{languageName}!{rule} $] type, such as
+	[$code|inline|Token_myLang!("<Mult Exp>", 5)$] (where "5" is the ruleId).
+</p>
+</div>
+[$apiHeadPlain| REDUCE:TOKEN_CLASSNAME $]
+<div class="api-def">
+	Inserts the class name for a particular type of nonterminal rule token,
+	such as
+	[$code|inline|Token_myLang!("<Mult Exp>", 5)$] (where "5" is the ruleId).
+</div>
+
+
+<h4>mvars (Modify Vars):</h4>
+<p>
+	These take the code between the [$code|inline|S$] and [$code|inline|E$]
+	tags, and modify it in some predetermined way.
+</p>
+[$apiHeadPlain| STATIC_IDENT $]
+<div class="api-def">
+	Converts an identifier such as [$code|inline|fooBar$] to [$code|inline|staticFooBar$].
+</div>
+[$apiHeadPlain| LANG_IDENT $]
+<div class="api-def">
+	Converts an identifier such as [$code|inline|fooBar$] to [$code|inline|fooBar_nameOfLang$].
+	For instance, if the language name (ie, the [$ident|SHORT_NAME$] from above)
+	is [$code|inline|myLang$], then
+	[$code|inline|/+S:LANG_IDENT+/fooBar/+E:LANG_IDENT+/$]
+	becomes [$code|inline|fooBar_myLang$].
+</div>

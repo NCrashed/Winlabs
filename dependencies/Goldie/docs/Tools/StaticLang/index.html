@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: StaticLang</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/Parse/index.html">Parse</a></li>
+<li><span class="pagemenu-link">StaticLang</span></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../Tools/index.html">Goldie's&nbsp;Tools</a>&nbsp;-> <span class="breadcrumb-link">StaticLang</span>
+	</div>
+	<br />
+	<h1>StaticLang</h1>
+	
+
+
+<p>
+Generates a language package from a
+<a class="page-link" href="../../CGT/index.html">CGT file</a>
+that can be embedded directly into a D program and used in either
+<a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a> or <a class="page-link" href="../../APIOver/StatVsDyn/index.html">dynamic-style</a>.
+</p>
+
+<h3>Example:</h3>
+<p>
+Suppose you have a program <span class="ident">MyApp</span> with a directory structure like this:
+</p>
+<div class="code-plain">MyAppProject
+ |
+ +-- src  <span class="code-comment">(all D sources in here)</span>
+ |    |
+ |    \-- myapp        <span class="code-comment">(package "myapp.*")</span>
+ |         |
+ |         +-- mylang  <span class="code-comment">(empty directory)</span>
+ |         |    |
+ |         |    \--
+ |         |
+ |         \-- main.d  <span class="code-comment">("module myapp.main;")</span>
+ |
+ \-- langs
+      |
+      +-- mylang.grm
+      \-- mylang.cgt  <span class="code-comment">(created by either GRMC or GOLD Parser Builder)</span>        
+</div>
+<p>
+And you want to use <span class="ident">mylang</span> in <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a>
+(or you want to use it <a class="page-link" href="../../APIOver/StatVsDyn/index.html">dynamic-style</a> but have it built
+directly into <span class="ident">MyApp</span> instead of loading the CGT at runtime).
+</p>
+<p>
+Run this command from the <span class="code-inline">MyAppProject</span> directory:
+</p>
+<div class="code-plain">&gt;<span class="code-user">goldie-staticlang langs/mylang.cgt --dir=src --pack=myapp.mylang</span></div>
+<p>
+StaticLang will create some <span class="code-inline">*.d</span> files inside <span class="code-inline">src/myapp/mylang/</span>.
+So now your project looks like this:
+</p>
+<div class="code-plain">MyAppProject
+ |
+ +-- src  <span class="code-comment">(all D sources in here)</span>
+ |    |
+ |    \-- myapp                   <span class="code-comment">(package "myapp.*")</span>
+ |         |
+ |         +-- mylang             <span class="code-comment">(package "myapp.mylang.*")</span>
+ |         |    |
+ |         |    +-- all.d         <span class="code-comment">(module "myapp.mylang.all")</span>
+ |         |    +-- lang.d        <span class="code-comment">(module "myapp.mylang.lang")</span>
+ |         |    +-- langHelper.d  <span class="code-comment">(module "myapp.mylang.langHelper")</span>
+ |         |    +-- lexer.d       <span class="code-comment">(module "myapp.mylang.lexer")</span>
+ |         |    +-- parser.d      <span class="code-comment">(module "myapp.mylang.parser")</span>
+ |         |    \-- token.d       <span class="code-comment">(module "myapp.mylang.token")</span>
+ |         |
+ |         \-- main.d             <span class="code-comment">(module "myapp.main")</span>
+ |
+ \-- langs
+      |
+      +-- mylang.grm
+      \-- mylang.cgt  <span class="code-comment">(created by either GRMC or GOLD Parser Builder)</span>
+</div>
+<p>
+Then, to use the language
+(in either <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a> or <a class="page-link" href="../../APIOver/StatVsDyn/index.html">dynamic-style</a>),
+include these lines in <span class="code-inline">src/myapp/main.d</span>:
+</p>
+<div class="code-highlight">import goldie.all;
+import myapp.mylang.all;</div>
+<p>
+And then use the <a class="page-link" href="../../APIRef/Language/index.html#Language__languageName_">Language_<span class="metaparam">{languageName}</span></a> named <span class="code-inline">language_mylang</span>,
+like this:
+</p>
+<div class="code-highlight">module myapp;
+import goldie.all;
+import myapp.mylang.all;
+
+void main()
+{
+    auto source = "...source code in 'mylang' language here...";
+    
+    <span class="code-comment">// Static-style:</span>
+    auto rootTokenStatic = language_mylang.parseCode(src).parseTree;
+    
+    <span class="code-comment">// Dynamic-style:</span>
+    auto rootTokenDynamic = language_mylang.parseCodeX(src).parseTreeX;
+    
+    <span class="code-comment">// rootTokenStatic is of type: Token_mylang!"&lt;mylang's start symbol&gt;"</span>
+    <span class="code-comment">//    (Look up 'Token_{languageName}!{symbol}' in Goldie's API Reference)</span>
+    
+    <span class="code-comment">// rootTokenDynamic is of type: Token</span>
+}</div>
+<p>
+You can also use <a class="page-link" href="../../APIRef/Language/index.html#Language_parseFile">parseFile</a> and
+<a class="page-link" href="../../APIRef/Language/index.html#Language_parseFileX">parseFileX</a> if you want to
+parse a file instead of just a string.
+</p>
+<p>
+For an example of actually using the resulting parse tree, see the source code
+for the <a class="page-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a> and the examples on the <a class="page-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a>
+page.
+</p>
+<p>
+If later on you change the <span class="ident">mylang</span> grammar, just recompile it to CGT
+with <a class="page-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a> or <a class="page-link" href="../../Tools/OtherTools/index.html#GOLD">GOLD Parser Builder</a>,
+and then re-run the StaticLang command above.
+</p>
+
+<h3>Command-line parameters:</h3>
+<div class="code-plain">Usage: goldie-staticlang [options] cgt-file [options]
+
+Examples:
+  goldie-staticlang langs/lang.cgt
+      Creates "goldie/staticlang/lang/*.d", each
+      containing "module goldie.staticlang.lang.*;"
+
+  goldie-staticlang langs/lang.cgt --dir foo/src --pack myapp.mylang
+  goldie-staticlang langs/lang.cgt --dir=foo/src --pack=myapp.mylang
+      Creates "foo/src/myapp/mylang/*.d", each
+      containing "module myapp.mylang.*;"
+
+--help, /?          Displays this help screen
+-p, --pack &lt;name&gt;   Name of output package (default: goldie.staticlang.{cgt})
+-d, --dir &lt;dir&gt;     Directory of package root (default: current directory)</div>
+
+<h3 class="list-heading">See Also:</h3>
+<ul>
+<li><a class="page-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="page-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+[$name|Requires$]
+[$title|Requirements$]
+[$frame|HTMLPage.tmpl$]
+
+<p>This has been tested to work on Windows and Linux x86. It should also work
+on OSX and any other platform supported by DMD, but has not been tested.</p>
+
+<table class="grid-table">
+<tr>
+	<td style="font-weight: bold">Required</td>
+	<td>[$pageLink|#DMD|DMD 2.052$] or newer (LDC/GDC are untested, and only partial support for DMD 2.057)</td>
+</tr>
+<tr>
+	<td style="font-weight: bold">Required</td>
+	<td>[$pageLink|#SemiTwist|SemiTwist D Tools - tag 'goldie-v0.9'$] (Bundled with Goldie's official prebuilt releases)</td>
+</tr>
+<tr>
+	<td style="font-style: italic">Optional</td>
+	<td>[$pageLink|#DVM|DVM (D Version Manager)$]</td>
+</tr>
+<tr>
+	<td style="font-style: italic">Optional</td>
+	<td>[$pageLink|#PN2|Programmer's Notepad 2$] (ie, PN2 Project files are included)</td>
+</tr>
+<tr>
+	<td style="font-style: italic">Optional</td>
+	<td>[$pageLink|#JsonViewer|JsonViewer$] (Bundled with Goldie)</td>
+</tr>
+<tr>
+	<td style="font-style: italic">Optional</td>
+	<td>[$pageLink|#OtherTools|Other Tools$]</td>
+</tr>
+</table>
+
+<br />
+
+<a name="DMD" />
+<span style="font-weight: bold">Required</span>
+<h2 style="margin-bottom: 0px; margin-top: 0px">Digital Mars D Compiler (DMD) v2.052 or newer</h2>
+<p>Reference compiler for the D Programming Language.</p>
+
+<p>
+The Goldie [$pageTitle|Tutorial$] has instructions for downloading
+and installing DMD (using [$pageLink| #DVM | DVM $]).
+</p>
+
+<p>
+LDC (on OSX or Linux) or GDC might work, but I haven't tried.
+</p>
+
+<p>
+The version of Goldie has been tested with DMD versions 2.052 through 2.056.
+On DMD 2.057, [$pageLink|StatVsDyn|dynamic-style$] works,
+but not static-style or grammar compiling due to DMD Issue
+[$link| http://d.puremagic.com/issues/show_bug.cgi?id=7375 | #7375 $].
+</p>
+
+<p>
+If you want to try to build Goldie's tools with LDC or GDC, you'll need to
+pass [$code|inline|-x--compiler=ldmd$] or [$code|inline|-x--compiler=gdmd$]
+into [$code|inline|semitwist-stbuild$] and modify SemiTwist D Tool's
+batch/shell buildscripts to pass
+[$code|inline|--compiler=ldmd$] or [$code|inline|--compiler=gdmd$] into RDMD.
+</p>
+
+<ul>
+<li>Download and install using [$pageLink| #DVM | DVM $]</li>
+<li>[$link| http://dlang.org/ | DMD Homepage $]</li>
+<li>[$link| http://www.digitalmars.com/d/2.0/changelog.html | Download $]</li>
+</ul>
+
+<a name="SemiTwist" />
+<span style="font-weight: bold">Required</span>
+<h2 style="margin-bottom: 0px; margin-top: 0px">SemiTwist D Tools - tag 'goldie-v0.9'</h2>
+<p>
+This is a set of tools and a library for D. The library is required by Goldie.
+Also included in SemiTwist D Tools is STBuild which can be used to
+build Goldie's tools and sample apps.
+SemiTwist D Tools is bundled with Goldie's official prebuilt releases.
+</p>
+
+<ul>
+<li>
+<span style="font-weight: bold">Installation</span>:
+Goldie's [$pageLink|Install| installation instructions $]
+include installing SemiTwist D Tools.
+</li>
+<li>[$link| https://bitbucket.org/Abscissa/semitwistdtools | SemiTwist D Tools Homepage $]</li>
+</ul>
+
+<a name="DVM" />
+<span style="font-style: italic">Optional</span>
+<h2 style="margin-bottom: 0px; margin-top: 0px">DVM (D Version Manager)</h2>
+<p>
+You can use this simple tool to easily install DMD.
+The Goldie [$pageTitle|Tutorial$] explains how.
+</p>
+<p>
+DVM is great because it also makes it easy to have multiple versions
+of DMD installed and switch between them.
+</p>
+
+<ul>
+<li>[$link| https://bitbucket.org/doob/dvm/wiki/Home | DVM (D Version Manager) Homepage $]</li>
+</ul>
+
+<a name="PN2" />
+<span style="font-style: italic">Optional</span>
+<h2 style="margin-bottom: 0px; margin-top: 0px">Programmer's Notepad 2</h2>
+<p>
+Optional, but the included project files are for Programmer's Notepad 2, so it
+could help if you want to work with Goldie's source. Note, the [$code|inline|*.ppg$]
+files are the main project files
+(the [$code|inline|*.pnproj$] files are secondary).
+</p>
+
+<ul>
+<li>[$link| http://www.pnotepad.org/ | Programmer's Notepad 2 Homepage $]</li>
+<li>[$link| http://www.pnotepad.org/download/ | Download Page $]</li>
+</ul>
+
+<a name="JsonViewer" />
+<span style="font-style: italic">Optional</span>
+<h2 style="margin-bottom: 0px; margin-top: 0px">JsonViewer</h2>
+<p>
+A specially-modified version of JsonViewer is bundled with Goldie,
+although it's not officially part of Goldie.
+</p>
+<p>
+See the [$pageTitle|JsonViewer$] page for more information on this tool.
+</p>
+
+<a name="OtherTools" />
+<span style="font-style: italic">Optional</span>
+<h2 style="margin-bottom: 0px; margin-top: 0px">Other Tools</h2>
+<p>
+Additional tools which may be useful for Goldie users can be found on the
+[$pageTitle|OtherTools$] page.
+</p>

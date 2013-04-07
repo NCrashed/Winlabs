@@ -1,0 +1,150 @@
+[$name|ParseTreeMode$]
+[$title|Parse Tree Mode$]
+[$frame|HTMLPage.tmpl$]
+<p>
+The version of [$pageTitle|JsonViewer$] included with Goldie has been
+customized to include a special Parse Tree Mode for viewing a text document
+side-by-side with a JSON-based tree that describes the text. In this mode,
+you can click on a tree node to highlight its corresponding text,
+or jump from a location in the text to the corresponding tree node.
+</p>
+<p>
+This page describes the special data JsonViewer looks for to enable and use
+this mode.
+</p>
+
+<h2>Sample</h2>
+<p>
+Goldie includes the sample JSON file
+[$link|https://bitbucket.org/Abscissa/goldie/src/v0.9/jsonSample.json|jsonSample.json$]
+that demonstrates how to create a JSON file that JsonViewer's Parse Tree Mode
+can use. Here is the content of the file:
+</p>
+<div class="code-plain">{
+    parseTreeMode: true,
+    source: "Once upon a time...",
+    
+    "Story": {
+        srcIndexStart: 0,
+        srcLength: 19,
+        
+        "Sentence": {
+            srcIndexStart: 0,
+            srcLength: 16,
+            
+            "Word 1": {
+                srcIndexStart: 0,
+                srcLength: 4,
+            },
+            
+            "Word 2": {
+                srcIndexStart: 5,
+                srcLength: 4,
+            },
+            
+            "Word 3": {
+                srcIndexStart: 10,
+                srcLength: 1,
+            },
+            
+            "Word 4": {
+                srcIndexStart: 12,
+                srcLength: 4,
+            }
+        },
+        
+        "Punctuation": {
+            srcIndexStart: 16,
+            srcLength: 3,
+        }
+    }
+}</div>
+<p>
+If you load that file into JsonViewer, it will look like this:
+</p>
+<img src="[$urlToRoot$]JsonViewerSample.png" alt="" />
+<p>
+As you can see, this JSON file describes a text file containing
+[$code|inline|Once upon a time...$].
+It also tells JsonViewer that [$code|inline|Once upon a time$] is a "Story",
+[$code|inline|...$] is "Punctuation",
+and [$code|inline|Once$] though [$code|inline|time$] are
+"Word 1" through "Word 4". (Remember that JSON objects can't have
+multiple members with the same name.)
+</p>
+<p>
+Click a tree node in the left panel to highlight the corresponding section of text.
+Click a location in the text and then click "Jump to Node" to select
+the corresponding node.
+</p>
+
+<h2>Reference</h2>
+<p>
+	All of the following are optional. However, if none of them are used,
+	then Parse Tree Mode won't be particularly useful.
+</p>
+
+[$apiHead|[:parseTreeMode:]$]
+<div class="api-def">
+<p>
+	This can go in either the root JSON object (as in the example above),
+	or the first JSON object immediately inside the root
+	("Story" in the example above).
+</p>
+<p>
+	Giving this a value of [$code|inline|true$] instructs JsonViewer to
+	automatically turn on Parse Tree Mode when loading the file.
+</p>
+</div>
+
+[$apiHead|[:source:]$]
+<div class="api-def">
+<p>
+	This can go in either the root JSON object (as in the example above),
+	or the first JSON object immediately inside the root
+	("Story" in the example above).
+</p>
+<p>
+	This contains the actual text that the JSON file describes.
+	This text will be shown in the middle panel.
+	Don't forget to properly escape any double-quotes.
+</p>
+</div>
+
+[$apiHead|[:file:]$]
+<div class="api-def">
+<p>
+	<span style="font-weight: bold">Not recommended:</span>
+	Use [$ident|source$] instead.
+</p>
+<p>
+	This can go in either the root JSON object,
+	or the first JSON object immediately inside the root
+	("Story" in the example above).
+</p>
+<p>
+	If [$ident|source$] is omitted, then [$ident|file$] can be used to load
+	the source text from a specific file. The value of this should be the
+	filename containing the text that the JSON file describes.
+</p>
+<p>
+	<span style="font-weight: bold">This is NOT recommended</span>, however, 
+	because the two files may become out-of-sync. It is recommended
+	that you use [$ident|source$] instead. (This can be safely included in addition to
+	[$ident|source$] though, because if [$ident|source$] is included,
+	JsonViewer will simply ignore [$ident|file$].)
+</p>
+</div>
+
+[$apiHead|[:
+srcIndexStart
+srcLength
+:]$]
+<div class="api-def">
+<p>
+	Any JSON object that includes both [$ident|srcIndexStart$] and [$ident|srcLength$]
+	is considered to refer to a specific section of the text. This section
+	of the text starts at [$ident|srcIndexStart$] (zero-indexed) and
+	extends for [$ident|srcLength$] characters.
+</p>
+</div>

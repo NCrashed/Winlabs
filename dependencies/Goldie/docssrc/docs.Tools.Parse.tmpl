@@ -1,0 +1,80 @@
+[$name|Parse$]
+[$title|Parse$]
+[$frame|HTMLPage.tmpl$]
+<p>
+Parses any source according to any
+[$pageLink|CGT| CGT file $],
+and saves the resulting
+tokens and parse tree to [$pageLink|ParseTreeMode| JSON files $].
+These JSON files can be inspected with
+the enhanced version of [$pageName|JsonViewer$] bundled with Goldie.
+</p>
+
+<h3>Example:</h3>
+<p>
+If the file extension of your source is the same as the name of a CGT file in
+Goldie's [$code|inline|lang/$] directory:
+</p>
+<div class="api-def">
+<div class="code-plain">&gt;[$code|user| goldie-parse lang/valid_sample2.calc $]</div>
+</div>
+
+<p>
+To use a specific CGT file:
+</p>
+<div class="api-def">
+<div class="code-plain">&gt;[$code|user| goldie-parse --lang=/home/me/myLanguages/calc.cgt lang/valid_sample2.calc $]</div>
+</div>
+
+<p>
+The above examples will create the following files in the same directory
+as [$code|inline|valid_sample2.calc$]:
+</p>
+<div class="api-def">
+[$code|plain|
+[:valid_sample2.calc.tk.json
+valid_sample2.calc.pt.json:]
+$]
+</div>
+<p>
+The [$code|inline|.tk.json$] file contains the tokenization of [$code|inline|valid_sample2.calc$].
+Ie, the result of the [$pageLink|LearnParsing#Frontend|Lexing$] phase.
+</p>
+<p>
+The [$code|inline|.pt.json$] file contains the parse tree of [$code|inline|valid_sample2.calc$].
+Ie, the result of the [$pageLink|LearnParsing#Frontend|Parsing$] phase.
+</p>
+<p>
+Either of the [$code|inline|.json$] files can be opened in [$pageTitle|JsonViewer$]
+and will be browsable using JsonViewer's [$pageLink|ParseTreeMode|Parse Tree Mode$].
+</p>
+
+<p>
+<span style="font-weight: bold">Note:</span>
+Keep in mind, especially when using [$ident|Parse$] with
+[$pageTitle|JsonViewer$], that parse trees tend to get very large, very fast.
+</p>
+
+<h3>Command-line parameters:</h3>
+[$code|plain|
+[:Usage: goldie-parse [options] source-file [options]
+
+Examples:
+    goldie-parse lang/valid_sample2.calc
+    goldie-parse lang/valid_sample2.calc --lang=lang/calc.cgt
+
+If --lang is not specified, goldie-parse will look in Goldie's own 'lang'
+subdirectory for a CGT file with a name matching the source file's extension.
+
+--help, /?         Displays this help screen
+-l, --lang <cgt>   CGT file of language (default: "{goldie}/lang/{src ext}.cgt")
+
+
+--pto <filename>   Parse tree output filename
+--tko <filename>   Token output filename
+--no-pt            Don't save parse tree
+--no-tk            Don't save tokens
+-p, --pretty       Pretty format output
+-t, --type <type>  Output type: "json" or "xml" (default: "json")
+--debug            Display debug information:]
+$]

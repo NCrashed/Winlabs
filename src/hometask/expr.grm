@@ -1,0 +1,37 @@
+!Grammar for win home task
+"Name"      = 'MDL'
+"Author"    = 'NCrashed'
+"Version"   = '0.01'
+"About"     = 'exprestion parser'
+"Case Sensitive" = true
+
+"Start Symbol" = <Everything>
+
+Comment Line  = '//'
+Comment Start = '/*'
+Comment End   = '*/'
+
+! -- Terminals -----------------------------------------
+Integer = ('+'|'-')? {Digit}+ ( ('e'|'E') ('+'|'-')? {Digit}+)?
+Rational = ('+'|'-')? {Digit}+ '.' {Digit}* ( ('e'|'E') ('+'|'-')? {Digit}+)?
+
+!{String Char} = {Printable} - ["\]
+!Literal = '"' ({String Char} | '\'{Printable})* '"'
+Identifier =  ({Letter} | '_') ({AlphaNumeric} | '_')*
+             
+! -- General rules -------------------------------------
+<Real> ::= Rational | Integer
+
+! -- Exprestion rules ----------------------------------
+<Rang1Operation> ::= '+' | '-'
+<Rang2Operation> ::= '*' | '/'
+<Rang3Operation> ::= '^'
+
+<Var>           ::= 'x'   
+<ParamList>     ::= <ParamList> <AdditionList> | <AdditionList> ','
+<Function>      ::= Identifier '(' <ParamList> ')'                    
+<FuncList>      ::= <Real> | <Var> | <Function> | '(' <AdditionList> ')'         
+<PowerList>     ::= <PowerList>     <Rang3Operation> <FuncList>  | <FuncList>                  
+<MultList>      ::= <MultList>      <Rang2Operation> <PowerList> | <PowerList>
+<AdditionList>  ::= <AdditionList>  <Rang1Operation> <MultList>  | <MultList> 
+<Everything>    ::= <AdditionList>

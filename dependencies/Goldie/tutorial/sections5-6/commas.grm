@@ -1,0 +1,27 @@
+! This grammar describes a comma-separated list of values.
+"Name"     = 'Commas Forever'
+"Author"   = 'Joe Coder'
+"Version"  = '0.02'
+"About"    = 'Comma-separated list of values'
+"Case Sensitive" = false
+
+"Start Symbol" = <Everything>
+
+! -- Terminals -----------------------------------------
+
+Integer = '{zero}' | ( '-'? {Digit}+ )
+
+{Ident Start} = {Letter} + [_]
+{Ident Char}  = {AlphaNumeric} + [_]
+Ident = {Ident Start} {Ident Char}*
+
+! -- Rules ---------------------------------------------
+
+<Everything> ::= <Size> <List> <Size>
+
+<Size> ::= 'Large' | 'Small'
+
+<List> ::= <List> ',' <List Element>
+        |  <List Element>
+
+<List Element> ::= Integer | Ident

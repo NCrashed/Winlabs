@@ -1,0 +1,555 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: Base</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><span class="pagemenu-link">Base</span></li>
+<li><a class="pagemenu-link" href="../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../APIRef/index.html">GoldieLib&nbsp;Reference</a>&nbsp;-> <span class="breadcrumb-link">Base</span>
+	</div>
+	<br />
+	<h1>Base</h1>
+	
+
+
+
+<ul>
+<li><a class="page-link" href="#CharPair">struct CharPair</a></li>
+<li><a class="page-link" href="#CharSet">struct CharSet</a></li>
+<li><a class="page-link" href="../../APIRef/Base/index.html#Symbol">struct Symbol</a></li>
+<li><a class="page-link" href="#Rule">struct Rule</a></li>
+<li><a class="page-link" href="#DFAState">struct DFAState</a></li>
+<li><a class="page-link" href="#DFAStateEdge">struct DFAStateEdge</a></li>
+<li><a class="page-link" href="#LALRState">struct LALRState</a></li>
+<li><a class="page-link" href="#LALRAction">struct LALRAction</a></li>
+<li><a class="page-link" href="../../APIRef/Base/index.html#Module">Module-Level Members</a></li>
+</ul>
+
+<p>
+These types store the information contained in a
+<a class="page-link" href="../../CGT/index.html">CGT file</a>.
+For more information on what these actually mean, see GOLD's documentation on
+<a class="extern-link" href="http://goldparser.org/articles/dfa.htm">DFA Lexing</a>,
+<a class="extern-link" href="http://goldparser.org/articles/lalr.htm">LALR(1) Parsing</a>,
+and the
+<a class="extern-link" href="http://goldparser.org/doc/cgt/index.htm">CGT file format</a>.
+</p>
+<p>
+Most users of GoldieLib will only need to deal directly with <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a>.
+</p>
+
+<p class="module-decl">module goldie.base</p><div class="api-section"><a name="CharPair" />struct CharPair</div>
+<div class="api-def">
+	<div class="api-head"><span class="attr"></span> dchar <span class="ident">start</span><br />
+<span class="attr"></span> dchar <span class="ident">end</span><br />
+</div>
+	<div class="api-def">
+		The start and end points of a range of UTF-32 code points.
+		Both <span class="ident">start</span> and <span class="ident">end</span> are inclusive.
+	</div>
+
+	<div class="api-head"><span class="attr">const</span> bool <span class="ident">opEquals</span>(ref const <a class="page-link" href="#CharPair">CharPair</a> <span class="param-name">s</span>)<br />
+</div>
+	<div class="api-def">
+		Comparison operator.
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> string <span class="ident">toString</span>()<br />
+</div>
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+<div class="code-highlight">auto charPair = CharPair('A', 'Z');
+assert(charPair.toString() == `CharPair('\U00000041','\U0000005A')`);</div>
+	</div>
+</div>
+
+<p class="module-decl">module goldie.base</p><div class="api-section"><a name="CharSet" />struct CharSet</div>
+<div class="api-def">
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="#CharPair">CharPair</a>[] <span class="ident">pairs</span><br />
+</div>
+	<div class="api-def">
+		This array defines all the UTF-32 code points
+		contained in this character set.
+	</div>
+
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(dstring <span class="param-name">str</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Constructor.
+	</p>
+	<p>
+		Automatically converts an unsorted array of UTF-32 code points
+		(with possible duplicates) to the internal, sorted and canonical,
+		<span class="code-inline">CharPair[]</span> representation.
+	</p>
+	</div>
+	
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(<a class="page-link" href="#CharPair">CharPair</a>[] <span class="param-name">pairs</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Constructor.
+	</p>
+	<p>
+		This <em>should</em> be sorted and canonical. For instance,
+		a set containing "ABC123" <em>should</em> be laid out exactly
+		like this:
+	</p>
+<div class="code-highlight">CharSet([ CharPair('1','3'), CharPair('A','C') ]);</div>
+	<p>
+		Any other equivalent set <em>might not</em> be properly handled by
+		when comparing with another CharSet. See <span class="ident">opEquals</span> below
+		for specifics.
+	</p>
+	<p>
+		If you're not passing the CharSet into Goldie, and you don't need
+		comparisons to be properly set-based, then this isn't required to be
+		sorted or canonical.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr">const</span> bool <span class="ident">opEquals</span>(ref const <a class="page-link" href="#CharSet">CharSet</a> <span class="param-name">s</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Comparison operator.
+	</p>
+	<p>
+		Only checks that the <span class="ident">pairs</span> arrays are equal.
+		Doesn't check for set equivalence:
+	</p>
+<div class="code-highlight">auto a = CharSet([ CharPair('A','D') ]);
+auto b = CharSet([ CharPair('A','B'), CharPair('C','D') ]);
+auto c = CharSet([ CharPair('C','D'), CharPair('A','B') ]);
+auto d = CharSet([ CharPair('A','C'), CharPair('B','D') ]);
+assert(a == b); <span class="code-comment">// Fails!</span>
+assert(a == c); <span class="code-comment">// Fails!</span>
+assert(a == d); <span class="code-comment">// Fails!</span>
+assert(b == c); <span class="code-comment">// Fails!</span>
+assert(b == d); <span class="code-comment">// Fails!</span>
+assert(c == d); <span class="code-comment">// Fails!</span>
+</div>
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> string <span class="ident">toString</span>()<br />
+</div>
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+<div class="code-highlight">auto charSet = CharSet("123ABC"d);
+assert(
+    charSet.toString() ==
+    `CharSet(CharPair('\U00000031','\U00000033'),CharPair('\U00000041','\U00000043'))`
+);
+</div>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> dstring <span class="ident">toRawChars</span>()<br />
+</div>
+	<div class="api-def">
+	<p>
+		Returns an array of all the UTF-32 code points in this set.
+	</p>
+	<p>
+		Not guaranteed to be sorted or to lack duplicates unless the
+		internal <span class="ident">pairs</span> array is sorted and canonical.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="#CharSet">CharSet</a> <span class="ident">dup</span>() const<br />
+</div>
+	<div class="api-def">
+		Returns a deep (not shallow) duplicate of this CharSet.
+	</div>
+
+	<div class="api-head"><span class="attr"></span> bool <span class="ident">matches</span>(dchar <span class="param-name">ch</span>)<br />
+</div>
+	<div class="api-def">
+		Checks whether a UTF-32 code point is included in this set.
+<div class="code-highlight">auto charSet = CharSet([ CharPair('1','3'), CharPair('A','C') ]);
+assert(charSet.matches('B'));</div>
+	</div>
+</div>
+
+<p class="module-decl">module goldie.base</p><div class="api-section"><a name="Symbol" />struct Symbol</div>
+<div class="api-def">
+	See the <a class="page-link" href="../../APIRef/Symbol/index.html">struct Symbol</a> page.
+</div>
+
+<p class="module-decl">module goldie.base</p><div class="api-section"><a name="Rule" />struct Rule</div>
+<div class="api-def">
+	<div class="api-head"><span class="attr"></span> int <span class="ident">symbolIndex</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		The nonterminal symbol this rule reduces to.
+	</p>
+	<p>
+		This is an index into <a class="page-link" href="../../APIRef/Language/index.html">Language</a><span class="ident">.symbolTable</span>.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> int[] <span class="ident">subSymbolIndicies</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		The symbols that get reduced by this rule.
+	</p>
+	<p>
+		These are indicies into <a class="page-link" href="../../APIRef/Language/index.html">Language</a><span class="ident">.symbolTable</span>.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> string <span class="ident">toString</span>()<br />
+</div>
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+<div class="code-highlight">auto rule = Rule(10, [2, 3, 4]);
+assert(rule.toString() == `Rule( 10, [2, 3, 4] )`);
+</div>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="#Rule">Rule</a> <span class="ident">dup</span>() const<br />
+</div>
+	<div class="api-def">
+		Returns a deep (not shallow) duplicate of this Rule.
+	</div>
+</div>
+
+<p class="module-decl">module goldie.base</p><div class="api-section"><a name="DFAState" />struct DFAState</div>
+<div class="api-def">
+	<div class="api-head"><span class="attr"></span> bool <span class="ident">accept</span><br />
+</div>
+	<div class="api-def">
+		Is this an "accept" state?
+	</div>
+
+	<div class="api-head"><span class="attr"></span> int <span class="ident">acceptSymbolIndex</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		If this is an accept state, <span class="ident">acceptSymbolIndex</span> refers to
+		the symbol that has been found.
+	</p>
+	<p>
+		This is an index into <a class="page-link" href="../../APIRef/Language/index.html">Language</a><span class="ident">.symbolTable</span>.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="#DFAStateEdge">DFAStateEdge</a>[] <span class="ident">edges</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		The DFA edges leading away from this state.
+	</p>
+	<p>
+		For more information,
+		see <a class="page-link" href="#DFAStateEdge">DFAStateEdge</a> and GOLD's documentation on both
+		<a class="extern-link" href="http://goldparser.org/articles/dfa.htm">DFA Lexing</a>
+		and the
+		<a class="extern-link" href="http://goldparser.org/doc/cgt/index.htm">CGT file format</a>.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> string <span class="ident">toString</span>()<br />
+</div>
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+<div class="code-highlight">auto dfaState = DFAState(true, 5, [ DFAStateEdge(3, 8) ]);
+assert(dfaState.toString() == `DFAState( true, 5, [DFAStateEdge(3,8)] )`);
+</div>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="#DFAState">DFAState</a> <span class="ident">dup</span>() const<br />
+</div>
+	<div class="api-def">
+		Returns a deep (not shallow) duplicate of this DFAState.
+	</div>
+</div>
+
+<p class="module-decl">module goldie.base</p><div class="api-section"><a name="DFAStateEdge" />struct DFAStateEdge</div>
+<div class="api-def">
+	<p>
+		If the current character being scanned by the <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a>
+		is in the character set referred to by <span class="ident">charSetIndex</span>,
+		then the <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> moves to the DFA state referred to by
+		<span class="ident">targetDFAStateIndex</span>.
+	</p>
+	<p>
+		For more information, see GOLD's documentation on
+		<a class="extern-link" href="http://goldparser.org/articles/dfa.htm">DFA Lexing</a>
+		and the
+		<a class="extern-link" href="http://goldparser.org/doc/cgt/index.htm">CGT file format</a>.
+	</p>
+	<div class="api-head"><span class="attr"></span> int <span class="ident">charSetIndex</span><br />
+</div>
+	<div class="api-def">
+		This is an index into <a class="page-link" href="../../APIRef/Language/index.html">Language</a><span class="ident">.charSetTable</span>.
+	</div>
+
+	<div class="api-head"><span class="attr"></span> int <span class="ident">targetDFAStateIndex</span><br />
+</div>
+	<div class="api-def">
+		This is an index into <a class="page-link" href="../../APIRef/Language/index.html">Language</a><span class="ident">.dfaTable</span>.
+	</div>
+
+	<div class="api-head"><span class="attr"></span> string <span class="ident">toString</span>()<br />
+</div>
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+<div class="code-highlight">auto dfaEdge = DFAStateEdge(3, 8);
+assert(dfaEdge.toString() == `DFAStateEdge(3,8)`);
+</div>
+	</div>
+</div>
+
+<p class="module-decl">module goldie.base</p><div class="api-section"><a name="LALRState" />struct LALRState</div>
+<div class="api-def">
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="#LALRAction">LALRAction</a>[] <span class="ident">actions</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		The possible LALR actions associated with this state.
+	</p>
+	<p>
+		For more information, see GOLD's documentation on
+		<a class="extern-link" href="http://goldparser.org/articles/lalr.htm">LALR Parsing</a>
+		and the
+		<a class="extern-link" href="http://goldparser.org/doc/cgt/index.htm">CGT file format</a>.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> string <span class="ident">toString</span>()<br />
+</div>
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+<div class="code-highlight">auto lalrState = LALRState([ LALRAction(7, LALRAction.Type.Shift, 10) ]);
+assert(lalrState.toString() == `LALRState( [LALRAction(7,LALRAction.Type.Shift,10)] )`);
+</div>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="#LALRState">LALRState</a> <span class="ident">dup</span>() const<br />
+</div>
+	<div class="api-def">
+		Returns a deep (not shallow) duplicate of this LALRState.
+	</div>
+</div>
+
+<p class="module-decl">module goldie.base</p><div class="api-section"><a name="LALRAction" />struct LALRAction</div>
+<div class="api-def">
+	<div class="api-head"><span class="attr"></span> enum <span class="ident">Type</span><br />
+</div>
+	<div class="api-def">
+		The definition of <span class="ident">LALRAction.Type</span> is:
+<div class="code-highlight">enum Type
+{
+    Shift  = 1, <span class="code-comment">// target: LALR State Index</span>
+    Reduce = 2, <span class="code-comment">// target: Rule Index</span>
+    Goto   = 3, <span class="code-comment">// target: LALR State Index</span>
+    Accept = 4  <span class="code-comment">// target: unused</span>
+}
+</div>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> int <span class="ident">symbolId</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		The symbol expected in order for the <a class="page-link" href="../../APIRef/Parser/index.html">Parser</a> to take
+		this branch of the LALR graph.
+	</p>
+	<p>
+		This is an index into <a class="page-link" href="../../APIRef/Language/index.html">Language</a><span class="ident">.symbolTable</span>.
+	</p>
+	<p>
+		For more information, see the definition of enum <span class="ident">Type</span> above,
+		as well as GOLD's documentation on
+		<a class="extern-link" href="http://goldparser.org/articles/lalr.htm">LALR Parsing</a>
+		and the
+		<a class="extern-link" href="http://goldparser.org/doc/cgt/index.htm">CGT file format</a>.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> Type <span class="ident">type</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		The type of this state.
+	</p>
+	<p>
+		For more information, see the definition of enum <span class="ident">Type</span> above,
+		as well as GOLD's documentation on
+		<a class="extern-link" href="http://goldparser.org/articles/lalr.htm">LALR Parsing</a>
+		and the
+		<a class="extern-link" href="http://goldparser.org/doc/cgt/index.htm">CGT file format</a>.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> int <span class="ident">target</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		Extra information associated with this LALR state.
+		The exact meaning of this depends on the value of <span class="ident">type</span>.
+	</p>
+	<p>
+		For more information, see the definition of enum <span class="ident">Type</span> above,
+		as well as GOLD's documentation on
+		<a class="extern-link" href="http://goldparser.org/articles/lalr.htm">LALR Parsing</a>
+		and the
+		<a class="extern-link" href="http://goldparser.org/doc/cgt/index.htm">CGT file format</a>.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> string <span class="ident">toString</span>()<br />
+</div>
+	<div class="api-def">
+		The result of this is valid D code representing a struct literal.
+		For example:
+<div class="code-highlight">auto lalrAction = LALRAction(7, LALRAction.Type.Shift, 10);
+assert(lalrAction.toString() == `LALRAction(7,LALRAction.Type.Shift,10)`);
+</div>
+	</div>
+
+	<div class="api-head"><span class="attr">static</span> string <span class="ident">typeToString</span>(Type <span class="param-name">type</span>)<br />
+</div>
+	<div class="api-def">
+		Example:
+<div class="code-highlight">string str = LALRAction.typeToString(LALRAction.Type.Reduce);
+assert(str == "Reduce");
+</div>
+	</div>
+
+	<div class="api-head"><span class="attr">static</span> string <span class="ident">fullTypeToString</span>(Type <span class="param-name">type</span>)<br />
+</div>
+	<div class="api-def">
+		Example:
+<div class="code-highlight">string str = LALRAction.fullTypeToString(LALRAction.Type.Reduce);
+assert(str == "LALRAction.Type.Reduce");
+</div>
+	</div>
+</div>
+
+<p class="module-decl">module goldie.base</p><div class="api-section"><a name="Module" />Module-Level Members</div>
+<div class="api-def">
+	<div class="api-head"><span class="attr"></span> T[] <span class="ident">goldieBaseDup</span>(T)(const(T[]) arr)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Duplicates the given array, calling <span class="code-inline">xxxx.dup()</span>
+		on each member.
+	</p>
+	<p>
+		Intended specifically for arrays of the types defined in
+		this <span class="code-inline">goldie.base</span> module.
+	</p>
+	</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

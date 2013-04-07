@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: Parse</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><span class="pagemenu-link">Parse</span></li>
+<li><a class="pagemenu-link" href="../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../Tools/index.html">Goldie's&nbsp;Tools</a>&nbsp;-> <span class="breadcrumb-link">Parse</span>
+	</div>
+	<br />
+	<h1>Parse</h1>
+	
+
+
+<p>
+Parses any source according to any
+<a class="page-link" href="../../CGT/index.html">CGT file</a>,
+and saves the resulting
+tokens and parse tree to <a class="page-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">JSON files</a>.
+These JSON files can be inspected with
+the enhanced version of <a class="page-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a> bundled with Goldie.
+</p>
+
+<h3>Example:</h3>
+<p>
+If the file extension of your source is the same as the name of a CGT file in
+Goldie's <span class="code-inline">lang/</span> directory:
+</p>
+<div class="api-def">
+<div class="code-plain">&gt;<span class="code-user">goldie-parse lang/valid_sample2.calc</span></div>
+</div>
+
+<p>
+To use a specific CGT file:
+</p>
+<div class="api-def">
+<div class="code-plain">&gt;<span class="code-user">goldie-parse --lang=/home/me/myLanguages/calc.cgt lang/valid_sample2.calc</span></div>
+</div>
+
+<p>
+The above examples will create the following files in the same directory
+as <span class="code-inline">valid_sample2.calc</span>:
+</p>
+<div class="api-def">
+<div class="code-plain">valid_sample2.calc.tk.json
+valid_sample2.calc.pt.json</div>
+</div>
+<p>
+The <span class="code-inline">.tk.json</span> file contains the tokenization of <span class="code-inline">valid_sample2.calc</span>.
+Ie, the result of the <a class="page-link" href="../../Start/LearnParsing/index.html#Frontend">Lexing</a> phase.
+</p>
+<p>
+The <span class="code-inline">.pt.json</span> file contains the parse tree of <span class="code-inline">valid_sample2.calc</span>.
+Ie, the result of the <a class="page-link" href="../../Start/LearnParsing/index.html#Frontend">Parsing</a> phase.
+</p>
+<p>
+Either of the <span class="code-inline">.json</span> files can be opened in <a class="page-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+and will be browsable using JsonViewer's <a class="page-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a>.
+</p>
+
+<p>
+<span style="font-weight: bold">Note:</span>
+Keep in mind, especially when using <span class="ident">Parse</span> with
+<a class="page-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>, that parse trees tend to get very large, very fast.
+</p>
+
+<h3>Command-line parameters:</h3>
+<div class="code-plain">Usage: goldie-parse [options] source-file [options]
+
+Examples:
+    goldie-parse lang/valid_sample2.calc
+    goldie-parse lang/valid_sample2.calc --lang=lang/calc.cgt
+
+If --lang is not specified, goldie-parse will look in Goldie's own 'lang'
+subdirectory for a CGT file with a name matching the source file's extension.
+
+--help, /?         Displays this help screen
+-l, --lang &lt;cgt&gt;   CGT file of language (default: "{goldie}/lang/{src ext}.cgt")
+
+
+--pto &lt;filename&gt;   Parse tree output filename
+--tko &lt;filename&gt;   Token output filename
+--no-pt            Don't save parse tree
+--no-tk            Don't save tokens
+-p, --pretty       Pretty format output
+-t, --type &lt;type&gt;  Output type: "json" or "xml" (default: "json")
+--debug            Display debug information</div>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

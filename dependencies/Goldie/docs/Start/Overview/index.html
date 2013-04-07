@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: Goldie Overview</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><span class="pagemenu-link">Goldie Overview</span></li>
+<li><a class="pagemenu-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../Start/index.html">Getting&nbsp;Started</a>&nbsp;-> <span class="breadcrumb-link">Goldie&nbsp;Overview</span>
+	</div>
+	<br />
+	<h1>Goldie Overview</h1>
+	
+
+
+
+<p>
+The process for using Goldie is just like
+<a class="extern-link" href="http://goldparser.org/about/how-it-works.htm">the process for GOLD Parser Builder</a>:
+</p>
+
+<a name="Grammar" />
+<h2>1. Write a grammar in the .grm language</h2>
+<div class="api-def">
+<p>
+Here is a simple example of a grammar definition:
+</p>
+<div class="code-plain">! This grammar defines a simple language consisting of
+! positive integers separated by a plus sign.
+
+"Start Symbol" = &lt;List&gt;
+
+Number = {Digit}+
+
+&lt;List&gt; ::= &lt;List&gt; '+' Number
+         | Number</div>
+<p>
+One of the nice things about the GOLD/Goldie systems, unlike most other parsing systems,
+is that there's no code embedded in the grammars, so grammars are write-once-and-reuse.
+In other words, if you write a grammar to use in one tool, you can reuse the exact same
+grammar for any other tool - even if the two tools are written in completely
+different languages!
+</p>
+<p>
+More information about the grammar description language used by GOLD and Goldie,
+including links to premade grammars, can be found on this page:
+<a class="page-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a>
+</p>
+</div>
+
+<a name="Compile" />
+<h2>2. Compile the grammar to .cgt format</h2>
+<div class="api-def">
+<p>
+Goldie uses the
+<a class="extern-link" href="http://goldparser.org/articles/lalr.htm">LALR(1)</a>
+and
+<a class="extern-link" href="http://goldparser.org/articles/dfa.htm">DFA</a>
+algorithms to parse source. Both of these algorithms can be driven completely
+by tables of raw data, so Goldie requires grammars be compiled into
+these tables before they can be used. This provides certain benefits:
+</p>
+<ul>
+<li>
+	The grammar definition itself can be parsed ahead of time, instead of on-the-fly.
+	(Although, this is typical of just about any parsing system.)
+</li>
+<li>
+	Grammars can be checked for errors before they're used.
+	(This is also typical.)
+</li>
+<li>
+	The code to parse a source can be written once and reused for any grammar,
+	even without automatically-generating any code.
+	This is very rare among parsing systems.
+	<!-- Goldie already provides this (and other features) to D2 users via the included
+	<a class="page-link" href="../../APIOver/index.html">GoldieLib</a>. -->
+</li>
+</ul>
+<p>
+That last benefit is very powerful as it allows programs to be written that operate
+on user-created grammars without compiling any software or using DLL-based plug-in systems.
+Goldie's <a class="page-link" href="../../Tools/Parse/index.html">Parse</a> tool and <a class="page-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a> sample make
+use of this ability.
+</p>
+<p>
+Of course, this doesn't prevent automatically generating source code for a
+parser as other tools such as ANTLR do. In fact, GOLD has a full
+template system that does exactly that. Goldie doesn't actually make any use of
+it, but GoldieLib does offer a <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a>
+which fills a similar role for
+<a class="extern-link" href="http://dlang.org/">D v2.x</a> users.
+</p>
+<h3>How to compile a grammar</h3>
+<p>Grammar files can be compiled in a number of ways:</p>
+<ul class="info-list">
+<li>
+	<h4>Goldie's <a class="page-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></h4>
+	<div class="info-list-info">
+	A cross-platform command-line tool.<br />
+	<br />
+<div class="code-plain" style="padding-left: 5px">&gt;<span class="code-user">goldie-grmc grammar.grm</span>
+Or:
+&gt;<span class="code-user">goldie-grmc grammar.grm -o=output.cgt</span></div>
+	</div>
+</li>
+<li>
+	<h4><a class="page-link" href="../../Tools/OtherTools/index.html#GOLD">GOLD Parser Builder</a></h4>
+	<div class="info-list-info">
+	A .NET-based tool in GUI and command-line versions.
+	</div>
+</li>
+<li>
+	<h4>GoldieLib's <a class="page-link" href="../../APIRef/Language/index.html">Language</a><span class="ident">.compileGrammar*</span> functions</h4>
+	<div class="info-list-info">
+	A <a class="extern-link" href="http://dlang.org/">D v2.x</a>
+	API interface.
+	This can be useful for building general language-processing tools.
+	In fact, this is what <a class="page-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a> uses.<br />
+	<br />
+<div class="code-highlight">string grammar1 = "!* grammar definition here *!";
+Language lang1 = Language.compileGrammar(grammar1);
+
+<span class="code-comment">// Or:</span>
+Language lang2 = Language.compileGrammarFile("grammar2.grm");
+
+<span class="code-comment">// Optionally save:</span>
+lang1.save("grammar1.cgt");
+lang2.save("grammar2.cgt");</div>
+	</div>
+</li>
+</ul>
+</div>
+
+<a name="Engine" />
+<h2>3. Use a GOLD engine to load the compiled grammar and parse a source</h2>
+<div class="api-def">
+<p>
+Any <a class="page-link" href="../../Tools/OtherTools/index.html#GOLD">GOLD</a>-compatible engine can be used to load the
+compiled grammar and parse a source. Such engines are
+<a class="page-link" href="../../Tools/OtherTools/index.html#EngineLinks">available for a wide variety of languages</a>,
+since they're
+<a class="extern-link" href="http://goldparser.org/doc/engine-pseudo/index.htm">fairly easy to make</a>.
+Goldie includes <a class="page-link" href="../../APIOver/index.html">GoldieLib</a> which serves as just such
+an engine for <a class="extern-link" href="http://dlang.org/">D v2.x</a>.
+</p>
+<p>
+Each engine is used differently, and their features and APIs can vary greatly.
+To start learning how to use the GoldieLib engine, see the following:
+</p>
+<ul>
+<li><a class="page-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="page-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></li>
+<li><a class="page-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="page-link" href="../../APIOver/index.html">GoldieLib Overview</a></li>
+<li><a class="page-link" href="../../APIRef/index.html">GoldieLib Reference</a></li>
+</ul>
+<p>
+Additionally, see the <a class="page-link" href="../../Tools/index.html">Goldie's Tools</a> page for various
+tools that may be helpful when using Goldie.
+</p>
+<em>Next:</em> <a class="page-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a>
+</div>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

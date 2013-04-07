@@ -1,0 +1,422 @@
+[$name|StatVsDyn$]
+[$title|Static And Dynamic Styles$]
+[$frame|HTMLPage.tmpl$]
+
+<p>
+Goldie supports two different styles of interfaces: a static-style and
+a dynamic-style. Both styles have pros and cons, and are suitable for
+different purposes. The differences are explained in the comparison chart
+and examples below.
+</p>
+
+<p>
+Note that if you use [$pageTitle|StaticLang$] to embed a language directly into your program,
+you can switch back and forth between static and dynamic styles however you wish.
+</p>
+
+<h2>Which Style Should I Use?</h2>
+<p>
+You can use whichever you want. In fact, you can mix and match both in
+the same code.
+</p>
+<p>
+When in doubt, the recommended rule of thumb is:
+</p>
+<p>
+	<em>
+		Use static-style unless what you're trying to do requires dynamic-style
+		(such as [$pageTitle|Parse$] or [$pageTitle|SampleGenericParse$]).
+	</em>
+</p>
+
+<p>
+Note: Static-style doesn't work on DMD 2.057 due to DMD Issue
+[$link| http://d.puremagic.com/issues/show_bug.cgi?id=7375 | #7375 $].
+</p>
+
+<h2>Comparison Chart</h2>
+<table class="grid-table" style="margin-bottom: 1em">
+<tr>
+	<td>&nbsp;</td>
+	<td style="width: 40%"><h3>Static-style</h3></td>
+	<td style="width: 40%"><h3>Dynamic-style</h3></td>
+</tr>
+<tr>
+	<td><h3>Primary Benefits</h3></td>
+	<td>Better compile-time type-safety</td>
+	<td>More run-time flexibility and slightly simpler API</td>
+</tr>
+<tr>
+	<td><h3>Ideal Uses</h3></td>
+	<td>
+		<ul>
+			<li>You're processing a single specific language.</li>
+			<li>You need high reliability.</li>
+		</ul>
+	</td>
+	<td>
+		<ul>
+			<li>
+				You're creating a general language processing tool,
+				like [$pageTitle|Parse$] or [$pageTitle|SampleGenericParse$].
+			</li>
+			<li>You need to support user-created languages.</li>
+			<li>You're just working on a quick-and-dirty project.</li>
+		</ul>
+	</td>
+</tr>
+<tr>
+	<td><h3>Advance Knowledge of Language</h3></td>
+	<td>
+		Languages must be known ahead-of-time by the developer.
+		(This is usually the case.)
+	</td>
+	<td>
+		Can use any user-supplied language, not just ones known by the developer at development-time.
+		This enables programs like [$pageTitle|Parse$] and [$pageTitle|SampleGenericParse$] to be possible.
+		<br /><br />
+		Note: Using a language not known at development-time naturally limits what you
+		can do with the language, unless you have a way to programmatically infer
+		semantic meaning from a grammar.
+	</td>
+</tr>
+<tr>
+	<td><h3>Loading a Language</h3></td>
+	<td>
+		Use [$pageTitle|StaticLang$] to embed the language directly into your program at compile-time.
+	</td>
+	<td>
+		<ul>
+			<li>Use [$pageTitle|StaticLang$] to embed the language directly into your program at compile-time.</li>
+			<li><em>OR</em> Load a [$code|inline|.cgt$] file at run-time.</li>
+			<li><em>OR</em> Compile a grammar definition at run-time.</li>
+		</ul>
+	</td>
+</tr>
+<tr>
+	<td><h3>Token Types</h3></td>
+	<td>
+		All tokens are subclassed from [$typeName|Token$] with a different
+		type for each symbol or rule (rule-tokens are subclassed from
+		nonterminal symbol-tokens).
+	</td>
+	<td>All tokens are of the type [$typeName|Token$].</td>
+</tr>
+<tr>
+	<td><h3>Use of Non-Existent Symbol/Rule</h3></td>
+	<td>Can be caught at compile-time.</td>
+	<td>Only detectable at run-time.</td>
+</tr>
+<tr>
+	<td><h3>Use of a Different Symbol/Rule Than Expected</h3></td>
+	<td>Can be caught at compile-time.</td>
+	<td>Only detectable at run-time.</td>
+</tr>
+<tr>
+	<td><h3>Unhandled Symbols</h3></td>
+	<td>Can be caught at compile-time.</td>
+	<td>Only detectable at run-time.</td>
+</tr>
+<tr>
+	<td><h3>Unhandled Rules</h3></td>
+	<td>
+		Effectively caught at run-time.
+		<br /><br />
+		(It's possible to catch this at compile-time, but at some point
+		you still have to do a run-time check to see what rule a nonterminal
+		was created from. And that check currently can't detect an unhandled rule at compile-time.)
+	</td>
+	<td>
+		Only detectable at run-time.
+	</td>
+</tr>
+</table>
+
+<a name="Types" />
+<h2>Types and Inheritance</h2>
+<p>
+Consider this grammar:
+</p>
+[$code|plain|
+[:! This is grammar "numberList.grm"
+"Start Symbol" = <List>
+
+Number = {Digit}+
+
+<List> ::= <List> '+' Number
+         | Number
+		 | :]
+$]
+<p>
+In both dynamic-style and static-style, there are the types
+[$typeName|Language$], [$typeName|Lexer$] and [$typeName|Parser$].
+These classes work for any grammar.
+</p>
+<p>
+Static-style additionally subclasses those with the following types, which can *only*
+be used with the "numberList" grammar: 
+[$typeLink|Language_{languageName}| Language_numberList$],
+[$typeLink|Lexer_{languageName}| Lexer_numberList$] and
+[$typeLink|Parser_{languageName}| Parser_numberList$].
+These contain additional/modified functionality that provides better type-safety.
+</p>
+<p>
+The [$typeName|Token$] type works similarly, but with some extra subclasses:
+</p>
+<p>
+In dynamic-style, all of the language's [$pageLink|APIOver#TokenSymbol| symbols $]
+(ie, [$code|inline|Number$], [$code|inline|<List>$] and
+the implicitly-defined [$code|inline|Whitespace$], [$code|inline|Error$] and [$code|inline|EOF$])
+are represented by type [$typeName|Token$].
+</p>
+<p>
+That is still true in static-style, but static-style also defines the following types:
+</p>
+
+<div class="api-def">
+	<h4 style="margin-bottom: 0px">Subclass of Token:</h4>
+	<ul>
+	<li>[$typeLink|Token_{languageName}| Token_numberList $]: All tokens in the language "numberList".</li>
+	</ul>
+
+	<h4 style="margin-bottom: 0px">Subclasses of Token_numberList:</h4>
+	<ul>
+	<li>[$typeLink|Token_{languageName}!{symbol}| Token_numberList!"Number" $]: All [$ident|Number$] terminals.</li>
+	<li>[$typeLink|Token_{languageName}!{symbol}| Token_numberList!"&lt;List&gt;" $]: All [$ident|&lt;List&gt;$] nonterminals.</li>
+	<li>[$typeLink|Token_{languageName}!{symbol}| Token_numberList!"Whitespace" $]: A special terminal built into all grammars.</li>
+	<li>[$typeLink|Token_{languageName}!{symbol}| Token_numberList!"Error" $]: A special terminal built into all grammars.</li>
+	<li>[$typeLink|Token_{languageName}!{symbol}| Token_numberList!"EOF" $]: A special terminal built into all grammars.</li>
+	<!-- <li>Plus similar types for the implicitly-defined [$typeLink|SymbolType| Whitespace, Error and EOF symbols $].</li> -->
+	</ul>
+
+	<h4 style="margin-bottom: 0px">Subclasses of Token_numberList!"Number":</h4>
+	<ul>
+	<li>
+		None, because [$ident|Number$] is a terminal.
+	</li>
+	</ul>
+
+	<h4 style="margin-bottom: 0px">Subclasses of Token_numberList!"&lt;List&gt;":</h4>
+	<ul>
+	<li>
+		[$typeLink|Token_{languageName}!{rule}| Token_numberList!("&lt;List&gt;", "&lt;List&gt;", "+", "Number") $]:<br />
+		All [$ident|&lt;List&gt;$] nonterminals matching the rule: [$code|inline| <List> ::= <List> '+' Number $]
+	</li>
+	<li>
+		[$typeLink|Token_{languageName}!{rule}| Token_numberList!("&lt;List&gt;", "Number") $]:<br />
+		All [$ident|&lt;List&gt;$] nonterminals matching the rule: [$code|inline| <List> ::= Number $]
+	</li>
+	<li>
+		[$typeLink|Token_{languageName}!{rule}| Token_numberList!("&lt;List&gt;", null) $]:<br />
+		All [$ident|&lt;List&gt;$] nonterminals matching the empty rule: [$code|inline|[:<List> ::= :]$]
+	</li>
+	</ul>
+	<p>
+	(Note: A future version of Goldie might be made to accept the actual rule,
+	such as [$code|inline| Token_numberList!"<List> ::= <List> '+' Number" $],
+	instead of a list of separate strings.)
+	</p>
+</div>
+
+<p>
+See also [$pageTitle|AmbiguousSym$].
+</p>
+
+<a name="ExLoading" />
+<h2>Examples</h2>
+<p>
+The following examples use the
+[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/lang/calc.grm | calc $]
+grammar.
+</p>
+
+<h2>Example: Loading a Language</h2>
+<h3>Static-style</h3>
+<div class="api-def">
+[$code|highlight|
+[:// Run "goldie-staticlang calc.cgt --pack=myapp.mylangs" at the command-line
+import goldie.all;
+import myapp.mylangs.calc.all;
+// Use 'language_calc':]
+$]
+</div>
+
+
+<h3>Dynamic-style</h3>
+<div class="api-def">
+<p>Do the same as static-style, or:</p>
+[$code|highlight|
+[:import goldie.all;
+Language language_calc = Language.load("calc.cgt");
+// Use 'language_calc':]
+$]
+<p>Or (slower) compile a grammar at runtime:</p>
+[$code|highlight|
+[:import goldie.all;
+Language language_calcA = Language.compileGrammar(`...actual grammar here...`);
+// -or-
+Language language_calcB = Language.compileGrammarFile("calc.grm");
+// Use 'language_calcA' or 'language_calcB':]
+$]
+</div>
+
+
+<h2>Example: Parsing a source</h2>
+<h3>Static-style</h3>
+<div class="api-def">
+[$code|highlight|
+[:string src = ...;
+Token_calc!"<Add Exp>" rootToken = language_calc.parseCode(src).parseTree;:]
+$]
+<p>
+See [$typeName|Token_{languageName}!{symbol}$] for details.
+</p>
+</div>
+
+<h3>Dynamic-style</h3>
+<div class="api-def">
+[$code|highlight|
+[:string src = ...;
+Token rootToken = language_calc.parseCodeX(src).parseTreeX;:]
+$]
+</div>
+<h4 style="margin-bottom: 0px;">See also:</h4>
+<ul>
+	<li>[$typeName|Language_{languageName}$].[$pageLink|Language#Language_parseCode |parseCode $]</li>
+	<li>[$typeName|Language_{languageName}$].[$pageLink|Language#Language_parseFile |parseFile $]</li>
+	<li>[$typeName|Language$].[$pageLink|Language#Language_parseCodeX |parseCodeX $]</li>
+	<li>[$typeName|Language$].[$pageLink|Language#Language_parseFileX |parseFileX $]</li>
+</ul>
+
+
+<a name="ExCheckSymbol" />
+<h2>Example: Checking a token's symbol</h2>
+<h3>Static-style</h3>
+<div class="api-def">
+[$code|highlight|
+[:// Check static/compile-time type (ie, not polymorphic)
+bool isAddExp(Token_calc!"<Add Exp>" tok)
+{
+	return true;
+}
+bool isAddExp(Token tok)
+{
+	return false;
+}
+
+// Check run-time type (ie, polymorphic)
+bool isAddExp(Token_calc tok)
+{
+	return cast(Token_calc!"<Add Exp>")tok is null;
+	
+	// Or to disambiguate (See the "Ambiguous Symbols" page):
+	return cast(Token_calc!(SymbolType.NonTerminal, "<Add Exp>"))tok is null;
+}:]
+$]
+</div>
+
+<h3>Dynamic-style</h3>
+<div class="api-def">
+[$code|highlight|
+[:bool isAddExp(Token tok)
+{
+	return tok.name == "<Add Exp>";
+	
+	// Or to disambiguate (See the "Ambiguous Symbols" page):
+	return tok.name == "<Add Exp>" && tok.type == SymbolType.NonTerminal;
+}:]
+$]
+</div>
+
+
+<a name="ExCheckRule" />
+<h2>Example: Checking a token's rule and retrieving a sub-token</h2>
+<h3>Static-style</h3>
+<div class="api-def">
+[$code|highlight|
+[:Token_calc!"<Mult Exp>" getMultExp(Token_calc!"<Add Exp>" tok)
+{
+	// This represents the rule: <Add Exp> ::= <Add Exp> '+' <Mult Exp>
+	if( auto t = cast(Token_calc!("<Add Exp>", "<Add Exp>", "+", "<Mult Exp>"))tok )
+	{
+		return t.sub!2;
+	}
+}:]
+$]
+</div>
+
+<h3>Dynamic-style</h3>
+<div class="api-def">
+[$code|highlight|
+[:Token getMultExp(Token tok)
+{
+	// This represents the rule: <Add Exp> ::= <Add Exp> '+' <Mult Exp>
+	if( tok.matches("<Add Exp>", "<Add Exp>", "+", "<Mult Exp>") )
+	{
+		return tok[2];
+	}
+}:]
+$]
+</div>
+
+
+<a name="ExDescendant" />
+<h2>Example: Finding a descendant token</h2>
+<h3>Static-style</h3>
+<div class="api-def">
+[$code|highlight|
+[:alias Token_calc Tok; // For convenience
+
+// Returns:
+//   this
+//     .sub!(/+ the first <Mult Exp> +/)
+//     .sub!(/+ the first <Negate Exp> +/)
+//     .sub!(/+ the first <Value> that was created from <Value> ::= Number +/);
+// 
+// If not found, returns null
+Tok!("<Value>","Number") foo(Token tok)
+{
+	return tok.get!( Tok!"<Mult Exp>", Tok!"<Negate Exp>", Tok!("<Value>","Number") )();
+}:]
+$]
+</div>
+
+<h3>Dynamic-style</h3>
+<div class="api-def">
+[$code|highlight|
+[:// Returns:
+//   this
+//     [/+ the first <Mult Exp> +/]
+//     [/+ the first <Negate Exp> +/]
+//     [/+ the first <Value> that was created from <Value> ::= Number +/];
+// 
+// If not found, returns null
+
+Token foo(Token tok)
+{
+	auto t = tok.get( ["<Mult Exp>", "<Negate Exp>", "<Value>"] );
+
+	if(t && t.matches("<Value>", "Number"))
+		return t;
+
+	return null;
+}:]
+$]
+</div>
+<h4 style="margin-bottom: 0px;">See also:</h4>
+<ul>
+	<li>[$typeName|Token$].[$pageLink|Token#Token_get|get$]</li>
+	<li>[$typeName|Token$].[$pageLink|Token#Token_getRequired|getRequired$]</li>
+</ul>
+
+<a name="ExTraverse" />
+<h2>Example: Traverse each node in a parse tree, with optional filtering</h2>
+<div class="api-def">
+	See documentation of [$pageLink|Token#traverse|traverse$] for examples.
+</div>
+
+<h2>More Examples</h2>
+<p>
+For a full-program example of static-style versus dynamic-style, see
+[$pageTitle|CalculatorStatic$] and [$pageTitle|CalculatorDynamic$].
+</p>

@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: Never Used a Parsing Tool?</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><span class="pagemenu-link">Never Used a Parsing Tool?</span></li>
+<li><a class="pagemenu-link" href="../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../Start/index.html">Getting&nbsp;Started</a>&nbsp;-> <span class="breadcrumb-link">Never&nbsp;Used&nbsp;a&nbsp;Parsing&nbsp;Tool?</span>
+	</div>
+	<br />
+	<h1>Never Used a Parsing Tool?</h1>
+	
+
+
+
+<ul>
+<li><a class="page-link" href="../../Start/LearnParsing/index.html#Compilers">How a Compiler Works</a></li>
+<li><a class="page-link" href="../../Start/LearnParsing/index.html#Frontend">The Frontend: Lexing, Parsing, AST and Semantics</a></li>
+<li><a class="page-link" href="../../Start/LearnParsing/index.html#ParsingTool">Using a Parsing Tool</a></li>
+<li><a class="page-link" href="../../Start/LearnParsing/index.html#Next">The Next Step</a></li>
+<li><a class="page-link" href="../../Start/LearnParsing/index.html#More">More Information</a></li>
+</ul>
+
+<a name="Compilers" />
+<h3 style="margin-bottom: 0px;">How a Compiler Works</h3>
+<h4 style="margin-top: 0px;">(Or: How can I use Goldie to create a compiler?)</h4>
+<p>
+There's a common misconception that language tools and computer science
+theory have advanced enough that creating a compiler can be fully-automated.
+This is not true. Only <em>certain parts</em> of writing a compiler can be
+automated, and it's only these parts that parsing tools (such as Goldie, GOLD,
+Lex/YACC, Flex/Bison and ANTLR) automate. A fully-working compiler is a
+complex program that contains many different parts.
+</p>
+<p>
+Here is a diagram of the three main parts of a compiler:
+</p>
+<div style="text-align: center;">
+	<img alt="Compiler Diagram" src="../../compiler-components.png" />
+</div>
+<ol>
+<li>
+<p>
+<span style="font-weight: bold">Frontend:</span>
+This is the only part of a compiler that automated parsing tools deal with.
+Even so, automated parsing tools only deal with <em>part</em> of the frontend
+(see the section
+<a class="page-link" href="../../Start/LearnParsing/index.html#Frontend">The Frontend: Lexing, Parsing, AST and Semantics</a>
+below).
+</p>
+<p>
+A compiler takes source code as input and outputs a program.
+The frontend is the "input" part. It brings in your source code, attempts to
+understand it, turns it into some sort of internal representation, makes sure
+everything is correct and gives errors if the source code has a problem.
+</p>
+</li>
+<li>
+<p>
+<span style="font-weight: bold">Optimizer:</span>
+Optimization is an optional, but very common, step.
+It adjusts the program being compiled so it runs faster, or in some cases,
+so it takes up less space. Sometimes this is considered to be part of either
+the frontend or the backend, or split between both.
+</p>
+<p>
+Automated parsing tools such as Goldie don't help with this step. This has to be
+either written manually, or an existing optimizer could be used. Either way,
+this can be a fair amount of work.
+</p>
+</li>
+<li>
+<p>
+<span style="font-weight: bold">Backend:</span>
+The (somewhat amusingly-named) backend is the "output" part of a compiler.
+It takes the internal representation of the code and converts it into either
+machine code (possibly for a Virtual Machine) or another programming language.
+In the case of generating machine code, there's a lot of associated
+computer science theory (see the books in <a class="page-link" href="../../Start/LearnParsing/index.html#More">More Information</a>).
+</p>
+<p>
+For many languages, the last part of the backend is the linker. The linker
+combines the many different compiled parts of a program (usually one for each
+original source file) into one single program. Often, this is done by either a
+completely separate program (as with many natively-compiled languages,
+such as D or C/C++) or by the host platform itself (as with dynamically-loaded
+libraries and many virtual machines such as JVM and .NET).
+</p>
+<p>
+As with the optimizer, automated parsing tools don't help with this step.
+The backend has to either be written manually, or an existing backend can be
+adapted.
+</p>
+</li>
+</ol>
+
+<a name="Frontend" />
+<h3>The Frontend: Lexing, Parsing, AST and Semantics</h3>
+<p>
+The frontend handles the first step in the compiling process.
+Like the compiler itself, the frontend is divided into separate steps:
+Lexing (or "Lexical Analysis"), Parsing (or "Grammatical/Syntactical Analysis"),
+AST Creation, and Semantic Analysis.
+</p>
+<p>
+Sometimes people refer to the frontend as a "parser", but that's technically
+incorrect. The parser is just one of the components in the frontend.
+</p>
+<div style="text-align: center;">
+	<img alt="Frontend Diagram" src="../../frontend-components.png" />
+</div>
+<ol>
+<li>
+<p>
+<img style="float: right; border: 1px solid black; margin: 0px 0px 8px 5px;" alt="Example Lexed Tokens" src="../../lex-sample.png" />
+<span style="font-weight: bold">Lexing:</span>
+This separates the source into a series of tokens. For instance,
+<span class="code-inline">int numApples = 10</span> gets converted into
+"Keyword 'int', Identifier 'numApples', Equals sign, Number 10".
+Goldie does this in the <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> class by using a
+<a class="extern-link" href="http://goldparser.org/articles/dfa.htm">DFA</a>.
+Lexers are also sometimes called tokenizers and scanners.
+You can view the result of this step using the <a class="page-link" href="../../Tools/Parse/index.html">Parse</a> tool
+and <a class="page-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>.
+</p>
+</li>
+<li style="clear: both;">
+<p>
+<img style="float: right; border: 1px solid black; margin: 0px 0px 8px 5px;" alt="Example Parse Tree" src="../../parse-tree-sample.png" />
+<span style="font-weight: bold">Parsing:</span>
+This arranges the lexed tokens into a tree. The structure of the tree is
+based directly on the rules in the language's grammar.
+Goldie does this in the <a class="page-link" href="../../APIRef/Parser/index.html">Parser</a> class by using an
+<a class="extern-link" href="http://goldparser.org/articles/lalr.htm">LALR(1)</a> algorithm.
+You can view the result of this step using the <a class="page-link" href="../../Tools/Parse/index.html">Parse</a> tool
+and <a class="page-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>.
+</p>
+<p>
+Sometimes parsers don't actually build a real parse tree. They may just simply
+process the tokens as they're being parsed. Or they may merge the parsing step
+with AST creation (see below) and directly output an AST.
+Goldie always builds a parse tree, although a future version of Goldie may
+provide the ability to omit it.
+</p>
+</li>
+<li style="clear: both;">
+<p>
+<img style="float: right; border: 1px solid black; margin: 0px 0px 8px 5px;" alt="Example Abstract Syntax Tree" src="../../ast-sample.png" />
+<span style="font-weight: bold">AST Creation:</span>
+This step is optional and is only sometimes performed by automatic parsers.
+Goldie doesn't currently perform this (so you'll have to do it yourself if you want an AST),
+but it probably will in a future version. Sometimes this is considered
+part of either the parsing step or the semantic analysis step.
+</p>
+<p>
+In this step, the parse tree is converted into an AST (Abstract Syntax Tree).
+An AST is like a parse tree, but it more closely resembles the way
+humans understand the code. For instance, the parse tree representation of
+<span class="code-inline">5 + 10</span> can be somewhat complex, unintuitive and highly
+dependent on the language's grammar. But an AST would most likely represent it
+very naturally: With one node for "Addition" that contains two subnodes,
+one for "5" and one for "10".
+</p>
+<p>
+An XML/HTML DOM is a good example of an AST. For another example, see the output
+of <a class="page-link" href="../../Tools/GenDocs/index.html">GenDocs</a>'s <span class="code-inline">--ast</span> flag.
+</p>
+</li>
+<li style="clear: both;">
+<p>
+<img style="float: right; border: 1px solid black; margin: 0px 0px 8px 5px;" alt="Example Semantic Analysis" src="../../semanitc-sample.png" />
+<span style="font-weight: bold">Semantic Analysis:</span>
+This step is generally NOT performed by automatic parsers.
+The user of such tools has to perform this step on their own because it's
+not as easily formalized as lexing, parsing or AST creation.
+</p>
+<p>
+In this step, the parse tree or the AST is analyzed and actual meaning is
+determined. This often involves extra error
+checking. For instance, in statically-typed languages, the type system exists
+in the semantic analysis phase. This step is also where type-mismatch errors
+and "undefined function/variable" errors are generated. Semantic analysis can
+be thought of as anything in the frontend that isn't formally defined
+by the language's grammar.
+</p>
+<p>
+See the
+<a class="extern-link" href="https://bitbucket.org/Abscissa/goldie/src/v0.9/src/tools/gendocs">GenDocs source</a>
+for an example of lexing/parsing with Goldie and then constructing an AST tree
+and performing semantic analysis.
+</p>
+</li>
+</ol>
+
+<a name="ParsingTool" />
+<h3 style="clear: both;">Using a Parsing Tool</h3>
+<p>
+Parsing tools such as Goldie only deal with the frontend. But not the entire
+frontend: Just the lexing, parsing, and sometimes AST creation parts.
+The rest still has to be written by the user of the parsing tool.
+</p>
+<p>
+There are a variety of parsing tools available, and they differ in various ways,
+such as: what parsing algorithm they use, what language is used to perform the
+parsing (ie, the "host" language), how the grammar is defined, and what special
+tools can be used.
+</p>
+<p>
+Goldie is compatible with the
+<a class="page-link" href="../../Tools/OtherTools/index.html#GOLD">GOLD Parsing System</a>, and both use
+<a class="extern-link" href="http://goldparser.org/articles/dfa.htm">DFA</a>
+for lexing and
+<a class="extern-link" href="http://goldparser.org/articles/lalr.htm">LALR(1)</a>
+for parsing. GoldieLib is designed to be used in programs written in the
+<a class="extern-link" href="http://dlang.org/">D programming language</a>
+(D version 2). But, the GOLD/Goldie systems
+are designed to be easily extended to other host languages via GOLD-compatible
+"engines",
+<a class="extern-link" href="http://goldparser.org/engine/index.htm">many of which are available</a>
+besides GoldieLib.
+</p>
+<p>
+See the <a class="page-link" href="../../Start/Overview/index.html">Goldie Overview</a> page for an overview of using Goldie, or
+the <a class="page-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a> page for a full tutorial.
+</p>
+<p>
+The GOLD website has a great tutorial on 
+<a class="extern-link" href="http://goldparser.org/getting-started/index.htm">Getting Started With Parsing</a>
+that's geared towards GOLD. It's applicable to Goldie as well, since the two are compatible.
+</p>
+
+<a name="Next" />
+<h3>The Next Step</h3>
+<p>
+<em>Next:</em> <a class="page-link" href="../../Start/Overview/index.html">Goldie Overview</a>
+</p>
+<p>
+Or, skip to the <a class="page-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a>.
+</p>
+
+<a name="More" />
+<h3>More Information</h3>
+<p>
+There are many resources for learning more about compilers and the
+computer science theory behind them. Here are some recommended
+resources for getting started:
+</p>
+<h4 style="margin-bottom: 5px;">Web Pages:</h4>
+<ul>
+<li style="margin-bottom: 7px;">
+	<a class="extern-link" href="http://goldparser.org/articles/index.htm">GOLD Parsing System: Articles, Links and Much More</a>
+	<br />
+	Many useful articles and links. I've personally found these very helpful.
+</li>
+</ul>
+<h4 style="margin-bottom: 5px;">Books:</h4>
+<ul>
+<li style="margin-bottom: 7px;">
+	<a class="extern-link" href="http://www.pearsonhighered.com/educator/product/Crafting-A-Compiler/9780136067054.page">Crafting a Compiler</a>
+	<br />
+	<span style="font-style: italic; font-size: 0.95em;">
+	ISBN-10: 0136067050<br />
+	ISBN-13: 978-0136067054<br />
+	</span>
+	All books on compiler theory I've seen target an audience of
+	mathematicians, computer scientists and/or students of such fields, rather
+	than programmers. But this
+	is by far the most programmer-friendly one I've come across.
+	I found it to be of immense help when writing <a class="page-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a>.
+</li>
+<li style="margin-bottom: 7px;">
+	<a class="extern-link" href="http://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools">Compilers: Principles, Techniques, and Tools</a>
+	(ie, "The Dragon Book")
+	<br />
+	<span style="font-style: italic; font-size: 0.95em;">
+	ISBN-10: 0321486811<br />
+	ISBN-13: 978-0321486813<br />
+	</span>
+	Widely considered the classic text on compiler theory. It is, however,
+	one of the most heavily mathematician/computer-scientist-oriented
+	compiler books out there.
+	But, while it's far from being the most programmer-friendly,
+	it is very detailed and thorough.
+</li>
+<li style="margin-bottom: 7px;">
+	<a class="extern-link" href="http://goldparser.org/articles/other-parsers.htm">GOLD Parsing System: Compiler Books</a>
+	<br />
+	Links to some other books on compiler theory, and also other parsing systems.
+</li>
+</ul>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: Library Source and StaticLang</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><span class="pagemenu-link">Library Source and StaticLang</span></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../Dev/index.html">Developers</a>&nbsp;-> <span class="breadcrumb-link">Library&nbsp;Source&nbsp;and&nbsp;StaticLang</span>
+	</div>
+	<br />
+	<h1>Library Source and StaticLang</h1>
+	
+
+
+
+<h3>
+Q: I've looked at the source for Token, Language, Lexer and Parser,
+and OMG, what the hell is that mess?! (Especially Token! Geez!)
+</h3>
+<p>
+A: Heh :) Put simply, it's a temporary kludge. The <a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a> tool
+generates static-style languages directly from Goldie's dynamic-style
+library source. That mess is all the directives used to help instruct
+<a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a> in how to do the conversion.
+</p>
+<p>
+To read the dynamic-style source, just ignore all the weird
+<span class="code-inline">/+...+/</span> directives
+and anything inside <span class="code-inline">version(Goldie_StaticStyle)</span>
+(it will NOT be defined when you compile).
+</p>
+<p>
+To read the static-style source, look at <a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a>'s output
+and remember that <span class="code-inline">version(Goldie_StaticStyle)</span> WILL be
+defined when compiling.
+</p>
+<p>
+To read the dynamic-style source, and see how <a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a> will
+transform it, see the explanation of <a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a>'s preprocessing
+below.
+</p>
+<p>
+I do intend to clean that all up.
+</p>
+
+<h3>
+Q: Goldie is already a language processing tool. Why don't you just use
+Goldie and a D grammar to do the conversion? Or use D's fantastic
+metaprogramming abilities?
+</h3>
+<p>
+A: I do intend to do something like that.
+</p>
+
+<h2>
+StaticLang's Preprocessing
+</h2>
+
+<h3>Tag Structure</h3>
+<p>
+StaticLang's preprocessing system is based on some basic tags:
+</p>
+<div class="code-plain">/+LETTER:TAG_NAME+/
+/+LETTER:TAG_NAME+/DUMMY</div>
+<p>
+Where:
+</p>
+<ul>
+<li>
+	<span class="code-inline">LETTER</span> is one of: <span class="code-inline">P</span>, <span class="code-inline">S</span>, or <span class="code-inline">E</span>
+	<ul>
+		<li>
+			<span class="code-inline">P</span> tags stand for "Place" and are used by themselves.
+			These tags are replaced by some other text.
+		</li>
+		<li>
+			<p><span class="code-inline">S</span> and <span class="code-inline">E</span> tags stand for "Start" and "End"
+			and are used in pairs surrounding code. Both tags <em>and</em> all the code
+			in between are all replaced.</p>
+			<p>Example:</p>
+<div class="code-plain">/+P:SOME_TAG+/
+/+P:SOME_TAG+/DUMMY
+/+S:SOME_TAG+/some D code here/+E:SOME_TAG+/</div>
+		</li>
+	</ul>
+</li>
+<li>
+	<span class="code-inline">TAG_NAME</span> is the name of the desired tag (see below).
+</li>
+<li>
+	The text <span class="code-inline">DUMMY</span> can optionally be appended whenever needed to make D's parser happy.
+	This is usually only useful for <span class="code-inline">P</span> tags.
+</li>
+</ul>
+<p>
+Note that, aside from the <span class="code-inline">DUMMY</span> text, the tags are seen as
+nested comments by D.
+</p>
+
+<h3>Defined Tags</h3>
+<p style="font-style: italic">
+You'll notice that some of the following are not yet documented.
+Full documentation of StaticLang's preprocessing is delayed because I
+may make use of D's metaprogramming to take over much of the work currently
+done by StaticLang.
+</p>
+<p>
+There are three classes of tags:
+cvars (Constant Vars), svars (Store Vars), and mvars (Modify Vars)
+</p>
+<h4>cvars (Constant Vars):</h4>
+<p>
+These tags are replaced with constant predetermined text that is always
+the same for a given language. (But it may differ from one language to another.)
+</p>
+<p>
+If <span class="code-inline">S</span> and <span class="code-inline">E</span> tags are used, all the code inside
+the start and end tags is replaced.
+</p>
+<div class="api-head"><span class="ident">REM</span></div>
+<div class="api-def">
+	<p>
+	Comments. Short for "remark", just like in BASIC and BATCH. These are
+	removed completely by StaticLang, and replaced with absolutely nothing.
+	</p>
+	<p>
+	Generally, it's preferred to use
+	<span class="code-inline">version(Goldie_DynamicStyle)</span> instead of this.
+	</p>
+</div>
+
+<div class="api-head"><span class="ident">STATIC</span></div>
+<div class="api-def">
+	Replaced with the text <span class="code-inline">static</span>
+</div>
+
+<div class="api-head"><span class="ident">OVERRIDE</span></div>
+<div class="api-def">
+	Replaced with the text <span class="code-inline">override</span>
+</div>
+
+<div class="api-head"><span class="ident">VERSION</span></div>
+<div class="api-def">
+	Replaced with Goldie's version number.
+</div>
+
+<div class="api-head"><span class="ident">PACKAGE</span></div>
+<div class="api-def">
+	<p>
+		Replaced with the package name of the language.
+	</p>
+	<p>
+		For instance, if StaticLang is run with the command line parameter
+		<span class="code-inline">-pack:myApp.langs.myLang</span>, then this tag is
+		replaced with the text <span class="code-inline">myApp.langs.myLang</span>.
+	</p>
+</div>
+
+<div class="api-head"><span class="ident">SHORT_PACKAGE</span></div>
+<div class="api-def">
+	<p>
+		Replaced with the name of the language, ie., the last part of the package name.
+	</p>
+	<p>
+		For instance, if StaticLang is run with the command line parameter
+		<span class="code-inline">-pack:myApp.langs.myLang</span>, then this tag is
+		replaced with the text <span class="code-inline">myLang</span>.
+	</p>
+</div>
+
+<div class="api-head"><span class="ident">INIT_STATIC_LANG</span></div>
+<div class="api-def">
+	Inserts some basic initialization for each module:
+<div class="code-plain">version = Goldie_StaticStyle;
+private enum _packageName = "/+P:PACKAGE+/";
+private enum _shortPackageName = "/+P:SHORT_PACKAGE+/"</div>
+</div>
+
+<div class="api-head"><span class="ident">LANG_CLASSNAME</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">Language_myLang</span>
+	(assuming the language name, ie. <span class="ident">SHORT_PACKAGE</span>, is <span class="code-inline">myLang</span>)
+</div>
+
+<div class="api-head"><span class="ident">LANG_INHERIT</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">public class Language_myLang : Language</span>
+</div>
+
+<div class="api-head"><span class="ident">LANG_INSTNAME</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">language_myLang</span>
+</div>
+
+<div class="api-head"><span class="ident">LANG_FILENAME</span></div>
+<div class="api-def">
+	Inserts the name of the <a class="page-link" href="../../CGT/index.html">CGT</a> file this static-style
+	language is being created from, without the path.
+	For instance, <span class="code-inline">myLang.cgt</span>
+</div>
+
+<div class="api-head"><span class="ident">LEXER_CLASSNAME</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">Lexer_myLang</span>
+</div>
+
+<div class="api-head"><span class="ident">LEXER_INHERIT</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">public class Lexer_myLang : Lexer</span>
+</div>
+
+<div class="api-head"><span class="ident">PARSER_CLASSNAME</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">Parser_myLang</span>
+</div>
+
+<div class="api-head"><span class="ident">PARSER_INHERIT</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">public class Parser_myLang : Parser</span>
+</div>
+
+<div class="api-head"><span class="ident">TOKEN_CLASSNAME</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">Token_myLang</span>
+</div>
+
+<div class="api-head"><span class="ident">TOKEN_INHERIT</span></div>
+<div class="api-def">
+	Replaced with
+	<span class="code-inline">private class _Token_myLang(SymbolType staticSymbolType, string _staticName) : Base_Token_myLang</span>
+</div>
+
+<div class="api-head"><span class="ident">SUBTOKENTYPE_NAME</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">SubTokenType_myLang</span>
+</div>
+
+<div class="api-head"><span class="ident">IS_CORRECT_TOKEN_FUNCNAME</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">isCorrectToken_myLang</span>
+</div>
+
+<div class="api-head"><span class="ident">RULE_ID_OF_FUNCNAME</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">ruleIdOf_myLang</span>
+</div>
+
+<div class="api-head"><span class="ident">TOKEN_CTOR_TERMFIRST</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">static if(staticSymbolType != SymbolType.NonTerminal) {</span>
+</div>
+
+<div class="api-head"><span class="ident">TOKEN_CTOR_NONTERMFIRST</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">static if(staticSymbolType == SymbolType.NonTerminal) {</span>
+</div>
+
+<div class="api-head"><span class="ident">BLOCK_ELSE</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">} else {</span>
+</div>
+
+<div class="api-head"><span class="ident">TOKEN_CTOR_END</span></div>
+<div class="api-def">
+	Replaced with <span class="code-inline">}</span>
+</div>
+
+<div class="api-head"><span class="ident">TOKEN_CLASSNAME_TOPNODE</span></div>
+<div class="api-def">
+	Inserts the name of the nonterminal <a class="page-link" href="../../APIRef/Token/index.html#Token__languageName___symbol_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{symbol}</span></a>
+	that is the root, or "Start Symbol", of the parse tree. Ie, this is the
+	type of <a class="page-link" href="../../APIRef/Parser/index.html#Parser_parseTree">Parser_{languageName}.parseTree</a>.
+</div>
+
+<div class="api-head"><span class="ident">TOKEN_TEMPLATE_1P</span></div>
+<div class="api-head"><span class="ident">TOKEN_TEMPLATE_2P</span></div>
+<div class="api-head"><span class="ident">TOKEN_TEMPLATE_RULE</span></div>
+<div class="api-def">
+	Inserts the bodies of various helper templates for referring to
+	the various static-style token types.
+</div>
+
+<div class="api-head"><span class="ident">SUBTOKENTYPE_TEMPLATE</span></div>
+<div class="api-def">
+	Inserts the implementation of the <span class="code-inline">SubTokenType_myLang</span>
+	template used by
+	<a class="page-link" href="../../APIRef/Token/index.html#Token_sub">Token_{languageName}!{rule}.sub(int index)</a>
+	to determine the correct static-style token type for each subtoken of a
+	<a class="page-link" href="../../APIRef/Token/index.html#Token__languageName___rule_">Token_{languageName}!{rule}</a>.
+</div>
+
+<div class="api-head"><span class="ident">SET_STATICID_TERM</span></div>
+<div class="api-def">
+	<span style="font-style: italic">To be documented...</span>
+</div>
+
+<div class="api-head"><span class="ident">SET_STATICID_NONTERM</span></div>
+<div class="api-def">
+	<span style="font-style: italic">To be documented...</span>
+</div>
+
+<div class="api-head"><span class="ident">RULE_ID_OF</span></div>
+<div class="api-def">
+	<span style="font-style: italic">To be documented...</span>
+</div>
+
+<div class="api-head"><span class="ident">LANG_STATICDATA</span></div>
+<div class="api-def">
+	Used to insert all the data from the given <a class="page-link" href="../../CGT/index.html">CGT</a> file
+	into the static-style <a class="page-link" href="../../APIRef/Language/index.html#Language__languageName_">Language_<span class="metaparam">{languageName}</span></a>.
+</div>
+
+<div class="api-head"><span class="ident">INIT_SYMBOL_LOOKUP</span></div>
+<div class="api-def">
+	Used in the <a class="page-link" href="../../APIRef/Language/index.html#Language__languageName_">Language_<span class="metaparam">{languageName}</span></a> constructor to insert
+	code that initializes the <span class="ident">symbolLookup</span> table.
+</div>
+
+<div class="api-head"><span class="ident">LOOKUP_SYMBOL</span></div>
+<div class="api-def">
+	Used to insert most of the body code for the
+	<a class="page-link" href="../../APIRef/Language/index.html#Language__languageName_">Language_<span class="metaparam">{languageName}</span></a><span class="ident">.staticLookupSymbol()</span> function.
+</div>
+
+
+<h4>svars (Store Vars):</h4>
+<p>
+	These are fairly complex compared to the cvars and mvars.
+	They involve the use multiple distinct forms:
+</p>
+<div class="code-plain">/+S:TAG_NAME:STORE+/ code here /+E:TAG_NAME:STORE+/
+/+P:TAG_NAME+/
+/+S:TAG_NAME:SOME_NAME+/ code here /+E:TAG_NAME:SOME_NAME+/
+/+P:TAG_NAME:SOME_NAME+/</div>
+<p>
+	First, the form <span class="code-inline">/+S:TAG_NAME:STORE+/ code here /+E:TAG_NAME:STORE+/</span>
+	is used to tell StaticLang to "store" the code inside.
+	The code <span class="code-inline">code here</span> is stored, but the whole set of tags
+	are removed and replaced with nothing.
+</p>
+<p>
+	Then, the form <span class="code-inline">/+P:TAG_NAME+/</span> is used. The stored code
+	is inserted into some internally-defined boilerplate code, repeated however
+	many times necessary (determined by the <span class="ident">TAG_NAME</span>
+	and the language), surrounding boilerplate is added, and
+	then the final result is inserted in.
+</p>
+<p>
+	Within the "stored" code, the final two forms can be used to insert certain
+	data that's different for each repetition.
+</p>
+
+
+<div class="api-head"><span class="ident">ACCEPT_TERM</span></div>
+<div class="api-head"><span class="ident">ACCEPT_TERM:STORE</span></div>
+<div class="api-def">
+<p>
+	Inside the lexer, this stores/inserts the code to accept and create a new
+	terminal token of the appropriate type.
+</p>
+<p>
+	This is repeated (along with boilerplate) for each possible terminal
+	token type, such as
+	<span class="code-inline">Token_myLang!(SymbolType.Whitespace, "Whitespace")</span>
+	or
+	<span class="code-inline">Token_myLang!(SymbolType.Terminal, "Number")</span>.
+</p>
+</div>
+<div class="api-head"><span class="ident">ACCEPT_TERM:TOKEN_CLASSNAME</span></div>
+<div class="api-def">
+	Inserts the class name for a particular type of terminal token, such as
+	<span class="code-inline">Token_myLang!(SymbolType.Whitespace, "Whitespace")</span>
+	or
+	<span class="code-inline">Token_myLang!(SymbolType.Terminal, "Number")</span>.
+</div>
+<div class="api-head"><span class="ident">REDUCE</span></div>
+<div class="api-head"><span class="ident">REDUCE:STORE</span></div>
+<div class="api-def">
+<p>
+	Inside the parser, this stores/inserts the code to reduce a group of
+	subtokens into a new nonterminal token of the appropriate type.
+</p>
+<p>
+	This is repeated (along with boilerplate) for each possible
+	<a class="page-link" href="../../APIRef/Token/index.html#Token__languageName___rule_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{rule}</span></a> type, such as
+	<span class="code-inline">Token_myLang!("&lt;Mult Exp&gt;", 5)</span> (where "5" is the ruleId).
+</p>
+</div>
+<div class="api-head"><span class="ident">REDUCE:TOKEN_CLASSNAME</span></div>
+<div class="api-def">
+	Inserts the class name for a particular type of nonterminal rule token,
+	such as
+	<span class="code-inline">Token_myLang!("&lt;Mult Exp&gt;", 5)</span> (where "5" is the ruleId).
+</div>
+
+
+<h4>mvars (Modify Vars):</h4>
+<p>
+	These take the code between the <span class="code-inline">S</span> and <span class="code-inline">E</span>
+	tags, and modify it in some predetermined way.
+</p>
+<div class="api-head"><span class="ident">STATIC_IDENT</span></div>
+<div class="api-def">
+	Converts an identifier such as <span class="code-inline">fooBar</span> to <span class="code-inline">staticFooBar</span>.
+</div>
+<div class="api-head"><span class="ident">LANG_IDENT</span></div>
+<div class="api-def">
+	Converts an identifier such as <span class="code-inline">fooBar</span> to <span class="code-inline">fooBar_nameOfLang</span>.
+	For instance, if the language name (ie, the <span class="ident">SHORT_NAME</span> from above)
+	is <span class="code-inline">myLang</span>, then
+	<span class="code-inline">/+S:LANG_IDENT+/fooBar/+E:LANG_IDENT+/</span>
+	becomes <span class="code-inline">fooBar_myLang</span>.
+</div>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+[$name|AmbiguousSym$]
+[$title|Ambiguous Symbols$]
+[$frame|HTMLPage.tmpl$]
+
+<p>
+[$pageLink| OtherTools#GOLD | GOLD $], and therefore Goldie, 
+allows grammars to
+have different symbols that share the same name as long as their
+[$typeName|SymbolType$] is different. For instance, in this grammar:
+</p>
+[$code|plain|
+[:Foo = {Letter}+
+<Foo> ::= Foo:]
+$]
+<p>
+According to GOLD, that is a perfectly legal grammar with two symbols named [$ident|Foo$]:
+The first one is a [$typeName|SymbolType$][$ident|.Terminal$],
+and the second is a [$typeName|SymbolType$][$ident|.NonTerminal$].
+This can cause problems because if you tried to refer to a symbol named [$ident|Foo$],
+there are two possible symbols you might mean. Symbol [$ident|Foo$] is ambiguous.
+</p>
+<p>
+Because of this, Goldie considers the angle brackets on nonterminal
+to be part of the symbol's name. So in the example above,
+the terminal symbol is named [$ident|Foo$], but the nonterminal is named
+[$ident|&lt;Foo&gt;$]. In Goldie, a nonterminal's name <em>always</em> includes
+the surrounding angle brackets.
+</p>
+<p>
+That usually solves the problem, but there are still cases where it doesn't help, such as these three:
+</p>
+[$code|plain|
+[:<Foo> ::= '<Foo>'
+<A> ::= 'EOL'
+<B> ::= 'Error':]
+$]
+<p>
+The above is perfectly legal grammar according to GOLD, but there are three
+ambiguities:
+</p>
+<ol>
+<li>
+	There is a nonterminal named [$ident|&lt;Foo&gt;$] <em>and</em>
+	a terminal named [$ident|&lt;Foo&gt;$]. Remember, string literals on
+	the right-side of a rule are terminals, and their name is whatever the
+	content of the string is.
+</li>
+<li>
+	Every GOLD grammar implicitly has a symbol of type
+	[$typeName|SymbolType$][$ident|.EOL$]
+	named [$ident|EOL$]. The [$ident|EOL$] terminal above is ambiguous
+	with that implicit symbol.
+</li>
+<li>
+	Every GOLD grammar implicitly has a symbol of type
+	[$typeName|SymbolType$][$ident|.Error$]
+	named [$ident|Error$]. The [$ident|Error$] terminal above is ambiguous
+	with that implicit symbol.
+</li>
+</ol>
+<p>
+To solve these problems: If you're checking tokens by looking at their symbol name
+(ie, [$pageLink|Token#Token_name|Token.name$]), then you'll need to remember to
+check that the symbol type (ie, [$pageLink|Token#Token_type|Token.type$]) is also
+what you expect.
+</p>
+<p>
+If you're passing a symbol name into a Goldie function or template, Goldie
+will raise an error if the symbol name is ambiguous. This will be a
+compile-time error for [$pageLink|StatVsDyn|static-style$] and it will be a
+run-time Exception for [$pageLink|StatVsDyn|dynamic-style$]. If you get such
+an "ambiguous symbol" error, you will need to disambiguate.
+</p>
+<p>
+For now, there is no built-in way to disambiguate for [$pageLink|StatVsDyn|dynamic-style$],
+you'll have to do it manually by checking the token's [$pageLink|Token#Token_type|type$]. 
+</p>
+<p>
+For [$pageLink|StatVsDyn|static-style$], suppose you have the following in your code:
+</p>
+[$code|highlight|
+[:// Ex #1
+Token_mylang!("<Foo>") // Which <Foo>? Terminal or nonterminal?
+
+// Ex #2
+Token_mylang!("<Foo>", "subSymbolOfFoo") // Which <Foo>? Terminal or nonterminal?
+
+// Ex #3
+Token_mylang!("<FooParent>", "<Foo>", ";") // Which <Foo>? Terminal or nonterminal?:]
+$]
+<p>
+If [$ident|&lt;Foo&gt;$] is ambiguous, you can disambiguate like this:
+</p>
+[$code|highlight|
+[:// Ex #1
+Token_mylang!(SymbolType.NonTerminal, "<Foo>");
+// or
+Token_mylang!(SymbolType.Terminal, "<Foo>");
+
+// Ex #2
+// No need to change this. All parameters after the first string are sub-symbols,
+// and *only* a SymbolType.NonTerminal can ever have sub-symbols.
+Token_mylang!("<Foo>", "subSymbolOfFoo")
+
+// Ex #3
+Token_mylang!("<FooParent>", Token_mylang!(SymbolType.NonTerminal, "<Foo>"), ";")
+// or
+Token_mylang!("<FooParent>", Token_mylang!(SymbolType.Terminal, "<Foo>"), ";"):]
+$]
+<p>
+Note that you can always use the disambiguated forms even on symbols that
+are not ambiguous.
+</p>
+<p>
+Also, note that using a disambiguated form always refers to the *exact same type*, not merely a separate-but-equivalent type:
+</p>
+[$code|highlight|
+[:// Grammar:
+//   "Start Symbol" = <Plus>
+//   <Plus> ::= '+'
+
+// Terminal token
+static assert(
+	is( Token_mylang!"+" == Token_mylang!(SymbolType.Terminal, "+") )
+);
+
+// NonTerminal token
+static assert(
+	is( Token_mylang!"<Plus>" == Token_mylang!(SymbolType.NonTerminal, "<Plus>") )
+);
+
+// Rule token
+static assert(
+	is(
+		Token_mylang!("<Plus>", "+") ==
+		Token_mylang!("<Plus>", Token_mylang!(SymbolType.Terminal, "+"))
+	)
+);
+
+// Or even:
+static assert(
+	is(
+		Token_mylang!("<Plus>", "+") ==
+		Token_mylang!("<Plus>", Token_mylang!"+"))
+	)
+);:]
+$]

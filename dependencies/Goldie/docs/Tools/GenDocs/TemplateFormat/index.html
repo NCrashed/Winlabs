@@ -1,0 +1,896 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: Template Format</title>
+<link rel="stylesheet" type="text/css" href="../../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><span class="pagemenu-link">Template Format</span></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../../Tools/index.html">Goldie's&nbsp;Tools</a>&nbsp;-> <a class="breadcrumb-link" href="../../../Tools/GenDocs/index.html">GenDocs</a>&nbsp;-> <span class="breadcrumb-link">Template&nbsp;Format</span>
+	</div>
+	<br />
+	<h1>Template Format</h1>
+	
+
+
+
+<div class="code-plain" style="white-space: normal; font-family: verdana,arial,'Bitstream Vera Sans',helvetica,sans-serif;">
+<em>NOTE:</em> GenDocs might become deprecated in a future version of Goldie
+in favor of <a class="extern-link" href="http://dlang.org/ddoc.html">Ddoc</a>.
+</div>
+
+<p>
+The templates used by <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a> are the desired HTML
+output files, but with some additional markup.
+</p>
+<p>
+Goldie's own documentation
+templates (in
+<a class="extern-link" href="https://bitbucket.org/Abscissa/goldie/src/v0.9/docssrc">{goldie root}/docssrc</a>)
+should serve as a good example. Pay special attention to the files
+<a class="extern-link" href="https://bitbucket.org/Abscissa/goldie/src/v0.9/docssrc/docs.tmpl">docs.tmpl</a>
+(which serves as the "main" file and defines
+all the pages in the documentation) and
+<a class="extern-link" href="https://bitbucket.org/Abscissa/goldie/src/v0.9/docssrc/HTMLPage.tmpl">HTMLPage.tmpl</a>
+(which provides the common HTML "frame" that gets used on every page).
+</p>
+
+<a name="Usage" />
+<h2>Usage</h2>
+<p>
+The basic usage of <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a> involves creating a single "main"
+template file (such as <span class="code-inline">docs.tmpl</span>). This main template file
+contains the content of the documentation's main entry page.
+It also defines all of the main page's sub-pages which,
+in turn, define their own content and sub-pages, and so on. Any of these
+pages can be defined all in one large template file, or divided up however you
+wish across multiple template files.
+(Standard Goldie convention is to define the entire sitemap in the main
+template, and give each page its own file named
+<span class="code-inline">{full name of page}.tmpl</span>.)
+</p>
+<p>
+Each page may also specify a "frame" file
+(such as <span class="code-inline">HTMLPage.tmpl</span>)
+which contains all of the HTML header/footer boilerplate.
+</p>
+<p>
+The main template file is passed to <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a> which automatically
+loads all referenced templates, processes them, and creates the HTML
+documentation as a directory tree. This directory tree has one directory and
+<span class="code-inline">index.html</span> file for each page
+(the name of this HTML file can be changed as a command-line
+parameter). The name of the directory is the same as the name of the page.
+The name of the page is set in the template; it is not assumed to be the
+template's filename.
+</p>
+
+<a name="Example" />
+<h2>Example</h2>
+<p>
+Consider the following template file.
+The main page is named "MyApp". It contains three sub-pages,
+"A", "B", and "C". Sub-page "B" has its own sub-page
+"MoreB".
+</p>
+<div class="code-plain">[$name|MyApp$]
+[$title|My App's Documentation$]
+&lt;p&gt;Welcome to my documentation!&lt;/p&gt;
+
+[$page|
+    [$name|A$]
+    [$title|Page A$]
+    &lt;p&gt;This is page A.&lt;/p&gt;
+$]
+
+[$page|
+    [$name|B$]
+    [$title|Page B$]
+    &lt;p&gt;This is page B.&lt;/p&gt;
+
+    [$page|
+        [$name|MoreB$]
+        [$title|More Page B$]
+        &lt;p&gt;This is more information for B.&lt;/p&gt;
+    $]
+$]
+
+[$page|
+    [$name|C$]
+    [$title|Page C$]
+    &lt;p&gt;This is page C.&lt;/p&gt;
+$]
+</div>
+
+<p>
+From that template, <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a> will create the following
+directory tree:
+</p>
+<div class="code-plain">MyApp/
+|-- index.html
+|
+|-- A/
+|   |-- index.html
+|
+|-- B/
+|   |-- index.html
+|   |
+|   |-- MoreB/
+|       |-- index.html
+|
+|-- C/
+    |-- index.html
+</div>
+
+<p>
+And the pages will look like this:
+</p>
+<img src="../../../GenDocsSampleMain.png" alt="" />
+<img src="../../../GenDocsSampleA.png" alt="" />
+<img src="../../../GenDocsSampleB.png" alt="" />
+<img src="../../../GenDocsSampleMoreB.png" alt="" />
+<img src="../../../GenDocsSampleC.png" alt="" />
+
+
+<a name="Syntax" />
+<h2>Syntax</h2>
+<p>
+All the <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a> markup falls into one of two
+categories: tags and quotes. These are explained below.
+See the file
+<a class="extern-link" href="https://bitbucket.org/Abscissa/goldie/src/v0.9/lang/tmpl.grm">{goldie root}/lang/tmpl.grm</a>
+for a formal definition of the syntax.
+</p>
+
+<a name="Tags" />
+<h3>Tags</h3>
+<p>
+Tags can either insert data, format data, or provide <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a>
+with information.
+</p>
+<p>
+Some examples of tags:
+</p>
+
+<ul>
+<li><span class="code-inline">[$title$]</span></li>
+<li><span class="code-inline">[$link| http://www.dsource.org/projects/goldie | Goldie Homepage $]</span></li>
+</ul>
+
+<p>
+The basic format is:
+</p>
+<p>
+<span class="code-inline">[$ tag_name $]</span><br />
+<span class="code-inline">[$ tag_name | tag_data $]</span><br />
+<span class="code-inline">[$ tag_name | first_param | tag_data $]</span><br />
+...<br />
+<span class="code-inline">[$ tag_name | first_param | second_param | etc... | tag_data $]</span><br />
+</p>
+<p>
+The tag name, parameters and data are all separated by the pipe character.
+</p>
+<p>
+Leading and trailing whitespace is trimmed from the tag name, parameters and data.
+</p>
+<p>
+The data of a tag can contain quotes.
+</p>
+<p>
+Tags do not nest (except for <span class="code-inline">[$page|...$]</span>). Yes, this is
+limiting and complicates certain aspects of <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a> templating,
+but fixing this would be a non-trivial change.
+However, this feature may be added in a later version
+(<a class="extern-link" href="http://www.dsource.org/projects/goldie/newticket">patches are welcome!</a>).
+</p>
+
+<a name="Quotes" />
+<h3>Quotes</h3>
+<p>
+Quotes insert text literally. Normally, any unquoted text gets inserted into
+the output automatically, but quotes are needed to escape pipe characters and
+square brackets. They can also be used to prevent whitespace surrounding tag
+data from getting trimmed.
+</p>
+<p>
+Outputting pipes and brackets:
+</p>
+<div class="code-plain">[:Hello! A | is a pipe. In D, int[] is an array.:]</div>
+<p>
+Preventing whitespace-trimming:
+</p>
+<div class="code-plain">[$link|http://www.semitwist.com/goldie|[:   Goldie Homepage   :]$]</div>
+<p>
+Quotes do not nest. The first instance of <span class="code-inline">:]</span> ends the quote.
+Quotes do not have any escape sequences.
+</p>
+<p>
+Any tags inside a quote do not get processed and simply get output literally.
+</p>
+
+<a name="Anchors" />
+<h2>A Note About Anchors</h2>
+<p>
+There are a few tags that generate or reference HTML anchors.
+Any time <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a> does this, it "sanitizes" the anchor name by converting
+certain invalid characters (specifically: space, parentheses, square brackets,
+and exclamation point) to underscores.
+</p>
+
+<a name="TagList" />
+<h2>Defined Tags</h2>
+<p>
+These are the tags that <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a> recognizes:
+</p>
+<p>
+NOTE: Some of these tags generate references to <a class="page-link" href="../../../Tools/GenDocs/TemplateFormat/index.html#CSSList">CSS classes</a>.
+It's up to the person writing the templates to include CSS code that defines these
+CSS classes.
+</p>
+
+<div class="api-head"><span class="ident">[$rem| {comment} $]</span></div>
+<div class="api-def">
+<p>
+A comment. <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a> just simply removes these.
+</p>
+<p>
+The term "rem" is borrowed from BASIC and DOS BATCH and is short for "remark".
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$name| {pageName} $]</span></div>
+<div class="api-def">
+<p>
+Sets the name of the current page.
+The page will be created in a directory of this name.
+This should be something like <span class="ident">MyPageName</span>.
+</p>
+<p>
+Every page should set this.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$name$]</span></div>
+<div class="api-def">
+Displays this page's name, which was set by <span class="code-inline">[$name|...$]</span>.
+</div>
+
+<div class="api-head"><span class="ident">[$fullName$]</span></div>
+<div class="api-def"><p>
+Displays the full name of this page.
+</p>
+<p>
+Example: If the main root page is named "Foo", and it has a sub-page
+named "Bar", then the full name of page "Bar" is "Foo.Bar".
+</p></div>
+
+<div class="api-head"><span class="ident">[$title| {pageTitle} $]</span></div>
+<div class="api-def">
+<p>
+Sets the title of the current page.
+This will be displayed to the user, and can be anything,
+such as <span class="code-inline">My Wonderful Page</span>.
+</p>
+<p>
+Every page should set this.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$title$]</span></div>
+<div class="api-def">
+Displays this page's title, which was set by <span class="code-inline">[$title|...$]</span>.
+</div>
+
+<div class="api-head"><span class="ident">[$desc| {pageDescription} $]</span></div>
+<div class="api-def">
+<p>
+Sets a description for the current page.
+</p>
+<p>
+If this is defined, this will be shown to the user when the
+parent page uses <span class="code-inline">[$pageMenu$]</span>.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$desc$]</span></div>
+<div class="api-def">
+Displays this page's description, which was set by <span class="code-inline">[$desc|...$]</span>.
+</div>
+
+<div class="api-head"><span class="ident">[$frame| {filename} $]</span></div>
+<div class="api-def"><p>
+Takes the filename of a template. This file will be used to "frame" the current page.
+</p>
+<!-- <p>
+See example below.
+</p> --></div>
+
+<div class="api-head"><span class="ident">[$framed$]</span></div>
+<div class="api-def">
+<p>
+If the current template was included as a frame (via <span class="code-inline">[$frame|...$]</span>),
+this inserts the content of that page (the page being "framed").
+</p>
+<!-- <p>
+TODO: Example here.
+</p> -->
+</div>
+
+<div class="api-head"><span class="ident">[$div| {cssClassName} | {content} $]</span></div>
+<div class="api-def">
+<p>
+Creates an HTML &lt;div&gt; with a given CSS class.
+</p>
+<p>
+This is provided as a shorthand for:
+</p>
+<div class="code-plain">&lt;div class="{cssClassName}"&gt;{content}&lt;/div&gt;</div>
+</div>
+
+<div class="api-head"><span class="ident">[$span| {cssClassName} | {content} $]</span></div>
+<div class="api-def">
+<p>
+Creates an HTML &lt;span&gt; with a given CSS class.
+</p>
+<p>
+This is provided as a shorthand for:
+</p>
+<div class="code-plain">&lt;span class="{cssClassName}"&gt;{content}&lt;/span&gt;</div>
+</div>
+
+<div class="api-head"><span class="ident">[$code| {cssSubClass} | {code} $]</span></div>
+<div class="api-def">
+<p>
+Identifies a section of text as being code.
+</p>
+<p>
+Suggested use: <span class="code-inline">The C++ statement [$code|inline|[:a=b+c;:]$] performs addition.</span>
+</p>
+<p>
+In most cases, this is a shorthand for the following:
+</p>
+<div class="code-plain">&lt;span class="code-{cssSubClass}"&gt;{code}&lt;/span&gt;</div>
+<p>
+However, any tabs in <span class="ident"><span class="metaparam">{code}</span></span> are converted to four spaces
+and the characters <span class="code-inline">&lt;&gt;&amp;</span> are automatically escaped.
+</p>
+<p>
+If <span class="ident"><span class="metaparam">{cssSubClass}</span></span> is (or starts with) "plain" or "highlight",
+then a div is generated instead of a span.
+</p>
+<p>
+Also, if <span class="ident"><span class="metaparam">{cssSubClass}</span></span> is (or starts with) "highlight",
+then any C++/D-style line-comments are highlighted
+(by surrounding with a span of class <span class="code-inline">code-comment</span>).
+This "highlight" also highlights any lines beginning
+in <span class="code-inline">+</span> with the css class <span class="code-inline">code-added</span>, and
+removes the <span class="code-inline">+</span>.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$file| {filename} $]</span></div>
+<div class="api-def">
+<p>
+Includes the content of another template file.
+</p>
+<p>
+Leading and trailing whitespace in the filename gets trimmed.
+</p>
+<p>
+This is analogous to C/C++'s <span class="code-inline">#include</span> or PHP's <span class="code-inline">require()</span>.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$page| {content} $]</span></div>
+<div class="api-def">
+<p>
+Creates a sub-page. The <span class="ident"><span class="metaparam">{content}</span></span> will only be shown in the sub-page,
+not in the current page.
+</p>
+<p>
+See the <a class="page-link" href="../../../Tools/GenDocs/TemplateFormat/index.html#Example">Example</a> section above for an example of the page tag.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$pageTitle| {pageName} $]</span></div>
+<div class="api-def">
+<p>Creates a link to another page within the generated documentation.</p>
+<p>The link's label is the title of the page.</p>
+<p>
+The <span class="ident"><span class="metaparam">{pageName}</span></span> can either be the page's fullName
+(see <span class="code-inline">[$fullName$]</span> above),
+or if no other page shares the same regular name,
+then it can be the page's regular name instead
+(see <span class="code-inline">[$name$]</span> above).
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$pageName| {pageName} $]</span></div>
+<div class="api-def">
+<p>Creates a link to another page within the generated documentation.</p>
+<p>The link's label is the name of the page.</p>
+<p>
+The <span class="ident"><span class="metaparam">{pageName}</span></span> can either be the page's fullName
+(see <span class="code-inline">[$fullName$]</span> above),
+or if no other page shares the same regular name,
+then it can be the page's regular name instead
+(see <span class="code-inline">[$name$]</span> above).
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$pageLink| {target} | {label} $]</span></div>
+<div class="api-def">
+<p>
+Creates a link to target within the generated documentation.
+The link's label is specified by <span class="ident"><span class="metaparam">{label}</span></span>.
+</p>
+<p>
+The <span class="ident"><span class="metaparam">{target}</span></span> can be in one of three formats:
+</p>
+<div class="code-plain">{pageName}
+#{anchor}
+{pageName}#{anchor}
+</div>
+<p>
+The <span class="ident"><span class="metaparam">{pageName}</span></span> can either be the page's fullName
+(see <span class="code-inline">[$fullName$]</span> above)
+or, if no other page shares the same regular name,
+the page's regular name 
+(see <span class="code-inline">[$name$]</span> above).
+</p>
+<p>
+The <span class="ident"><span class="metaparam">{anchor}</span></span> is the name of an anchor within the target page.
+If an <span class="ident"><span class="metaparam">{anchor}</span></span> is used without a <span class="ident"><span class="metaparam">{pageName}</span></span>,
+the page is assumed to be the current page.
+Like all anchors processed by <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a>, the <span class="ident"><span class="metaparam">{anchorName}</span></span> is
+sanitized as described in <a class="page-link" href="../../../Tools/GenDocs/TemplateFormat/index.html#Anchors">A Note About Anchors</a> above.</p>
+<p>
+If <span class="ident"><span class="metaparam">{pageName}</span></span> is the current page
+and there is no <span class="ident"><span class="metaparam">{anchor}</span></span>, then <span class="ident"><span class="metaparam">{label}</span></span> is
+highlighted, but not actually made into a link.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$typeName| {typeName} $]</span></div>
+<div class="api-def">
+<p>
+Highlights <span class="ident"><span class="metaparam">{typeName}</span></span> as a type and creates a link to the page which documents it.
+</p>
+<p>
+The <span class="ident"><span class="metaparam">{typeName}</span></span> must be a type recognized by <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a>.
+This is done by using
+<span class="code-inline">[$apiSectionType|...$]</span> or <span class="code-inline">[$definesType|...$]</span>
+on the page where the type is documented.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$typeLink| {typeName} | {label} $]</span></div>
+<div class="api-def">
+<p>
+Creates a link to the page which documents the type <span class="ident"><span class="metaparam">{typeName}</span></span>.
+Uses <span class="ident"><span class="metaparam">{label}</span></span> as the link's label.
+</p>
+<p>
+The <span class="ident"><span class="metaparam">{typeName}</span></span> must be a type recognized by <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a>.
+This is done by using
+<span class="code-inline">[$apiSectionType|...$]</span> or <span class="code-inline">[$definesType|...$]</span>
+on the page where the type is documented.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$urlLink| {url} $]</span></div>
+<div class="api-def">
+<p>
+Turns a URL into a link.
+Used for linking to pages outside the generated documentation,
+when you want the URL to be shown.
+</p>
+<p>
+This is provided as a shorthand for:
+</p>
+<div class="code-plain">&lt;a class="extern-link" href="{url}"&gt;{url}&lt;/a&gt;</div>
+</div>
+
+<div class="api-head"><span class="ident">[$link| {url} | {label} $]</span></div>
+<div class="api-def">
+<p>
+Creates a standard HTML link.
+Used for linking to pages outside the generated documentation,
+when you want a label to be shown instead of the URL.
+</p>
+<p>
+The "Goldie Homepage" link in the upper-left corner of this page is an example
+of this tag.
+</p>
+<p>
+This is provided as a shorthand for:
+</p>
+<div class="code-plain">&lt;a class="extern-link" href="{url}"&gt;{label}&lt;/a&gt;</div>
+</div>
+
+<div class="api-head"><span class="ident">[$ident| {name} $]</span></div>
+<div class="api-def">
+<p>
+Highlights <span class="ident"><span class="metaparam">{name}</span></span> as an identifier.
+Any "meta-params" (ie, text surrounded by curly braces) are highlighted.
+</p>
+<p>
+Sample use: <span class="code-inline">The [$ident|MyLittle{animalName}$] classes represent small animals.</span>
+</p>
+<p>
+Generated HTML:
+</p>
+<div class="code-plain">The
+&lt;span class="ident"&gt;
+MyLittle
+&lt;span class="metaparam"&gt;{animalName}&lt;/span&gt;
+&lt;/span&gt;
+classes represent small animals.</div>
+<p>
+Result: The <span class="ident">MyLittle<span class="metaparam">{animalName}</span></span> classes represent small animals.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$attr| {attribute} $]</span></div>
+<div class="api-def">
+<p>
+Highlights <span class="ident"><span class="metaparam">{attribute}</span></span> as an
+<a class="extern-link" href="http://dlang.org/attribute.html">Attribute</a>.
+Mainly used in API headings. For instance, on the <a class="page-link" href="../../../APIRef/Language/index.html">class Language</a> and
+<a class="page-link" href="../../../APIRef/Token/index.html">class Token</a> documentation pages,
+all of the green "static", "enum", "readonly" and "@property" are attributes.
+</p>
+<p>
+If your API headings are in a D-style language, then normally you would just
+use the <span class="code-inline">[$apiHead|...$]</span> tag which highlights attributes
+automatically. This <span class="code-inline">[$attr|...$]</span> tag is provided
+if you need to do it manually.
+</p>
+<p>
+This is provided as a shorthand for:
+</p>
+<div class="code-plain">&lt;span class="attr"&gt;{attribute}&lt;/span&gt;</div>
+</div>
+
+<div class="api-head"><span class="ident">[$paramName| {paramName} $]</span></div>
+<div class="api-def">
+<p>
+Highlights <span class="ident"><span class="metaparam">{paramName}</span></span> as a function parameter.
+Mainly used in API headings.
+</p>
+<p>
+If your API headings are in a D-style language, then normally you would just
+use the <span class="code-inline">[$apiHead|...$]</span> tag which highlights parameters
+automatically. This <span class="code-inline">[$paramName|...$]</span> tag is provided
+if you need to do it manually.
+</p>
+<p>
+This is provided as a shorthand for:
+</p>
+<div class="code-plain">&lt;span class="param-name"&gt;{attribute}&lt;/span&gt;</div>
+</div>
+
+<div class="api-head"><span class="ident">[$apiSection| {sectionName} | {module} | {label} $]</span></div>
+<div class="api-def">
+<p>
+Creates an API section to group together related functions, variables, etc.
+</p>
+<p>
+Note: If the section represents a type (such as a class, struct or enum),
+then you should use <span class="code-inline">[$apiSectionType|...$]</span> instead.
+</p>
+<p>
+Example:
+<span class="code-inline">[$apiSection| ModuleLevel | mylib.util | Module-Level Members $]</span>
+</p>
+<p>
+That creates a section header that says "Module-Level Members"
+and "module mylib.util" (the "module ..." text can be omitted by leaving the
+<span class="ident"><span class="metaparam">{module}</span></span> parameter blank). It also creates an HTML anchor named "ModuleLevel".
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$apiSectionType| {sectionName} | {module} | {label} $]</span></div>
+<div class="api-def">
+<p>
+Creates an API section that represents a type (such as a class, struct or enum).
+This is used to group related functions, variables, etc, together.
+</p>
+<p>
+Example:
+<span class="code-inline">[$apiSectionType| Foo | mylib.foo | abstract class Foo : FooBase $]</span>
+</p>
+<p>
+That creates a section header that says "abstract class Foo : FooBase"
+and "module mylib.foo" (the "module ..." text can be omitted by leaving the
+<span class="ident"><span class="metaparam">{module}</span></span> parameter blank). It also creates an HTML anchor named "Foo".
+</p>
+<p>
+Additionally, it registers "Foo" as a known type so that if "Foo" is used in an
+<span class="code-inline">[$apiHead|...$]</span> anywhere in the documentation,
+it will automatically be turned into a link that points to this section header.
+</p>
+<p>
+Note: If the section does NOT represent a type,
+then you should use <span class="code-inline">[$apiSection|...$]</span> instead.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$apiHead| {data} $]</span></div>
+<div class="api-def">Creates an API definition header for such things as functions and variables.
+Automatically highlights according to D-style grammar for function headers
+and variable declarations.</div>
+
+<div class="api-head"><span class="ident">[$apiHeadPlain| {data} $]</span></div>
+<div class="api-def"><p>Creates an API definition header without any highlighting.</p>
+<p>This is used by the tag name section headers in this documentation page.</p></div>
+
+<div class="api-head"><span class="ident">[$apiDef| {data} $]</span></div>
+<div class="api-def">
+<p>
+Creates an API definition. Generally used immediately
+following <span class="code-inline">[$apiHead|...$]</span> or
+<span class="code-inline">[$apiHeadPlain|...$]</span>.
+This is a shorthand for <span class="code-inline">[$div|api-def|...$]</span>.
+</p>
+<p>
+Unfortunately, this tag is of very limited use since tags can't currently
+contain other tags.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$definesType| {typeName}$]</span></div>
+<div class="api-def">
+<p>
+Registers <span class="ident"><span class="metaparam">{typeName}</span></span> as a known type so that if <span class="ident"><span class="metaparam">{typeName}</span></span>
+is used in an <span class="code-inline">[$apiHead|...$]</span> anywhere in the documentation,
+it will automatically be turned into a link that points to this page header.
+</p>
+<p>
+This tag is not frequently needed since
+<span class="code-inline">[$apiSectionType|...$]</span> does this automatically.
+But if you define a type in a page without using
+<span class="code-inline">[$apiSectionType|...$]</span>, then this tag can be useful.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$urlToRoot$]</span></div>
+<div class="api-def">
+<p>
+Inserts a relative URL path from the current page to the main root page directory.
+</p>
+<p>
+Using <span class="code-inline">[$urlToRoot$]</span> inside your main root page results in
+an empty string. Using it in an immediate
+child of the main root page results in <span class="code-inline">../</span>. Etc...
+</p>
+<p>
+As an example, on this particular Goldie documentation page, 
+<span class="code-inline">[$urlToRoot$]</span> results in
+<span class="code-inline">../../../</span>
+</p>
+<p>
+This is useful for referring to things such as an common image directory:
+</p>
+<div class="code-plain">&lt;img src="[$urlToRoot$]images/mainlogo.jpeg" /&gt;</div>
+</div>
+
+<div class="api-head"><span class="ident">[$urlToBase$]</span></div>
+<div class="api-def">
+<p>
+Inserts a relative URL path from the current page to the parent directory
+of the main root page directory.
+</p>
+<p>
+This is equivalent to <span class="code-inline">[$urlToRoot$]../</span>
+</p>
+<p>
+This is useful for referring to things that are outside the documentation's directory tree.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$breadcrumbs$]</span></div>
+<div class="api-def">
+<p>
+Displays a "breadcrumb" trail to the current page.
+</p>
+<p>
+Example:
+</p>
+<p>
+<a class="breadcrumb-link" href="../../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../../Tools/index.html">Goldie's&nbsp;Tools</a>&nbsp;-> <a class="breadcrumb-link" href="../../../Tools/GenDocs/index.html">GenDocs</a>&nbsp;-> <span class="breadcrumb-link">Template&nbsp;Format</span>
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$pageMenu$]</span></div>
+<div class="api-def">Displays a list of links to all immediate sub-pages (not recursive).
+Page titles and (if defined) descriptions are shown.</div>
+
+<div class="api-head"><span class="ident">[$pageMap$]</span></div>
+<div class="api-def">Displays a recursive tree-style list of links to all sub-pages.
+Page titles are shown, but not descriptions.</div>
+
+<div class="api-head"><span class="ident">[$siteMap$]</span></div>
+<div class="api-def">
+<p>
+Much like <span class="code-inline">[$pageMap$]</span>, except this starts from
+the root page instead of the current page and the top-level pages
+aren't bulleted.
+</p>
+<p>
+The left-navigation bar in this documentation is an
+example of <span class="code-inline">[$siteMap$]</span>
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$siteMapRooted$]</span></div>
+<div class="api-def">
+<p>
+Much like <span class="code-inline">[$siteMap$]</span>, except this includes the root page
+in the displayed tree.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$parentPageLink$]</span></div>
+<div class="api-def">
+<p>
+Creates a link to the parent page. The page title is used as the link's label.
+</p>
+</div>
+
+<div class="api-head"><span class="ident">[$pageTitle| {pageName} $]</span></div>
+<div class="api-def">
+<p>
+Displays the title of page <span class="ident"><span class="metaparam">{pageName}</span></span> as a link
+(unless <span class="ident"><span class="metaparam">{pageName}</span></span> is the current page, in which case the title
+is shown, but not as a link).
+</p>
+</div>
+
+<a name="CSSList" />
+<h2>CSS Classes</h2>
+<p>
+These are the CSS classes that <a class="page-link" href="../../../Tools/GenDocs/index.html">GenDocs</a> uses:
+</p>
+<div class="api-head"><span class="ident">api-head</span></div>
+<div class="api-def"></div>
+
+<div class="api-head"><span class="ident">api-def</span></div>
+<div class="api-def"></div>
+
+<div class="api-head"><span class="ident">api-section</span></div>
+<div class="api-def"></div>
+
+<div class="api-head"><span class="ident">module-decl</span></div>
+<div class="api-def"></div>
+
+<div class="api-head"><span class="ident">breadcrumb-link</span></div>
+<div class="api-def"></div>
+
+<div class="api-head"><span class="ident">extern-link</span></div>
+<div class="api-def"></div>
+
+<div class="api-head"><span class="ident">page-link</span></div>
+<div class="api-def"></div>
+
+<div class="api-head"><span class="ident">pagemenu-link</span></div>
+<div class="api-def"></div>
+
+<div class="api-head"><span class="ident">ident</span></div>
+<div class="api-def"></div>
+
+<div class="api-head"><span class="ident">attr</span></div>
+<div class="api-def"></div>
+
+<div class="api-head"><span class="ident">metaparam</span></div>
+<div class="api-def"></div>
+
+<div class="api-head"><span class="ident">code</span></div>
+<div class="api-def"></div>
+
+<div class="api-head"><span class="ident">code-added</span></div>
+<div class="api-def"></div>
+
+<div class="api-head"><span class="ident">code-comment</span></div>
+<div class="api-def"></div>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

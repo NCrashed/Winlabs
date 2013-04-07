@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: FAQ</title>
+<link rel="stylesheet" type="text/css" href="../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><span class="pagemenu-link">FAQ</span></div><div class="pagemenu-link"><a class="pagemenu-link" href="../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <span class="breadcrumb-link">FAQ</span>
+	</div>
+	<br />
+	<h1>FAQ</h1>
+	
+
+
+
+<ul>
+<li><a class="page-link" href="../FAQ/index.html#CreateCompiler">Q: How can I use Goldie to create a compiler?</a></li>
+<li><a class="page-link" href="../FAQ/index.html#TheName">Q: Why the name "Goldie"?</a></li>
+<li><a class="page-link" href="../FAQ/index.html#EmptyRule">Q: How do I refer to a rule that has no subtokens?</a></li>
+<li><a class="page-link" href="../FAQ/index.html#ParseD">Q: Can Goldie parse the D language?</a></li>
+<li><a class="page-link" href="../FAQ/index.html#Ambiguous">Q: I'm getting "Ambiguous symbol" errors!</a></li>
+<li><a class="page-link" href="../FAQ/index.html#VsGazelle">Q: This project sounds very similar to Gazelle.
+	What's the difference, and which one is better?</a></li>
+<li><a class="page-link" href="../FAQ/index.html#VsANTLR">Q: What about Goldie vs. ANTLR?</a></li>
+<li><a class="page-link" href="../FAQ/index.html#ReallyFA">Q: Are these questions really frequently-asked?</a></li>
+</ul>
+
+<a name="CreateCompiler" />
+<h2>Q: How can I use Goldie to create a compiler?</h2>
+<p>
+A: This is not an easy task no matter what parsing tool you use.
+To get started, see the <a class="page-link" href="../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a> page which contains an
+overview of everything involved in creating a full compiler.
+</p>
+<p>
+In summary: 
+Use Goldie to implement a lexer/parser (see <a class="page-link" href="../Start/Overview/index.html">Goldie Overview</a> and
+the <a class="page-link" href="../Start/Tutorial/index.html">Beginner's Tutorial</a>), and then,
+just as with any other parsing tool, you'll have to do your own
+semantic analysis on the resulting tree, and then implement a compiler backend.
+</p>
+
+<a name="TheName" />
+<h2>Q: Why the name "Goldie"?</h2>
+<p>
+A: "<a class="page-link" href="../Tools/OtherTools/index.html#GOLD">GOLD</a> for D" -> "GOLD D" -> "Goldie"
+</p>
+
+<a name="EmptyRule" />
+<h2>Q: How do I refer to a rule that has no subtokens?</h2>
+<p>
+A: Use <span class="code-inline">null</span> for the list of subtokens.
+For details and examples, see
+<a class="page-link" href="../APIOver/index.html#EmptyRule">Referring to a rule that has no subtokens</a>
+on the <a class="page-link" href="../APIOver/index.html">GoldieLib Overview</a> page.
+</p>
+
+<a name="ParseD" />
+<h2>Q: Can Goldie parse the D language?</h2>
+<p>
+<em>Short answer:</em> 
+Lexing: Mostly, yes (see the included
+<a class="extern-link" href="https://bitbucket.org/Abscissa/goldie/src/v0.9/lang/dlex.grm">dlex.grm</a>).
+Parsing: Not yet.
+</p>
+<p>
+<em>Long answer:</em>
+See
+<a class="extern-link" href="http://forum.dlang.org/post/jg8s41$2s7d$1@digitalmars.com">
+this newsgroup discussion thread</a>.
+</p>
+
+<a name="Ambiguous" />
+<h2>Q: I'm getting "Ambiguous symbol" errors!</h2>
+<p>
+A: See <a class="page-link" href="../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a>.
+</p>
+
+<a name="VsGazelle" />
+<h2>
+	Q: This project sounds very similar to Gazelle.
+	What's the difference, and which one is better?
+</h2>
+<p>
+A: GOLD/Goldie and <a class="extern-link" href="http://www.reverberate.org/gazelle/">Gazelle</a> are
+both members of a new class of generic parsers that focus on fully-reusable
+grammars that aren't tied to any particular host language. They both
+accomplish this by completely separating the grammar from the parsing engine.
+</p>
+<p>
+Both systems have their pros and cons, and which one's better is up to you.
+They're both evolving, so limitations on both sides are likely to change.
+Here is a comparison (disclaimer: based on my admittedly limited knowledge of Gazelle)
+so you can decide for yourself:
+</p>
+<table class="comparison-table">
+<tr style="font-size: 1.1em;">
+	<th style="width: auto;">&nbsp;</th>
+	<th style="width: 33%; text-align: center;">Goldie</th>
+	<th style="width: 33%; text-align: center;">Gazelle</th>
+</tr>
+<tr>
+	<th>Parser Type</th>
+	<td><a class="extern-link" href="http://goldparser.org/articles/lalr.htm">LALR(1)</a></td>
+	<td>LL(*)</td>
+</tr>
+<tr>
+	<th>Grammars Compile To</th>
+	<td>Tables</td>
+	<td>Bytecode</td>
+</tr>
+<tr>
+	<th>Written In</th>
+	<td><a class="extern-link" href="http://dlang.org/">D</a></td>
+	<td>C</td>
+</tr>
+<tr>
+	<th>Easily Used From Other Languages</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Event-Based Parsing</th>
+	<td class="box-no">No</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Creates a Parse Tree</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-no">No</td>
+</tr>
+<tr>
+	<th>Speed</th>
+	<td class="box-no">Medium focus so far</td>
+	<td class="box-yes">Strong focus so far</td>
+</tr>
+<tr>
+	<th>Usability (Tools, API, Docs, etc...)</th>
+	<td class="box-yes">Strong focus so far</td>
+	<td class="box-no">Medium focus so far</td>
+</tr>
+<tr>
+	<th>Existing Ecosystem</th>
+	<td class="box-yes">Fairly large, due to compatability with <a class="page-link" href="../Tools/OtherTools/index.html#GOLD">GOLD</a></td>
+	<td class="box-no">Currently limited to the main Gazelle project</td>
+</tr>
+<tr>
+	<th>Grammar Definition Expressiveness</th>
+	<td class="box-no">Powerful, but room for improvement</td>
+	<td class="box-yes">Appears to be quite powerful</td>
+</tr>
+<tr>
+	<th>Regular Expressions for Defining Terminals</th>
+	<td>
+	GOLD's <a class="extern-link" href="http://goldparser.org/doc/grammars/index.htm">custom
+	regex syntax</a>, designed to be easy to read
+	</td>
+	<td>
+	Standard PCRE regex
+	</td>
+</tr>
+<tr>
+	<th>Various Tools Available</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Integrated Lexing and Parsing</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Library API for Compiling Grammars</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Strives for Flexibility</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Cross-Platform</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Commandline Compatible</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Open Source</th>
+	<td class="box-yes">Yes, <a class="extern-link" href="https://bitbucket.org/Abscissa/goldie/src/v0.9/LICENSE.txt">zlib/libpng</a></td>
+	<td class="box-yes">Yes, <a class="extern-link" href="https://github.com/haberman/gazelle/blob/master/LICENSE">3-Clause BSD</a></td>
+</tr>
+</table>
+<p>
+(If anything in this comparison appears to be wrong or out-of-date,
+I invite you to file a <a class="page-link" href="../Start/Contact/Tickets/index.html">bug report</a>.)
+</p>
+
+<a name="VsANTLR" />
+<h2>Q: What about Goldie vs. ANTLR?</h2>
+<p>
+A: While Goldie and Gazelle are in roughly the same class,
+<a class="extern-link" href="http://www.antlr.org/">ANTLR</a> is very different
+in that grammars are not independent from the host language.
+</p>
+<table class="comparison-table">
+<tr style="font-size: 1.1em;">
+	<th style="width: auto;">&nbsp;</th>
+	<th style="width: 25%; text-align: center;">Goldie</th>
+	<th style="width: 25%; text-align: center;">Gazelle</th>
+	<th style="width: 25%; text-align: center;">ANTLR</th>
+</tr>
+<tr>
+	<th>Parser Type</th>
+	<td><a class="extern-link" href="http://goldparser.org/articles/lalr.htm">LALR(1)</a></td>
+	<td>LL(*)</td>
+	<td>LL(k)</td>
+</tr>
+<tr>
+	<th>Maturity</th>
+	<td class="box-no">Still young</td>
+	<td class="box-no">Still young</td>
+	<td class="box-yes">Very mature, with a large following</td>
+</tr>
+<tr>
+	<th>Official Host Languages</th>
+	<td><a class="extern-link" href="http://dlang.org/">D</a></td>
+	<td>C</td>
+	<td><a class="extern-link" href="http://www.antlr.org/api/index.html">Java, C, C#, Python, ActionScript</a></td>
+</tr>
+<tr>
+	<th>Other Host Languages Available</th>
+	<td class="box-yes"><a class="page-link" href="../Tools/OtherTools/index.html#EngineLinks">Yes</a></td>
+	<td class="box-no">No</td>
+	<td class="box-yes"><a class="extern-link" href="http://www.antlr.org/wiki/display/ANTLR3/Code+Generation+Targets">Yes</a></td>
+</tr>
+<tr>
+	<th>Easy to Support a New Host Language</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+	<td class="box-no">
+		No. Typically, the entire ANTLR and
+		<a class="extern-link" href="http://www.stringtemplate.org/">StringTemplate</a>
+		projects must be ported.
+	</td>
+</tr>
+<tr>
+	<th>Can Embed Source Code Into Grammar</th>
+	<td class="box-no">No</td>
+	<td class="box-no">No</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Reuse Grammars on Other Host Languages</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+	<td class="box-no">Typically, no. The embedded code must be ported.</td>
+</tr>
+<tr>
+	<th>Extensive Tools, Including GUIs</th>
+	<td class="box-yes"><a class="page-link" href="../Tools/index.html">Yes</a></td>
+	<td class="box-no">No</td>
+	<td class="box-yes"><a class="extern-link" href="http://www.antlr.org/works/index.html">Yes</a></td>
+</tr>
+<tr>
+	<th>Open Source</th>
+	<td class="box-yes">Yes, <a class="extern-link" href="https://bitbucket.org/Abscissa/goldie/src/v0.9/LICENSE.txt">zlib/libpng</a></td>
+	<td class="box-yes">Yes, <a class="extern-link" href="https://github.com/haberman/gazelle/blob/master/LICENSE">3-Clause BSD</a></td>
+	<td class="box-yes">Yes, <a class="extern-link" href="http://www.antlr.org/license.html">3-Clause BSD</a></td>
+</tr>
+<tr>
+	<th>Nutty Creator</th>
+	<td class="box-yes"><a class="extern-link" href="http://www.semitwist.com/download/img/shots/goldie-wtf.png">Yes</a></td>
+	<td>Unknown</td>
+	<td class="box-yes"><a class="extern-link" href="http://www.antlr.org/images/terence_antlr.jpg">Yes</a></td>
+</tr>
+</table>
+<p>
+(If anything in this comparison appears to be wrong or out-of-date,
+I invite you to file a <a class="page-link" href="../Start/Contact/Tickets/index.html">bug report</a>.)
+</p>
+
+<a name="ReallyFA" />
+<h2>Q: Are these questions really frequently-asked?</h2>
+<p>
+A: No, I'm just anticipating most of them. ;)
+</p>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

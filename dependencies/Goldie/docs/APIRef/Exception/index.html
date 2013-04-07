@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: Exception</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIRef/Base/index.html">Base</a></li>
+<li><span class="pagemenu-link">Exception</span></li>
+<li><a class="pagemenu-link" href="../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../APIRef/index.html">GoldieLib&nbsp;Reference</a>&nbsp;-> <span class="breadcrumb-link">Exception</span>
+	</div>
+	<br />
+	<h1>Exception</h1>
+	
+
+
+
+
+<ul>
+<li><a class="page-link" href="#LexError">struct LexError</a></li>
+<li>
+	<a class="page-link" href="#ParseException">class ParseException</a>
+	<ul>
+	<li>
+		<a class="page-link" href="#LexException">class LexException</a> <span class="ident">: ParseException</span>
+		<ul>
+		<li><a class="page-link" href="#InvalidUtfSequence">class InvalidUtfSequence</a> <span class="ident">: LexException</span></li>
+		</ul>
+	</li>
+	<li><a class="page-link" href="#UnexpectedTokenException">class UnexpectedTokenException</a><span class="ident">: ParseException</span></li>
+	<li><a class="page-link" href="#UnexpectedEofException">class UnexpectedEofException</a>  <span class="ident">: ParseException</span></li>
+	<li><a class="page-link" href="#InternalException">class InternalException</a>       <span class="ident">: ParseException</span></li>
+	</ul>
+</li>
+<li>
+	<a class="page-link" href="#LanguageLoadException">class LanguageLoadException</a><span class="ident">: std.stdio.StdioException</span>
+	<ul>
+	<li><a class="page-link" href="#LanguageNotFoundException">class LanguageNotFoundException</a><span class="ident">: LanguageLoadException</span></li>
+	</ul>
+</li>
+	<li><a class="page-link" href="#IllegalArgumentException">class IllegalArgumentException</a></li>
+</ul>
+
+<p>
+This includes functionality for when a parsed source contains errors.
+</p>
+
+<p class="module-decl">module goldie.exception</p><div class="api-section"><a name="LexError" />struct LexError</div>
+<div class="api-def">
+	<p>
+		This isn't actually a thrown exception. It's just used to represent
+		a single lexing error.
+	</p>
+	<div class="api-head"><span class="attr"></span> string <span class="ident">file</span><br />
+</div>
+	<div class="api-head"><span class="attr"></span> ptrdiff_t <span class="ident">line</span><br />
+</div>
+	<div class="api-head"><span class="attr"></span> ptrdiff_t <span class="ident">pos</span><br />
+</div>
+	<div class="api-def">
+		Filename, line number, and "<a class="page-link" href="../../APIOver/index.html#LineColumn">column</a> number" of the error.
+		Note Goldie's conventions regarding <a class="page-link" href="../../APIOver/index.html#LineColumn">line and column numbers</a>.
+	</div>
+
+	<div class="api-head"><span class="attr"></span> string <span class="ident">content</span><br />
+</div>
+	<div class="api-def">
+		The actual piece of source that failed to lex.
+	</div>
+
+	<div class="api-head"><span class="attr">readonly @property</span> string <span class="ident">printableContent</span><br />
+</div>
+	<div class="api-def">
+		Like <span class="ident">content</span>, but with non-printable characters removed.
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> string <span class="ident">toString</span>()<br />
+</div>
+	<div class="api-def">
+		Ready-to-display string representation in the following format:
+		<div class="code-plain">{file}({line}:{pos}): Syntax Error: '{printableContent}'</div>
+	</div>
+</div>
+
+<p class="module-decl">module goldie.exception</p><div class="api-section"><a name="ParseException" />class ParseException : Exception</div>
+<div class="api-def">
+	<p>
+	Thrown upon any lexing or parsing error.
+	</p>
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Parser/index.html">Parser</a> <span class="ident">parser</span><br />
+</div>
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> <span class="ident">lexer</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		The lexer and parser used when the error occurred. These can be
+		inspected to obtain more information about the error.
+	</p>
+	<p>
+		Under certain circumstances, either or both of these may be null,
+		so make sure to check for null before using.
+	</p>
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> string <span class="ident">msg</span><br />
+</div>
+	<div class="api-def">
+		Ready-to-display string representation of the error, including
+		filename (if available) and line and <a class="page-link" href="../../APIOver/index.html#LineColumn">column</a> numbers.
+	</div>
+	
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(string <span class="param-name">msg</span>)<br />
+</div>
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(<a class="page-link" href="../../APIRef/Parser/index.html">Parser</a> <span class="param-name">parser</span>, string <span class="param-name">msg</span>)<br />
+</div>
+	<div class="api-def">
+		Constructors.
+	</div>
+</div>
+
+<p class="module-decl">module goldie.exception</p><div class="api-section"><a name="LexException" />class LexException : ParseException</div>
+<div class="api-def">
+	<p>
+	Thrown upon any lexing error.
+	</p>
+
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(<a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> <span class="param-name">lexer</span>)<br />
+</div>
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>
+
+<p class="module-decl">module goldie.exception</p><div class="api-section"><a name="InvalidUtfSequence" />class InvalidUtfSequence : LexException</div>
+<div class="api-def">
+	<p>
+	Thrown when the lexer comes across a byte sequence that is invalid Unicode.
+	This may occur if the source contains invalid UTF-8, or if a binary file is parsed by accident.
+	</p>
+
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(<a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> <span class="param-name">lexer</span>)<br />
+</div>
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>
+
+<p class="module-decl">module goldie.exception</p><div class="api-section"><a name="UnexpectedTokenException" />class UnexpectedTokenException : ParseException</div>
+<div class="api-def">
+	<p>
+	Thrown when parsing finds a type of token in a place where the grammar
+	doesn't allow it.
+	For example, in a C-like language,
+	the <span class="code-inline">if</span> in: <span class="code-inline">var1 + if + var2</span>.
+	</p>
+
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(<a class="page-link" href="../../APIRef/Parser/index.html">Parser</a> <span class="param-name">parser</span>)<br />
+</div>
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>
+
+<p class="module-decl">module goldie.exception</p><div class="api-section"><a name="UnexpectedEofException" />class UnexpectedEofException : ParseException</div>
+<div class="api-def">
+	<p>
+	Thrown when parsing reaches the end of the source in a place where the
+	grammar expects more tokens.
+	For example, in a C-like language,
+	a source consisting entirely of: <span class="code-inline">void main() {</span>.
+	</p>
+
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(<a class="page-link" href="../../APIRef/Parser/index.html">Parser</a> <span class="param-name">parser</span>=null)<br />
+</div>
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>
+
+<p class="module-decl">module goldie.exception</p><div class="api-section"><a name="InternalException" />class InternalException : ParseException</div>
+<div class="api-def">
+	<p>
+	Thrown when an internal error is detected within Goldie.
+	</p>
+	<p>
+	If you get one of these exceptions (the "msg" string will say
+	something along the lines of "Internal Goldie Error:..."),
+	please <a class="extern-link" href="http://www.dsource.org/projects/goldie/newticket">file a bug report</a>.
+	</p>
+</div>
+
+<p class="module-decl">module goldie.exception</p><div class="api-section"><a name="LanguageLoadException" />class LanguageLoadException : std.stdio.StdioException</div>
+<div class="api-def">
+	<p>
+	Thrown when a problem occurs loading a CGT language file.
+	</p>
+	<p>
+	<span class="ident">StdioException</span> is part of D's standard library.
+	</p>
+
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(string <span class="param-name">msg</span>="", string <span class="param-name">lang</span>="", Exception <span class="param-name">next</span>=null)<br />
+</div>
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>
+
+<p class="module-decl">module goldie.exception</p><div class="api-section"><a name="LanguageNotFoundException" />class LanguageNotFoundException : LanguageLoadException</div>
+<div class="api-def">
+	<p>
+	Thrown when Goldie tries to load a CGT language file,
+	but cannot find the file.
+	</p>
+
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(string <span class="param-name">lang</span>, Exception <span class="param-name">next</span>=null)<br />
+</div>
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>
+
+<p class="module-decl">module goldie.exception</p><div class="api-section"><a name="IllegalArgumentException" />class IllegalArgumentException : Exception</div>
+<div class="api-def">
+	<p>
+	Thrown when an invalid argument is passed to a Goldie function.
+	</p>
+
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>(string <span class="param-name">msg</span>)<br />
+</div>
+	<div class="api-def">
+		Constructor.
+	</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

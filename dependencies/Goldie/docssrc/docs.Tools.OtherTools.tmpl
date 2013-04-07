@@ -1,0 +1,120 @@
+[$name|OtherTools$]
+[$title|Other Tools$]
+[$frame|HTMLPage.tmpl$]
+[$desc|Tools that are not part of Goldie but may be useful to Goldie users$]
+
+<p>
+Here are some tools that are not part of Goldie but may be useful
+to Goldie users:
+</p>
+
+<ul>
+	<li>[$pageLink|#GOLD|GOLD Parser Builder$]</li>
+	<li>[$pageLink|#Graphviz|Graphviz$]</li>
+	<li>[$pageLink|#GOLDWiki|GOLD Wiki$]</li>
+	<li>[$pageLink|#EngineLinks|Other GOLD-Compatible Engines$]</li>
+	<li>[$pageLink|#ToolLinks|Other GOLD-Compatible Tools$]</li>
+</ul>
+
+<a name="GOLD" />
+<h2 style="margin-bottom: 0px; margin-top: 0px">GOLD Parser Builder</h2>
+<p>
+An excellent freeware tool. Goldie started out as an engine for the
+[$link| http://goldparser.org/ | GOLD Parsing System $].
+GOLD Parser Builder can be used to create, modify and test languages that
+can be used with Goldie or any other GOLD-compatible tool.
+</p>
+<p>
+GOLD Parser Builder features:
+</p>
+<ul>
+<li>Grammar editor with syntax highlighting.</li>
+<li>
+Grammar-generating wizard.
+(This was used to help create Goldie's sample
+[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/lang/calc.grm | calc.grm $]
+grammar.)
+</li>
+<li>Test window to step through parsing of a sample source.</li>
+<li>Templating system that can generate lexers/parsers or skeleton programs for various languages.</li>
+<li>Importing/exporting with YACC/Bison format.</li>
+<li>Interactive inspection of the compiled DFA and LALR tables.</li>
+</ul>
+<p>
+Many people like the new v5 (which runs on .NET). Personally, I prefer the
+older v3.4.4 because the editor is much more responsive and the UI
+uses screen space more efficiently (although it doesn't have syntax highlighting).
+But any version will work fine with Goldie.
+</p>
+<p>
+Note, however, that Goldie doesn't
+yet support the new features added in GOLD v5, such as the .egt file format.
+Fortunately, these new features are purely optional. If you stick to the older
+[$pageLink|CGT|.cgt$] format,
+everything will work fine with Goldie.
+</p>
+<p>
+GOLD Parser Builder is a Windows program and comes in separate GUI and command-line versions.
+The older v3.4.4 works under Wine, although it can be slow at certain points.
+I haven't been able to get v4 to work under Mono
+(although I haven't tried the command-line version, the newer v5, or newer versions of Mono).
+</p>
+
+<ul>
+<li>[$link| http://goldparser.org/ | GOLD Parser Builder Homepage $]</li>
+<li>[$link| http://goldparser.org/builder/index.htm | Download Page $] (only lists latest version)</li>
+<li>[$link| http://www.semitwist.com/download/gold-parser-builder-3-4-4.zip | Direct Download Link for v3.4.4 $]</li>
+<li>[$link| http://goldparser.org/builder/index.htm#Tools | GOLD Tools and Add-Ons $] (GOLD tools are compatible with Goldie)</li>
+</ul>
+
+<a name="Graphviz" />
+<h2 style="margin-bottom: 0px; margin-top: 0px">Graphviz</h2>
+<p>
+Goldie's [$pageTitle|GRMC$] can output the lexer's original NFA and resulting
+[$link|http://goldparser.org/articles/dfa.htm|DFA$] in Graphviz's
+[$link|http://en.wikipedia.org/wiki/DOT_language|DOT$] format.
+These can then be viewed graphically or converted into images using Graphviz
+(or any other DOT-compatible visualization software).
+An explanation of how to use Graphviz with Goldie is on the
+[$pageLink|Tutorial#LexerGraph|Beginner's Tutorial$] page.
+</p>
+<ul>
+<li>[$link| http://www.graphviz.org/ | Graphviz Homepage $]</li>
+<li>[$pageLink| Tutorial#LexerGraph | Using Graphviz With Goldie $]</li>
+</ul>
+
+<a name="GOLDWiki" />
+<h2 style="margin-bottom: 0px; margin-top: 0px">GOLD Wiki</h2>
+<p>
+A public Wiki for GOLD and GOLD-related tools such as Goldie.
+</p>
+<ul>
+<li>[$link| http://www.semitwist.com/goldwiki/ | GOLD Wiki Homepage $]</li>
+<li>[$link| http://www.semitwist.com/goldwiki/Main/Tools | GOLD-Related Tools $]</li>
+<li>[$link| http://www.semitwist.com/goldwiki/Main/EngineComparison | List/Comparison of GOLD Engines $] (GOLD Engines are compatible with Goldie)</li>
+</ul>
+
+<a name="EngineLinks" />
+<h2 style="margin-bottom: 0px; margin-top: 0px">Other GOLD-Compatible Engines</h2>
+<p>
+[$pageLink|APIOver|GoldieLib$] is a [$pageLink|Overview#Engine| GOLD-compatible engine $]
+for [$link| http://dlang.org/ | D v2.x $]. But there many
+other engines compatible with GOLD and Goldie for a wide variety of languages,
+since they're fairly easy to write.
+</p>
+<ul>
+<li>[$link| http://goldparser.org/engine/index.htm | GOLD's list of engines $]</li>
+<li>[$link| http://www.semitwist.com/goldwiki/Main/EngineComparison | GOLD Wiki's list/comparison of engines $]</li>
+<li>[$link| http://goldparser.org/doc/engine-pseudo/index.htm | GOLD's documentation for writing your own engine $]</li>
+</ul>
+
+<a name="ToolLinks" />
+<h2 style="margin-bottom: 0px; margin-top: 0px">Other GOLD-Compatible Tools</h2>
+<p>
+More GOLD/Goldie-related tools can be found at the links below. Note that
+GOLD tools and engines are compatible with Goldie.
+</p>
+<ul>
+<li>[$link| http://goldparser.org/builder/index.htm#Tools | GOLD's list of tools $]</li>
+<li>[$link| http://www.semitwist.com/goldwiki/Main/Tools | GOLD Wiki's list of tools $]</li>
+</ul>

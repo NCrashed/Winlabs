@@ -1,0 +1,35 @@
+[$name|DumpCGT$]
+[$title|DumpCGT$]
+[$frame|HTMLPage.tmpl$]
+<p>
+Dumps the data in a
+[$pageLink| CGT | CGT file $]
+to human-readable text.
+</p>
+
+<h3>Example:</h3>
+<p>
+Using the included
+[$link|https://bitbucket.org/Abscissa/goldie/src/v0.9/lang/calc.cgt| lang/calc.cgt $]
+(The grammar source for this language can be found in
+[$link|https://bitbucket.org/Abscissa/goldie/src/v0.9/lang/calc.grm| lang/calc.grm $]):
+</p>
+<div class="code-plain">&gt;[$code|user| goldie-dumpcgt lang/calc.cgt $]</div>
+<p>
+The results of the above can be seen in
+[$link|https://bitbucket.org/Abscissa/goldie/src/v0.9/lang/calc.cgt.txt| calc.cgt.txt $].
+</p>
+
+<h3>Command-line parameters:</h3>
+[$code|plain|
+[:Usage: goldie-dumpcgt [options] <inputfile> [options]
+
+Examples:
+  goldie-dumpcgt language.cgt
+  goldie-dumpcgt language.cgt --out=language.cgt.txt
+
+Options:
+  --help, /?            Displays this help screen
+  -o, --out <filename>  Output filename (default is '<inputfile w/o path>.txt')
+  -n, --no-filename     Don't include the CGT's filename in the dump:]
+$]

@@ -1,0 +1,198 @@
+File    : calc.cgt
+Name    : Calc
+Version : 0.01
+Author  : Nick Sabalausky
+About   : Basic Calculator Grammar
+Case Sensitive : false
+
+Start Symbol Index  : 10
+EOF Symbol Index    : 0
+Error Symbol Index  : 1
+Symbol Table (Length 14) ->
+  [0   ] : EOF         : EOF
+  [1   ] : Error       : Error
+  [2   ] : Whitespace  : Whitespace
+  [3   ] : Terminal    : -
+  [4   ] : Terminal    : (
+  [5   ] : Terminal    : )
+  [6   ] : Terminal    : *
+  [7   ] : Terminal    : /
+  [8   ] : Terminal    : +
+  [9   ] : Terminal    : Number
+  [10  ] : NonTerminal : <Add Exp>
+  [11  ] : NonTerminal : <Mult Exp>
+  [12  ] : NonTerminal : <Negate Exp>
+  [13  ] : NonTerminal : <Value>
+
+Character Set Table (Length 8) ->
+  [0   ] : 	
+  
+  [1   ] : -
+  [2   ] : (
+  [3   ] : )
+  [4   ] : *
+  [5   ] : /
+  [6   ] : +
+  [7   ] : 0123456789
+
+Initial DFA State : 0
+DFA Table (Length 9) ->
+  [0   ] : Accept Symbol #-1: false, 8 Edges ->
+           [0   ] : Char Set #0    : Target DFA State #1   
+           [1   ] : Char Set #1    : Target DFA State #2   
+           [2   ] : Char Set #2    : Target DFA State #3   
+           [3   ] : Char Set #3    : Target DFA State #4   
+           [4   ] : Char Set #4    : Target DFA State #5   
+           [5   ] : Char Set #5    : Target DFA State #6   
+           [6   ] : Char Set #6    : Target DFA State #7   
+           [7   ] : Char Set #7    : Target DFA State #8   
+  [1   ] : Accept Symbol #2: true, 1 Edge ->
+           [0   ] : Char Set #0    : Target DFA State #1   
+  [2   ] : Accept Symbol #3: true, 0 Edges
+  [3   ] : Accept Symbol #4: true, 0 Edges
+  [4   ] : Accept Symbol #5: true, 0 Edges
+  [5   ] : Accept Symbol #6: true, 0 Edges
+  [6   ] : Accept Symbol #7: true, 0 Edges
+  [7   ] : Accept Symbol #8: true, 0 Edges
+  [8   ] : Accept Symbol #9: true, 1 Edge ->
+           [0   ] : Char Set #7    : Target DFA State #8   
+
+Rule Table (Length 10) ->
+  [0   ] : <Add Exp> ::= <Add Exp> + <Mult Exp>
+  [1   ] : <Add Exp> ::= <Add Exp> - <Mult Exp>
+  [2   ] : <Add Exp> ::= <Mult Exp>
+  [3   ] : <Mult Exp> ::= <Mult Exp> * <Negate Exp>
+  [4   ] : <Mult Exp> ::= <Mult Exp> / <Negate Exp>
+  [5   ] : <Mult Exp> ::= <Negate Exp>
+  [6   ] : <Negate Exp> ::= - <Value>
+  [7   ] : <Negate Exp> ::= <Value>
+  [8   ] : <Value> ::= Number
+  [9   ] : <Value> ::= ( <Add Exp> )
+
+Initial LALR State : 0
+LALR State Table (Length 19) ->
+  [0   ] : 7 Actions ->
+           [0   ] : If '-' (#3), Shift to LALR State #1
+           [1   ] : If '(' (#4), Shift to LALR State #2
+           [2   ] : If 'Number' (#9), Shift to LALR State #3
+           [3   ] : If '<Add Exp>' (#10), Goto LALR State #4
+           [4   ] : If '<Mult Exp>' (#11), Goto LALR State #5
+           [5   ] : If '<Negate Exp>' (#12), Goto LALR State #6
+           [6   ] : If '<Value>' (#13), Goto LALR State #7
+  [1   ] : 3 Actions ->
+           [0   ] : If '(' (#4), Shift to LALR State #2
+           [1   ] : If 'Number' (#9), Shift to LALR State #3
+           [2   ] : If '<Value>' (#13), Goto LALR State #8
+  [2   ] : 7 Actions ->
+           [0   ] : If '-' (#3), Shift to LALR State #1
+           [1   ] : If '(' (#4), Shift to LALR State #2
+           [2   ] : If 'Number' (#9), Shift to LALR State #3
+           [3   ] : If '<Add Exp>' (#10), Goto LALR State #9
+           [4   ] : If '<Mult Exp>' (#11), Goto LALR State #5
+           [5   ] : If '<Negate Exp>' (#12), Goto LALR State #6
+           [6   ] : If '<Value>' (#13), Goto LALR State #7
+  [3   ] : 6 Actions ->
+           [0   ] : If 'EOF' (#0), Reduce to <Value> (Rule #8)
+           [1   ] : If '-' (#3), Reduce to <Value> (Rule #8)
+           [2   ] : If ')' (#5), Reduce to <Value> (Rule #8)
+           [3   ] : If '*' (#6), Reduce to <Value> (Rule #8)
+           [4   ] : If '/' (#7), Reduce to <Value> (Rule #8)
+           [5   ] : If '+' (#8), Reduce to <Value> (Rule #8)
+  [4   ] : 3 Actions ->
+           [0   ] : If 'EOF' (#0), Accept (Unused Index #0)
+           [1   ] : If '-' (#3), Shift to LALR State #10
+           [2   ] : If '+' (#8), Shift to LALR State #11
+  [5   ] : 6 Actions ->
+           [0   ] : If '*' (#6), Shift to LALR State #12
+           [1   ] : If '/' (#7), Shift to LALR State #13
+           [2   ] : If 'EOF' (#0), Reduce to <Add Exp> (Rule #2)
+           [3   ] : If '-' (#3), Reduce to <Add Exp> (Rule #2)
+           [4   ] : If ')' (#5), Reduce to <Add Exp> (Rule #2)
+           [5   ] : If '+' (#8), Reduce to <Add Exp> (Rule #2)
+  [6   ] : 6 Actions ->
+           [0   ] : If 'EOF' (#0), Reduce to <Mult Exp> (Rule #5)
+           [1   ] : If '-' (#3), Reduce to <Mult Exp> (Rule #5)
+           [2   ] : If ')' (#5), Reduce to <Mult Exp> (Rule #5)
+           [3   ] : If '*' (#6), Reduce to <Mult Exp> (Rule #5)
+           [4   ] : If '/' (#7), Reduce to <Mult Exp> (Rule #5)
+           [5   ] : If '+' (#8), Reduce to <Mult Exp> (Rule #5)
+  [7   ] : 6 Actions ->
+           [0   ] : If 'EOF' (#0), Reduce to <Negate Exp> (Rule #7)
+           [1   ] : If '-' (#3), Reduce to <Negate Exp> (Rule #7)
+           [2   ] : If ')' (#5), Reduce to <Negate Exp> (Rule #7)
+           [3   ] : If '*' (#6), Reduce to <Negate Exp> (Rule #7)
+           [4   ] : If '/' (#7), Reduce to <Negate Exp> (Rule #7)
+           [5   ] : If '+' (#8), Reduce to <Negate Exp> (Rule #7)
+  [8   ] : 6 Actions ->
+           [0   ] : If 'EOF' (#0), Reduce to <Negate Exp> (Rule #6)
+           [1   ] : If '-' (#3), Reduce to <Negate Exp> (Rule #6)
+           [2   ] : If ')' (#5), Reduce to <Negate Exp> (Rule #6)
+           [3   ] : If '*' (#6), Reduce to <Negate Exp> (Rule #6)
+           [4   ] : If '/' (#7), Reduce to <Negate Exp> (Rule #6)
+           [5   ] : If '+' (#8), Reduce to <Negate Exp> (Rule #6)
+  [9   ] : 3 Actions ->
+           [0   ] : If '-' (#3), Shift to LALR State #10
+           [1   ] : If ')' (#5), Shift to LALR State #14
+           [2   ] : If '+' (#8), Shift to LALR State #11
+  [10  ] : 6 Actions ->
+           [0   ] : If '-' (#3), Shift to LALR State #1
+           [1   ] : If '(' (#4), Shift to LALR State #2
+           [2   ] : If 'Number' (#9), Shift to LALR State #3
+           [3   ] : If '<Mult Exp>' (#11), Goto LALR State #15
+           [4   ] : If '<Negate Exp>' (#12), Goto LALR State #6
+           [5   ] : If '<Value>' (#13), Goto LALR State #7
+  [11  ] : 6 Actions ->
+           [0   ] : If '-' (#3), Shift to LALR State #1
+           [1   ] : If '(' (#4), Shift to LALR State #2
+           [2   ] : If 'Number' (#9), Shift to LALR State #3
+           [3   ] : If '<Mult Exp>' (#11), Goto LALR State #16
+           [4   ] : If '<Negate Exp>' (#12), Goto LALR State #6
+           [5   ] : If '<Value>' (#13), Goto LALR State #7
+  [12  ] : 5 Actions ->
+           [0   ] : If '-' (#3), Shift to LALR State #1
+           [1   ] : If '(' (#4), Shift to LALR State #2
+           [2   ] : If 'Number' (#9), Shift to LALR State #3
+           [3   ] : If '<Negate Exp>' (#12), Goto LALR State #17
+           [4   ] : If '<Value>' (#13), Goto LALR State #7
+  [13  ] : 5 Actions ->
+           [0   ] : If '-' (#3), Shift to LALR State #1
+           [1   ] : If '(' (#4), Shift to LALR State #2
+           [2   ] : If 'Number' (#9), Shift to LALR State #3
+           [3   ] : If '<Negate Exp>' (#12), Goto LALR State #18
+           [4   ] : If '<Value>' (#13), Goto LALR State #7
+  [14  ] : 6 Actions ->
+           [0   ] : If 'EOF' (#0), Reduce to <Value> (Rule #9)
+           [1   ] : If '-' (#3), Reduce to <Value> (Rule #9)
+           [2   ] : If ')' (#5), Reduce to <Value> (Rule #9)
+           [3   ] : If '*' (#6), Reduce to <Value> (Rule #9)
+           [4   ] : If '/' (#7), Reduce to <Value> (Rule #9)
+           [5   ] : If '+' (#8), Reduce to <Value> (Rule #9)
+  [15  ] : 6 Actions ->
+           [0   ] : If '*' (#6), Shift to LALR State #12
+           [1   ] : If '/' (#7), Shift to LALR State #13
+           [2   ] : If 'EOF' (#0), Reduce to <Add Exp> (Rule #1)
+           [3   ] : If '-' (#3), Reduce to <Add Exp> (Rule #1)
+           [4   ] : If ')' (#5), Reduce to <Add Exp> (Rule #1)
+           [5   ] : If '+' (#8), Reduce to <Add Exp> (Rule #1)
+  [16  ] : 6 Actions ->
+           [0   ] : If '*' (#6), Shift to LALR State #12
+           [1   ] : If '/' (#7), Shift to LALR State #13
+           [2   ] : If 'EOF' (#0), Reduce to <Add Exp> (Rule #0)
+           [3   ] : If '-' (#3), Reduce to <Add Exp> (Rule #0)
+           [4   ] : If ')' (#5), Reduce to <Add Exp> (Rule #0)
+           [5   ] : If '+' (#8), Reduce to <Add Exp> (Rule #0)
+  [17  ] : 6 Actions ->
+           [0   ] : If 'EOF' (#0), Reduce to <Mult Exp> (Rule #3)
+           [1   ] : If '-' (#3), Reduce to <Mult Exp> (Rule #3)
+           [2   ] : If ')' (#5), Reduce to <Mult Exp> (Rule #3)
+           [3   ] : If '*' (#6), Reduce to <Mult Exp> (Rule #3)
+           [4   ] : If '/' (#7), Reduce to <Mult Exp> (Rule #3)
+           [5   ] : If '+' (#8), Reduce to <Mult Exp> (Rule #3)
+  [18  ] : 6 Actions ->
+           [0   ] : If 'EOF' (#0), Reduce to <Mult Exp> (Rule #4)
+           [1   ] : If '-' (#3), Reduce to <Mult Exp> (Rule #4)
+           [2   ] : If ')' (#5), Reduce to <Mult Exp> (Rule #4)
+           [3   ] : If '*' (#6), Reduce to <Mult Exp> (Rule #4)
+           [4   ] : If '/' (#7), Reduce to <Mult Exp> (Rule #4)
+           [5   ] : If '+' (#8), Reduce to <Mult Exp> (Rule #4)
+

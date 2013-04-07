@@ -1,0 +1,17 @@
+! This grammar describes a comma-separated list of integers.
+"Name"     = 'Commas Forever'
+"Author"   = 'Joe Coder'
+"Version"  = '0.01'
+"About"    = 'Comma-separated list of integers'
+"Case Sensitive" = true   ! Doesn't really matter since there's no letters
+
+"Start Symbol" = <List>
+
+! -- Terminals -----------------------------------------
+
+Integer = '-'? {Digit}+
+
+! -- Rules ---------------------------------------------
+
+<List> ::= <List> ',' Integer
+        |  Integer

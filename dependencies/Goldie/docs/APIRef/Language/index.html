@@ -1,0 +1,637 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: class Language</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Exception/index.html">Exception</a></li>
+<li><span class="pagemenu-link">class Language</span></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../APIRef/index.html">GoldieLib&nbsp;Reference</a>&nbsp;-> <span class="breadcrumb-link">class&nbsp;Language</span>
+	</div>
+	<br />
+	<h1>class Language</h1>
+	
+
+
+
+
+<ul>
+<li>
+	<a class="page-link" href="#Language">class Language</a>
+	<ul>
+	<li><a class="page-link" href="#Language__languageName_">class Language_<span class="metaparam">{languageName}</span></a><span class="ident">: Language</span></li>
+	</ul>
+</li>
+<li><a class="page-link" href="../../APIRef/Language/index.html#Module">Module-Level Members</a></li>
+</ul>
+
+<p>
+This is the main interface to GoldieLib.
+</p>
+
+<p class="module-decl">module goldie.lang</p><div class="api-section"><a name="Language" />class Language</div>
+<div class="api-def">
+	<p>
+	This class corresponds to a loaded <a class="page-link" href="../../CGT/index.html">CGT file</a>,
+	ie. a compiled grammar.
+	This is used for <a class="page-link" href="../../APIOver/StatVsDyn/index.html">dynamic-style</a>.
+	</p>
+
+	<div class="api-head"><span class="attr"></span>  <span class="ident">this</span>()<br />
+</div>
+	<div class="api-def">
+	<p>
+		Creates a new blank <span class="ident">Language</span>.
+	</p>
+	<p>
+		This should only be used if you're going to manually create a
+		<span class="ident">Language</span>, which is an advanced feature.
+		Normally, you would create a <span class="ident">Language</span> via <span class="ident">Language.load</span>,
+		<a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a> or possibly one of the <span class="ident">Language.compileGrammar*</span>
+		functions.
+	</p>
+	</div>
+	
+	<a name="Language_load" />
+	<div class="api-head"><span class="attr">static</span> <a class="page-link" href="#Language">Language</a> <span class="ident">load</span>(string <span class="param-name">cgtFilename</span>)<br />
+</div>
+	<div class="api-head"><span class="attr"><span class="attr" style="color: red; margin-bottom: 0px">DEPRECATED</span> static</span> <a class="page-link" href="#Language">Language</a> <span class="ident">loadCGT</span>(string <span class="param-name">filename</span>)<br />
+</div>
+	<div class="api-def">
+	Loads a CGT compiled grammar file.
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> void <span class="ident">save</span>(string <span class="param-name">cgtFilename</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Saves this <span class="ident">Language</span> to a
+		<a class="page-link" href="../../CGT/index.html">CGT file</a>.
+	</p>
+	</div>
+		
+	<div class="api-head"><span class="attr">static</span> bool <span class="ident">compileGrammarGoldCompatibility</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		Used by the <span class="ident">Language.compileGrammar*</span> functions. This is
+		equivalent to the <span class="code-inline">-gold</span> command-line switch in <a class="page-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a>.
+		Default value is <span class="ident">false</span>.
+	</p>
+	</div>
+	
+	<div class="api-head"><span class="attr">static</span> <a class="page-link" href="#Language">Language</a> <span class="ident">compileGrammar</span>(string <span class="param-name">grammarDefinition</span>, string <span class="param-name">filename</span>="")<br />
+</div>
+	<div class="api-def">
+	<p>
+		Compiles a grammar definition into a
+		<a class="page-link" href="../../APIOver/StatVsDyn/index.html">dynamic-style</a> <span class="ident">Language</span>.
+		This uses the exact same code as <a class="page-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a>.
+	</p>
+	<p>
+		The filename from which the grammar definition originated can be
+		provided so any errors during compilation can report the
+		grammar definition's filename.
+	</p>
+	<p>
+		If there's an error in the grammar, instead of an exception being
+		thrown, an error message will be sent to stdout and null will be
+		returned. This will be fixed in a future version of Goldie.
+	</p>
+	<p>
+		Because grammar compiling uses <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a>
+		internally, the <span class="ident">compileGrammar</span> functions cannot be used
+		on DMD 2.057 due to DMD Issue
+		<a class="extern-link" href="http://d.puremagic.com/issues/show_bug.cgi?id=7375">#7375</a>.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr">static</span> <a class="page-link" href="#Language">Language</a> <span class="ident">compileGrammarFile</span>(string <span class="param-name">filename</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Just like <span class="ident">compileGrammar</span>, but loads the grammar definition
+		from a .grm file.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr">static</span> <a class="page-link" href="#Language">Language</a> <span class="ident">compileGrammarDebug</span>(string <span class="param-name">grammarDefinition</span>, string <span class="param-name">filename</span>="", bool <span class="param-name">verbose</span>=false)<br />
+</div>
+	<div class="api-head"><span class="attr">static</span> <a class="page-link" href="#Language">Language</a> <span class="ident">compileGrammarFileDebug</span>(string <span class="param-name">filename</span>, bool <span class="param-name">verbose</span>=false)<br />
+</div>
+	<div class="api-def">
+	Same as <span class="ident">compileGrammar</span> and <span class="ident">compileGrammarFile</span>, except it 
+	stores the lexer's NFA and DFA
+	(in
+	<a class="extern-link" href="http://graphviz.org/">Graphviz</a>
+	<a class="extern-link" href="http://en.wikipedia.org/wiki/DOT_language">DOT</a>
+	format)
+	into <span class="ident">Language.nfaDot</span> and <span class="ident">Language.dfaDot</span>.
+	Also, a verbose mode can optionally be enabled.
+	</div>
+
+	<div class="api-head"><span class="attr"></span> string <span class="ident">filename</span><br />
+</div>
+	<div class="api-def">
+		The path and name of the <a class="page-link" href="../../CGT/index.html">CGT file</a> this Language was loaded from (if any).
+	</div>
+
+	<div class="api-head"><span class="attr"></span> string <span class="ident">name</span><br />
+<span class="attr"></span> string <span class="ident">ver</span><br />
+<span class="attr"></span> string <span class="ident">author</span><br />
+<span class="attr"></span> string <span class="ident">about</span><br />
+<span class="attr"></span> bool <span class="ident">caseSensitive</span><br />
+</div>
+	<div class="api-def">
+		Metadata about the language.
+		For more information, see GOLD's documentation for the 
+		<a class="extern-link" href="http://goldparser.org/doc/grammars/index.htm">grammar definition language</a>
+		and
+		<a class="extern-link" href="http://goldparser.org/doc/cgt/index.htm">CGT files</a>.
+		Note that all of these, including <span class="ident">caseSensitive</span>, are <em>informational-only</em>
+		and do not actually affect GoldieLib's behavior.
+	</div>
+
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a>[] <span class="ident">symbolTable</span><br />
+<span class="attr"></span> <a class="page-link" href="../../APIRef/Base/index.html#CharSet">CharSet</a>[] <span class="ident">charSetTable</span><br />
+<span class="attr"></span> <a class="page-link" href="../../APIRef/Base/index.html#Rule">Rule</a>[] <span class="ident">ruleTable</span><br />
+<span class="attr"></span> <a class="page-link" href="../../APIRef/Base/index.html#DFAState">DFAState</a>[] <span class="ident">dfaTable</span><br />
+<span class="attr"></span> <a class="page-link" href="../../APIRef/Base/index.html#LALRState">LALRState</a>[] <span class="ident">lalrTable</span><br />
+<br />
+<span class="attr"></span> int <span class="ident">startSymbolIndex</span><br />
+<span class="attr"></span> int <span class="ident">initialDFAState</span><br />
+<span class="attr"></span> int <span class="ident">initialLALRState</span><br />
+<br />
+<span class="attr"></span> int <span class="ident">eofSymbolIndex</span><br />
+<span class="attr"></span> int <span class="ident">errorSymbolIndex</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		The actual language-defining information in the CGT file.
+		See GOLD's
+		<a class="extern-link" href="http://goldparser.org/doc/cgt/index.htm">CGT documentation</a>
+		for more information.
+	</p>
+	<p>
+		These are very low-level to the lexing/parsing process and most people
+		will not need to access these directly.
+		In particular, modifying any of these is an <em>advanced</em> feature
+		that should only be done if you really know what you're doing.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr">@property</span> <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> <span class="ident">eofSymbol</span><br />
+</div>
+	<div class="api-def">
+		The <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> for end-of-file.
+	</div>
+
+	<div class="api-head"><span class="attr">@property</span> <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> <span class="ident">errorSymbol</span><br />
+</div>
+	<div class="api-def">
+		The <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> for a lexing error.
+	</div>
+
+	<div class="api-head"><span class="attr"></span> string <span class="ident">nfaDot</span><br />
+</div>
+	<div class="api-head"><span class="attr"></span> string <span class="ident">dfaDot</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		The lexer's NFA and DFA in
+		<a class="extern-link" href="http://graphviz.org/">Graphviz</a>
+		<a class="extern-link" href="http://en.wikipedia.org/wiki/DOT_language">DOT</a>
+		format.
+	</p>
+	<p>
+		These are always empty unless the <a class="page-link" href="#Language">Language</a> was created via
+		<span class="ident">Language.compileGrammarDebug</span> or
+		<span class="ident">Language.compileGrammarFileDebug</span>.
+		Languages loaded from a <a class="page-link" href="../../CGT/index.html">CGT file</a> or via
+		<a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a> will never have these filled in.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> int <span class="ident">nfaNumStates</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		The number of NFA states created when generating the lexer.
+		The number of DFA and LALR states can always be found with
+		<span class="ident">dfaTable.length</span> and <span class="ident">lalrTable.length</span>.
+	</p>
+	<p>
+		This is always 0 unless the <a class="page-link" href="#Language">Language</a> was created via
+		<span class="ident">Language.compileGrammarDebug</span> or
+		<span class="ident">Language.compileGrammarFileDebug</span>.
+		Languages loaded from a <a class="page-link" href="../../CGT/index.html">CGT file</a> or via
+		<a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a> will never have this filled in.
+	</p>
+	</div>
+	
+	<a name="Language_parseFileX" />
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Parser/index.html">Parser</a> <span class="ident">parseFileX</span>(string <span class="param-name">filename</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Loads a file, lexes and parses it with a new <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a>
+		and a new <a class="page-link" href="../../APIRef/Parser/index.html">Parser</a>, and returns the <a class="page-link" href="../../APIRef/Parser/index.html">Parser</a>
+		which can then be used to obtain the parsing
+		(and lexing) results or can be reused to parse something else.
+	</p>
+	<p>
+		Throws a <a class="page-link" href="../../APIRef/Exception/index.html#ParseException">ParseException</a> if the source contains an error.
+	</p>
+	</div>
+
+	<a name="Language_parseCodeX" />
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Parser/index.html">Parser</a> <span class="ident">parseCodeX</span>(string <span class="param-name">source</span>, string <span class="param-name">filename</span>="")<br />
+</div>
+	<div class="api-def">
+	<p>
+		Creates a new <a class="page-link" href="../../APIRef/Parser/index.html">Parser</a> and a new <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a>,
+		uses them to lex and parse "source", and returns the <a class="page-link" href="../../APIRef/Parser/index.html">Parser</a>
+		which can then be used to obtain the
+		parsing (and lexing) results or can be reused to parse something else.
+	</p>
+	<p>
+		Throws a <a class="page-link" href="../../APIRef/Exception/index.html#ParseException">ParseException</a> if the source contains an error.
+	</p>
+	<p>
+		The filename from which the source originated can be provided
+		so the error messages upon any parsing or lexing errors can report the
+		filename.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Parser/index.html">Parser</a> <span class="ident">parseTokensX</span>(<a class="page-link" href="../../APIRef/Token/index.html">Token</a>[] <span class="param-name">tokens</span>, string <span class="param-name">filename</span>="", <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> <span class="param-name">lexerUsed</span>=null)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Usually just called by the other parse functions.
+	</p>
+	<p>
+		Creates a new <a class="page-link" href="../../APIRef/Parser/index.html">Parser</a>, uses it to parse an already-lexed
+		array of <a class="page-link" href="../../APIRef/Token/index.html">Token</a>s, and returns the <a class="page-link" href="../../APIRef/Parser/index.html">Parser</a> which
+		can then be used to obtain the parsing
+		results or can be reused to parse something else.
+	</p>
+	<p>
+		Throws a <a class="page-link" href="../../APIRef/Exception/index.html#ParseException">ParseException</a> if the source contains an error.
+	</p>
+	<p>
+		The filename from which the source originated can be provided
+		so the error messages upon any parsing errors can report the filename.
+	</p>
+	<p>
+		The <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> that was used can be provided so that
+		the <a class="page-link" href="../../APIRef/Parser/index.html">Parser</a> returned can provide access to the lexing results.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> <span class="ident">lexFileX</span>(string <span class="param-name">filename</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Usually just called by the parse functions.
+	</p>
+	<p>
+		Loads a file, lexes it with a new <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a>, and returns
+		the <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> which can then be used to obtain the lexing
+		results or can be reused to lex something else.
+	</p>
+	<p>
+		Throws a <a class="page-link" href="../../APIRef/Exception/index.html#LexException">LexException</a> if the source contains an error.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> <span class="ident">lexCodeX</span>(string <span class="param-name">source</span>, string <span class="param-name">filename</span>="")<br />
+</div>
+	<div class="api-def">
+	<p>
+		Usually just called by the parse functions.
+	</p>
+	<p>
+		Creates a new <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a>, uses it to lex "source", and returns
+		the <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> which can then be used to obtain the lexing
+		results or can be reused to lex something else.
+	</p>
+	<p>
+		Throws a <a class="page-link" href="../../APIRef/Exception/index.html#LexException">LexException</a> if the source contains an error.
+	</p>
+	<p>
+		The filename from which the source originated can be provided
+		so the error messages upon any lexing errors can report the filename.
+	</p>
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> string[] <span class="ident">uniqueSymbolNames</span>()<br />
+</div>
+	<div class="api-def">
+		Returns an array of all valid symbol names. If
+		more than one <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> exists with the same name,
+		the name is only included in the array once.
+	</div>
+
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a>[] <span class="ident">symbolsByName</span>(string <span class="param-name">name</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Returns an array of every <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> with the name "name".
+	</p>
+	<p>
+		Note that GOLD, and therefore Goldie, allows multiple symbols with the
+		same name as long as each symbol is of a different <a class="page-link" href="../../APIRef/Symbol/index.html#SymbolType">SymbolType</a>.
+	</p>
+	</div>
+		
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Symbol/index.html#SymbolType">SymbolType</a>[] <span class="ident">symbolTypesByName</span>(string <span class="param-name">name</span>)<br />
+</div>
+	<div class="api-def">
+		Just like <span class="ident">symbolsByName</span> except this only returns
+		the <a class="page-link" href="../../APIRef/Symbol/index.html#SymbolType">SymbolType</a> of
+		each symbol, rather than the <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> itself.
+	</div>
+		
+	<div class="api-head"><span class="attr"></span> string <span class="ident">symbolTypesStrByName</span>(string <span class="param-name">name</span>)<br />
+</div>
+	<div class="api-def">
+		Like <span class="ident">symbolTypesByName</span>, but returns a human-readable list in string form.
+	</div>
+	
+
+	<div class="api-head"><span class="attr"></span> bool <span class="ident">isSymbolNameValid</span>(string <span class="param-name">name</span>)<br />
+</div>
+	<div class="api-def">
+		Returns true if <em>at least</em> one <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> exists with the given name.
+	</div>
+		
+	<div class="api-head"><span class="attr"></span> bool <span class="ident">isSymbolNameAmbiguous</span>(string <span class="param-name">name</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Returns true if <em>more than</em> one <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> exists with the given name.
+	</p>
+	<p>
+		Note that GOLD allows multiple symbols with the same name as long as each
+		symbol is of a different <a class="page-link" href="../../APIRef/Symbol/index.html#SymbolType">SymbolType</a>.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> int <span class="ident">ruleIdOf</span>(string <span class="param-name">parentSymbol</span>, string[] <span class="param-name">subSymbols</span>...)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Returns an index into <span class="ident">ruleTable</span> given the name of the reduction symbol
+		and the names of the symbols being reduced.
+	</p>
+	<p>
+		For example, if your grammar has a rule like this:
+	</p>
+	<div class="code-plain">&lt;Add Exp&gt; ::= &lt;Add Exp&gt; '+' &lt;Mult Exp&gt;</div>
+	<p>
+		Then you can retrieve the corresponding <a class="page-link" href="../../APIRef/Base/index.html#Rule">Rule</a> like this:
+	</p>
+	<div class="code-plain">myLang.ruleTable[ myLang.ruleIdOf("&lt;Add Exp&gt;", "&lt;Add Exp&gt;", "+", "&lt;Mult Exp&gt;") ]</div>
+	<p>
+		Throws if such a rule doesn't exist or if any of the given symbol names
+		are ambiguous (ie, if more than one symbol exists with the given name).
+	</p>
+	<p>
+		Note: This is just a quick-n-dirty implementation at the moment. It works,
+		but it might run slow.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> string <span class="ident">ruleToString</span>(int <span class="param-name">ruleId</span>)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Returns the given rule in a human-readable string.
+		Note this might not actually be valid code for the
+		<a class="page-link" href="../../Start/Grammar/index.html">grammar description language</a>.
+	</p>
+	<p>
+		For example, if your grammar has a rule like this:
+	</p>
+	<div class="code-plain">&lt;Add Exp&gt; ::= &lt;Add Exp&gt; '+' &lt;Mult Exp&gt;</div>
+	<p>
+		Then:
+	</p>
+<div class="code-plain">auto ruleId = myLang.ruleIdOf("&lt;Add Exp&gt;", "&lt;Add Exp&gt;", "+", "&lt;Mult Exp&gt;")
+assert(myLang.ruleToString(ruleId) == "&lt;Add Exp&gt; ::= &lt;Add Exp&gt; + &lt;Mult Exp&gt;");</div>
+	</div>
+</div>
+
+<p class="module-decl">module {user-specified package}.lang</p><div class="api-section"><a name="Language__languageName_" />class Language_<span class="metaparam">{languageName}</span> : Language</div>
+<div class="api-def">
+	<div class="api-head">
+		{languageName} = Name of static-style language
+	</div>
+	<p>
+	This is the <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a> counterpart to
+	<a class="page-link" href="#Language">Language</a>, generated by the
+	<a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a> tool.
+	</p>
+	<p>
+	If the name of a language is <span class="ident">foo</span> (for example), then
+	the name of this class will be <span class="ident">Language_foo</span>.
+	</p>
+	<p>
+	All of the <a class="page-link" href="#Language">Language</a> members are available, but alternate
+	versions are added.
+	</p>
+	
+	<div class="api-head"><span class="attr">static enum</span> string <span class="ident">staticName</span><br />
+<span class="attr">static enum</span> string <span class="ident">staticVer</span><br />
+<span class="attr">static enum</span> string <span class="ident">staticAuthor</span><br />
+<span class="attr">static enum</span> string <span class="ident">staticAbout</span><br />
+<span class="attr">static enum</span> bool <span class="ident">staticCaseSensitive</span><br />
+<br />
+<span class="attr">static immutable</span> <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a>[] <span class="ident">staticSymbolTable</span><br />
+<span class="attr">static immutable</span> <a class="page-link" href="../../APIRef/Base/index.html#CharSet">CharSet</a>[] <span class="ident">staticCharSetTable</span><br />
+<span class="attr">static immutable</span> <a class="page-link" href="../../APIRef/Base/index.html#Rule">Rule</a>[] <span class="ident">staticRuleTable</span><br />
+<span class="attr">static immutable</span> <a class="page-link" href="../../APIRef/Base/index.html#DFAState">DFAState</a>[] <span class="ident">staticDFATable</span><br />
+<span class="attr">static immutable</span> <a class="page-link" href="../../APIRef/Base/index.html#LALRState">LALRState</a>[] <span class="ident">staticLALRTable</span><br />
+<br />
+<span class="attr">static enum</span> int <span class="ident">staticStartSymbolIndex</span><br />
+<span class="attr">static enum</span> int <span class="ident">staticInitialDFAState</span><br />
+<span class="attr">static enum</span> int <span class="ident">staticInitialLALRState</span><br />
+<span class="attr">static enum</span> int <span class="ident">staticEofSymbolIndex</span><br />
+<span class="attr">static enum</span> int <span class="ident">staticErrorSymbolIndex</span><br />
+<br />
+<span class="attr">static immutable</span> string[] <span class="ident">staticUniqueSymbolNameArray</span><br />
+<span class="attr">static enum</span> <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> <span class="ident">staticEofSymbol</span><br />
+<span class="attr">static enum</span> <a class="page-link" href="../../APIRef/Symbol/index.html">Symbol</a> <span class="ident">staticErrorSymbol</span><br />
+<br />
+<span class="attr">static</span> bool <span class="ident">staticIsSymbolNameValid</span>(string <span class="param-name">name</span>)<br />
+<span class="attr">static</span> bool <span class="ident">staticIsSymbolNameAmbiguous</span>(string <span class="param-name">name</span>)<br />
+</div>
+	<div class="api-def">
+		Compile-time counterparts to the corresponding <a class="page-link" href="#Language">Language</a>
+		members.
+	</div>
+
+	<div class="api-head"><span class="attr">static enum</span> string <span class="ident">packageName</span><br />
+<span class="attr">static enum</span> string <span class="ident">shortPackageName</span><br />
+</div>
+	<div class="api-def">
+		If <a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a> was passed, for example,
+		<span class="code-inline">--pack=myApp.langs.myLang</span>, then
+		<span class="ident">packageName</span> is <span class="code-inline">"myApp.langs.myLang"</span> and
+		<span class="ident">shortPackageName</span> is the name of the language: <span class="code-inline">"myLang"</span>.
+	</div>
+
+	<div class="api-head"><span class="attr">static enum</span> string <span class="ident">langInstanceName</span><br />
+<span class="attr">static enum</span> string <span class="ident">langClassName</span><br />
+<span class="attr">static enum</span> string <span class="ident">lexerClassName</span><br />
+<span class="attr">static enum</span> string <span class="ident">parserClassName</span><br />
+<span class="attr">static enum</span> string <span class="ident">tokenClassName</span><br />
+</div>
+	<div class="api-def">
+		The names of the various classes <a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a> created for
+		this language. For example, <span class="code-inline">"language_myLang"</span>,
+		<span class="code-inline">"Language_myLang"</span>, <span class="code-inline">"Lexer_myLang"</span>,
+		<span class="code-inline">"Parser_myLang"</span>, and <span class="code-inline">"Token_myLang"</span>.
+	</div>
+
+	<a name="Language_parseFile" />
+	<a name="Language_parseCode" />
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Parser/index.html#Parser__languageName_">Parser_<span class="metaparam">{languageName}</span></a> <span class="ident">parseFile</span>(string <span class="param-name">filename</span>)<br />
+</div>
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Parser/index.html#Parser__languageName_">Parser_<span class="metaparam">{languageName}</span></a> <span class="ident">parseCode</span>(string <span class="param-name">source</span>, string <span class="param-name">filename</span>="")<br />
+</div>
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Parser/index.html#Parser__languageName_">Parser_<span class="metaparam">{languageName}</span></a> <span class="ident">parseTokens</span>(<a class="page-link" href="../../APIRef/Token/index.html">Token</a>[] <span class="param-name">tokens</span>, string <span class="param-name">filename</span>="", <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> <span class="param-name">lexerUsed</span>=null)<br />
+</div>
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Lexer/index.html#Lexer__languageName_">Lexer_<span class="metaparam">{languageName}</span></a> <span class="ident">lexFile</span>(string <span class="param-name">filename</span>)<br />
+</div>
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Lexer/index.html#Lexer__languageName_">Lexer_<span class="metaparam">{languageName}</span></a> <span class="ident">lexCode</span>(string <span class="param-name">source</span>, string <span class="param-name">filename</span>="")<br />
+</div>
+	<div class="api-def">
+	<p>
+	Type-safe <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a> counterparts to the
+	respective "X"-suffixed lex and parse functions in <a class="page-link" href="#Language">Language</a>.
+	</p>
+	</div>
+</div>
+
+<p class="module-decl">module {user-specified package}.lang</p><div class="api-section"><a name="Module" />Module-Level Members</div>
+<div class="api-def">
+	<p></p>
+	
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="#Language__languageName_">Language_<span class="metaparam">{languageName}</span></a> <span class="ident">language_{languageName}</span><br />
+</div>
+	<div class="api-def">
+	<p>
+	A pre-instantiated instance of a <a class="page-link" href="#Language__languageName_">Language_<span class="metaparam">{languageName}</span></a>, 
+	generated by <a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a> and only created
+	for <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a> languages.
+	</p>
+	<p>
+	For example, if the name of a language is <span class="ident">foo</span>, then
+	the declaration of this will be:
+	</p>
+	<div class="code-highlight">Language_foo language_foo;</div>
+	</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

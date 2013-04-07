@@ -1,0 +1,140 @@
+[$name|StaticLang$]
+[$title|StaticLang$]
+[$frame|HTMLPage.tmpl$]
+<p>
+Generates a language package from a
+[$pageLink|CGT | CGT file $]
+that can be embedded directly into a D program and used in either
+[$pageLink|StatVsDyn|static-style$] or [$pageLink|StatVsDyn|dynamic-style$].
+</p>
+
+<h3>Example:</h3>
+<p>
+Suppose you have a program [$ident|MyApp$] with a directory structure like this:
+</p>
+<div class="code-plain">[:MyAppProject
+ |
+ +-- src  :][$code|comment|(all D sources in here)$][:
+ |    |
+ |    \-- myapp        :][$code|comment|(package "myapp.*")$][:
+ |         |
+ |         +-- mylang  :][$code|comment|(empty directory)$][:
+ |         |    |
+ |         |    \--
+ |         |
+ |         \-- main.d  :][$code|comment|("module myapp.main;")$][:
+ |
+ \-- langs
+      |
+      +-- mylang.grm
+      \-- mylang.cgt  :][$code|comment|(created by either GRMC or GOLD Parser Builder)$]        
+</div>
+<p>
+And you want to use [$ident|mylang$] in [$pageLink|StatVsDyn|static-style$]
+(or you want to use it [$pageLink|StatVsDyn|dynamic-style$] but have it built
+directly into [$ident|MyApp$] instead of loading the CGT at runtime).
+</p>
+<p>
+Run this command from the [$code|inline|MyAppProject$] directory:
+</p>
+<div class="code-plain">&gt;[$code|user| goldie-staticlang langs/mylang.cgt --dir=src --pack=myapp.mylang $]</div>
+<p>
+StaticLang will create some [$code|inline|*.d$] files inside [$code|inline|src/myapp/mylang/$].
+So now your project looks like this:
+</p>
+<div class="code-plain">[:MyAppProject
+ |
+ +-- src  :][$code|comment|(all D sources in here)$][:
+ |    |
+ |    \-- myapp                   :][$code|comment|(package "myapp.*")$][:
+ |         |
+ |         +-- mylang             :][$code|comment|(package "myapp.mylang.*")$][:
+ |         |    |
+ |         |    +-- all.d         :][$code|comment|(module "myapp.mylang.all")$][:
+ |         |    +-- lang.d        :][$code|comment|(module "myapp.mylang.lang")$][:
+ |         |    +-- langHelper.d  :][$code|comment|(module "myapp.mylang.langHelper")$][:
+ |         |    +-- lexer.d       :][$code|comment|(module "myapp.mylang.lexer")$][:
+ |         |    +-- parser.d      :][$code|comment|(module "myapp.mylang.parser")$][:
+ |         |    \-- token.d       :][$code|comment|(module "myapp.mylang.token")$][:
+ |         |
+ |         \-- main.d             :][$code|comment|(module "myapp.main")$][:
+ |
+ \-- langs
+      |
+      +-- mylang.grm
+      \-- mylang.cgt  :][$code|comment|(created by either GRMC or GOLD Parser Builder)$]
+</div>
+<p>
+Then, to use the language
+(in either [$pageLink|StatVsDyn|static-style$] or [$pageLink|StatVsDyn|dynamic-style$]),
+include these lines in [$code|inline|src/myapp/main.d$]:
+</p>
+[$code|highlight|
+import goldie.all;
+import myapp.mylang.all;
+$]
+<p>
+And then use the [$typeName|Language_{languageName}$] named [$code|inline|language_mylang$],
+like this:
+</p>
+[$code|highlight|
+[:module myapp;
+import goldie.all;
+import myapp.mylang.all;
+
+void main()
+{
+	auto source = "...source code in 'mylang' language here...";
+	
+	// Static-style:
+	auto rootTokenStatic = language_mylang.parseCode(src).parseTree;
+	
+	// Dynamic-style:
+	auto rootTokenDynamic = language_mylang.parseCodeX(src).parseTreeX;
+	
+	// rootTokenStatic is of type: Token_mylang!"<mylang's start symbol>"
+	//    (Look up 'Token_{languageName}!{symbol}' in Goldie's API Reference)
+	
+	// rootTokenDynamic is of type: Token
+}:]
+$]
+<p>
+You can also use [$pageLink|Language#Language_parseFile|parseFile$] and
+[$pageLink|Language#Language_parseFileX|parseFileX$] if you want to
+parse a file instead of just a string.
+</p>
+<p>
+For an example of actually using the resulting parse tree, see the source code
+for the [$pageTitle|SampleApps$] and the examples on the [$pageTitle|StatVsDyn$]
+page.
+</p>
+<p>
+If later on you change the [$ident|mylang$] grammar, just recompile it to CGT
+with [$pageTitle|GRMC$] or [$pageLink|OtherTools#GOLD|GOLD Parser Builder$],
+and then re-run the StaticLang command above.
+</p>
+
+<h3>Command-line parameters:</h3>
+[$code|plain|
+[:Usage: goldie-staticlang [options] cgt-file [options]
+
+Examples:
+  goldie-staticlang langs/lang.cgt
+      Creates "goldie/staticlang/lang/*.d", each
+      containing "module goldie.staticlang.lang.*;"
+
+  goldie-staticlang langs/lang.cgt --dir foo/src --pack myapp.mylang
+  goldie-staticlang langs/lang.cgt --dir=foo/src --pack=myapp.mylang
+      Creates "foo/src/myapp/mylang/*.d", each
+      containing "module myapp.mylang.*;"
+
+--help, /?          Displays this help screen
+-p, --pack <name>   Name of output package (default: goldie.staticlang.{cgt})
+-d, --dir <dir>     Directory of package root (default: current directory):]
+$]
+
+<h3 class="list-heading">See Also:</h3>
+<ul>
+<li>[$pageTitle|StatVsDyn$]</li>
+<li>[$pageTitle|DevStaticLang$]</li>
+</ul>

@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: class Parser</title>
+<link rel="stylesheet" type="text/css" href="../../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><span class="pagemenu-link">class Parser</span></li>
+<li><a class="pagemenu-link" href="../../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../ChangeLog/index.html">Change Log</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <a class="breadcrumb-link" href="../../APIRef/index.html">GoldieLib&nbsp;Reference</a>&nbsp;-> <span class="breadcrumb-link">class&nbsp;Parser</span>
+	</div>
+	<br />
+	<h1>class Parser</h1>
+	
+
+
+
+<ul>
+<li>
+	<a class="page-link" href="#Parser">class Parser</a>
+	<ul>
+	<li><a class="page-link" href="#Parser__languageName_">class Parser_<span class="metaparam">{languageName}</span></a><span class="ident">: Parser</span></li>
+	</ul>
+</li>
+</ul>
+
+<p class="module-decl">module goldie.parser</p><div class="api-section"><a name="Parser" />class Parser</div>
+<div class="api-def">
+	
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Token/index.html">Token</a> <span class="ident">parseTreeX</span><br />
+</div>
+	<div class="api-def">
+		The root token in the parse tree of the last source parsed.
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> <span class="ident">lexer</span><br />
+</div>
+	<div class="api-def">
+		The Lexer that was used to lex the source before parsing.
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Language/index.html">Language</a> <span class="ident">lang</span><br />
+</div>
+	<div class="api-def">
+		The Language that was used to lex and parse the source.
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> string <span class="ident">filename</span><br />
+</div>
+	<div class="api-def">
+		The filename (if available) of the last source parsed.
+	</div>
+	
+	<div class="api-head"><span class="attr"></span> int[] <span class="ident">rulesUsed</span><br />
+<span class="attr"></span> Stack!<a class="page-link" href="../../APIRef/Token/index.html">Token</a> <span class="ident">tokenStack</span><br />
+<span class="attr"></span> Stack!int <span class="ident">stateStack</span><br />
+<span class="attr"></span> <a class="page-link" href="../../APIRef/Token/index.html">Token</a> <span class="ident">currTok</span><br />
+<span class="attr"></span> int <span class="ident">tokIndex</span><br />
+<span class="attr"></span> int <span class="ident">state</span><br />
+</div>
+	<div class="api-def">
+	<p>
+		Internal parser state. Access is provided to these for diagnostic
+		purposes.
+		If an exception is thrown during parsing, then these can be inspected
+		to check the parser's internal state at the time of the exception.
+		This is probably only useful for debugging Goldie.
+	</p>
+	<p>
+		The templated type
+		<span class="ident">Stack!T</span>
+		is defined in the module
+		<a class="extern-link" href="https://bitbucket.org/Abscissa/semitwistdtools/src/goldie-v0.9/src/semitwist/util/container.d">semitwist.util.container</a>
+		from
+		<a class="page-link" href="../../Start/Requires/index.html#SemiTwist">SemiTwist D Tools</a>.
+	</p>
+	</div>
+
+	<div class="api-head"><span class="attr"></span> <a class="page-link" href="../../APIRef/Token/index.html">Token</a> <span class="ident">process</span>(<a class="page-link" href="../../APIRef/Token/index.html">Token</a>[] <span class="param-name">tokens</span>, <a class="page-link" href="../../APIRef/Language/index.html">Language</a> <span class="param-name">lang</span>, string <span class="param-name">filename</span>="", <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> <span class="param-name">lexer</span>=null)<br />
+</div>
+	<div class="api-def">
+	<p>
+		Parses a series of tokens. Throws a <a class="page-link" href="../../APIRef/Exception/index.html#ParseException">ParseException</a>
+		if the source contains an error.
+	</p>
+	<p>
+		Normally, you would use one of the
+		<a class="page-link" href="../../APIRef/Language/index.html">Language</a><span class="ident">.parse</span> functions instead of calling this directly,
+		but this direct access is provided in case you'd rather re-use the
+		same parser instead of instantiating a new one every time.
+	</p>
+	<p>
+		The filename from which the source originated can be provided
+		so error messages can report the appropriate filename.
+	</p>
+	<p>
+		The <a class="page-link" href="../../APIRef/Lexer/index.html">Lexer</a> that was used to lex the source can be provided
+		so that, upon any error, the <a class="page-link" href="../../APIRef/Exception/index.html#ParseException">ParseException</a> can provide
+		access to all the lexing information.
+	</p>
+	<p>
+		Returns <span class="ident">parseTreeX</span>.
+	</p>
+	</div>
+</div>
+
+<p class="module-decl">module {user-specified package}.parser</p><div class="api-section"><a name="Parser__languageName_" />class Parser_<span class="metaparam">{languageName}</span> : Parser</div>
+<div class="api-def">
+	<div class="api-head">
+		{languageName} = Name of static-style language
+	</div>
+	<p>
+	This is the <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a> counterpart to
+	<span class="page-link">Parser</span>, and is generated by the
+	<a class="page-link" href="../../Tools/StaticLang/index.html">StaticLang</a> tool.
+	</p>
+	<p>
+	If the name of a language is, for example, <span class="ident">foo</span>, then
+	the name of this class will be <span class="ident">Parser_foo</span>.
+	</p>
+	
+	<a name="Parser_parseTree" />
+	<div class="api-head">
+		<a class="page-link" href="../../APIRef/Token/index.html#Token__languageName___symbol_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{symbol}</span></a> <span class="ident">parseTree</span>
+	</div>
+	<div class="api-def">
+	<p>
+		Type-safe <a class="page-link" href="../../APIOver/StatVsDyn/index.html">static-style</a> counterpart to
+		<a class="page-link" href="#Parser">Parser</a><span class="ident">.parseTreeX</span>.
+	</p>
+	<p>
+		Since the actual rule used for the root can only be known
+		at runtime (because it depends on the actual source parsed), this is a
+		<a class="page-link" href="../../APIRef/Token/index.html#Token__languageName___symbol_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{symbol}</span></a> and not
+		a <a class="page-link" href="../../APIRef/Token/index.html#Token__languageName___rule_">Token_<span class="metaparam">{languageName}</span>!<span class="metaparam">{rule}</span></a>. So in order to access
+		the subtokens, you will need to determine which rule was used,
+		like this:
+	</p>
+<div class="code-highlight"><span class="code-comment">// Assume the language "calc":</span>
+<span class="code-comment">// "Start Symbol" = &lt;Add Exp&gt;</span>
+<span class="code-comment">// &lt;Add Exp&gt; ::= &lt;Add Exp&gt; '+' &lt;Mult Exp&gt;</span>
+<span class="code-comment">//             | &lt;Add Exp&gt; '-' &lt;Mult Exp&gt;</span>
+<span class="code-comment">//             | &lt;Mult Exp&gt;</span>
+void foo(string src)
+{
+    Parser_calc parserUsed = language_calc.parseCode(src);
+    
+    Token_calc!"&lt;Add Exp&gt;" rootUnknownRule = parserUsed.parseTree;
+    
+    <span class="code-comment">// This is the static-style equivilent to using Token.matches()</span>
+    if( auto root =
+        cast(Token_calc!("&lt;Add Exp&gt;", "&lt;Mult Exp&gt;"))rootUnknownRule )
+    {
+        <span class="code-comment">// Use root</span>
+    }
+    else if( auto root =
+        cast(Token_calc!("&lt;Add Exp&gt;", "&lt;Add Exp&gt;", "+", "&lt;Mult Exp&gt;"))rootUnknownRule )
+    {
+        <span class="code-comment">// Use root</span>
+    }
+    else if( auto root =
+        cast(Token_calc!("&lt;Add Exp&gt;", "&lt;Add Exp&gt;", "-", "&lt;Mult Exp&gt;"))rootUnknownRule )
+    {
+        <span class="code-comment">// Use root</span>
+    }
+    else
+        throw new Exception("Forgot to handle some other rule!");
+}
+</div>		
+	</div>
+</div>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+[$name|JsonViewer$]
+[$title|JsonViewer$]
+[$frame|HTMLPage.tmpl$]
+<p>
+Bundled with Goldie is a specially-modified version of JsonViewer. This is not
+officially part of Goldie, but is included as a convenience. JsonViewer
+requires the .NET runtime. It has also been tested to run on Linux with Mono,
+but it's a little bit buggy that way.
+</p>
+
+<p>
+The original JsonViewer (available from [$urlLink|http://jsonviewer.codeplex.com$])
+is a tool written in C# for viewing JSON files (JSON is a text-based data file
+format and a common alternative to XML).
+</p>
+
+<p>
+The version of JsonViewer bundled with Goldie still retains that functionality,
+but has been modified to include a special
+[$pageLink|ParseTreeMode| Parse Tree Mode $] for viewing a text document
+side-by-side with a JSON-based tree that describes the text.
+This is useful, for example, for viewing the
+JSON files that are output by Goldie's [$pageTitle|Parse$] tool.
+</p>
+
+<p>
+<span style="font-weight: bold">Using the Parse Tree Mode:</span>
+Click a tree node in the left panel to highlight the corresponding section of text.
+Click a location in the text and then click "Jump to Node" to select
+the corresponding node.
+</p>
+
+<p>
+Source code and Visual C# 2008 Express project files are included.
+Note that unlike Goldie, JsonViewer is licensed under the
+[$link| http://jsonviewer.codeplex.com/license | Microsoft Community License (Ms-CL) v1.1 $].
+</p>
+
+<p>
+The main JsonViewer executable is here:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;[$code|inline|{Main Goldie Directory}\JsonViewer\JsonView.exe$]
+</p>
+
+<p>
+A from-scratch rewrite in D is planned.
+</p>
+
+<p>
+<span style="font-weight: bold">Note:</span>
+This program has some trouble with very large JSON files. So when using it with
+[$pageTitle|Parse$], keep in mind that parse trees tend to get very large,
+very fast. So try to use small source files with this.
+</p>
+
+<h3>Screenshot:</h3>
+<img src="[$urlToRoot$]JsonViewerSample.png" alt="" />

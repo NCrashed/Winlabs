@@ -1,0 +1,280 @@
+[$name|FAQ$]
+[$title|FAQ$]
+[$frame|HTMLPage.tmpl$]
+
+<ul>
+<li>[$pageLink|#CreateCompiler| Q: How can I use Goldie to create a compiler? $]</li>
+<li>[$pageLink|#TheName|        Q: Why the name "Goldie"? $]</li>
+<li>[$pageLink|#EmptyRule|      Q: How do I refer to a rule that has no subtokens? $]</li>
+<li>[$pageLink|#ParseD|         Q: Can Goldie parse the D language? $]</li>
+<li>[$pageLink|#Ambiguous|      Q: I'm getting "Ambiguous symbol" errors! $]</li>
+<li>[$pageLink|#VsGazelle|      Q: This project sounds very similar to Gazelle.
+	What's the difference, and which one is better? $]</li>
+<li>[$pageLink|#VsANTLR|        Q: What about Goldie vs. ANTLR? $]</li>
+<li>[$pageLink|#ReallyFA|       Q: Are these questions really frequently-asked? $]</li>
+</ul>
+
+<a name="CreateCompiler" />
+<h2>Q: How can I use Goldie to create a compiler?</h2>
+<p>
+A: This is not an easy task no matter what parsing tool you use.
+To get started, see the [$pageTitle|LearnParsing$] page which contains an
+overview of everything involved in creating a full compiler.
+</p>
+<p>
+In summary: 
+Use Goldie to implement a lexer/parser (see [$pageTitle|Overview$] and
+the [$pageTitle|Tutorial$]), and then,
+just as with any other parsing tool, you'll have to do your own
+semantic analysis on the resulting tree, and then implement a compiler backend.
+</p>
+
+<a name="TheName" />
+<h2>Q: Why the name "Goldie"?</h2>
+<p>
+A: "[$pageLink|OtherTools#GOLD|GOLD$] for D" -> "GOLD D" -> "Goldie"
+</p>
+
+<a name="EmptyRule" />
+<h2>Q: How do I refer to a rule that has no subtokens?</h2>
+<p>
+A: Use [$code|inline|null$] for the list of subtokens.
+For details and examples, see
+[$pageLink|APIOver#EmptyRule|Referring to a rule that has no subtokens$]
+on the [$pageTitle|APIOver$] page.
+</p>
+
+<a name="ParseD" />
+<h2>Q: Can Goldie parse the D language?</h2>
+<p>
+<em>Short answer:</em> 
+Lexing: Mostly, yes (see the included
+[$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/lang/dlex.grm | dlex.grm $]).
+Parsing: Not yet.
+</p>
+<p>
+<em>Long answer:</em>
+See
+[:<a class="extern-link" href="http://forum.dlang.org/post/jg8s41$2s7d$1@digitalmars.com">:]
+this newsgroup discussion thread</a>.
+</p>
+
+<a name="Ambiguous" />
+<h2>Q: I'm getting "Ambiguous symbol" errors!</h2>
+<p>
+A: See [$pageTitle|AmbiguousSym$].
+</p>
+
+<a name="VsGazelle" />
+<h2>
+	Q: This project sounds very similar to Gazelle.
+	What's the difference, and which one is better?
+</h2>
+<p>
+A: GOLD/Goldie and [$link|http://www.reverberate.org/gazelle/|Gazelle$] are
+both members of a new class of generic parsers that focus on fully-reusable
+grammars that aren't tied to any particular host language. They both
+accomplish this by completely separating the grammar from the parsing engine.
+</p>
+<p>
+Both systems have their pros and cons, and which one's better is up to you.
+They're both evolving, so limitations on both sides are likely to change.
+Here is a comparison (disclaimer: based on my admittedly limited knowledge of Gazelle)
+so you can decide for yourself:
+</p>
+<table class="comparison-table">
+<tr style="font-size: 1.1em;">
+	<th style="width: auto;">&nbsp;</th>
+	<th style="width: 33%; text-align: center;">Goldie</th>
+	<th style="width: 33%; text-align: center;">Gazelle</th>
+</tr>
+<tr>
+	<th>Parser Type</th>
+	<td>[$link| http://goldparser.org/articles/lalr.htm | LALR(1) $]</td>
+	<td>LL(*)</td>
+</tr>
+<tr>
+	<th>Grammars Compile To</th>
+	<td>Tables</td>
+	<td>Bytecode</td>
+</tr>
+<tr>
+	<th>Written In</th>
+	<td>[$link|http://dlang.org/|D$]</td>
+	<td>C</td>
+</tr>
+<tr>
+	<th>Easily Used From Other Languages</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Event-Based Parsing</th>
+	<td class="box-no">No</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Creates a Parse Tree</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-no">No</td>
+</tr>
+<tr>
+	<th>Speed</th>
+	<td class="box-no">Medium focus so far</td>
+	<td class="box-yes">Strong focus so far</td>
+</tr>
+<tr>
+	<th>Usability (Tools, API, Docs, etc...)</th>
+	<td class="box-yes">Strong focus so far</td>
+	<td class="box-no">Medium focus so far</td>
+</tr>
+<tr>
+	<th>Existing Ecosystem</th>
+	<td class="box-yes">Fairly large, due to compatability with [$pageLink|OtherTools#GOLD|GOLD$]</td>
+	<td class="box-no">Currently limited to the main Gazelle project</td>
+</tr>
+<tr>
+	<th>Grammar Definition Expressiveness</th>
+	<td class="box-no">Powerful, but room for improvement</td>
+	<td class="box-yes">Appears to be quite powerful</td>
+</tr>
+<tr>
+	<th>Regular Expressions for Defining Terminals</th>
+	<td>
+	GOLD's [$link| http://goldparser.org/doc/grammars/index.htm | custom
+	regex syntax $], designed to be easy to read
+	</td>
+	<td>
+	Standard PCRE regex
+	</td>
+</tr>
+<tr>
+	<th>Various Tools Available</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Integrated Lexing and Parsing</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Library API for Compiling Grammars</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Strives for Flexibility</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Cross-Platform</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Commandline Compatible</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Open Source</th>
+	<td class="box-yes">Yes, [$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/LICENSE.txt | zlib/libpng $]</td>
+	<td class="box-yes">Yes, [$link| https://github.com/haberman/gazelle/blob/master/LICENSE | 3-Clause BSD $]</td>
+</tr>
+</table>
+<p>
+(If anything in this comparison appears to be wrong or out-of-date,
+I invite you to file a [$pageLink|Tickets| bug report $].)
+</p>
+
+<a name="VsANTLR" />
+<h2>Q: What about Goldie vs. ANTLR?</h2>
+<p>
+A: While Goldie and Gazelle are in roughly the same class,
+[$link|http://www.antlr.org/|ANTLR$] is very different
+in that grammars are not independent from the host language.
+</p>
+<table class="comparison-table">
+<tr style="font-size: 1.1em;">
+	<th style="width: auto;">&nbsp;</th>
+	<th style="width: 25%; text-align: center;">Goldie</th>
+	<th style="width: 25%; text-align: center;">Gazelle</th>
+	<th style="width: 25%; text-align: center;">ANTLR</th>
+</tr>
+<tr>
+	<th>Parser Type</th>
+	<td>[$link| http://goldparser.org/articles/lalr.htm | LALR(1) $]</td>
+	<td>LL(*)</td>
+	<td>LL(k)</td>
+</tr>
+<tr>
+	<th>Maturity</th>
+	<td class="box-no">Still young</td>
+	<td class="box-no">Still young</td>
+	<td class="box-yes">Very mature, with a large following</td>
+</tr>
+<tr>
+	<th>Official Host Languages</th>
+	<td>[$link|http://dlang.org/|D$]</td>
+	<td>C</td>
+	<td>[$link|http://www.antlr.org/api/index.html|Java, C, C#, Python, ActionScript$]</td>
+</tr>
+<tr>
+	<th>Other Host Languages Available</th>
+	<td class="box-yes">[$pageLink|OtherTools#EngineLinks|Yes$]</td>
+	<td class="box-no">No</td>
+	<td class="box-yes">[$link|http://www.antlr.org/wiki/display/ANTLR3/Code+Generation+Targets|Yes$]</td>
+</tr>
+<tr>
+	<th>Easy to Support a New Host Language</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+	<td class="box-no">
+		No. Typically, the entire ANTLR and
+		[$link| http://www.stringtemplate.org/ | StringTemplate $]
+		projects must be ported.
+	</td>
+</tr>
+<tr>
+	<th>Can Embed Source Code Into Grammar</th>
+	<td class="box-no">No</td>
+	<td class="box-no">No</td>
+	<td class="box-yes">Yes</td>
+</tr>
+<tr>
+	<th>Reuse Grammars on Other Host Languages</th>
+	<td class="box-yes">Yes</td>
+	<td class="box-yes">Yes</td>
+	<td class="box-no">Typically, no. The embedded code must be ported.</td>
+</tr>
+<tr>
+	<th>Extensive Tools, Including GUIs</th>
+	<td class="box-yes">[$pageLink|Tools|Yes$]</td>
+	<td class="box-no">No</td>
+	<td class="box-yes">[$link|http://www.antlr.org/works/index.html|Yes$]</td>
+</tr>
+<tr>
+	<th>Open Source</th>
+	<td class="box-yes">Yes, [$link| https://bitbucket.org/Abscissa/goldie/src/v0.9/LICENSE.txt | zlib/libpng $]</td>
+	<td class="box-yes">Yes, [$link| https://github.com/haberman/gazelle/blob/master/LICENSE | 3-Clause BSD $]</td>
+	<td class="box-yes">Yes, [$link| http://www.antlr.org/license.html | 3-Clause BSD $]</td>
+</tr>
+<tr>
+	<th>Nutty Creator</th>
+	<td class="box-yes">[$link| http://www.semitwist.com/download/img/shots/goldie-wtf.png | Yes $]</td>
+	<td>Unknown</td>
+	<td class="box-yes">[$link| http://www.antlr.org/images/terence_antlr.jpg | Yes $]</td>
+</tr>
+</table>
+<p>
+(If anything in this comparison appears to be wrong or out-of-date,
+I invite you to file a [$pageLink|Tickets| bug report $].)
+</p>
+
+<a name="ReallyFA" />
+<h2>Q: Are these questions really frequently-asked?</h2>
+<p>
+A: No, I'm just anticipating most of them. ;)
+</p>

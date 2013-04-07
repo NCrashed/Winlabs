@@ -1,0 +1,79 @@
+#!/bin/sh
+
+showUsage()
+{
+	echo "Usage:   ./makePackage {ver} {os} {arch}"
+	echo "Example: ./makePackage 0.5 linux x86"
+	echo
+}
+
+# Check args
+if [ "$1" = "" ] ; then
+	showUsage
+	exit
+fi
+
+if [ "$2" = "" ] ; then
+	showUsage
+	exit
+fi
+
+if [ "$3" = "" ] ; then
+	showUsage
+	exit
+fi
+
+if [ "$1" = "--help" ] ; then
+	showUsage
+	exit
+fi
+
+# ./release/
+rm release -rf
+mkdir release
+cd release
+
+git clone https://bitbucket.org/Abscissa/semitwistdtools.git SemiTwistDTools
+git clone https://bitbucket.org/Abscissa/goldie.git Goldie
+
+# Cleanup Git's droppings:
+rm SemiTwistDTools/.git -rf
+rm SemiTwistDTools/.gitignore -f
+rm Goldie/.git -rf
+rm Goldie/.gitignore -f
+
+# ./release/SemiTwistDTools/
+cd SemiTwistDTools
+./buildAll all
+bin/semitwist-unittests-debug
+
+# ./release/Goldie/
+cd ../Goldie
+mkdir ../PublicDocs
+mkdir ../PublicDocs/docs
+cp -rf docs/* ../PublicDocs/docs
+../SemiTwistDTools/bin/semitwist-stbuild-debug all all
+./makeDocs
+./makeDocs --trimlink --od=../PublicDocs
+
+# ./release/
+cd ..
+rm SemiTwistDTools/obj -rf
+mkdir SemiTwistDTools/obj
+rm Goldie/obj -rf
+mkdir Goldie/obj
+
+7z a -bd Goldie-v$1-$2-$3.7z SemiTwistDTools Goldie
+mkdir save-semitwist-bin
+mkdir save-goldie-bin
+mv SemiTwistDTools/bin/semitwist-* save-semitwist-bin
+mv Goldie/bin/goldie-* save-goldie-bin
+7z a -bd Goldie-v$1-source-only.7z SemiTwistDTools Goldie
+mv save-semitwist-bin/* SemiTwistDTools/bin
+mv save-goldie-bin/* Goldie/bin
+rmdir save-semitwist-bin
+rmdir save-goldie-bin
+
+# ./
+cd ..
+echo Done packaging.

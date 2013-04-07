@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Goldie: Change Log</title>
+<link rel="stylesheet" type="text/css" href="../theme.css" />
+<style type="text/css"></style>
+</head>
+
+<body>
+
+<table>
+<tr>
+<td style="padding-top: 0px">
+
+	<div class="page-title">
+		<a class="extern-link" href="http://www.semitwist.com/goldie/">Goldie</a>
+	</div>
+
+	<div class="page-subtitle">
+		Parsing System <span class="page-subtitle-version">(v0.9)</span>
+	</div>
+
+	<div class="side-panel">
+		<div class="pagemenu-link"><a class="page-link" href="../index.html">Goldie Home (v0.9)</a></div>
+		<div class="pagemenu-link"><a class="pagemenu-link" href="../Start/index.html">Getting Started</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Start/Requires/index.html">Requirements</a></li>
+<li><a class="pagemenu-link" href="../Start/Install/index.html">Download / Install</a></li>
+<li><a class="pagemenu-link" href="../Start/LearnParsing/index.html">Never Used a Parsing Tool?</a></li>
+<li><a class="pagemenu-link" href="../Start/Overview/index.html">Goldie Overview</a></li>
+<li><a class="pagemenu-link" href="../Start/Tutorial/index.html">Beginner's Tutorial</a></li>
+<li><a class="pagemenu-link" href="../Start/Grammar/index.html">Grammar Definition Language</a></li>
+<li><a class="pagemenu-link" href="../Start/Contact/index.html">Contact / Support</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Start/Contact/MessageBoard/index.html">Message Board</a></li>
+<li><a class="pagemenu-link" href="../Start/Contact/Tickets/index.html">Issue Tracking</a></li>
+</ul>
+</li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../Tools/index.html">Goldie's Tools</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Tools/AlterCGT/index.html">AlterCGT</a></li>
+<li><a class="pagemenu-link" href="../Tools/DumpCGT/index.html">DumpCGT</a></li>
+<li><a class="pagemenu-link" href="../Tools/GenDocs/index.html">GenDocs</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Tools/GenDocs/TemplateFormat/index.html">Template Format</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../Tools/GRMC/index.html">GRMC: Grammar Compiler</a></li>
+<li><a class="pagemenu-link" href="../Tools/JsonViewer/index.html">JsonViewer</a>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Tools/JsonViewer/ParseTreeMode/index.html">Parse Tree Mode</a></li>
+</ul>
+</li>
+<li><a class="pagemenu-link" href="../Tools/Parse/index.html">Parse</a></li>
+<li><a class="pagemenu-link" href="../Tools/StaticLang/index.html">StaticLang</a></li>
+<li><a class="pagemenu-link" href="../Tools/OtherTools/index.html">Other Tools</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../APIOver/index.html">GoldieLib Overview</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../APIOver/StatVsDyn/index.html">Static And Dynamic Styles</a></li>
+<li><a class="pagemenu-link" href="../APIOver/AmbiguousSym/index.html">Ambiguous Symbols</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../APIRef/index.html">GoldieLib Reference</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../APIRef/Base/index.html">Base</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Exception/index.html">Exception</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Language/index.html">class Language</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Lexer/index.html">class Lexer</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Parser/index.html">class Parser</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Symbol/index.html">struct Symbol</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Token/index.html">class Token</a></li>
+<li><a class="pagemenu-link" href="../APIRef/Ver/index.html">Ver</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../SampleApps/index.html">GoldieLib Sample Apps</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../SampleApps/CalculatorStatic/index.html">Calculator Static</a></li>
+<li><a class="pagemenu-link" href="../SampleApps/CalculatorDynamic/index.html">Calculator Dynamic</a></li>
+<li><a class="pagemenu-link" href="../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a></li>
+</ul>
+<div class="pagemenu-link"><a class="pagemenu-link" href="../CGT/index.html">CGT File Format</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../FAQ/index.html">FAQ</a></div><div class="pagemenu-link"><span class="pagemenu-link">Change Log</span></div><div class="pagemenu-link"><a class="pagemenu-link" href="../GitMaster/index.html">If You Use Git Master</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../Future/index.html">Future Work</a></div><div class="pagemenu-link"><a class="pagemenu-link" href="../Dev/index.html">Developers</a></div>
+<ul class="pagemenu-link">
+<li><a class="pagemenu-link" href="../Dev/DevScripts/index.html">Scripts for Developers</a></li>
+<li><a class="pagemenu-link" href="../Dev/DevStaticLang/index.html">Library Source and StaticLang</a></li>
+</ul>
+
+	</div>
+	
+</td>
+
+<td class="main-panel">
+	<div>
+	<a class="breadcrumb-link" href="../index.html">Goldie&nbsp;Home&nbsp;(v0.9)</a>&nbsp;-> <span class="breadcrumb-link">Change&nbsp;Log</span>
+	</div>
+	<br />
+	<h1>Change Log</h1>
+	
+
+
+<p>
+Dates below are in YYYY-MM-DD format.
+</p>
+
+<h3 style="margin-bottom: 0px;">
+	<span class="changelog-version"><a class="extern-link" href="http://www.semitwist.com/goldie/v0.9/">v0.9</a></span>
+	<span class="changelog-summary"> - Tools</span>
+</h3>
+<div class="changelog-date">2012-04-17</div>
+<div class="changelog-compilers">
+	Tested on: DMD 2.055 - DMD 2.059, but only partially DMD 2.057 as described
+	<a class="page-link" href="../ChangeLog/index.html#Caveat2057">below</a>
+</div>
+<ul>
+	<li>
+		Added support for DMD 2.059.
+	</li>
+	<li>
+		Removed support for DMD 2.054 and below.
+	</li>
+	<li>
+		<a class="page-link" href="../APIOver/index.html">GoldieLib</a>: Renamed
+			<span class="ident">Language.loadCGT</span> to
+			<a class="page-link" href="../APIRef/Language/index.html#Language_load">Language.load</a>.
+	</li>
+	<li>
+		<a class="page-link" href="../Tools/GRMC/index.html">GRMC: Grammar Compiler</a>: Major bugs fixed:
+		<ul>
+			<li>
+				Fixed: Shift-Reduce conflicts aren't actually resolved at all
+				contrary to the warning message. They are now reported and
+				resolved by assuming "Shift" as intended.
+			</li>
+
+			<li>
+				Fixed: Failure to resolve Shift-Reduce conflicts can result in
+				false Reduce-Reduce conflict errors.
+			</li>
+
+			<li>
+				Fixed: In certain cases, extra terminals incorrectly added
+				as lookaheads.
+				Ultimately, the parser would occasionally accept a terminal
+				when it should have given an "Unexpected xxxx" error, which
+				probably would have then led to an <a class="page-link" href="../APIRef/Exception/index.html#InternalException">InternalException</a>.
+				(Root cause: Generating lookaheads mistook recursive rules for "can derive empty".)
+			</li>
+
+			<li>
+				Fixed: In certain cases, LALR actions point to wrong state,
+				creating extra conflict errors and possibly incorrect parsing.
+			</li>
+
+			<li>
+				Fixed: In certain cases, LALR states are accidentally merged.
+			</li>
+		</ul>
+	</li>
+	<li>
+		New tool: <a class="page-link" href="../Tools/AlterCGT/index.html">AlterCGT</a>.
+	</li>
+	<li>
+		Command line options for all tools are now processed with
+		<a class="extern-link" href="http://dlang.org/phobos/std_getopt.html">getopt</a> and use
+		standard Unix conventions (even on Windows). This means what used to
+		be <span class="code-inline">-foo:bar</span> or <span class="code-inline">/foo:bar</span> must now be
+		written as <span class="code-inline">--foo=bar</span> or <span class="code-inline">--foo bar</span>.
+		(But <span class="code-inline">/?</span> is still supported as an alternative to
+		<span class="code-inline">--help</span>.)
+	</li>
+	<li>
+		<a class="page-link" href="../Tools/DumpCGT/index.html">DumpCGT</a>: Dumps directly to a text file, not stdout.
+	</li>
+	<li>
+		<a class="page-link" href="../Tools/DumpCGT/index.html">DumpCGT</a>: Added <span class="code-inline">--out</span> and
+		<span class="code-inline">--no-filename</span> command line options.
+	</li>
+	<li>
+		<a class="page-link" href="../Tools/GenDocs/index.html">GenDocs</a>: Fixed: Code highlighted as "added" with
+		<span class="code-inline">+</span> is followed by an excess blank line.
+	</li>
+	<li>
+		<a class="page-link" href="../Tools/Parse/index.html">Parse</a>: Fixed: Crashes when saving to XML instead of JSON.
+	</li>
+	<li>
+		<a class="page-link" href="../Tools/Parse/index.html">Parse</a>: Changed the command line options.
+	</li>
+	<li>
+		<a class="page-link" href="../Tools/StaticLang/index.html">StaticLang</a>: Output directory cannot be the same
+		as Goldie's package source, to prevent overwriting Goldie's source.
+		(But note: This detection can be fooled with symbolic links or
+		separate installations of Goldie.)
+	</li>
+	<li>
+		<a class="page-link" href="../Tools/StaticLang/index.html">StaticLang</a>/<a class="page-link" href="../Tools/Parse/index.html">Parse</a>:
+		Always output Unix-style \n newlines. (This is 2012 - everything
+		relevant handles \n just fine, even on Windows. High time to
+		standardize on it.)
+	</li>
+</ul>
+
+<h3 style="margin-bottom: 0px;">
+	<span class="changelog-version"><a class="extern-link" href="http://www.semitwist.com/goldie/v0.8/">v0.8</a></span>
+	<span class="changelog-summary"> - Support DMD 2.058</span>
+</h3>
+<div class="changelog-date">2012-02-18</div>
+<div class="changelog-compilers">
+	Tested on: DMD 2.052 - DMD 2.058, but only partially DMD 2.057 as described
+	<a class="page-link" href="../ChangeLog/index.html#Caveat2057">below</a>
+	(but see <a class="extern-link" href="http://www.semitwist.com/goldie/v0.8/Start/Install/#RDMD">this note regarding RDMD</a> from the archived Goldie documentation)
+</div>
+<ul>
+	<li>
+		Added support for DMD 2.058.
+	</li>
+	<li>
+		Calculator <a class="page-link" href="../SampleApps/index.html">samples</a> now require at least DMD 2.054.
+	</li>
+	<li>
+		<a class="page-link" href="../Tools/StaticLang/index.html">StaticLang</a>:
+		Static-style languages generate a proper compile-time error when used
+		with a different version of Goldie than the one they were created with.
+	</li>
+	<li>
+		Now uses <a class="extern-link" href="https://bitbucket.org/Abscissa/semitwistdtools">SemiTwist D Tools</a>
+		tag '<a class="extern-link" href="https://bitbucket.org/Abscissa/semitwistdtools/src/goldie-v0.8">goldie-v0.8</a>'.
+	</li>
+</ul>
+
+<h3 style="margin-bottom: 0px;">
+	<span class="changelog-version"><a class="extern-link" href="http://www.semitwist.com/goldie/v0.7/">v0.7</a></span>
+	<span class="changelog-summary"> - API, 64-bit, Git</span>
+</h3>
+<div class="changelog-date">2012-01-29</div>
+<div class="changelog-compilers">
+	Tested on: DMD 2.052 - DMD 2.056, and partially DMD 2.057 as described
+	<a class="page-link" href="../ChangeLog/index.html#Caveat2057">below</a>
+	(but see <a class="extern-link" href="http://www.semitwist.com/goldie/v0.8/Start/Install/#RDMD">this note regarding RDMD</a> from the archived Goldie documentation)
+</div>
+<ul>
+	<li>
+		<a class="page-link" href="../APIOver/index.html">GoldieLib</a>: Added
+			<a class="page-link" href="../APIRef/Token/index.html#Token_get">Token.get</a> and
+			<a class="page-link" href="../APIRef/Token/index.html#Token_getRequired">Token.getRequired</a>.
+	</li>
+	<li>
+		<a class="page-link" href="../APIOver/index.html">GoldieLib</a>: Added
+			<a class="page-link" href="../APIRef/Token/index.html#traverse">traverse</a> for parse tree traversal.
+	</li>
+	<li>
+		<a class="page-link" href="../APIOver/index.html">GoldieLib</a>: Added
+			<a class="page-link" href="../APIRef/Token/index.html#Token_subtokens">op overloads</a>
+			as a preferred alternative to
+			<a class="page-link" href="../APIRef/Token/index.html#Token_subX">Token.subX</a> for accessing subtokens in dynamic-style.
+	</li>
+	<li>
+		<a class="page-link" href="../APIOver/index.html">GoldieLib</a>: Fixed: RangeException on
+		<span class="code-inline">Token.matches("&lt;blah&gt;", null)</span> (ie, when attempting to
+		match an empty rule with <a class="page-link" href="../APIRef/Token/index.html#Token_matches">matches</a>).
+	</li>
+	<li>
+		<a class="extern-link" href="http://www.dsource.org/projects/goldie/ticket/20">Fixed Issue #20</a>:
+		Fails on 64-bit builds.
+		(But note the still-open <a class="extern-link" href="http://www.dsource.org/projects/goldie/ticket/21">#21</a>:
+		64-bit 'staticlang' and 'sampleGenericParse' blocked by DMD Issue
+		<a class="extern-link" href="http://d.puremagic.com/issues/show_bug.cgi?id=6983">#6983</a>)
+	</li>
+	<li>Switched version control from SVN/DSource to Git/BitBucket.</li>
+	<li>Added <a class="page-link" href="../Start/Tutorial/index.html">Beginner's Tutorial</a>.</li>
+	<li>
+		Many documentation updates/improvements including
+		(in addition to the usual misc and API updates)
+		an updated <a class="page-link" href="../FAQ/index.html">FAQ</a>.
+	</li>
+	<li><a class="page-link" href="../Tools/StaticLang/index.html">StaticLang</a>: Creates the output path if it doesn't already exist.</li>
+	<li>
+		Renamed "Parse Anything" sample to <a class="page-link" href="../SampleApps/SampleGenericParse/index.html">Sample Generic Parse</a>
+		(to avoid confusion with the <a class="page-link" href="../Tools/Parse/index.html">Parse</a> tool).
+	</li>
+	<li>
+		<a name="Caveat2057" />
+		Added support for DMD 2.056.
+		On DMD 2.057, <a class="page-link" href="../APIOver/StatVsDyn/index.html">dynamic-style</a> works,
+		but not static-style or grammar compiling due to DMD Issue
+		<a class="extern-link" href="http://d.puremagic.com/issues/show_bug.cgi?id=7375">#7375</a>.
+	</li>
+	<li>
+		Now uses <a class="extern-link" href="https://bitbucket.org/Abscissa/semitwistdtools">SemiTwist D Tools</a>
+		tag '<a class="extern-link" href="https://bitbucket.org/Abscissa/semitwistdtools/src/goldie-v0.7">goldie-v0.7</a>'.
+	</li>
+</ul>
+
+<h3 style="margin-bottom: 0px;">
+	<span class="changelog-version"><a class="extern-link" href="http://www.semitwist.com/goldie/v0.6/">v0.6</a></span>
+	<span class="changelog-summary"> - Newer DMDs and Static Fixed</span>
+</h3>
+<div class="changelog-date">2011-10-04</div>
+<div class="changelog-compilers">
+	Tested on: DMD 2.052 - DMD 2.055
+	(but see <a class="extern-link" href="http://www.semitwist.com/goldie/v0.8/Start/Install/#RDMD">this note regarding RDMD</a> from the archived Goldie documentation)
+</div>
+<ul>
+	<li>
+		Added support for DMD 2.054 and 2.055.
+		The next version of Goldie will likely require at least 2.055.
+	</li>
+	<li>Fixed: Major bug in static-style: Some tokens erroneously refer to calc grammar no matter what grammar they're from.</li>
+	<li>Now uses <a class="extern-link" href="http://www.dsource.org/projects/semitwist">SemiTwist D Tools</a> r234</li>
+</ul>
+
+<h3 style="margin-bottom: 0px;">
+	<span class="changelog-version"><a class="extern-link" href="http://www.semitwist.com/goldie/v0.5/">v0.5</a></span>
+	<span class="changelog-summary"> - Speed</span>
+</h3>
+<div class="changelog-date">2011-05-17</div>
+<div class="changelog-compilers">
+	Tested on: DMD 2.052 - DMD 2.053
+</div>
+<ul>
+	<li>Improved lexing/parsing speed by about 5x-6x.</li>
+	<li>Small additional speedup lexing languages with large character sets (such as Unicode).</li>
+	<li><a class="page-link" href="../Tools/GRMC/index.html">GRMC: Grammar Compiler</a>: Supports <span class="ident">{All Valid}</span> character set.</li>
+	<li><a class="page-link" href="../Tools/GRMC/index.html">GRMC: Grammar Compiler</a>: Complex grammars are compiled to CGT up to about 4x-8x faster.</li>
+	<li><a class="page-link" href="../Tools/GRMC/index.html">GRMC: Grammar Compiler</a>: Verbose (-v) flag shows each step and amount of time taken.</li>
+	<li><a class="page-link" href="../SampleApps/SampleGenericParse/index.html">ParseAnything</a>: No more unhandled exception when parsing a source with an error.</li>
+	<li>Fixed to work with DMD 2.053 (still works with 2.052, too).</li>
+	<li>Now uses <a class="extern-link" href="http://www.dsource.org/projects/semitwist">SemiTwist D Tools</a> r221</li>
+</ul>
+
+<h3 style="margin-bottom: 0px;">
+	<span class="changelog-version"><a class="extern-link" href="http://www.semitwist.com/goldie/v0.4/">v0.4</a></span>
+	<span class="changelog-summary"> - D2 and GRMC</span>
+</h3>
+<div class="changelog-date">2011-03-27</div>
+<div class="changelog-compilers">
+	Tested on: DMD 2.052
+</div>
+<ul>
+	<li>Switched from D1/Tango to D2/Phobos.</li>
+	<li>New tool: <a class="page-link" href="../Tools/GRMC/index.html">GRMC: Grammar Compiler</a>. Because of this, Goldie no longer requires GOLD Parser Builder.</li>
+	<li>Grammars can be compiled not only from <a class="page-link" href="../Tools/GRMC/index.html">GRMC: Grammar Compiler</a>, but also through the D API, GoldieLib.</li>
+	<li>No longer requires xfBuild or Rebuild.</li>
+	<li>Executable filenames are now prefixed with 'goldie-' to minimize chance of collisions on the PATH.</li>
+	<li>Many misc changes/improvements to tools, API and documentation.</li>
+	<li>Now uses <a class="extern-link" href="http://www.dsource.org/projects/semitwist">SemiTwist D Tools</a> r213</li>
+</ul>
+
+<h3 style="margin-bottom: 0px;">
+	<span class="changelog-version"><a class="extern-link" href="http://www.semitwist.com/goldie/v0.3/Docs/">v0.3</a></span>
+	<span class="changelog-summary"> - Static-Style and Documentation</span>
+</h3>
+<div class="changelog-date">2010-07-25</div>
+<div class="changelog-compilers"></div>
+<ul>
+	<li>Added static-style languages.</li>
+	<li>Major improvements to API for parsing errors.</li>
+	<li>Misc changes/improvements to API.</li>
+	<li>New tools: <a class="page-link" href="../Tools/StaticLang/index.html">StaticLang</a>, <a class="page-link" href="../Tools/JsonViewer/index.html">JsonViewer</a> and <a class="page-link" href="../Tools/GenDocs/index.html">GenDocs</a>.</li>
+	<li>Split Calculator sample app into a dynamic-style version and a static-style version.</li>
+	<li>Greatly improved handling of Unicode.</li>
+	<li>Created complete documentation.</li>
+	<li>Now uses <a class="extern-link" href="http://www.dsource.org/projects/semitwist">SemiTwist D Tools</a> r132</li>
+</ul>
+
+<h3 style="margin-bottom: 0px;">
+	<span class="changelog-version"><a class="extern-link" href="http://www.dsource.org/projects/goldie/wiki/Docs">v0.02</a></span>
+	<span class="changelog-summary"> - Minor Bugfix</span>
+</h3>
+<div class="changelog-date">2009-09-09</div>
+<div class="changelog-compilers"></div>
+<ul>
+	<li>Fixed: Rare array-out-of-bounds upon Lexer error.</li>
+	<li>Fixed: <a class="extern-link" href="http://www.dsource.org/projects/goldie/ticket/1">Ticket #1: Extra oddball character in lex error message's quote</a></li>
+	<li>Now uses SemiTwist D Tools r86</li>
+</ul>
+
+<h3 style="margin-bottom: 0px;">
+	<span class="changelog-version"><a class="extern-link" href="http://www.dsource.org/projects/goldie/wiki/Docs">v0.01</a></span>
+	<span class="changelog-summary"> - Initial Release</span>
+</h3>
+<div class="changelog-date">2009-08-26</div>
+<div class="changelog-compilers"></div>
+<ul>
+	<li>Initial Release</li>
+	<li>Uses SemiTwist D Tools r82</li>
+</ul>
+</td>
+
+</tr>
+</table>
+
+<hr />
+<p class="footer">
+	Goldie v0.9 Documentation<br />
+	Copyright &copy; 2010-2012 Nick Sabalausky<br />
+	<br />
+</p>
+
+</body>
+
+</html>

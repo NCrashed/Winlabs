@@ -1,0 +1,1786 @@
+[$name|Tutorial$]
+[$title|Beginner's Tutorial$]
+[$frame|HTMLPage.tmpl$]
+
+<ol style="list-style-type: decimal;">
+<li>[$pageLink|#InstallD|      Install the D compiler               $]</li>
+<li>[$pageLink|#InstallGoldie| Install Goldie and SemiTwist D Tools $]</li>
+<li>
+	[$pageLink|#WriteGrammar|  Write a Grammar $]
+	<ul>
+	<li>[$pageLink|#Terminal|      Terminal Symbols    $]</li>
+	<li>[$pageLink|#NonTerminal|   NonTerminal Symbols $]</li>
+	<li>[$pageLink|#OtherTerminal| The Other Terminal  $]</li>
+	</ul>
+</li>
+<li>
+	[$pageLink|#CompileAndTestGrammar| Compile and Test the Grammar $]
+	<ul>
+	<li>[$pageLink|#CompileGrammar|     Compiling the Grammar   $]</li>
+	<li>[$pageLink|#TestGrammar|        Testing the Grammar     $]</li>
+	<li>[$pageLink|#WhitespaceComments| Whitespace and Comments $]</li>
+	</ul>
+</li>
+<li>[$pageLink|#EnhanceGrammar| Enhancing the Grammar $]</li>
+<li>
+	[$pageLink|#Program| Making a Real Program $]
+	<ul>
+	<li>[$pageLink|#ImportLanguage|    Importing the Language    $]</li>
+	<li>[$pageLink|#ParseInput|        Parsing the Input         $]</li>
+	<li>[$pageLink|#AST|               The Abstract Syntax Tree  $]</li>
+	<li>[$pageLink|#NavigateParseTree| Navigating the Parse Tree $]</li>
+	<li>[$pageLink|#SemanticErrors|    Semantic Errors           $]</li>
+	</ul>
+</li>
+<li>[$pageLink|#SuggestedExercises| Suggested Exercises $]</li>
+<li>
+	[$pageLink|#AdditionalTools| Additional Tools $]
+	<ul>
+	<li>[$pageLink|#DumpCGT|    Dumping the Compiled Grammar Tables $]</li>
+	<li>[$pageLink|#LexerGraph| Lexer Graph         $]</li>
+	<li>[$pageLink|#GOLD|       GOLD Parser Builder $]</li>
+	</ul>
+</li>
+</ol>
+
+<p>
+All the code samples in this tutorial can be found in Goldie's
+[$code|inline|tutorial$] subdirectory. To use them, simply
+follow along with this tutorial.
+</p>
+
+<a name="InstallD" />
+<h2>1. Install the D compiler</h2>
+<div class="api-def">
+<p>
+If you don't already have DMD installed, you can do it like this
+(where <i>{NAME-OF-DVM-FILE}</i> is the appropriate file for your OS from
+the [$link| https://bitbucket.org/doob/dvm/downloads | DVM download page $]):
+</p>
+
+<h4 style="margin-bottom: 0px;">Windows:</h4>
+<div class="code-plain"><i>[:[Download <i>{NAME-OF-DVM-FILE}</i> to your current directory]</i>:]
+&gt;<span class="code-user"><i>{NAME-OF-DVM-FILE}</i> install dvm</span>
+[:<i>[Close your command prompt and open a new one.]</i>:]
+&gt;[$code|user|dvm install 2.058$]
+&gt;[$code|user|dvm use 2.058 --default$]
+</div>
+
+<h4 style="margin-bottom: 0px;">Posix:</h4>
+<div class="code-plain">&gt;<span class="code-user">wget -O dvm https://bitbucket.org/doob/dvm/downloads/<i>{NAME-OF-DVM-FILE}</i></span>
+&gt;[$code|user|chmod +x dvm$]
+&gt;[$code|user|./dvm install dvm$]
+[:<i>[Close your command prompt and open a new one.]</i>:]
+&gt;[$code|user|dvm install 2.058$]
+&gt;[$code|user|dvm use 2.058 --default$]
+</div>
+
+<p>
+Note that DMD 2.057 won't work for this tutorial due to DMD Issue
+[$link| http://d.puremagic.com/issues/show_bug.cgi?id=7375 | #7375 $].
+</p>
+
+<p style="font-style: italic;">
+(For more information on this step, see the
+[$link| https://bitbucket.org/doob/dvm/wiki/Home | DVM installation instructions $].)
+</p>
+</div>
+
+
+<a name="InstallGoldie" />
+<h2>2. Install Goldie and SemiTwist D Tools</h2>
+<div class="api-def">
+<p>
+Download and extract the
+[$link| http://www.semitwist.com/download/goldie/ | prepackaged release $]
+(in [$pageLink|Install#7z|7z$] format) for your OS. Or grab the "source-only"
+package. (If you'd prefer to download via Git, please see [$pageTitle|Install$].)
+</p>
+<p>
+Then, just [$pageLink| Install#EnvPATH | update your PATH $]
+to include the Goldie and SemiTwistDTools [$code|inline|bin$] directories
+(or just symlink the executables to your preferred [$code|inline|bin$]
+directory if you're on a Posix OS), and
+[$pageLink| Install#IncludePath | update DMD's configuration $]
+to include the Goldie and SemiTwistDTools [$code|inline|src$] directories.
+</p>
+<p>
+If you downloaded the "source-only" package, or downloaded via Git,
+you'll need to compile Goldie and SemiTwist D Tools like this:
+</p>
+<div class="code-plain">&gt;[$code|user|cd SemiTwistDTools$]
+&gt;[$code|user|buildAll$] <i>(or [$code|user|./buildAll$] on Posix)</i>
+&gt;[$code|user|cd ../Goldie$]
+&gt;[$code|user|semitwist-stbuild all -x-I../SemiTwistDTools/src$]
+&gt;[$code|user|makeDocs$] <i>(or [$code|user|./makeDocs$] on Posix)</i></div>
+<p style="font-style: italic;">
+(For more information on this step, see [$pageTitle|Install$].)
+</p>
+</div>
+
+
+<a name="WriteGrammar" />
+<h2>3. Write a Grammar</h2>
+<div class="api-def">
+<p>
+There are grammars
+[$link|http://goldparser.org/grammars/index.htm| already available $],
+but to help get a feel for Goldie, let's write our own.
+For your first grammar, we'll keep it super-simple and make it a
+comma-separated list of integers. Goldie's grammars are written in the
+[$link| http://goldparser.org/doc/grammars/index.htm | GOLD Meta-Language $],
+so that's what we'll be using.
+</p>
+<p>
+Start by opening your favorite text editor. Or you can use
+[$pageLink| OtherTools#GOLD | GOLD Parser Builder $] or
+[$link| http://goldparser.org/builder/index.htm#Tools | Grammar Edit $],
+both of which feature syntax highlighting and other benefits. There's also a 
+[$link| http://goldparser.org/builder/index.htm#Tools | syntax file for VIM $].
+</p>
+<p>
+Create a new file in your editor of choice and name it [$code|inline|commas.grm$].
+Enter the following into it:
+</p>
+<p class="figure-title">tutorial/section3/commas.grm:</p>
+[$code|plain|
+[:! This grammar describes a comma-separated list of integers.
+"Name"     = 'Commas Forever'
+"Author"   = 'Joe Coder'
+"Version"  = '0.01'
+"About"    = 'Comma-separated list of integers'
+"Case Sensitive" = true   ! Doesn't really matter since there's no letters
+
+"Start Symbol" = <List>
+
+! -- Terminals -----------------------------------------
+
+Integer = '-'? {Digit}+
+
+! -- Rules ---------------------------------------------
+
+<List> ::= <List> ',' Integer
+        |  Integer:]
+$]
+<p>
+There's two things to notice about this code right from the start:
+</p>
+<ol style="list-style-type: decimal;">
+<li>
+	Comments start with [$code|inline|!$] and extend to the end of the line.
+	The grammar description language also supports multi-line block comments
+	which look like this: [$code|inline|!* comment *!$]
+</li>
+<li>
+	Whitespace and indentation are not significant, but newlines are.
+	However, that said, we could have put the [$code|inline|[: |  Integer:]$]
+	at the end of the previous line and it would have still worked fine.
+</li>
+</ol>
+<p>
+The first line, of course, is just a comment.
+</p>
+<p>
+The next four lines just set some metadata for the grammar: Name, Author,
+Version, and About. You should normally include them, but they don't have
+any real effect.
+</p>
+<p>
+The sixth line tells Goldie that the grammar we're describing is case-sensitive.
+Since our grammar is just numbers and commas, that's irrelevant,
+so just ignore it for now.
+</p>
+<a name="Terminal" />
+<h3>Terminal Symbols</h3>
+<p>
+Skipping the [$code|inline|"Start Symbol"$] for a minute, let's look at the
+line defining our terminal:
+</p>
+[$code|plain|
+[:Integer = '-'? {Digit}+:]
+$]
+<p>
+A terminal symbol is the most basic part of a grammar. They're defined just
+simply with regular expressions. Our grammar is made up of integers, and we
+can easily describe an integer with a regular expression, so that's what
+we've done here.
+</p>
+<p>
+To analyze that line more closely: First, we're naming our integer symbol
+(sensibly enough) [$code|inline|Integer$]. Next, we're defining an
+[$code|inline|Integer$] symbol to be an optional minus sign followed by one
+or more digits. The [$code|inline|?$] means "optional", the [$code|inline|+$]
+means "one or more", and [$code|inline|{Digit}$] is a built-in character
+set that means "any of the digits from 0 through 9". Instead of using
+[$code|inline|{Digit}$], we could also have been more explicit and said
+[$code|inline|[:[0123456789]:]$] instead.
+</p>
+<a name="NonTerminal" />
+<h3>NonTerminal Symbols</h3>
+<p>
+Now we come to the nonterminal section. A nonterminal is any symbol in our
+grammar that's made of of other terminal and/or nonterminal symbols.
+Here's ours:
+</p>
+[$code|plain|
+[:<List> ::= <List> ',' Integer
+        |  Integer:]
+$]
+<p>
+In the [$link| http://goldparser.org/doc/grammars/index.htm | GOLD Meta-Language $],
+the names of nonterminals are surrounded by angle brackets,
+such as [$code|inline|<List>$] above. Goldie considers the brackets to be part
+of the symbol's name.
+</p>
+<p>
+What the above code says, is that a [$code|inline|<List>$] symbol can be
+(the correct term is "derives from") either of the following:
+</p>
+<ul>
+<li>
+	[$code|inline|Integer$]: Just a plain old [$code|inline|Integer$] by itself.
+</li>
+<li>
+	[$code|inline|<List> ',' Integer$]: Any existing [$code|inline|<List>$],
+	followed by a comma, and then an [$code|inline|Integer$].
+</li>
+</ul>
+<p>
+Actually, the rule as written above is really just syntactic sugar for what
+are <em>really</em> two separate rules:
+</p>
+[$code|plain|
+[:<List> ::= <List> ',' Integer
+<List> ::= Integer:]
+$]
+<p>
+The combined form is preferred, though.
+</p>
+<p>
+So this grammar accepts an integer as a [$code|inline|<List>$]. But, since an
+[$code|inline|Integer$] can become (or rather, the proper term is "reduces to")
+a [$code|inline|<List>$], the grammar also accepts
+an integer followed by a comma and then another integer. And since <em>that</em>
+reduces to a [$code|inline|<List>$] too, our grammar also accepts that list
+of two integers followed by <em>another</em> comma and integer, etc..., all
+the way up to any number of comma separated integers you can throw at it.
+</p>
+<p>
+So if you give it a list of numbers, the parser will march right through
+them like this (the parts that get reduced to a new [$code|inline|<List>$]
+at each step have been highlighted):
+</p>
+<div class="code-plain">7,12,42,-920,65535 [$code|user|[:[The "Lexer" turns this into Integers...]:]$]
+[$code|added|Integer$],Integer,Integer,Integer,Integer [$code|user|(Integers:$] 7,12,42,-920,65535[$code|user|)$]
+[$code|added|<List>,Integer$],Integer,Integer,Integer  [$code|user|(List:$] 7[$code|user|) (Integers:$] 12,42,-920,65535[$code|user|)$]
+[$code|added|<List>,Integer$],Integer,Integer          [$code|user|(List:$] 7,12[$code|user|) (Integers:$] 42,-920,65535[$code|user|)$]
+[$code|added|<List>,Integer$],Integer                  [$code|user|(List:$] 7,12,42[$code|user|) (Integers:$] -920,65535[$code|user|)$]
+[$code|added|<List>,Integer$]                          [$code|user|(List:$] 7,12,42,-920[$code|user|) (Integers:$] 65535[$code|user|)$]
+&lt;List&gt;                                  [$code|user|(List:$] 7,12,42,-920,65535[$code|user|)$]</div>
+<p>
+By the end, the parser will have built this tree, from bottom to top:
+</p>
+<div class="code-plain">[:
+                              &lt;List&gt;(7,12,42,-920,65535)
+                                 /\
+                                /  ----------------------
+                               /                \        \
+                        &lt;List&gt;(7,12,42,-920)   ','   Integer(65535)
+                           /\
+                          /  -----------------
+                         /           \        \
+                  &lt;List&gt;(7,12,42)   ','   Integer(-920)
+                     /\
+                    /  --------------
+                   /        \        \
+            &lt;List&gt;(7,12)   ','   Integer(42)
+               /\
+              /  -----------
+             /     \        \
+      &lt;List&gt;(7)   ','   Integer(12)
+         /
+        /
+       /
+  Integer(7)
+:]
+</div>
+<p>
+Notice that the terminals are always the leaves of the tree.
+(That's why they're called "terminals".)
+</p>
+<p>
+Getting back to the [$code|inline|"Start Symbol"$] we skipped before:
+</p>
+[$code|plain|[:"Start Symbol" = <List>:]$]
+<p>
+That's a required part of every grammar. That tells the parser that the
+<em>entire</em> source being parsed must ultimately reduce to that one
+lone nonterminal. If it does, then the source is ok - it parsed successfully.
+If not, then it's not a valid source - the source has an error.
+</p>
+<p>
+Those people experienced with LL parsers may have noticed that this is a
+left-recursive grammar and cringed. Such a grammar is not allowed in LL parsing,
+you'd have to write it using right-recursion: [$code|inline|Integer ',' <List>$].
+Goldie, however, is an LR parser (more specifically, an LALR(1)). In LR parsing,
+left-recursion is not only allowed, but is more efficient than right-recursion.
+Of course, that doesn't mean LR is necessarily better: We have our own issues
+to deal with, such as shift-reduce and reduce-reduce conflicts.
+</p>
+<a name="OtherTerminal" />
+<h3>The Other Terminal</h3>
+<p>
+As it turns out, [$code|inline|Integer$] isn't the only terminal
+in this grammar. There's also the comma. Since the comma is just a simple
+ordinary string and doesn't require any of the fancy regular expression features
+(such as the "optional" [$code|inline|?$], the "one or more" [$code|inline|+$]
+or the [$code|inline|{Digit}$]), we were able to define it implicitly
+just by sticking it right in the nonterminal's definition.
+The name of this terminal symbol is just simply [$code|inline|,$].
+</p>
+<p>
+If we wanted, we could have defined it formally:
+</p>
+[$code|plain|
+[:Comma = ','
+
+<List> ::= <List> Comma Integer
+        |  Integer:]
+$]
+<p>
+But putting it inline is more convenient and easier to read.
+</p>
+</div>
+
+
+<a name="CompileAndTestGrammar" />
+<h2>4. Compile and Test the Grammar</h2>
+<div class="api-def">
+<p>
+So far, we haven't actually used the grammar. We've just written it and
+discussed how it will work. So let's try it out for real
+(I believe the proper term is "fo realz", but I'm not hip enough).
+</p>
+<a name="CompileGrammar" />
+<h3>Compiling the Grammar</h3>
+<p>
+First we have to compile our grammar. You can do this in
+[$pageLink| OtherTools#GOLD | GOLD Parser Builder $], but Goldie has its own
+tool, [$pageTitle|GRMC$], so let's try that. At the command line:
+</p>
+<div class="code-plain">&gt;[$code|user|goldie-grmc commas.grm$]</div>
+<p>
+That will compile the grammar and save it to the file [$code|inline|commas.cgt$].
+The extension "cgt" stands for "Compiled Grammar Table".
+</p>
+<a name="TestGrammar" />
+<h3>Testing the Grammar</h3>
+<p>
+Now that our grammar is compiled, we can test it. Create a new file named
+[$code|inline|test.commas$]. In it, type the number list we used in the
+previous section:
+</p>
+[$code|plain|[:7,12,42,-920,65535:]$]
+<p>
+Now save, and then go back to the command line to parse it against your
+freshly compiled grammar:
+</p>
+<div class="code-plain">&gt;[$code|user|goldie-parse --lang=commas.cgt test.commas$]
+Saving Tokens (test.commas.tk.json)...Done!
+Saving Parse Tree (test.commas.pt.json)...Done!</div>
+<p>
+As you can see, there were no errors, and results were saved to the JSON files
+[$code|inline|test.commas.tk.json$] and [$code|inline|test.commas.pt.json$].
+The first one is the result of the lexing phase, and the second is the final
+parsed result. Let's take a look...
+</p>
+<p>
+Bundled with Goldie is a specially-modified version of a GUI program called
+[$pageTitle|JsonViewer$]. The original version, and thus this one as well,
+was written in C#, and unfortunately it does have some bugs when run in Linux
+under Mono (A rewrite in D is planned).  But it works fine under .NET on
+Windows, and it does at least work somewhat on Linux/Mono, so let's give it a go.
+</p>
+<p>
+Run the main JsonViewer executable:
+[$code|inline|{main Goldie directory}/JsonViewer/JsonView.exe$]. Open
+the first JSON file with it: [$code|inline|test.commas.tk.json$]. Then expand
+the tree on the left and you should see something like this:
+</p>
+<img src="[$urlToRoot$]Tutorial-JsonViewer1.png" alt="Lexer Result in JsonViewer" />
+<p>
+That's a lot of info! You can see that Goldie's lexer separated the list
+into a series of integer and comma tokens. Click a token in left panel, and
+it will highlight the token in the original source. Click a position in the
+source, then "Jump To Node", and it will highlight the corresponding token
+on the left. Whenever a token on the left is selected, the far-right-side
+panel will show various information about it.
+</p>
+<p>
+But there's no structure! It's just a series of tokens. And there's no
+[$code|inline|<List>$]. It only has the nonterminals. That's because
+this is only the output of the lexing phase. It's the parser that
+handles the nonterminals.
+</p>
+<p>
+So let's open the other JSON file: [$code|inline|test.commas.pt.json$]. Expand
+the tree on the left again:
+</p>
+<img src="[$urlToRoot$]Tutorial-JsonViewer2.png" alt="Parser Result in JsonViewer" />
+<p>
+Now that's much more interesting. Although it's laid out differently, notice
+that the tree exactly matches what we predicted in the previous section: The
+same tree, built from the structure defined in the grammar file.
+The root node is a [$code|inline|<List>$], because that's what our
+[$code|inline|"Start Symbol"$] was set to.
+That root node represents the entire source code, and consists
+of three subtokens: A [$code|inline|<List>$] (representing the entire
+list except for the last element), then a [$code|inline|,$] and finally an
+[$code|inline|Integer$] (which represents the last element). Just like our
+definition of [$code|inline|<List> ::= <List> ',' Integer$]!
+</p>
+<p>
+At this point, I invite you to play around with the [$code|inline|test.commas$]
+file, changing it, reparsing it, and seeing what happens. Make sure to try
+deliberately bad input: put words in, two commas in a row, decimals, etc.
+The parser will properly report the filename, location and what went wrong.
+</p>
+<p>
+If you do something that's valid in the lexing phase (syntactically correct),
+but invalid in the parsing phase (grammatically incorrect), such as two commas
+in a row, the lexer's JSON output ([$code|inline|*.tk.json$]) will look fine,
+but it won't be able to produce a parse tree ([$code|inline|*.pt.json$]).
+</p>
+<p>
+If you have a syntax error, such as including a word instead of an integer,
+then it will still save the lexer results and you'll be able to see the error
+token that was reported to you in the error message.
+</p>
+<a name="WhitespaceComments" />
+<h3>Whitespace and Comments</h3>
+<p>
+While playing around with the sample input, you may have noticed that the
+parser happily accepts any whitespace you throw at it: Spaces, tabs,
+newlines, etc. It even shows up in the lexer's JSON file.
+But we never defined any whitespace in the grammar!
+</p>
+<p>
+The [$link| http://goldparser.org/doc/grammars/index.htm | GOLD Meta-Language $]
+automatically defines a default whitespace terminal if you don't. You can
+override it like this:
+</p>
+[$code|plain|[:Whitespace = ({Space} | {HT})+:]$]
+<p>
+That defines the whitespace to be one or more characters that can each be
+either space or (horizontal) tab. No newlines, no form-feed, no non-breaking
+space, no vertical tab (yes, there is such a thing!), no anything else.
+</p>
+<p>
+Or, you can effectively disable whitespace by setting it to the rarely-used
+value of 1 (that is, the ASCII/Unicode code #1, not the actual digit '1'):
+</p>
+[$code|plain|[:Whitespace = {&01}+:]$]
+<p>
+However you choose to define the whitespace, any whitespace tokens the lexer
+finds are automatically skipped by the parser.
+</p>
+<p>
+The [$link| http://goldparser.org/doc/grammars/index.htm | GOLD Meta-Language $]
+also has built-in support for comments, which work much like whitespace.
+For example, to define C/C++-style line comments and block comments:
+</p>
+[$code|plain|
+[:Comment Line  = '//'
+Comment Start = '/*'
+Comment End   = '*/':]
+$]
+<p>
+Like whitespace, comments are detected by the lexer and then the parser
+skips them automatically. But unlike whitespace, there are no default comments.
+If you don't define a line comment or a block comment, then you don't get
+any line comments or block comments.
+</p>
+<p>
+[$pageLink| OtherTools#GOLD | GOLD Parser Builder $] has rather advanced
+comment support as of version 5, but unfortunately Goldie doesn't support any
+of GOLD's new v5 features just yet. It will, but at the moment, Goldie is
+limited to one type of line comment, and one non-nesting block comment defined
+by a starting token and an ending token.
+</p>
+</div>
+
+
+<a name="EnhanceGrammar" />
+<h2>5. Enhancing the Grammar</h2>
+<div class="api-def">
+<p>
+Before getting into writing some real code, let's make a few small
+enhancements to our grammar.
+</p>
+<a name="Zero" />
+<h3>"Zero" And Case Sensitivity</h3>
+<p>
+First, just for kicks, let's allow the text [$code|inline|{zero}$]
+(including the curly braces) to be a synonym for [$code|inline|0$].
+It'll still be considered an integer, just
+an alternate way of writing one, so we'll just add it into the
+[$code|inline|Integer$] definition:
+</p>
+[$code|plain|
+[:Integer = '{zero}' | ( '-'? {Digit}+ ):]
+$]
+<p>
+The [$code|inline|[:|:]$] means "or". So this new version of
+[$code|inline|Integer$] can be either [$code|inline|{zero}$] or
+exactly what we had before.
+</p>
+<p>
+Recompile the grammar, and now the you can use [$code|inline|{zero}$] in your
+[$code|inline|test.commas$] file!
+</p>
+<p>
+This is where the [$code|inline|"Case Sensitive"$] starts to make sense.
+Since we set it to true, the grammar will only accept [$code|inline|{zero}$]
+exactly as we typed it in the source. It won't accept [$code|inline|{ZERO}$],
+[$code|inline|{Zero}$], [$code|inline|{zERo}$], etc. If you would like it
+to accept any casing, just change [$code|inline|"Case Sensitive"$] to false.
+(If you omit the [$code|inline|"Case Sensitive"$] line, it defaults to false.)
+</p>
+<a name="Identifiers" />
+<h3>Identifiers</h3>
+<p>
+Let's update the grammar to allow some arbitrary identifiers, just like
+variable names in other languages. Typically, identifiers are defined
+to be a letter or underscore followed by zero or more letters, digits
+or underscores. So let's follow suit:
+</p>
+[$code|plain|
+[:Ident = ({Letter} | '_') ({AlphaNumeric} | '_')*:]
+$]
+<p>
+The [$code|inline|{Letter}$] means "any upper or lowercase letter".
+The [$code|inline|{AlphaNumeric}$] is the same, but it also includes 0 through 9.
+Finally, the [$code|inline|*$] means "zero or more".
+So this quite literally means "A letter or underscore; followed by zero or more
+letters, digits or underscores".
+</p>
+<p>
+That's getting a little long and harder to read, but we can simplify it by
+defining our own character sets:
+</p>
+[$code|plain|
+[:{Ident Start} = {Letter} + [_]
+{Ident Char}  = {AlphaNumeric} + [_]
+Ident = {Ident Start} {Ident Char}*:]
+$]
+<p>
+That's surprisingly straightforward. When defining a character set (the names of
+character sets are always surrounded by curly braces), the [$code|inline|+$]
+means "everything in both of these character sets". So [$code|inline|{Ident Start}$]
+is the set off all letters plus the underscore.
+</p>
+<p>
+We can also use [$code|inline|-$] to exclude characters. For example,
+[$code|inline|[:{AlphaNumeric} - {Digit} - [zZ] - 'A':]$] results in all letters
+except for uppercase [$code|inline|A$], and upper and lowercase [$code|inline|Z$].
+Of course, if you set [$code|inline|"Case Sensitive"$] to false, then
+it'll simply mean "All letters except for A and Z, regardless of case."
+</p>
+<p>
+But now that we've defined our identifiers, we still have to work them into
+the rest of the grammar. I've highlighted the parts which have changed:
+</p>
+<div class="code-plain">&lt;List&gt; ::= &lt;List&gt; ',' [$code|added|<List Element>$]
+        [:|:]  [$code|added|<List Element>$]
+
+[$code|added|[:<List Element> ::= Integer | Ident:]$]</div>
+<p>
+Now, instead of being a list of [$code|inline|Integer$], it's a list of
+[$code|inline|<List Element>$]. And a [$code|inline|<List Element>$]
+can be either an [$code|inline|Integer$] or an [$code|inline|Ident$].
+</p>
+<a name="Surrounded" />
+<h3>We're Surrounded!</h3>
+<p>
+We'll make one last little change: Our grammar should
+support two different forms: Large and Small. Large can accept any integer.
+But since supporting <em>any</em> integer can be computationally demanding,
+we have the option of a Small.
+The Small size means all values must fit into two bytes.
+In other words, only integers from 0 through 65,535 will be allowed.
+</p>
+<p>
+Additionally, let's include the (somewhat contrived) expectation
+that the description of "Large" or "Small" must be repeated at the end of
+the source. For example:
+</p>
+[$code|plain|[:Large 1, mango, -24, 93521356, {zero}, 77 Large:]$]
+[$code|plain|[:Small 1, mango, 24, 32000, {zero}, 77 Small:]$]
+<p>
+First, we'll create a symbol for these size descriptions:
+</p>
+[$code|plain|[:<Size> ::= 'Large' | 'Small':]$]
+<p>
+Now, we'll create another new symbol to combine it all together:
+</p>
+[$code|plain|[:<Everything> ::= <Size> <List> <Size>:]$]
+<p>
+Since this new [$code|inline|<Everything>$] is intended to represent the
+entire source (instead of [$code|inline|<List>$] as before) we have to update
+the [$code|inline|"Start Symbol"$]:
+</p>
+<div class="code-plain">"Start Symbol" = [$code|added|<Everything>$]</div>
+<p>
+And while we're at it, we may as well update the grammar's metadata.
+So now, our entire grammar looks like this:
+</p>
+<p class="figure-title">tutorial/sections5-6/commas.grm:</p>
+<div class="code-plain">! This grammar describes a comma-separated list of [$code|added|values$].
+"Name"     = 'Commas Forever'
+"Author"   = 'Joe Coder'
+"Version"  = '0.0[$code|added|2$]'
+"About"    = 'Comma-separated list of [$code|added|values$]'
+"Case Sensitive" = [$code|added|false$]
+
+"Start Symbol" = [$code|added|<Everything>$]
+
+! -- Terminals -----------------------------------------
+
+Integer = [$code|added|[:'{zero}' | ( :]$]'-'? {Digit}+[$code|added|[: ):]$]
+
+[$code|added|[:{Ident Start} = {Letter} + [_]
+{Ident Char}  = {AlphaNumeric} + [_]
+Ident = {Ident Start} {Ident Char}*:]$]
+
+! -- Rules ---------------------------------------------
+
+[$code|added|<Everything> ::= <Size> <List> <Size>
+
+<Size> ::= 'Large' [:|:] 'Small'$]
+
+&lt;List&gt; ::= &lt;List&gt; ',' [$code|added|<List Element>$]
+        [:|:]  [$code|added|<List Element>
+
+<List Element> ::= Integer [:|:] Ident$]</div>
+<p>
+Whew! That's a lot of changes!
+</p>
+<p>
+You may notice that a couple of
+our new restrictions are not yet enforced: A "Small" list still accepts any
+integer, and the sizes at the beginning and end don't have to match: One could
+be "Large", but the other could still be "Small". Those are not things
+that are easily handled in a grammar. They're more of a semantic matter (rather
+than syntactic), so we'll handle them in our own code later.
+</p>
+<p>
+In any case, compile this new grammar, and try it out!
+</p>
+</div>
+
+<a name="Program" />
+<h2>6. Making a Real Program</h2>
+<div class="api-def">
+<p>
+Alright, now it's time for some real code:
+</p>
+<a name="ImportLanguage" />
+<h3>Importing the Language</h3>
+<p>
+There are two main ways to load your grammar into GoldieLib:
+</p>
+<p>
+One way is to load the compiled grammar file at runtime, just like
+the [$pageTitle|Parse$] tool did when we used it earlier.
+We could easily do that,
+but unless you're writing a program like [$pageTitle|Parse$] which needs to
+work on <em>any</em> grammar, it's better to take the other approach:
+</p>
+<p>
+Use Goldie's [$pageTitle|StaticLang$] tool to convert your compiled grammar
+into a D package. Not only does this help your program startup faster
+and allow you to distribute your program without the compiled grammar file,
+but it also gives you the option of using GoldieLib's
+[$pageLink|StatVsDyn|static-style$] interfaces. The nice thing about
+GoldieLib's static-style interfaces (as opposed to the dynamic-style ones)
+is they provide better compile-time safety. For example,
+if you mistype the name of a symbol (such as [$code|inline|Idint$] instead
+of [$code|inline|Ident$]), the static-style will give you an error at
+compile-time instead of leaving you with a runtime bug.
+</p>
+<p>
+Creating a D package for your grammar is a simple as this:
+</p>
+<div class="code-plain">&gt;[$code|user|[:goldie-staticlang commas.cgt --pack=commas:]$]</div>
+<p>
+That will create a package named [$code|inline|commas$].
+In your D code, import it like this:
+</p>
+[$code|highlight|
+[:import goldie.all; // Import GoldieLib itself
+import commas.all; // Import our commas language:]
+$]
+<a name="ParseInput" />
+<h3>Parsing the Input</h3>
+<p>
+Now we're ready to actually start using GoldieLib.
+</p>
+<p>
+The first thing to do is load a file and parse it according to our
+commas grammar:
+</p>
+<p class="figure-title">tutorial/sections5-6/program1.d:</p>
+[$code|highlight|
+[:import std.stdio;
+import goldie.all; // Import GoldieLib itself
+import commas.all; // Import our commas language
+
+int main(string[] args)
+{
+	try
+	{
+		auto parseTree = language_commas.parseFile(args[1]).parseTree;
+	}
+	catch(ParseException e)
+	{
+		writeln(e.msg);
+		return 1;
+	}
+
+	return 0;
+}:]
+$]
+<p>
+The try/catch block is simply there so upon any parsing (or lexing)
+error you'll get a prettier error message than just an ugly unhandled
+exception.
+</p>
+<p>
+The only particularly interesting line is this one:
+</p>
+[$code|highlight|
+[:auto parseTree = language_commas.parseFile(args[1]).parseTree;:]
+$]
+<p>
+That one line does it all. Let's break it down:
+</p>
+<p>
+The [$code|inline|language_commas$] is our commas language. It's a
+variable of type
+[$typeLink|Language_{languageName}| Language_commas $]
+and, like it's type, is automatically
+defined and instantiated in the [$code|inline|commas$] package that
+[$pageTitle|StaticLang$] generated for us.
+</p>
+<p>
+The language has a [$code|inline|parseFile$] function which takes the
+name of a file (we're giving it [$code|inline|[:args[1]:]$]), loads
+the file, and parses it according to our grammar. It throws a
+[$typeName|ParseException$] upon any errors in the file.
+</p>
+<p>
+The [$code|inline|parseFile$] function returns a
+[$typeLink|Parser_{languageName}|Parser_commas$], ie.,  the parser it
+used to parse the file. Various information can be obtained from the parser,
+but in most cases, the only interesting member is [$code|inline|parseTree$].
+</p>
+<p>
+This [$code|inline|parseTree$] is, naturally, the resulting parse tree.
+It is, in fact, the very same parse tree generated by the
+[$pageTitle|Parse$] tool we used earlier.
+</p>
+<p>
+Finally, we stick the resulting parse tree into a variable named,
+unsurprisingly, [$code|inline|parseTree$]. The type of this variable is
+[$typeLink|Token_{languageName}!{symbol}| Token_commas!"&lt;Everything&gt;" $].
+That makes sense, because [$code|inline|[:<Everything>:]$] is the name of
+our grammar's Start Symbol. So naturally, the root of the parse tree
+would be an [$code|inline|[:<Everything>:]$] token.
+</p>
+<div class="code-plain" style="white-space: normal; font-family: verdana,arial,'Bitstream Vera Sans',helvetica,sans-serif;">
+<em>Side note:</em> If we were using
+[$pageLink|StatVsDyn|dynamic-style$] instead of static-style,
+we would have grabbed [$code|inline|parseTreeX$] instead of [$code|inline|parseTree$].
+Also, the root token (in fact, <em>all</em> tokens in the parse tree) would
+have been type [$typeLink|Token|Token$]. You can try out those changes
+if you would like.<br />
+<br />
+There is a relationship between the token types:
+[$typeLink|Token_{languageName}!{symbol}| Token_commas!"&lt;Everything&gt;" $]
+is a subclass of [$typeLink|Token_{languageName}| Token_commas $] which is
+a subclass of [$typeLink|Token|Token$].
+</div>
+<p>
+Create a commas file to test this program with
+(named, for example, [$code|inline|test.commas$]).
+Then compile and run the program like this
+(If you're using DMD 2.055, add [$code|inline|-ofprogram1$]
+to the command below, <em>before</em> the [$code|inline|program1.d$]):
+</p>
+<div class="code-plain">&gt;[$code|user|[:rdmd --build-only -I{path to SemiTwistDTools}/src -I{path to Goldie}/src program1.d :]$]
+&gt;[$code|user|[:program1 test.commas:]$]</div>
+<p>
+You'll notice that any parsing or lexing errors will result in the exact
+same error messages produced by the [$pageTitle|Parse$] tool used earlier.
+</p>
+<a name="AST" />
+<h3>The Abstract Syntax Tree</h3>
+<p>
+It's time to actually do something with the parse tree.
+We'll start by pulling the data from a commas file into this structure:
+</p>
+[$code|highlight|
+[:enum Size { Large, Small }
+
+struct Element
+{
+	string ident;
+	BigInt integer;
+}
+
+struct Commas
+{
+	Size size;
+	Element[] elements;
+}:]
+$]
+<p>
+That's essentially an Abstract Syntax Tree (AST) for our grammar.
+It matches up to the data contained in a commas file quite nicely:
+</p>
+<p>
+The [$ident|Commas$] struct represents an entire commas data file.
+It contains the size declared in the file (Large or Small) and
+an array of [$ident|Element$].
+</p>
+<p>
+These [$ident|Element$] structs, in turn, represent each of the individual
+values contained in the commas data file. For the values that are identifiers,
+it has a string [$ident|ident$] to hold the identifier's name.
+For the integer values, the [$ident|ident$] string will be null, and the
+integer value will be stored in the (appropriately-named) [$ident|integer$] variable.
+</p>
+<p>
+Regarding the integers:
+Since the Large-sized files can accept integers of <em>any</em> size,
+an ordinary 32-bit int won't cut it. Even a 64-bit long could fail for very
+large numbers. Since our spec said <em>any</em> size, we need to use a
+[$link|http://dlang.org/phobos/std_bigint.html|BigInt$].
+</p>
+<a name="NavigateParseTree" />
+<h3>Navigating the Parse Tree</h3>
+<p>
+We have our parse tree, thanks to Goldie. And we've defined what we want to
+ultimately end up with. Time to connect those up by writing the core of
+our little program.
+</p>
+<p>
+While writing this, it will help to have a sample parse tree to look at.
+So we'll use our old friends [$pageTitle|Parse$] and [$pageTitle|JsonViewer$]:
+</p>
+<div class="code-plain">&gt;[$code|user|goldie-parse --lang=commas.cgt test.commas$]</div>
+<p>
+Then open [$code|inline|test.commas.pt.json$] in [$pageTitle|JsonViewer$]:
+</p>
+<img src="[$urlToRoot$]Tutorial-JsonViewer3.png" alt="Sample Parse Tree in JsonViewer" />
+<p>
+You'll also want to keep the grammar definition, [$code|inline|commas.grm$],
+open for reference.
+</p>
+<p>
+To start, let's create a convenience alias to shorten the token types:
+</p>
+[$code|highlight|
+[:alias Token_commas Tok;:]
+$]
+<p>
+After parsing, we'll call a function (which we're going to write) to convert
+the parse tree to a [$ident|Commas$] struct:
+</p>
+[$code|highlight|
+[:auto parseTree = language_commas.parseFile(args[1]).parseTree;
++auto commas = toCommas(parseTree);:]
+$]
+<p>
+Here's the definition of [$ident|toCommas$]:
+</p>
+[$code|highlight|
+[:Commas toCommas(Tok!"<Everything>" root)
+{
+	Commas commas;
+
+	// Determine size
+	auto tokSize = root.get!(Tok!"<Size>")();
+	if( cast(Tok!("<Size>", "Large")) tokSize )
+		commas.size = Size.Large;
+	else
+		commas.size = Size.Small;
+	
+	// Get elements
+	auto tokList = root.get!(Tok!"<List>")();
+	commas.elements = toElements(tokList);
+	
+	return commas;
+}:]
+$]
+<p>
+First, this function determines the size that was chosen.
+Looking at the grammar definition (and confirmed by our sample parse tree),
+an [$code|inline|<Everything>$] token has three subtokens:
+[$code|inline|<Size>$], [$code|inline|<List>$] and then another
+[$code|inline|<Size>$].
+</p>
+<p>
+We could access each of these subtokens with [$code|inline|root.sub!0$],
+[$code|inline|root.sub!1$] and [$code|inline|root.sub!2$] respectively
+(or in [$pageLink|StatVsDyn|dynamic-style$]: [$code|inline|[:root[0]:]$],
+[$code|inline|[:root[1]:]$] and [$code|inline|[:root[2]:]$]).
+But that's not very self-documenting, plus it's brittle if the grammar
+changes. So instead, we're using [$pageLink|Token#Token_get|get$] to ask for
+the first immediate subtoken that's of type [$code|inline|Tok!"<Size>"$].
+</p>
+<p>
+Since [$code|inline|Tok!"<Size>"$] is a nonterminal, the type
+[$code|inline|Tok!"<Size>"$] is actually an abstract base class. The
+real type of [$code|inline|tokSize$] depends on which of the rules was
+used to create it (ie, which "production rule" it's "derived from"):
+</p>
+[$code|plain|
+[:<Size> ::= 'Large'
+<Size> ::= 'Small':]
+$]
+<p>
+To check if the [$code|inline|Tok!"<Size>"$] comes from a
+[$code|inline|Large$], we simply try to downcast to the type for that rule:
+</p>
+[$code|highlight|
+[:if( cast(Tok!("<Size>", "Large")) tokSize ) ...:]
+$]
+<p>
+If it isn't a [$code|inline|Large$], then the downcast fails, resulting in
+null, and the [$code|inline|else$] branch is taken.
+Either way, [$code|inline|commas.size$] is set appropriately.
+</p>
+<p>
+Finally, the function grabs [$code|inline|<Everything>$]'s [$code|inline|<List>$]
+subtoken, and converts it to [$code|inline|[:Element[]:]$] using our next
+function:
+</p>
+[$code|highlight|
+[:Element[] toElements(Tok!"<List>" tokList)
+{
+	Element[] elems;
+
+	// Traverse each token in tokList
+	// (using preorder tree traversal: first the parent, then the children)
+	foreach(Token token; traverse(tokList))
+	{
+		// If the token is an Ident or Integer,
+		// convert it to Element and append it to the array.
+		if(auto tokElem = cast(Tok!"Ident") token)
+			elems ~= toElement(tokElem);
+		else if(auto tokElem = cast(Tok!"Integer") token)
+			elems ~= toElement(tokElem);
+	}
+
+	return elems;
+}:]
+$]
+<p>
+This function uses GoldieLib's
+[$pageLink|Token#traverse|traverse$] to search the parse tree from
+[$code|inline|tokList$] downward. This is a standard "preorder" traversal:
+At each node in the tree, it visits the node itself first, then each of
+its entire child trees from left to right.
+Every time a [$code|inline|Tok!"Ident"$] or [$code|inline|Tok!"Integer"$]
+is found, our function converts it to an [$code|inline|Element$] then appends
+it to an array.
+</p>
+<p>
+One word of caution: You should be very careful about using
+[$pageLink|Token#traverse|traverse$]. Since it visits <em>every</em>
+subnode in the tree until you break out, careless use of it can cause
+big slowdowns in your program. If there are large sections of the parse tree
+you're not interested in, it may be much faster to use
+[$pageLink|Token#Token_get|get$] and [$pageLink|Token#Token_sub|sub$]
+instead. Or you can use the [$code|inline|skip()$] and predicate features
+of [$pageLink|Token#traverse|traverse$] to prune entire sections out of
+your traversal. In our particular case, most of the
+[$code|inline|Tok!"<List>"$] parse tree is relevant, so we should be ok.
+</p>
+<p>
+There's one nifty little D trick in this function I'd like to point out:
+</p>
+[$code|highlight|
+[:if(auto tokElem = cast(Tok!"Ident") token):]
+$]
+<p>
+What the heck? A variable declaration inside an if's conditional?
+</p>
+<p>
+Yup. D intentionally allows this. If the downcast fails (resulting in null),
+then [$code|inline|tokElem$] is initialized to null, and you have
+[$code|inline|if(null)$]. That's false, so it takes the [$code|inline|else$],
+and [$code|inline|tokElem$] is left completely undeclared.
+On the other hand, if the downcast succeeds, the conditional is true
+and [$code|inline|tokElem$] can be used inside the if's "true" path.
+</p>
+<p>
+On a related note, if you're wondering why the body code is identical
+for both if's:
+</p>
+[$code|highlight|
+[:elems ~= toElement(tokElem);:]
+$]
+<p>
+That's because [$code|inline|toElement$] is overloaded on [$code|inline|tokElem$]'s
+type, and [$code|inline|tokElem$] is declared as a different type in each case:
+[$code|inline|Tok!"Ident"$] in the first, and [$code|inline|Tok!"Integer"$]
+in the second.
+</p>
+<p>
+We're down to the two final functions:
+</p>
+[$code|highlight|
+[:Element toElement(Tok!"Ident" tokElem)
+{
+	return Element( tokElem.toString() );
+}
+
+Element toElement(Tok!"Integer" tokElem)
+{
+	auto str = tokElem.toString();
+
+	// Integer "{zero}"?
+	if(str == "{zero}")
+		return Element(null, BigInt("0"));
+	
+	// Normal integer
+	return Element(null, BigInt(str));
+}:]
+$]
+<p>
+These convert an [$code|inline|Ident$] or [$code|inline|Integer$] to
+an Element.
+</p>
+<p>
+The first is straightforward: It just creates an [$code|inline|Element$]
+and sets the [$code|inline|ident$] member to whatever string was written in
+the original source file.
+</p>
+<p>
+The second overload is slightly more complex, but not terribly so:
+As with the first overload, it takes the original string text from the
+source file. But instead of stuffing it straight into an [$code|inline|Element$],
+it checks for that alternative form of zero. Either way, a new
+[$link|http://dlang.org/phobos/std_bigint.html|BigInt$]
+is initialized with the appropriate string and set as the [$code|inline|integer$]
+member of a new [$code|inline|Element$]. The [$code|inline|ident$] member
+is initialized to null since it's not applicable.
+</p>
+<p>
+Finally, we need some output so we know things actually went right:
+</p>
+[$code|highlight|
+[:auto parseTree = language_commas.parseFile(args[1]).parseTree;
+auto commas = toCommas(parseTree);
++writeln(commas);:]
+$]
+<p>
+That requires a toString for [$ident|Commas$]:
+</p>
+[$code|highlight|
+[:string toString()
+{
+	string str = to!string(size);
+	foreach(elem; elements)
+	{
+		str ~= "\n";
+		str ~= elem.toString();
+	}
+	return str;
+}:]
+$]
+<p>
+And one for [$ident|Element$]:
+</p>
+[$code|highlight|
+[:string toString()
+{
+	if(ident)
+		return "Ident:   "~ident;
+	else
+	{
+		string str;
+		integer.toString((const(char)[] s) { str ~= s; }, "");
+		return "Integer: "~str;
+	}
+}:]
+$]
+<p>
+That should about do it. Here's our program so far:
+</p>
+<p class="figure-title">tutorial/sections5-6/program2.d:</p>
+[$code|highlight|
+[:+import std.bigint;
++import std.conv;
+import std.stdio;
+
+import goldie.all; // Import GoldieLib itself
+import commas.all; // Import our commas language
+
+enum Size { Large, Small }
+
+struct Element
+{
+	string ident;
+	BigInt integer;
+
++	string toString()
++	{
++		if(ident)
++			return "Ident:   "~ident;
++		else
++		{
++			string str;
++			integer.toString((const(char)[] s) { str ~= s; }, "");
++			return "Integer: "~str;
++		}
++	}
+}
+
+struct Commas
+{
+	Size size;
+	Element[] elements;
+
++	string toString()
++	{
++		string str = to!string(size);
++		foreach(elem; elements)
++		{
++			str ~= "\n";
++			str ~= elem.toString();
++		}
++		return str;
++	}
+}
+
++alias Token_commas Tok;
+
+int main(string[] args)
+{
+	try
+	{
+		auto parseTree = language_commas.parseFile(args[1]).parseTree;
++		auto commas = toCommas(parseTree);
++		writeln(commas);
+	}
+	catch(ParseException e)
+	{
+		writeln(e.msg);
+		return 1;
+	}
+
+	return 0;
+}
+
++Commas toCommas(Tok!"<Everything>" root)
++{
++	Commas commas;
++
++	// Determine size
++	auto tokSize = root.get!(Tok!"<Size>")();
++	if( cast(Tok!("<Size>", "Large")) tokSize )
++		commas.size = Size.Large;
++	else
++		commas.size = Size.Small;
++	
++	// Get elements
++	auto tokList = root.get!(Tok!"<List>")();
++	commas.elements = toElements(tokList);
++	
++	return commas;
++}
++
++Element[] toElements(Tok!"<List>" tokList)
++{
++	Element[] elems;
++
++	// Traverse each token in tokList
++	// (using preorder tree traversal: first the parent, then the children)
++	foreach(Token token; traverse(tokList))
++	{
++		// If the token is an Ident or Integer,
++		// convert it to Element and append it to the array.
++		if(auto tokElem = cast(Tok!"Ident") token)
++			elems ~= toElement(tokElem);
++		else if(auto tokElem = cast(Tok!"Integer") token)
++			elems ~= toElement(tokElem);
++	}
++
++	return elems;
++}
++
++Element toElement(Tok!"Ident" tokElem)
++{
++	return Element( tokElem.toString() );
++}
++
++Element toElement(Tok!"Integer" tokElem)
++{
++	auto str = tokElem.toString();
++
++	// Integer "{zero}"?
++	if(str == "{zero}")
++		return Element(null, BigInt("0"));
++	
++	// Normal integer
++	return Element(null, BigInt(str));
++}:]
+$]
+<p>
+Compile and run it with a sample commas file, and you'll see something like:
+</p>
+<div class="code-plain">&gt;[$code|user|[:rdmd --build-only -I{path to SemiTwistDTools}/src -I{path to Goldie}/src program2.d:]$]
+&gt;[$code|user|[:program2 test.commas:]$]
+Large
+Integer: 1
+Ident:   mango
+Integer: -24
+Integer: 93521356
+Integer: 0
+Integer: 77</div>
+<a name="SemanticErrors" />
+<h3>Semantic Errors</h3>
+<p>
+Remember the two restrictions our grammar didn't enforce? To recap:
+The sizes given at the start and end must match, and "Small" mode
+doesn't accept integers outside the range of 0 - 65,535 (ie, two bytes).
+</p>
+<p>
+Well, our program <em>still</em> isn't enforcing those. It happily processes
+them and spits out bogus data. Try it and see:
+</p>
+<p class="figure-title">tutorial/sections5-6/test-different-sizes.commas:</p>
+[$code|highlight|
+[:Large 1, mango, -24, 93521356, {zero}, 77 Small:]
+$]
+<p class="figure-title">tutorial/sections5-6/test-out-of-range.commas:</p>
+[$code|highlight|
+[:Small 1, mango, -24, 93521356, {zero}, 77 Small:]
+$]
+<div class="code-plain">&gt;[$code|user|[:program2 test-different-sizes.commas:]$]
+Large
+Integer: 1
+Ident:   mango
+Integer: -24
+Integer: 93521356
+Integer: 0
+Integer: 77
+&gt;[$code|user|[:program2 test-out-of-range.commas:]$]
+Small
+Integer: 1
+Ident:   mango
+Integer: -24
+Integer: 93521356
+Integer: 0
+Integer: 77</div>
+<p>
+Time to rectify that.
+Matching the sizes is easiest, so let's get that out of the way first.
+In the [$code|inline|toCommas$] function, we'll adjust the size-handling
+portion like this:
+</p>
+<div class="code-highlight">Commas toCommas(Tok!"&lt;Everything&gt;" root)
+{
+    Commas commas;
+
+    <span class="code-comment">[$code|added|// Ensure sizes are consistent$]</span>
+    auto tokSize  = root.get!(Tok!"&lt;Size&gt;")([$code|added|0$]);
+    [$code|added|auto tokSize2 = root.get!(Tok!"<Size>")(1);$]
+    [$code|added|if(tokSize[:[0]:].symbol != tokSize2[:[0]:].symbol)$]
+        [$code|added|throw new ParseException("Sizes must match!");$]
+
+    [$code|comment|// Determine size$]
+    if( cast(Tok!("&lt;Size&gt;", "Large")) tokSize )
+    ...
+}</div>
+<p>
+We need to get both of [$code|inline|root$]'s two [$code|inline|<Size>$]
+subtokens, not just the first. So we use the optional parameter of
+[$pageLink|Token#Token_get|get$] to ask for the first and second
+[$code|inline|<Size>$] tokens.
+Then, it's just a simple matter of ensuring the single subtoken of 
+each [$code|inline|<Size>$] are of the same symbol: Either
+[$code|inline|Ident$] or [$code|inline|Integer$].
+</p>
+<p>
+Now for enforcing Small. First of all, there's no need to use a
+[$link|http://dlang.org/phobos/std_bigint.html|BigInt$]
+when the number will fit into a two byte ushort. [$ident|Element$]
+should support optional ushort, so we'll add two members:
+</p>
+[$code|highlight|
+[:bool   isSmall;
+ushort smallInteger;:]
+$]
+<p>
+And adjust the [$code|inline|toString$] accordingly:
+</p>
+[$code|highlight|
+[:string toString()
+{
+	if(ident)
+		return "Ident:   "~ident;
+	else
+	{
++		if(isSmall)
++			return "ushort:  "~to!string(smallInteger);
++		else
++		{
+			string str;
+			integer.toString((const(char)[] s) { str ~= s; }, "");
+			return "Integer: "~str;
++		}
+	}
+}:]
+$]
+<p>
+We should give ourselves an easy way to create an
+[$ident|Element$] that uses [$code|inline|smallInteger$]:
+</p>
+[$code|highlight|
+[:static Element createSmall(ushort smallInteger)
+{
+	Element elem;
+	elem.isSmall = true;
+	elem.smallInteger = smallInteger;
+	return elem;
+}:]
+$]
+<p>
+Now to actually create a such an [$ident|Element$] when possible:
+</p>
+<div class="code-highlight">Element toElement(Tok!"Integer" tokElem)
+{
+    auto str = tokElem.toString();
+
+    [$code|comment|// Integer "{zero}"?$]
+    if(str == "{zero}")
+        return [$code|added|Element.createSmall(0)$];
+	
+    [$code|comment|// Normal integer$]
+    [$code|added|auto bigInt = BigInt(str);$]
+    [$code|added|if(bigInt >= ushort.min && bigInt <= ushort.max)$]
+    [$code|added|[:    return Element.createSmall( to!ushort(str) );:]$]
+    [$code|added|else$]
+        return Element(null, [$code|added|bigInt$]);
+}</div>
+<p>
+That's everything needed to use a ushort instead of
+[$link|http://dlang.org/phobos/std_bigint.html|BigInt$]
+when possible. All that's left is to require it when Small is used:
+</p>
+[$code|highlight|
+[:Commas toCommas(Tok!"<Everything>" root)
+{
+	...
+
+	// Get elements
+	auto tokList = root.get!(Tok!"<List>")();
+	commas.elements = toElements(tokList);
+	
++	// Enforce size restriction for Small
++	if(commas.size == Size.Small)
++	foreach(elem; commas.elements)
++	{
++		if(elem.ident is null && !elem.isSmall)
++			throw new ParseException("Out of range for Small: "~elem.toString());
++	}
+	
+	return commas;
+}:]
+$]
+<p>
+And there we have it: A full program for our grammar, and both semantic
+restrictions are enforced.
+Here's the final source for our program:
+</p>
+<p class="figure-title">tutorial/sections5-6/program3.d:</p>
+[$code|highlight|
+[:import std.bigint;
+import std.conv;
+import std.stdio;
+
+import goldie.all; // Import GoldieLib itself
+import commas.all; // Import our commas language
+
+enum Size { Large, Small }
+
+struct Element
+{
+	string ident;
+	BigInt integer;
++	bool   isSmall;
++	ushort smallInteger;
++	
++	static Element createSmall(ushort smallInteger)
++	{
++		Element elem;
++		elem.isSmall = true;
++		elem.smallInteger = smallInteger;
++		return elem;
++	}
+	
+	string toString()
+	{
+		if(ident)
+			return "Ident:   "~ident;
+		else
+		{
++			if(isSmall)
++				return "ushort:  "~to!string(smallInteger);
++			else
++			{
+				string str;
+				integer.toString((const(char)[] s) { str ~= s; }, "");
+				return "Integer: "~str;
++			}
+		}
+	}
+}
+
+struct Commas
+{
+	Size size;
+	Element[] elements;
+
+	string toString()
+	{
+		string str = to!string(size);
+		foreach(elem; elements)
+		{
+			str ~= "\n";
+			str ~= elem.toString();
+		}
+		return str;
+	}
+}
+
+alias Token_commas Tok;
+
+int main(string[] args)
+{
+	try
+	{
+		auto parseTree = language_commas.parseFile(args[1]).parseTree;
+		auto commas = toCommas(parseTree);
+		writeln(commas);
+	}
+	catch(ParseException e)
+	{
+		writeln(e.msg);
+		return 1;
+	}
+
+	return 0;
+}
+
+Commas toCommas(Tok!"<Everything>" root)
+{
+	Commas commas;
+
++	// Ensure sizes are consistent
++	auto tokSize  = root.get!(Tok!"<Size>")(0);
++	auto tokSize2 = root.get!(Tok!"<Size>")(1);
++	if(tokSize[0].symbol != tokSize2[0].symbol)
++		throw new ParseException("Sizes must match!");
+
+	// Determine size
+	if( cast(Tok!("<Size>", "Large")) tokSize )
+		commas.size = Size.Large;
+	else
+		commas.size = Size.Small;
+	
+	// Get elements
+	auto tokList = root.get!(Tok!"<List>")();
+	commas.elements = toElements(tokList);
+	
++	// Enforce size restriction for Small
++	if(commas.size == Size.Small)
++	foreach(elem; commas.elements)
++	{
++		if(elem.ident is null && !elem.isSmall)
++			throw new ParseException("Out of range for Small: "~elem.toString());
++	}
+	
+	return commas;
+}
+
+Element[] toElements(Tok!"<List>" tokList)
+{
+	Element[] elems;
+
+	// Traverse each token in tokList
+	// (using preorder tree traversal: first the parent, then the children)
+	foreach(Token token; traverse(tokList))
+	{
+		// If the token is an Ident or Integer,
+		// convert it to Element and append it to the array.
+		if(auto tokElem = cast(Tok!"Ident") token)
+			elems ~= toElement(tokElem);
+		else if(auto tokElem = cast(Tok!"Integer") token)
+			elems ~= toElement(tokElem);
+	}
+
+	return elems;
+}
+
+Element toElement(Tok!"Ident" tokElem)
+{
+	return Element( tokElem.toString() );
+}
+
+Element toElement(Tok!"Integer" tokElem)
+{
+	auto str = tokElem.toString();
+
+	// Integer "{zero}"?
+	if(str == "{zero}")
++		return Element.createSmall(0);
+	
+	// Normal integer
++	auto bigInt = BigInt(str);
++	if(bigInt >= ushort.min && bigInt <= ushort.max)
++		return Element.createSmall( to!ushort(str) );
++	else
++		return Element(null, bigInt);
+}:]
+$]
+<p>
+To compile and use, just like before:
+</p>
+<div class="code-plain">&gt;[$code|user|[:rdmd --build-only -I{path to SemiTwistDTools}/src -I{path to Goldie}/src program3.d:]$]
+&gt;[$code|user|[:program3 test.commas:]$]
+Large
+Integer: 1
+Ident:   mango
+Integer: -24
+Integer: 93521356
+Integer: 0
+Integer: 77
+&gt;[$code|user|[:program3 test-different-sizes.commas:]$]
+Sizes must match!
+&gt;[$code|user|[:program3 test-out-of-range.commas:]$]
+Out of range for Small: Integer: -24</div>
+<p>
+This section has only touched on some of the features of GoldieLib's API.
+For example, there are many other members of a token we didn't cover; see the
+API Reference for [$pageLink|Token|Token$] for a full list and descriptions.
+And browse through the rest of GoldieLib's [$pageLink|APIOver|Overview$]
+and [$pageLink|APIRef|Reference$] for much more information.
+Also, read through the sources for the [$pageTitle|SampleApps$].
+</p>
+</div>
+
+<a name="SuggestedExercises" />
+<h2>7. Suggested Exercises</h2>
+<div class="api-def">
+<p>
+Here are some exercise ideas for practicing Goldie yourself:
+</p>
+<ul>
+<li>
+	<p>
+	Add a new size "Medium" for 32-byte signed integers (ie, D's [$code|inline|int$]).
+	</p>
+</li>
+<li>
+	<p>
+	Make an alternate program for the commas grammar that
+	finds the longest/shortest identifier, and the largest/smallest
+	integer <em>without</em> creating an AST. Or create a sorted list
+	of identifiers without creating an AST.
+	</p>
+</li>
+<li>
+	<p>
+	Modify the commas program to not use any form of
+	[$pageLink|Token#Token_get|get$] or [$pageLink|Token#traverse|traverse$]
+	at all. Just use [$pageLink|Token#Token_sub|sub$]. Remember, you
+	must downcast a token to its rule form (such as
+	[$code|inline|Tok!("<Size>", "Large")$] or
+	[$code|inline|Tok!("<List>", "<List>", ",", "<List Element>")$])
+	before you can use [$pageLink|Token#Token_sub|sub$] on it.
+	(This is because which subtokens are available depends on
+	the rule used to create the token.)
+	</p>
+</li>
+<li>
+	<p>
+	Convert a commas file to XML or JSON.
+	</p>
+</li>
+<li>
+	<p>
+	Add an additional "definitions" section to the beginning of
+	the commas file that allows you to set values for each of the
+	identifiers.
+	</p>
+	<p>
+	For example:
+	</p>
+[$code|plain|
+[:banana = 0;
+mango = 70;
+peach = 17;
+Large
+1, mango, peach, 
+-24, banana, 77
+Large:]
+$]
+	<p>
+	When you output an identifier, also show its associated value, if available.
+	</p>
+	<p>
+	As a next step, require that all identifiers used must have an integer
+	value defined.
+	</p>
+</li>
+<li>
+	<p>
+	Create a simple programming language like this:
+	</p>
+[$code|plain|
+[:output "Pick a number 1-10";
+:start;
+input num;
+if num == 5 then goto done;
+if num > 5 then goto tooBig;
+	output "Too small";
+	goto start;
+:tooBig;
+	output "Too big";
+	goto start;
+:done;
+output "Yep!";:]
+$]
+	<p>
+	Look at the included [$code|inline|lang/dlex.grm$] file to see how to
+	create a string literal.
+	</p>
+	<p>
+	Write an interpreter to run the code. Or write a translator program
+	to convert the code to D. Later, add support for arithmetic expressions.
+	</p>
+</li>
+</ul>
+</div>
+
+<a name="AdditionalTools" />
+<h2>8. Additional Tools</h2>
+<div class="api-def">
+<p>
+We've covered most of the basics, but there are a few more tools we haven't
+discussed which could be helpful.
+</p>
+<a name="DumpCGT" />
+<h3>Dumping the Compiled Grammar Tables</h3>
+<p>
+First of all, there's [$pageTitle|DumpCGT$]. This is just what it sounds:
+it takes the data in a compiled grammar file and dumps it to a human-readable
+form:
+</p>
+<div class="code-plain">&gt;<span class="code-user">goldie-dumpcgt commas.cgt</span></div>
+<p>
+That saves the data in our compiled grammar file to a readable text file named
+[$code|inline|commas.cgt.txt$].
+Open it up and you'll see our original metadata, and all the internal tables
+that drive the lexer and parser. You can also get the same information
+by loading the compiled grammar file into
+[$pageLink| OtherTools#GOLD | GOLD Parser Builder $].
+</p>
+<p>
+Some information that's not relevant to the lexer or parser is lost when
+compiling the grammar, so you can actually get a larger, better set of
+information by loading the original grammar into GOLD Parser Builder.
+</p>
+<a name="LexerGraph" />
+<h3>Lexer Graph</h3>
+<p>
+Goldie's lexer uses a
+[$link|http://www.goldparser.org/articles/dfa.htm|finite state machine$]
+to convert source code into terminal tokens.
+[$pageTitle|GRMC$] has a feature which allows you to use
+[$link|http://www.graphviz.org/|Graphviz$] to visualize how your
+grammar is lexed. This can be helpful for debugging a grammar
+or for just understanding how lexing works.
+</p>
+<p>
+First, you'll need to install [$link|http://www.graphviz.org/|Graphviz$]. Then,
+use the [$code|inline|--dot$] switch when compiling your grammar to save the
+lexer's finite state machine to the Graphviz
+[$link|http://en.wikipedia.org/wiki/DOT_language|DOT$] format:
+</p>
+<div class="code-plain">&gt;<span class="code-user">goldie-grmc commas.grm --dot</span></div>
+<p>
+That will create two files in addition to the usual compiled grammar file:
+[$code|inline|commas.cgt.nfa.dot$] and [$code|inline|commas.cgt.dfa.dot$].
+These files each contain a graph of the grammar's finite state machine.
+It's the same graph, but in NFA and DFA forms, respectively.
+The NFA more closely matches the definition in your grammar file.
+The DFA is the graph Goldie actually uses and is created from the NFA.
+</p>
+<p>
+The Graphviz interface is admittedly a bit...weird. But it's not difficult
+to learn. To view a DOT file:
+</p>
+<ol style="list-style-type: decimal;">
+<li>Run Graphviz's "dotty" program. It will start to a blank white window.</li>
+<li>Right-click inside the window, and choose "load graph" from the popup menu.</li>
+<li>Select the DOT file to load.</li>
+</ol>
+<p>
+Here's what the graphs look like for [$code|inline|commas.grm$] (click to enlarge):
+</p>
+<p class="figure-title">NFA:</p>
+<a href="[$urlToRoot$]Tutorial-Graphviz-NFA.png">
+<img src="[$urlToRoot$]Tutorial-Graphviz-NFA-Sm.png" alt="NFA for commas.grm in Graphviz" />
+</a>
+<p class="figure-title">DFA:</p>
+<a href="[$urlToRoot$]Tutorial-Graphviz-DFA.png">
+<img src="[$urlToRoot$]Tutorial-Graphviz-DFA-Sm.png" alt="DFA for commas.grm in Graphviz" />
+</a>
+<p>
+The graphs are a series of states with transitions between them. Each state
+is numbered, starting with "S_0" - the state where the lexer always begins.
+States that accept a terminal are double-octagons instead of circles.
+The solid black arrows between the states are transitions. They are
+labeled with the characters which, when read from the input, cause the state
+machine to take that transition. The NFA also has dotted red arrows which
+indicate transitions that don't require any input to be read (the existence
+of these empty transitions is what makes it an NFA). Every time the lexer
+accepts a terminal, it starts back at "S_0" again.
+</p>
+<a name="GOLD" />
+<h3>GOLD Parser Builder</h3>
+<p>
+[$pageLink|OtherTools#GOLD|GOLD Parser Builder$]
+is the program Goldie is based around. It can be used as an alternative
+to [$pageTitle|GRMC$] or as an editor for grammar files. It also has
+extensive features for inspecting, analyzing and testing grammars.
+</p>
+<p>
+Using GOLD Parser Builder is very straightforward. However, you can find
+a great overview of the UI on its 
+[$link|http://goldparser.org/builder/screenshots.htm| screenshots page $].
+There's also a
+[$link| http://goldparser.org/builder/index.htm | commandline version $].
+</p>
+<p>
+Keep in mind, Goldie does not yet support GOLD's new v5 features, such as
+the .egt file format.
+</p>
+</div>
+
