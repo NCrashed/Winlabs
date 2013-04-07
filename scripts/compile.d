@@ -10,6 +10,15 @@ import std.file;
 string[string] lab4Depends;
 string[string] hometaskDepends;
 
+static string[] getVCIncludes()
+{
+	return [
+		`C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include`,
+		`C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include`,
+		`C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\atlmfc\include`,
+	];
+} 
+
 static this()
 {
 	lab4Depends =
@@ -56,14 +65,23 @@ string compileGrammar()
 	return "";
 }
 
+static string generateInclude(string[] paths)
+{
+	string ret;
+	foreach(s; paths)
+		ret~= `-I"`~s~`" `;
+	return ret;
+}
+enum vcincludesCompiled = generateInclude(getVCIncludes());
+
 string compileLab4Resources()
 {
-	return `rcc -32 -D_WIN32 -I"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include" -I"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\atlmfc\include" ..\src\lab4\lab4.rc -o..\bin\lab4.res && cd ..\src\lab4 && htod resource.h`;
+	return `rcc -32 -D_WIN32 `~vcincludesCompiled~` ..\src\lab4\lab4.rc -o..\bin\lab4.res && cd ..\src\lab4 && htod resource.h`;
 }
 
 string compileHometaskResources()
 {
-	return `rcc -32 -D_WIN32 -I"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include" -I"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\atlmfc\include" ..\src\hometask\hometask.rc -o..\bin\hometask.res && cd ..\src\hometask && htod resource.h`;
+	return `rcc -32 -D_WIN32 `~vcincludesCompiled~` ..\src\hometask\hometask.rc -o..\bin\hometask.res && cd ..\src\hometask && htod resource.h`;
 }
 
 void cleanupParser()

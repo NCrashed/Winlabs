@@ -5,3 +5,6 @@ module resource;
 //C     #endif
 
 //C     #define IDC_EDIT1 		0x002
+
+const IDC_EDIT1 = 0x002;
+//C     #define IDC_NONE		0x000
