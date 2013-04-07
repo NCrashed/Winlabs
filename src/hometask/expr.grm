@@ -5,12 +5,13 @@
 "About"     = 'exprestion parser'
 "Case Sensitive" = true
 
-"Start Symbol" = <Everything>
+"Start Symbol" = <AdditionList>
 
 Comment Line  = '//'
 Comment Start = '/*'
 Comment End   = '*/'
-
+Whitespace = {Whitespace}+
+           
 ! -- Terminals -----------------------------------------
 Integer = ('+'|'-')? {Digit}+ ( ('e'|'E') ('+'|'-')? {Digit}+)?
 Rational = ('+'|'-')? {Digit}+ '.' {Digit}* ( ('e'|'E') ('+'|'-')? {Digit}+)?
@@ -23,15 +24,17 @@ Identifier =  ({Letter} | '_') ({AlphaNumeric} | '_')*
 <Real> ::= Rational | Integer
 
 ! -- Exprestion rules ----------------------------------
-<Rang1Operation> ::= '+' | '-'
-<Rang2Operation> ::= '*' | '/'
-<Rang3Operation> ::= '^'
-
 <Var>           ::= 'x'   
-<ParamList>     ::= <ParamList> <AdditionList> | <AdditionList> ','
+<ParamList>     ::= <ParamList> ',' <AdditionList> | <AdditionList>
 <Function>      ::= Identifier '(' <ParamList> ')'                    
 <FuncList>      ::= <Real> | <Var> | <Function> | '(' <AdditionList> ')'         
-<PowerList>     ::= <PowerList>     <Rang3Operation> <FuncList>  | <FuncList>                  
-<MultList>      ::= <MultList>      <Rang2Operation> <PowerList> | <PowerList>
-<AdditionList>  ::= <AdditionList>  <Rang1Operation> <MultList>  | <MultList> 
-<Everything>    ::= <AdditionList>
+                 
+<PowerList>     ::= <PowerList> '^' <FuncList>  | <FuncList>                  
+                 
+<MultList>      ::= <MultList> '*' <PowerList> 
+                 | <MultList> '/' <PowerList> 
+                 | <PowerList>
+                 
+<AdditionList>  ::= <AdditionList>  '+' <MultList>  
+                 | <AdditionList>  '-' <MultList>
+                 | <MultList> 
