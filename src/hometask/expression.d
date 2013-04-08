@@ -10,6 +10,7 @@ import std.conv;
 import std.math;
 import std.container;
 import std.range;
+import std.string;
 
 abstract class ExprTree
 {
@@ -381,17 +382,10 @@ ExprTree parseToken(EToken!"<FuncList>" tok)
 
 ExprTree parseToken(EToken!"<Function>" tok)
 {
-	string funcName = (tok.getRequired!(EToken!"Identifier")()).toString;
+	string funcName = toLower((tok.getRequired!(EToken!"Identifier")()).toString);
 	EToken!"<ParamList>" paramsTok = tok.getRequired!(EToken!"<ParamList>")();
 	if(funcName == "sin")
 	{
-		/*if(auto t = cast(EToken!("<ParamList>", "<ParamList>", ",", "<AdditionList>"))paramsTok)
-		{
-			if(auto t2 = cast(EToken!("<ParamList>", "<AdditionList>"))t.sub!0)
-			{
-				return new SinusNode(parseToken(t2.sub!0), parseToken(t.sub!2));
-			}
-		}*/
 		if(auto t = cast(EToken!("<ParamList>", "<AdditionList>"))paramsTok)
 		{
 			return new SinusNode(parseToken(t.sub!0));
@@ -454,6 +448,14 @@ ExprTree parseToken(EToken!"<Function>" tok)
 		if(auto t = cast(EToken!("<ParamList>", "<AdditionList>"))paramsTok)
 		{
 			return new LogNode(parseToken(t.sub!0), new ConstNode(cast(double)E));
+		}	
+		throw new Exception("Ln arity error!");
+	}
+	else if(funcName == "lg")
+	{
+		if(auto t = cast(EToken!("<ParamList>", "<AdditionList>"))paramsTok)
+		{
+			return new LogNode(parseToken(t.sub!0), new ConstNode(10.0));
 		}	
 		throw new Exception("Ln arity error!");
 	}

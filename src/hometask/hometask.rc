@@ -16,6 +16,7 @@ MAINMENU MENU DISCARDABLE
     POPUP "&File"
     {
         MENUITEM "&Set equation", IDM_SET_EQUATION
+        MENUITEM "&Reset view", IDM_RESET_VIEW
         MENUITEM SEPARATOR
         MENUITEM "&Exit", IDM_EXIT
     }

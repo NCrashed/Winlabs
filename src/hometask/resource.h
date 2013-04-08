@@ -10,5 +10,6 @@
 #define IDM_SET_EQUATION                        40000
 #define IDM_EXIT                                40001
 #define IDB_HIDEBTN								40002
+#define IDM_RESET_VIEW							40003
 
 #define IDM_NONE								0

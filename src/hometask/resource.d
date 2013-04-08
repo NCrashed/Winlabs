@@ -15,6 +15,8 @@ const IDC_EDIT1 = 2;
 const IDM_SET_EQUATION = 40000;
 //C     #define IDB_HIDEBTN								40002
 const IDM_EXIT = 40001;
-
+//C     #define IDM_RESET_VIEW							40003
 const IDB_HIDEBTN = 40002;
+
+const IDM_RESET_VIEW = 40003;
 //C     #define IDM_NONE								0

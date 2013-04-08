@@ -3,8 +3,7 @@
 //    (See accompanying file LICENSE_1_0.txt or copy at
 //          http://www.boost.org/LICENSE_1_0.txt)
 /**
-*   TODO: Сделать засечки на кратных единичному отрезках.
-*   TODO: Сделать возможность ресайза.
+*   TODO: Сделать адаптивную сетку и шаг.
 */
 module lab4;
 
@@ -13,6 +12,7 @@ import std.string;
 import std.utf;
 import std.math;
 import std.stdio;
+import std.conv;
 
 import resource;
 import expression;
@@ -175,8 +175,8 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     static HINSTANCE hInstance;
     static int sx, sy, width, height;
+    
     static bool hideGraph = false;
-
     static HWND hideButton;
     enum HIDE_BUTTON_WIDTH = 120;
     enum HIDE_BUTTON_HEIGHT = 30;
@@ -186,6 +186,19 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
     static HMENU hMenu;
     static HMENU hMenuFile;
     PAINTSTRUCT ps;
+
+    static int panx, pany, oldPanx, oldPany;
+    static bool grabPan = false;
+
+    enum SCALE_MIN = 0.001;
+    enum SCALE_MAX = 0.1;
+    enum SCALE_DEFAULT = 0.02;
+    static double scale = SCALE_DEFAULT;
+
+    RECT clientRect() @property
+    {
+        return RECT(0, 0, width, height);
+    }
 
     switch (message)
     {
@@ -226,8 +239,8 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             width = LOWORD(lParam);
             height = HIWORD(lParam);
-            sx = width/2;
-            sy = height/2;  
+            //sx = width/2;
+            //sy = height/2;  
 
             MoveWindow(
                 hideButton,
@@ -247,22 +260,53 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         case WM_LBUTTONDOWN:
         {
+            grabPan = true;
+            oldPanx = LOWORD(lParam);
+            oldPany = HIWORD(lParam);              
             return 0;
+        }
+        case WM_LBUTTONUP:
+        {
+            grabPan = false;      
+            sx += panx;
+            sy += pany;    
+            panx = 0;
+            pany = 0;
+            auto rect = clientRect();
+            InvalidateRect(hwnd, &rect, TRUE);            
+            return 0;
+        }
+        case WM_MOUSEMOVE:
+        {
+            if(grabPan)
+            {
+                panx = LOWORD(lParam)-oldPanx;
+                pany = HIWORD(lParam)-oldPany;
+                auto rect = clientRect();
+                InvalidateRect(hwnd, &rect, TRUE);
+            }
+            return 0;
+        }
+        case WM_MOUSEWHEEL:
+        {
+            scale += cast(short)(wParam >>> 16)*0.00001;
+
+            if(scale < SCALE_MIN) scale = SCALE_MIN;
+            if(scale > SCALE_MAX) scale = SCALE_MAX;
+
+            auto rect = clientRect();
+            InvalidateRect(hwnd, &rect, TRUE);            
         }
         case WM_PAINT:
         {
-            if (!hideGraph)
-            {
-                hdc = BeginPaint(hwnd, &ps);
-                scope(exit) EndPaint(hwnd, &ps);
+            hdc = BeginPaint(hwnd, &ps);
+            scope(exit) EndPaint(hwnd, &ps);
 
-                DrawGraphic(hdc, testTree, 
-                    sx, sy, 
-                    width, height, 
-                    0.02f);
-                return 0;
-            }
-            break;
+            drawGraphic(hdc, testTree, !hideGraph,
+                sx + panx, sy + pany, 
+                width, height, 
+                scale);
+            return 0;
         }
         case WM_COMMAND:
         {
@@ -272,11 +316,7 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
                 case IDM_SET_EQUATION:
                 {
                     CreateExprDialog(hInstance, hwnd);
-                    RECT rect;
-                    rect.right  = 0;
-                    rect.top    = 0;
-                    rect.left   = width; 
-                    rect.bottom = height;
+                    auto rect = clientRect();
                     InvalidateRect(hwnd, &rect, TRUE);
                     return 0;
                 }
@@ -289,12 +329,18 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
                 case IDB_HIDEBTN:
                 {
                     hideGraph = !hideGraph;
-                    RECT rect;
-                    rect.right  = 0;
-                    rect.top    = 0;
-                    rect.left   = width; 
-                    rect.bottom = height;
+                    auto rect = clientRect();
                     InvalidateRect(hwnd, &rect, TRUE);                    
+                }
+                case IDM_RESET_VIEW:
+                {
+                    scale = SCALE_DEFAULT;
+                    sx = width/2;
+                    sy = height/2;
+                    panx = 0;
+                    pany = 0;
+                    auto rect = clientRect();
+                    InvalidateRect(hwnd, &rect, TRUE);                          
                 }
                 default:
             }
@@ -305,31 +351,109 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
     return DefWindowProc(hwnd, message, wParam, lParam);
 }
 
-void DrawGraphic(HDC hdc, ExprTree tree, int sx, int sy, int width, int height, float scale)
+void drawGraphic(HDC hdc, ExprTree tree, bool drawExpr, int sx, int sy, int width, int height, float scale)
 {
     enum DRAW_STEP = 0.1;
     enum PEN_TYPE = RGB(255, 0, 0);
 
-    // Draw axis
-    SelectObject(hdc, GetStockObject(BLACK_PEN));
-    MoveToEx(hdc, 0, sy, NULL);
-    LineTo(hdc, width, sy);
-
-    MoveToEx(hdc, sx, 0, NULL);
-    LineTo(hdc, sx, height);
-
-    // Draw graphic
-    SelectObject(hdc, GetStockObject(DC_PEN));
-    SetDCPenColor(hdc, PEN_TYPE);
-    double minX = - sx * scale;
-    double maxX = (width-sx)*scale;
-    double preX = minX;
-    double preY = tree.compute(preX);
-    for(double x = minX; x <= maxX; x += DRAW_STEP)
+    void drawAxis()
     {
-        MoveToEx(hdc, sx + cast(int)(preX/scale), sy + cast(int)(-preY/scale), NULL);
-        preX = x;
-        preY = tree.compute(x);
-        LineTo(hdc, sx + cast(int)(preX/scale), sy + cast(int)(-preY/scale));
+        void drawUnitMarks()
+        {
+            enum MARK_SIZE = 3;
+            enum TEXT_MARGIN_X = 6;
+            enum TEXT_MARGIN_Y = 12;
+
+            SelectObject(hdc, GetStockObject(BLACK_PEN));
+            SetBkMode( hdc, TRANSPARENT );
+
+            double minX = cast(double)cast(long)(- sx * scale);
+            double maxX = cast(double)cast(long)((width-sx)*scale);
+            for(double x = minX; x <= maxX; x += 1.0)
+            {
+                int markx = sx + cast(int)(x/scale);
+                MoveToEx(hdc, markx, sy - MARK_SIZE, NULL);
+                LineTo(hdc, markx, sy + MARK_SIZE);
+
+                if(cast(long)x != 0)
+                {
+                    wstring markText = to!wstring(cast(long)x);
+                    TextOut(hdc, markx - markText.length*4, sy + MARK_SIZE + TEXT_MARGIN_X, markText.toUTF16z, markText.length);
+                }
+            }
+
+            double minY = cast(double)cast(long)(- sy * scale);
+            double maxY = cast(double)cast(long)((height-sy)*scale);
+            for(double y = minY; y <= maxY; y += 1.0)
+            {
+                int marky = sy + cast(int)(y/scale);
+                MoveToEx(hdc, sx - MARK_SIZE, marky, NULL);
+                LineTo(hdc, sx + MARK_SIZE, marky);
+
+                if(cast(long)y != 0)
+                {
+                    wstring markText = to!wstring(cast(long)y);
+                    TextOut(hdc, sx - MARK_SIZE - TEXT_MARGIN_Y - markText.length*4, marky - 8, markText.toUTF16z, markText.length);                
+                } else
+                {
+                    TextOut(hdc, sx - MARK_SIZE - TEXT_MARGIN_Y, sy + MARK_SIZE + TEXT_MARGIN_X, "0".toUTF16z, 1);
+                }
+            }            
+        }
+        
+        void drawGrid()
+        {
+            SelectObject(hdc, GetStockObject(DC_PEN));
+            SetDCPenColor(hdc, RGB(200, 200, 200));            
+
+            double minX = cast(double)cast(long)(- sx * scale);
+            double maxX = cast(double)cast(long)((width-sx)*scale);
+            for(double x = minX; x <= maxX; x += 1.0)
+            {
+                int markx = sx + cast(int)(x/scale);
+                MoveToEx(hdc, markx, 0, NULL);
+                LineTo(hdc, markx, height);
+            }
+
+            double minY = cast(double)cast(long)(- sy * scale);
+            double maxY = cast(double)cast(long)((height-sy)*scale);
+            for(double y = minY; y <= maxY; y += 1.0)
+            {
+                int marky = sy + cast(int)(y/scale);
+                MoveToEx(hdc, 0, marky, NULL);
+                LineTo(hdc, width, marky);
+            }              
+        }
+
+        drawGrid();
+
+        SelectObject(hdc, GetStockObject(BLACK_PEN));
+        MoveToEx(hdc, 0, sy, NULL);
+        LineTo(hdc, width, sy);
+
+        MoveToEx(hdc, sx, 0, NULL);
+        LineTo(hdc, sx, height);
+
+        drawUnitMarks();
     }
+
+    void drawGraphic()
+    {
+        SelectObject(hdc, GetStockObject(DC_PEN));
+        SetDCPenColor(hdc, PEN_TYPE);
+        double minX = - sx * scale;
+        double maxX = (width-sx)*scale;
+        double preX = minX;
+        double preY = tree.compute(preX);
+        for(double x = minX; x <= maxX; x += DRAW_STEP)
+        {
+            MoveToEx(hdc, sx + cast(int)(preX/scale), sy + cast(int)(-preY/scale), NULL);
+            preX = x;
+            preY = tree.compute(x);
+            LineTo(hdc, sx + cast(int)(preX/scale), sy + cast(int)(-preY/scale));
+        }        
+    }
+
+    drawAxis();
+    if(drawExpr) drawGraphic();
 }
