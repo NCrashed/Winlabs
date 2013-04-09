@@ -170,12 +170,17 @@ int myWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int
     return msg.wParam;
 }
 
+enum SCALE_MIN = 0.0005;
+enum SCALE_MAX = 0.1;
+enum SCALE_DEFAULT = 0.02;
+enum UNIT_SCALE_WIDTH = 0.01;
+
 extern(Windows)
 LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     static HINSTANCE hInstance;
     static int sx, sy, width, height;
-    
+
     static bool hideGraph = false;
     static HWND hideButton;
     enum HIDE_BUTTON_WIDTH = 120;
@@ -190,9 +195,6 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
     static int panx, pany, oldPanx, oldPany;
     static bool grabPan = false;
 
-    enum SCALE_MIN = 0.001;
-    enum SCALE_MAX = 0.1;
-    enum SCALE_DEFAULT = 0.02;
     static double scale = SCALE_DEFAULT;
 
     RECT clientRect() @property
@@ -289,10 +291,25 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         case WM_MOUSEWHEEL:
         {
-            scale += cast(short)(wParam >>> 16)*0.00001;
+            POINT mp;
+            mp.x = LOWORD(lParam);
+            mp.y = HIWORD(lParam);
+            ScreenToClient(hwnd, &mp);
 
+            double x = mp.x-sx;
+            double y = mp.y-sy;
+            double wx = x*scale;
+            double wy = -y*scale;
+
+            scale += cast(short)(wParam >>> 16)*0.00001;
             if(scale < SCALE_MIN) scale = SCALE_MIN;
             if(scale > SCALE_MAX) scale = SCALE_MAX;
+
+            double px = round(wx/scale);
+            double py = round(-wy/scale);
+
+            sx += x - cast(int)px;
+            sy += y - cast(int)py;
 
             auto rect = clientRect();
             InvalidateRect(hwnd, &rect, TRUE);            
@@ -306,6 +323,7 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
                 sx + panx, sy + pany, 
                 width, height, 
                 scale);
+
             return 0;
         }
         case WM_COMMAND:
@@ -330,7 +348,8 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
                 {
                     hideGraph = !hideGraph;
                     auto rect = clientRect();
-                    InvalidateRect(hwnd, &rect, TRUE);                    
+                    InvalidateRect(hwnd, &rect, TRUE);    
+                    return 0;                
                 }
                 case IDM_RESET_VIEW:
                 {
@@ -341,6 +360,7 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
                     pany = 0;
                     auto rect = clientRect();
                     InvalidateRect(hwnd, &rect, TRUE);                          
+                    return 0;
                 }
                 default:
             }
@@ -353,11 +373,22 @@ LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void drawGraphic(HDC hdc, ExprTree tree, bool drawExpr, int sx, int sy, int width, int height, float scale)
 {
-    enum DRAW_STEP = 0.1;
+    enum DRAW_STEP = 0.5;
     enum PEN_TYPE = RGB(255, 0, 0);
 
     void drawAxis()
     {
+        long scaleDist = cast(long)((scale-SCALE_DEFAULT)/UNIT_SCALE_WIDTH);
+        double unitWidth;
+        if(scaleDist < 0)
+        {
+            unitWidth = 1.0 / (-scaleDist+1);
+        }
+        else
+        {
+            unitWidth = 1.0 + scaleDist;
+        }
+
         void drawUnitMarks()
         {
             enum MARK_SIZE = 3;
@@ -367,32 +398,32 @@ void drawGraphic(HDC hdc, ExprTree tree, bool drawExpr, int sx, int sy, int widt
             SelectObject(hdc, GetStockObject(BLACK_PEN));
             SetBkMode( hdc, TRANSPARENT );
 
-            double minX = cast(double)cast(long)(- sx * scale);
-            double maxX = cast(double)cast(long)((width-sx)*scale);
-            for(double x = minX; x <= maxX; x += 1.0)
+            double minX = cast(double)cast(long)(- sx * scale / unitWidth) * unitWidth ;
+            double maxX = cast(double)cast(long)((width-sx) * scale / unitWidth) * unitWidth;
+            for(double x = minX; x <= maxX; x += unitWidth)
             {
                 int markx = sx + cast(int)(x/scale);
                 MoveToEx(hdc, markx, sy - MARK_SIZE, NULL);
                 LineTo(hdc, markx, sy + MARK_SIZE);
 
-                if(cast(long)x != 0)
+                if(cast(long)(x/unitWidth) != 0)
                 {
-                    wstring markText = to!wstring(cast(long)x);
+                    wstring markText = to!wstring(x);
                     TextOut(hdc, markx - markText.length*4, sy + MARK_SIZE + TEXT_MARGIN_X, markText.toUTF16z, markText.length);
                 }
             }
 
-            double minY = cast(double)cast(long)(- sy * scale);
-            double maxY = cast(double)cast(long)((height-sy)*scale);
-            for(double y = minY; y <= maxY; y += 1.0)
+            double minY = cast(double)cast(long)(- sy * scale / unitWidth) * unitWidth;
+            double maxY = cast(double)cast(long)((height-sy) * scale / unitWidth) * unitWidth;
+            for(double y = minY; y <= maxY; y += unitWidth)
             {
                 int marky = sy + cast(int)(y/scale);
                 MoveToEx(hdc, sx - MARK_SIZE, marky, NULL);
                 LineTo(hdc, sx + MARK_SIZE, marky);
 
-                if(cast(long)y != 0)
+                if(cast(long)(y/unitWidth) != 0)
                 {
-                    wstring markText = to!wstring(cast(long)y);
+                    wstring markText = to!wstring(-y);
                     TextOut(hdc, sx - MARK_SIZE - TEXT_MARGIN_Y - markText.length*4, marky - 8, markText.toUTF16z, markText.length);                
                 } else
                 {
@@ -406,18 +437,18 @@ void drawGraphic(HDC hdc, ExprTree tree, bool drawExpr, int sx, int sy, int widt
             SelectObject(hdc, GetStockObject(DC_PEN));
             SetDCPenColor(hdc, RGB(200, 200, 200));            
 
-            double minX = cast(double)cast(long)(- sx * scale);
-            double maxX = cast(double)cast(long)((width-sx)*scale);
-            for(double x = minX; x <= maxX; x += 1.0)
+            double minX = cast(double)cast(long)(- sx * scale / unitWidth) * unitWidth;
+            double maxX = cast(double)cast(long)((width-sx)*scale / unitWidth) * unitWidth;
+            for(double x = minX; x <= maxX; x += unitWidth)
             {
                 int markx = sx + cast(int)(x/scale);
                 MoveToEx(hdc, markx, 0, NULL);
                 LineTo(hdc, markx, height);
             }
 
-            double minY = cast(double)cast(long)(- sy * scale);
-            double maxY = cast(double)cast(long)((height-sy)*scale);
-            for(double y = minY; y <= maxY; y += 1.0)
+            double minY = cast(double)cast(long)(- sy * scale / unitWidth) * unitWidth;
+            double maxY = cast(double)cast(long)((height-sy)*scale / unitWidth) * unitWidth;
+            for(double y = minY; y <= maxY; y += unitWidth)
             {
                 int marky = sy + cast(int)(y/scale);
                 MoveToEx(hdc, 0, marky, NULL);
@@ -445,7 +476,7 @@ void drawGraphic(HDC hdc, ExprTree tree, bool drawExpr, int sx, int sy, int widt
         double maxX = (width-sx)*scale;
         double preX = minX;
         double preY = tree.compute(preX);
-        for(double x = minX; x <= maxX; x += DRAW_STEP)
+        for(double x = minX; x <= maxX; x += DRAW_STEP*scale)
         {
             MoveToEx(hdc, sx + cast(int)(preX/scale), sy + cast(int)(-preY/scale), NULL);
             preX = x;
